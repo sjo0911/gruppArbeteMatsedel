@@ -3,6 +3,8 @@ const app = express();
 
 const {mongoose} = require('./db/mongoose');
 const District = require('./db/routes/district.route');
+const Menu = require('./db/routes/menu.route');
+const User = require('./db/routes/user.route');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) // To parse the incoming requests with JSON payloads
@@ -18,3 +20,5 @@ app.listen(3000, () => {
 })
 
 app.use('/district', District)
+app.use('/menu', Menu)
+app.use('/user', User)
