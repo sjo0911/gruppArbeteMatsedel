@@ -1,10 +1,6 @@
 
 const mongoose = require('mongoose');
 
-var generateObjectId = function() {
-    return mongoose.Types.ObjectId();
-}
-
 const DistrictSchema = new mongoose.Schema({
     districtName: {
         type: String,
@@ -14,10 +10,6 @@ const DistrictSchema = new mongoose.Schema({
     },
     schools: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                default: generateObjectId
-            },
             schoolName: {
                 type: String,
                 required: true,

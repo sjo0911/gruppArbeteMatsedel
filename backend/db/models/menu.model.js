@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 
-var generateObjectId = function() {
-    return mongoose.Types.ObjectId();
-}
-
 const MenuSchema = new mongoose.Schema({
     startDate: {
         type: Date,
@@ -15,10 +11,6 @@ const MenuSchema = new mongoose.Schema({
     },
     meals: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                default: generateObjectId
-            },
             mealName: {
                 type: String,
                 required: true,
