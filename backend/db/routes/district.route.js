@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     // Create district and return new district to user
-    let districtName = req.body.name;
+    let districtName = req.body.districtName;
     let schools = req.body.schools;
     let newDistrict = new District({
         districtName,
@@ -23,6 +23,22 @@ router.post('/', (req, res) => {
     });
     newDistrict.save().then((districtDoc) => {
         res.send(districtDoc);
+    })
+})
+
+router.patch('/:id', (req, res) => {
+    District.findOneAndUpdate({ _id: req.params.id }, {
+        $set: req.body
+    }).then(() => {
+        res.sendStatus(200);
+    });
+})
+
+router.delete('/:id', (req, res) => {
+    District.findOneAndRemove({
+        _id: req.params.id
+    }).then((removedDistrictDoc) => {
+        res.send(removedDistrictDoc);
     })
 })
 

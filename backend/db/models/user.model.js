@@ -17,7 +17,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        trim: true
+        trim: true,
+        unique: true
     },
     password: {
         type: String,
@@ -27,7 +28,7 @@ const UserSchema = new mongoose.Schema({
     },
     districts: [
         {
-            _districtId: {
+            _id: {
                 type: mongoose.Types.ObjectId
             }
         }
