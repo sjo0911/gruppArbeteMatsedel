@@ -12,6 +12,12 @@ router.get('/', (req, res) => {
     });
 })
 
+router.get('/:id', (req, res) => {
+    Menu.findOne({ _id: req.params.id }).then((menu) => {
+        res.send(menu);
+    })
+})
+
 router.post('/', (req, res) => {
     let startDate = req.body.startDate;
     let endDate = req.body.endDate;

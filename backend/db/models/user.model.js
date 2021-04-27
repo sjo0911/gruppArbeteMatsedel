@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     },
     districts: [
         {
-            _districtId: {
+            _id: {
                 type: mongoose.Types.ObjectId
             }
         }
