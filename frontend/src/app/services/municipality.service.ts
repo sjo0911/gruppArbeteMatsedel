@@ -9,6 +9,6 @@ export class MunicipalityService {
   constructor(private webReqService: WebReqService) { }
 
   getMunicipalities() {
-    return this.webReqService.get('municipalities');
+    return this.webReqService.get('municipality');
   }
 }

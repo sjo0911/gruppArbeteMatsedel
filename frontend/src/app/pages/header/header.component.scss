@@ -45,6 +45,7 @@
     cursor: pointer;
     .navbar-link {
         color: hsl(0, 0%, 100%);
+        background: transparent;
         &:hover {
             color: #1775b8;
         }

@@ -11,8 +11,12 @@ import { MunicipalityService } from 'src/app/services/municipality.service';
 export class HeaderComponent implements OnInit {
   // Skapa interface för municipality istället för any[]
   municipalities: any[];
+  chosenMunicipality: any;
+  municipalityTitle: string;
 
-  constructor(private municipalityService: MunicipalityService, private router: Router) { }
+  constructor(private municipalityService: MunicipalityService, private router: Router) {
+    this.municipalityTitle ="Kommun"
+  }
 
   ngOnInit(): void {
 
@@ -21,6 +25,9 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-
+  chooseMunicipality(municipality: any) {
+    this.chosenMunicipality = municipality;
+    this.municipalityTitle = this.chosenMunicipality.municipalityName;
+  }
 
 }

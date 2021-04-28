@@ -14,38 +14,34 @@
 
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-   Kommun
+                  {{municipalityTitle}}
   </a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item" *ngFor = "let municipality of municipalities">
+                        <a class="navbar-item" *ngFor = "let municipality of municipalities" (click) = "chooseMunicipality(municipality)">
                           <p>{{ municipality.municipalityName }}</p>
-    </a>
-                        <a class="navbar-item">
-      Bureå
-    </a>
-                        <a class="navbar-item">
-      Lövånger
     </a>
                     </div>
                 </div>
 
+                <ng-template [ngIf]="chosenMunicipality" [ngIfElse]="none">
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
     Skola
   </a>
-                    <div class="navbar-dropdown">
+                    <div class="navbar-dropdown" *ngFor = "let school of chosenMunicipality.schools">
                         <a class="navbar-item">
-      Skelleftehamn
-    </a>
-                        <a class="navbar-item">
-      Bureå
-    </a>
-                        <a class="navbar-item">
-      Lövånger
+                          <p>{{ school.schoolName }}</p>
     </a>
                     </div>
                 </div>
-
+              </ng-template>
+              <ng-template #none>
+                <div class="navbar-item">
+                  <a class="navbar-link">
+  Skola
+</a>
+</div>
+              </ng-template>
 
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
