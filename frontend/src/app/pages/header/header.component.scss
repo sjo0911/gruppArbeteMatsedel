@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 .centeredContent {
+=======
+.centered-content {
+>>>>>>> Stashed changes
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,26 +21,26 @@
 .navbar-menu .paginatorLeft {
     display: flex;
     margin-left: 100px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-right: 100px;
     cursor: pointer;
     color: hsl(0, 0%, 100%);
-    .h1 {
-        margin-bottom: 15x;
-        font-size: auto;
+    .weekPager {
+        margin-bottom: 3px;
+        font-size: 10;
     }
 }
 
 .navbar-menu .paginatorRight {
     display: flex;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 100px;
     margin-right: 100px;
     cursor: pointer;
     color: hsl(0, 0%, 100%);
-    .h1 {
-        margin-bottom: 15px;
-        font-size: auto;
+    .weekPager {
+        margin-bottom: 3px;
+        font-size: 10;
     }
 }
 
