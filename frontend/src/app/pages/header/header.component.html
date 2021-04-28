@@ -17,8 +17,8 @@
    Kommun
   </a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">
-      Skelleftehamn
+                        <a class="navbar-item" *ngFor = "let municipality of municipalities">
+                          <p>{{ municipality.municipalityName }}</p>
     </a>
                         <a class="navbar-item">
       Bureå
