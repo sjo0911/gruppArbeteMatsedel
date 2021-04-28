@@ -1,0 +1,38 @@
+.navbar {
+    background: #063752;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-menu .paginatorLeft {
+    display: flex;
+    margin-left: 100px;
+    margin-top: 10px;
+    margin-right: 100px;
+    cursor: pointer;
+    color: hsl(0, 0%, 100%);
+}
+
+.navbar-menu .paginatorRight {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    cursor: pointer;
+    color: hsl(0, 0%, 100%);
+    &.hover {
+        color: pink;
+    }
+}
+
+.navbar-menu .navbar-item {
+    margin-top: 3px;
+    cursor: pointer;
+    .navbar-link {
+        color: hsl(0, 0%, 100%);
+        &:hover {
+            color: #1775b8;
+        }
+    }
+}
