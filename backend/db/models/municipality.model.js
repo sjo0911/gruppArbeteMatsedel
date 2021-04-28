@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const MunicipalitySchema = new mongoose.Schema({
-    municipality: {
+    municipalityName: {
         type: String,
         required: true,
         minlength: 1,
