@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         minlength: 5,
         trim: true
     },
-    districts: [
+    municipalityIds: [
         {
             _id: {
                 type: mongoose.Types.ObjectId
