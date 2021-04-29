@@ -30,7 +30,7 @@
               {{schoolTitle}}
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)">
+              <a class="navbar-item" *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)" routerLink="/menu/{{school._menuId}}/week/{{currentWeek}}">
                 <p>{{ school.schoolName }}</p>
               </a>
             </div>
@@ -49,21 +49,20 @@
             {{weekTitle}}
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)">
+            <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)" routerLink="/menu/{{chosenSchool._menuId}}/week/{{week.weekNr}}">
               <p>{{ "Vecka " + week.weekNr }}</p>
             </a>
 
           </div>
         </div>
 
-        <div class="paginatorRight">
+        <div class="paginatorRight" >
           <h1 class="weekPager">
             {{nextWeekTitle}}
           </h1>
           <span class="material-icons">
             arrow_forward_ios
           </span>
-
         </div>
       </div>
     </div>

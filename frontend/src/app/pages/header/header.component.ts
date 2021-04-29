@@ -27,11 +27,14 @@ export class HeaderComponent implements OnInit {
   nextWeek : Week;
   previousWeekTitle : string;
   nextWeekTitle : string;
+  currentWeek : string;
 
-  constructor(private municipalityService: MunicipalityService, private router: Router, private dateHandlerService : DateHandlerService, private menuService: MenuService) {
+  constructor(private municipalityService: MunicipalityService, private router: Router,
+    private dateHandlerService : DateHandlerService, private menuService: MenuService) {
     this.municipalityTitle = "Kommun";
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
+    this.currentWeek = this.dateHandlerService.getCurrentWeek();
   }
 
   ngOnInit(): void {
@@ -44,6 +47,14 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
 
   }
+
+//   routingPrevious(){
+//     this.router.navigate(`['/menu/${this.chosenSchool._menuId}']`);
+//  }
+
+//   routingNext(){
+//     this.router.navigate("['/hero']");
+//  }
 
   chooseMunicipality(municipality: Municipality) {
     this.chosenMunicipality = municipality;
@@ -58,19 +69,20 @@ export class HeaderComponent implements OnInit {
     this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menu: Menu) => {
       this.weeks = this.dateHandlerService.getWeeks(menu.startDate, menu.endDate);
 
-      let currentWeek = this.dateHandlerService.getCurrentWeek();
+      // let currentWeek = this.dateHandlerService.getCurrentWeek();
       this.weeks.forEach(week => {
-        if(week.weekNr === currentWeek) {
+        if(week.weekNr === this.currentWeek) {
           this.chosenWeek = week;
         }
       });
       this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
 
-      this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, this.chosenWeek);
-      console.log(this.previousWeek.weekNr);
-      this.previousWeekTitle = "V." + this.previousWeek.weekNr;
-      this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, this.chosenWeek);
-      this.nextWeekTitle = "V." + this.nextWeek.weekNr;
+      // console.log(this.chosenWeek.weekNr);
+      // this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, this.chosenWeek);
+      // console.log(this.previousWeek.weekNr);
+      // this.previousWeekTitle = "V." + this.previousWeek.weekNr;
+      // this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, this.chosenWeek);
+      // this.nextWeekTitle = "V." + this.nextWeek.weekNr;
     });
 
   }
