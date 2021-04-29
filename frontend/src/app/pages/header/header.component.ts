@@ -23,6 +23,10 @@ export class HeaderComponent implements OnInit {
   weeks : Week[];
   weekTitle : string;
   chosenWeek : Week;
+  previousWeek : Week;
+  nextWeek : Week;
+  previousWeekTitle : string;
+  nextWeekTitle : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router, private dateHandlerService : DateHandlerService, private menuService: MenuService) {
     this.municipalityTitle = "Kommun";
@@ -35,7 +39,9 @@ export class HeaderComponent implements OnInit {
     this.municipalityService.getMunicipalities().subscribe((municipalities: Municipality[]) => {
       this.municipalities = municipalities;
     })
+  }
 
+  ngOnDestroy() {
 
   }
 
@@ -59,7 +65,24 @@ export class HeaderComponent implements OnInit {
         }
       });
       this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
+
+      this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, this.chosenWeek);
+      console.log(this.previousWeek.weekNr);
+      this.previousWeekTitle = "V." + this.previousWeek.weekNr;
+      this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, this.chosenWeek);
+      this.nextWeekTitle = "V." + this.nextWeek.weekNr;
     });
+
+  }
+
+  chooseWeek(week : Week) {
+    this.chosenWeek = week;
+    this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
+
+    this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, week);
+    this.previousWeekTitle = "V." + this.previousWeek.weekNr;
+    this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, week);
+    this.nextWeekTitle = "V." + this.nextWeek.weekNr;
   }
 
 }

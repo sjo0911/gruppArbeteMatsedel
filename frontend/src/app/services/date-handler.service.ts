@@ -28,6 +28,30 @@ export class DateHandlerService {
     return datePipe.transform(dateNow, 'w');
   }
 
+  getPreviousWeek(weeks : Week [], week : Week) : Week{
+    let previousWeekNr = parseInt(week.weekNr) - 1;
+    let returnWeek : Week;
+    weeks.forEach(week => {
+      if(parseInt(week.weekNr) === previousWeekNr) {
+        returnWeek = week;
+      }
+    });
+    return returnWeek;
+  }
+
+  getNextWeek(weeks : Week[], week : Week) : Week {
+    let nextWeek = parseInt(week.weekNr) + 1;
+    let returnWeek : Week;
+    weeks.forEach(week => {
+      if(parseInt(week.weekNr) === nextWeek) {
+        returnWeek = week;
+      }
+    });
+    return returnWeek;
+  }
+
+
+
   // convertToWeek(date:Date):string {
   //   let datePipe: DatePipe = new DatePipe('en-US');
   //   return datePipe.transform(date, 'w');

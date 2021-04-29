@@ -7,7 +7,9 @@
           <span class="material-icons">
             arrow_back_ios
           </span>
-          <h1 class="weekPager">V.5</h1>
+          <h1 class="weekPager">
+            {{previousWeekTitle}}
+          </h1>
         </div>
 
         <div class="navbar-item has-dropdown is-hoverable">
@@ -47,15 +49,17 @@
             {{weekTitle}}
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Vecka 18
+            <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)">
+              <p>{{ "Vecka " + week.weekNr }}</p>
             </a>
 
           </div>
         </div>
 
         <div class="paginatorRight">
-          <h1 class="weekPager">V.7</h1>
+          <h1 class="weekPager">
+            {{nextWeekTitle}}
+          </h1>
           <span class="material-icons">
             arrow_forward_ios
           </span>
