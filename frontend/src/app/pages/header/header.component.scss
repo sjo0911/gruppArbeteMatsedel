@@ -65,4 +65,7 @@
   border: 0px;
   background: transparent;
   color: white;
+  &:active {
+    transform: translateY(4px);
+  }
 }

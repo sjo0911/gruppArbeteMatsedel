@@ -113,16 +113,25 @@ export class HeaderComponent implements OnInit {
       this.nextWeekTitle = "";
     }
 
-
+    // Fixa router linken när man trycker på knapparna fram och tillbaka
 
     // Från html:
     // routerLink="/menu/{{chosenSchool._menuId}}/week/{{week.weekNr}}"
-    //this.router.navigateByUrl(`${this.ROOT_URL}/menu/${this.chosenSchool._menuId}/week/${week.weekNr}`);
+    // this.router.navigateByUrl(`${this.ROOT_URL}/menu/${this.chosenSchool._menuId}/week/${week.weekNr}`);
 
 
   }
   previousWeekClick(): void {
-    this.chooseWeek(this.previousWeek);
+    if(this.previousWeek) {
+      this.chooseWeek(this.previousWeek);
+    }
+
+  }
+
+  nextWeekClick(): void {
+    if(this.nextWeek){
+      this.chooseWeek(this.nextWeek);
+    }
   }
 
 }

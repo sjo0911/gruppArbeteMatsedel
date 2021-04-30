@@ -1,0 +1,38 @@
+.centered-content {
+  // background: #063249;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  // border-radius: 8px;
+  // margin: 20px;
+}
+
+.menu-content {
+  // background: white;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  align-items: top;
+  justify-content: center;
+}
+
+.day-content {
+  background: #063249;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  min-width: 800px;
+  max-height: 150px;
+  min-height: 150px;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+
+}
+
+
+
