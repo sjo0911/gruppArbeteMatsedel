@@ -3,7 +3,7 @@
   <nav class="navbar" role="navigation">
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <button class="paginatorLeft" routerLink="/menu/{{chosenSchool._menuId}}/week/{{previousWeek}}" routerLinkActive="is-active">
+        <button class="paginatorLeft" (click) = "previousWeekClick()">
           <span class="material-icons">
             arrow_back_ios
           </span>
