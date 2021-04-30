@@ -29,12 +29,15 @@ export class HeaderComponent implements OnInit {
   nextWeekTitle : string;
   currentWeek : string;
 
+  ROOT_URL : string;
+
   constructor(private municipalityService: MunicipalityService, private router: Router,
     private dateHandlerService : DateHandlerService, private menuService: MenuService) {
     this.municipalityTitle = "Kommun";
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
     this.currentWeek = this.dateHandlerService.getCurrentWeek();
+    this.ROOT_URL = "localhost:4200";
   }
 
   ngOnInit(): void {
@@ -77,6 +80,10 @@ export class HeaderComponent implements OnInit {
       });
       this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
 
+      // Från html:
+      // routerLink="/menu/{{school._menuId}}/week/{{currentWeek}}"
+      this.router.navigateByUrl(`${this.ROOT_URL}/menu/${school._menuId}/week/${this.currentWeek}`);
+
       // console.log(this.chosenWeek.weekNr);
       // this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, this.chosenWeek);
       // console.log(this.previousWeek.weekNr);
@@ -95,6 +102,10 @@ export class HeaderComponent implements OnInit {
     this.previousWeekTitle = "V." + this.previousWeek.weekNr;
     this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, week);
     this.nextWeekTitle = "V." + this.nextWeek.weekNr;
+
+    // Från html:
+    // routerLink="/menu/{{chosenSchool._menuId}}/week/{{week.weekNr}}"
+    this.router.navigateByUrl(`${this.ROOT_URL}/menu/${this.chosenSchool._menuId}/week/${week.weekNr}`);
   }
 
 }
