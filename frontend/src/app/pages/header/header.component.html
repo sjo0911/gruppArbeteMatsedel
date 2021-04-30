@@ -3,14 +3,14 @@
   <nav class="navbar" role="navigation">
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <div class="paginatorLeft">
+        <button class="paginatorLeft" routerLink="/menu/{{chosenSchool._menuId}}/week/{{previousWeek}}" routerLinkActive="is-active">
           <span class="material-icons">
             arrow_back_ios
           </span>
           <h1 class="weekPager">
             {{previousWeekTitle}}
           </h1>
-        </div>
+        </button>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -30,7 +30,7 @@
               {{schoolTitle}}
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)">
+              <a class="navbar-item" *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)" routerLink="/menu/{{school._menuId}}/week/{{currentWeek}}" routerLinkActive="is-active">
                 <p>{{ school.schoolName }}</p>
               </a>
             </div>
@@ -49,7 +49,7 @@
             {{weekTitle}}
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)">
+            <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)" routerLink="/menu/{{chosenSchool._menuId}}/week/{{week.weekNr}}" routerLinkActive="is-active">
               <p>{{ "Vecka " + week.weekNr }}</p>
             </a>
 

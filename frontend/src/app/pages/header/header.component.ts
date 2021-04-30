@@ -81,8 +81,8 @@ export class HeaderComponent implements OnInit {
       this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
 
       // Från html:
-      // routerLink="/menu/{{school._menuId}}/week/{{currentWeek}}"
-      this.router.navigateByUrl(`${this.ROOT_URL}/menu/${school._menuId}/week/${this.currentWeek}`);
+      //
+      //this.router.navigateByUrl(`${this.ROOT_URL}/menu/${school._menuId}/week/${this.currentWeek}`);
 
       // console.log(this.chosenWeek.weekNr);
       // this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, this.chosenWeek);
@@ -99,13 +99,30 @@ export class HeaderComponent implements OnInit {
     this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
 
     this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, week);
-    this.previousWeekTitle = "V." + this.previousWeek.weekNr;
+    if(this.previousWeek){
+      this.previousWeekTitle = "V." + this.previousWeek.weekNr;
+    } else {
+      this.previousWeekTitle = "";
+    }
+
     this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, week);
-    this.nextWeekTitle = "V." + this.nextWeek.weekNr;
+
+    if(this.nextWeek){
+      this.nextWeekTitle = "V." + this.nextWeek.weekNr;
+    } else {
+      this.nextWeekTitle = "";
+    }
+
+
 
     // Från html:
     // routerLink="/menu/{{chosenSchool._menuId}}/week/{{week.weekNr}}"
-    this.router.navigateByUrl(`${this.ROOT_URL}/menu/${this.chosenSchool._menuId}/week/${week.weekNr}`);
+    //this.router.navigateByUrl(`${this.ROOT_URL}/menu/${this.chosenSchool._menuId}/week/${week.weekNr}`);
+
+
+  }
+  previousWeekClick(): void {
+    this.chooseWeek(this.previousWeek);
   }
 
 }
