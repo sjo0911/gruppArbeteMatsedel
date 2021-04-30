@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Week } from '../models/week';
+import { Menu } from '../models/menu';
+import { Meal } from '../models/meal';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,22 @@ export class DateHandlerService {
         returnWeek = week;
       }
     });
+    return returnWeek;
+  }
+
+  getMealsOfWeek(menu : Menu, weekNr : string) : Week {
+    let datePipe : DatePipe = new DatePipe('en-US');
+    let returnWeek : Week;
+    let returnMeals : Meal[] = menu.meals.filter(function(meal) {
+      if(weekNr === datePipe.transform(meal.mealDate, 'w')) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    returnWeek.meals = returnMeals;
+
+    returnWeek.weekNr = weekNr;
     return returnWeek;
   }
 
