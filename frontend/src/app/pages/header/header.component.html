@@ -3,12 +3,14 @@
   <nav class="navbar" role="navigation">
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <div class="paginatorLeft">
+        <button class="paginatorLeft" (click) = "previousWeekClick()">
           <span class="material-icons">
             arrow_back_ios
           </span>
-          <h1 class="weekPager">V.5</h1>
-        </div>
+          <h1 class="weekPager">
+            {{previousWeekTitle}}
+          </h1>
+        </button>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -47,20 +49,21 @@
             {{weekTitle}}
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Vecka 18
+            <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)">
+              <p>{{ "Vecka " + week.weekNr }}</p>
             </a>
 
           </div>
         </div>
 
-        <div class="paginatorRight">
-          <h1 class="weekPager">V.7</h1>
+        <button class="paginatorRight" (click) = "nextWeekClick()">
+          <h1 class="weekPager">
+            {{nextWeekTitle}}
+          </h1>
           <span class="material-icons">
             arrow_forward_ios
           </span>
-
-        </div>
+        </button>
       </div>
     </div>
     <hr class="navbar-divider">
