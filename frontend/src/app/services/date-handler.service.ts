@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Week } from '../models/week';
 import { Menu } from '../models/menu';
 import { Meal } from '../models/meal';
+import { Day } from '../models/day';
 
 @Injectable({
   providedIn: 'root'
@@ -54,16 +55,37 @@ export class DateHandlerService {
 
   getMealsOfWeek(menu : Menu, weekNr : string) : Week {
     let datePipe : DatePipe = new DatePipe('en-US');
-    let returnWeek : Week;
-    let returnMeals : Meal[] = menu.meals.filter(function(meal) {
-      if(weekNr === datePipe.transform(meal.mealDate, 'w')) {
-        return true;
-      } else {
-        return false;
-      }
-    })
-    returnWeek.meals = returnMeals;
+    let returnWeek : Week = new Week();
 
+    if(menu.meals) {
+      menu.meals.forEach(meal => {
+        if(weekNr === datePipe.transform(meal.mealDate, 'w')) {
+          returnWeek.meals.push(meal);
+        }
+      });
+    }
+
+    let day : Day;
+    let days : Day[] = new Array();
+    let dayExist : boolean;
+    if(returnWeek.meals) {
+      returnWeek.meals.forEach(meal => {
+        dayExist = false;
+        days.forEach(day => {
+          if(day.date === meal.mealDate) {
+            dayExist = true;
+            day = day;
+            day.meals.push(meal);
+          }
+        });
+        if(!dayExist) {
+          day = new Day();
+          day.meals.push(meal);
+          day.date = meal.mealDate;
+          days.push(day);
+        }
+      });
+    }
     returnWeek.weekNr = weekNr;
     return returnWeek;
   }
