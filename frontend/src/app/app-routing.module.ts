@@ -4,8 +4,7 @@ import { MenuComponent } from './pages/menu/menu.component';
 
 const routes: Routes = [
   { path:  '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'menu/:menuId', component: MenuComponent },
-  { path: 'menu/:menuId/week/:weekNr', component: MenuComponent }
+  { path: '', component: MenuComponent }
 ];
 
 @NgModule({

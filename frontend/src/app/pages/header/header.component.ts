@@ -72,6 +72,8 @@ export class HeaderComponent implements OnInit {
         }
       });
       this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
+
+      this.sharingService.setWeek(this.chosenWeek);
     });
 
   }
