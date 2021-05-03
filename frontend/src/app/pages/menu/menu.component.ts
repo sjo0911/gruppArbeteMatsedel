@@ -27,10 +27,16 @@ export class MenuComponent implements OnInit {
       })
       this.menuService.getMenu(menuId).subscribe((menu: Menu) => {
         this.menu = menu;
+        menu.
         this.week = this.dateHandlerService.getMealsOfWeek(this.menu, this.weekNr);
       })
 
   }
+
+
+    getMeals() {
+      console.log(this.dateHandlerService.getMealsOfWeek(this.menu, this.weekNr));
+    }
 
 
 
