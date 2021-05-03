@@ -7,6 +7,7 @@ import { Week } from 'src/app/models/week';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { MunicipalityService } from 'src/app/services/municipality.service';
+import { SharingService } from 'src/app/services/sharing.service';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
   ROOT_URL : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
-    private dateHandlerService : DateHandlerService, private menuService: MenuService) {
+    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService) {
     this.municipalityTitle = "Kommun";
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
@@ -50,14 +51,6 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
 
   }
-
-//   routingPrevious(){
-//     this.router.navigate(`['/menu/${this.chosenSchool._menuId}']`);
-//  }
-
-//   routingNext(){
-//     this.router.navigate("['/hero']");
-//  }
 
   chooseMunicipality(municipality: Municipality) {
     this.chosenMunicipality = municipality;
@@ -79,17 +72,6 @@ export class HeaderComponent implements OnInit {
         }
       });
       this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
-
-      // Från html:
-      //
-      //this.router.navigateByUrl(`${this.ROOT_URL}/menu/${school._menuId}/week/${this.currentWeek}`);
-
-      // console.log(this.chosenWeek.weekNr);
-      // this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, this.chosenWeek);
-      // console.log(this.previousWeek.weekNr);
-      // this.previousWeekTitle = "V." + this.previousWeek.weekNr;
-      // this.nextWeek = this.dateHandlerService.getNextWeek(this.weeks, this.chosenWeek);
-      // this.nextWeekTitle = "V." + this.nextWeek.weekNr;
     });
 
   }
@@ -113,14 +95,9 @@ export class HeaderComponent implements OnInit {
       this.nextWeekTitle = "";
     }
 
-    // Fixa router linken när man trycker på knapparna fram och tillbaka
-
-    // Från html:
-    // routerLink="/menu/{{chosenSchool._menuId}}/week/{{week.weekNr}}"
-    // this.router.navigateByUrl(`${this.ROOT_URL}/menu/${this.chosenSchool._menuId}/week/${week.weekNr}`);
-
-
+    this.sharingService.setWeek(this.chosenWeek);
   }
+
   previousWeekClick(): void {
     if(this.previousWeek) {
       this.chooseWeek(this.previousWeek);

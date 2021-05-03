@@ -6,7 +6,6 @@ const routes: Routes = [
   { path:  '', redirectTo: '/', pathMatch: 'full' },
   { path: 'menu/:menuId', component: MenuComponent },
   { path: 'menu/:menuId/week/:weekNr', component: MenuComponent }
-
 ];
 
 @NgModule({
