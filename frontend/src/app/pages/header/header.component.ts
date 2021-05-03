@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
     this.chosenSchool = school;
     this.schoolTitle = this.chosenSchool.schoolName;
     this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menu: Menu) => {
-      this.weeks = this.dateHandlerService.getWeeks(menu.startDate, menu.endDate);
+      this.weeks = this.dateHandlerService.getWeeks(menu);
 
       // let currentWeek = this.dateHandlerService.getCurrentWeek();
       this.weeks.forEach(week => {

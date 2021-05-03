@@ -25,15 +25,31 @@ export class DateHandlerService {
   //   return weeks;
   // }
 
-  getWeeks(startDate: Date, endDate: Date) : Week[] {
+  getWeeks(menu : Menu) : Week[] {
     let datePipe: DatePipe = new DatePipe('en-US');
     let week : Week = new Week();
     let weeks : Week[] = new Array();
-    var newEndDate = new Date(endDate);
-    for (var day = new Date(startDate); day <= newEndDate; day.setDate(day.getDate() + 7)) {
-      week.weekNr = datePipe.transform(day, 'w');
-      weeks.push(week);
-      week = new Week();
+    var newEndDate = new Date(menu.endDate);
+    let day : Day;
+    for (var date = new Date(menu.startDate); date <= newEndDate; date.setDate(date.getDate() + 1)) {
+      if(datePipe.transform(date, 'EEEE') === 'Monday') {
+        week = new Week();
+        week.startDate = date;
+        week.weekNr = datePipe.transform(date, 'w');
+      } else if (datePipe.transform(date, 'EEEE') === 'Sunday') {
+        week.endDate = date;
+        weeks.push(week);
+      }
+      if(datePipe.transform(date, 'EEEE') !== 'Saturday' || datePipe.transform(date, 'EEEE') !== 'Sunday') {
+        day = new Day();
+        day.date = date;
+        menu.meals.forEach(meal => {
+          if(datePipe.transform(meal.mealDate, 'mediumDate') === datePipe.transform(date, 'mediumDate')) {
+            day.meals.push(meal);
+          }
+        });
+        week.days.push(day);
+      }
     }
     return weeks;
   }
