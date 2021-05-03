@@ -8,11 +8,9 @@ export class Week {
   weekNr: string;
 
   days: Day[];
-  meals : Meal[];
 
   constructor() {
     this.days = new Array();
-    this.meals = new Array();
   }
 
 }

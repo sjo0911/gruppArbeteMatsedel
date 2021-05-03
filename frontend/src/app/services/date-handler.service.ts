@@ -12,6 +12,19 @@ export class DateHandlerService {
 
   constructor() { }
 
+  // getWeeks(startDate: Date, endDate: Date) : Week[] {
+  //   let datePipe: DatePipe = new DatePipe('en-US');
+  //   let week : Week = new Week();
+  //   let weeks : Week[] = new Array();
+  //   var newEndDate = new Date(endDate);
+  //   for (var day = new Date(startDate); day <= newEndDate; day.setDate(day.getDate() + 7)) {
+  //     week.weekNr = datePipe.transform(day, 'w');
+  //     weeks.push(week);
+  //     week = new Week();
+  //   }
+  //   return weeks;
+  // }
+
   getWeeks(startDate: Date, endDate: Date) : Week[] {
     let datePipe: DatePipe = new DatePipe('en-US');
     let week : Week = new Week();
@@ -53,41 +66,41 @@ export class DateHandlerService {
     return returnWeek;
   }
 
-  getMealsOfWeek(menu : Menu, weekNr : string) : Week {
-    let datePipe : DatePipe = new DatePipe('en-US');
-    let returnWeek : Week = new Week();
+  // getMealsOfWeek(menu : Menu, weekNr : string) : Week {
+  //   let datePipe : DatePipe = new DatePipe('en-US');
+  //   let returnWeek : Week = new Week();
 
-    if(menu.meals) {
-      menu.meals.forEach(meal => {
-        if(weekNr === datePipe.transform(meal.mealDate, 'w')) {
-          returnWeek.meals.push(meal);
-        }
-      });
-    }
+  //   if(menu.meals) {
+  //     menu.meals.forEach(meal => {
+  //       if(weekNr === datePipe.transform(meal.mealDate, 'w')) {
+  //         returnWeek.meals.push(meal);
+  //       }
+  //     });
+  //   }
 
-    let day : Day;
-    let days : Day[] = new Array();
-    let dayExist : boolean;
-    if(returnWeek.meals) {
-      returnWeek.meals.forEach(meal => {
-        dayExist = false;
-        days.forEach(day => {
-          if(day.date === meal.mealDate) {
-            dayExist = true;
-            day = day;
-            day.meals.push(meal);
-          }
-        });
-        if(!dayExist) {
-          day = new Day();
-          day.meals.push(meal);
-          day.date = meal.mealDate;
-          days.push(day);
-        }
-      });
-    }
-    returnWeek.weekNr = weekNr;
-    return returnWeek;
-  }
+  //   let day : Day;
+  //   let days : Day[] = new Array();
+  //   let dayExist : boolean;
+  //   if(returnWeek.meals) {
+  //     returnWeek.meals.forEach(meal => {
+  //       dayExist = false;
+  //       days.forEach(day => {
+  //         if(day.date === meal.mealDate) {
+  //           dayExist = true;
+  //           day = day;
+  //           day.meals.push(meal);
+  //         }
+  //       });
+  //       if(!dayExist) {
+  //         day = new Day();
+  //         day.meals.push(meal);
+  //         day.date = meal.mealDate;
+  //         days.push(day);
+  //       }
+  //     });
+  //   }
+  //   returnWeek.weekNr = weekNr;
+  //   return returnWeek;
+  // }
 
 }
