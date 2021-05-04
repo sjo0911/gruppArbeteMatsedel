@@ -31,6 +31,8 @@ export class DateHandlerService {
     let weeks : Week[] = new Array();
     var newEndDate = new Date(menu.endDate);
     let day : Day;
+    week.startDate = menu.startDate;
+    week.weekNr = datePipe.transform(menu.startDate, 'w');
     for (var date = new Date(menu.startDate); date <= newEndDate; date.setDate(date.getDate() + 1)) {
       if(datePipe.transform(date, 'EEEE') === 'Monday') {
         week = new Week();
