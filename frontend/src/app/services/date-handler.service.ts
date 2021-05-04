@@ -29,20 +29,20 @@ export class DateHandlerService {
     let datePipe: DatePipe = new DatePipe('en-US');
     let week : Week = new Week();
     let weeks : any[];
-    console.log(weeks);
     weeks  = [];
-    console.log(weeks);
     var newEndDate = new Date(menu.endDate);
     let day : Day;
     week.startDate = menu.startDate;
     week.weekNr = datePipe.transform(menu.startDate, 'w');
+    var date = new Date(menu.startDate);
+    date.setHours(0);
 
-    for (var date = new Date(menu.startDate); date <= newEndDate; date.setDate(date.getDate() + 1)) {
+    for (date; date <= newEndDate; date.setDate(date.getDate() + 1)) {
       if(datePipe.transform(date, 'EEEE') === 'Monday') {
         week = new Week();
         week.startDate = new Date(date);
         week.weekNr = datePipe.transform(date, 'w');
-      } else if (datePipe.transform(date, 'EEEE') === 'Sunday') {
+      } else if (datePipe.transform(date, 'EEEE') === 'Sunday' || datePipe.transform(date, 'mediumDate') === datePipe.transform(newEndDate, 'mediumDate')) {
         week.endDate = new Date(date);
         let newWeek = Object.assign(week);
         weeks.push(newWeek);
