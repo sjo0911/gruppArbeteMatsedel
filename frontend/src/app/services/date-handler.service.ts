@@ -28,30 +28,36 @@ export class DateHandlerService {
   getWeeks(menu : Menu) : Week[] {
     let datePipe: DatePipe = new DatePipe('en-US');
     let week : Week = new Week();
-    let weeks : Week[] = new Array();
+    let weeks : any[];
+    console.log(weeks);
+    weeks  = [];
+    console.log(weeks);
     var newEndDate = new Date(menu.endDate);
     let day : Day;
     week.startDate = menu.startDate;
     week.weekNr = datePipe.transform(menu.startDate, 'w');
+
     for (var date = new Date(menu.startDate); date <= newEndDate; date.setDate(date.getDate() + 1)) {
       if(datePipe.transform(date, 'EEEE') === 'Monday') {
         week = new Week();
-        week.startDate = date;
+        week.startDate = new Date(date);
         week.weekNr = datePipe.transform(date, 'w');
       } else if (datePipe.transform(date, 'EEEE') === 'Sunday') {
-        week.endDate = date;
-        weeks.push(week);
+        week.endDate = new Date(date);
+        let newWeek = Object.assign(week);
+        weeks.push(newWeek);
       }
       if (datePipe.transform(date, 'EEEE') === 'Monday' || datePipe.transform(date, 'EEEE') === 'Tuesday' || datePipe.transform(date, 'EEEE') === 'Wednesday'
       || datePipe.transform(date, 'EEEE') === 'Thursday' || datePipe.transform(date, 'EEEE') === 'Friday') {
         day = new Day();
-        day.date = date;
+        day.date = new Date(date);
         menu.meals.forEach(meal => {
           if(datePipe.transform(meal.mealDate, 'mediumDate') === datePipe.transform(date, 'mediumDate')) {
             day.meals.push(meal);
           }
         });
-        week.days.push(day);
+        let newDay = Object.assign(day);
+        week.days.push(newDay);
       }
     }
     return weeks;
