@@ -16,8 +16,11 @@ export class MenuComponent implements OnInit {
   menu : Menu;
   weekNr : string;
   week : Week;
+  noInput : string;
 
-  constructor(private menuService: MenuService, private route : ActivatedRoute, private dateHandlerService : DateHandlerService, private sharingService : SharingService) { }
+  constructor(private menuService: MenuService, private route : ActivatedRoute, private dateHandlerService : DateHandlerService, private sharingService : SharingService) {
+    this.noInput = "MAT SAKNASSSS";
+  }
 
   ngOnInit(): void {
     // let menuId : string;

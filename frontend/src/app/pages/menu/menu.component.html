@@ -1,13 +1,19 @@
-<div class="centered-content" *ngIf= "week">
-  <div class="menu-content" >
+<div class="centered-content" *ngIf="week">
+  <div class="menu-content">
     <div class="day-content" *ngFor="let day of week.days">
       <div class="day-date">
-        {{day.date | date:'EEEE' }}<br>{{day.date | date }}{{day.meals}}
+        {{ day.date | date: "EEEE" }}<br>{{ day.date | date }}
       </div>
-      <div class="day-meals">
-
-      </div>
+      <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
+        <div class="day-meals" *ngFor="let meal of day.meals">
+          {{ day.meals }}
+        </div>
+      </ng-template>
+      <ng-template #elseBlock>
+        <div class="day-meals">
+          <a>{{ noInput }}</a>
+        </div>
+      </ng-template>
     </div>
-
   </div>
 </div>
