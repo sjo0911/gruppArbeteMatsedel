@@ -1,22 +1,29 @@
 .centered-content {
   // background: #063249;
   display: flex;
+  max-width: 1000px;
+  max-height: 700px;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   // border-radius: 8px;
   // margin: 20px;
+
+
 }
 
 .menu-content {
-  // background: white;
+  //background: white;
+  max-width: 1000px;
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   vertical-align: middle;
   align-items: top;
   justify-content: center;
+
 }
 
 .day-content {
