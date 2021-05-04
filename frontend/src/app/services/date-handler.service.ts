@@ -42,7 +42,8 @@ export class DateHandlerService {
         week.endDate = date;
         weeks.push(week);
       }
-      if(datePipe.transform(date, 'EEEE') !== 'Saturday' || datePipe.transform(date, 'EEEE') !== 'Sunday') {
+      if (datePipe.transform(date, 'EEEE') === 'Monday' || datePipe.transform(date, 'EEEE') === 'Tuesday' || datePipe.transform(date, 'EEEE') === 'Wednesday'
+      || datePipe.transform(date, 'EEEE') === 'Thursday' || datePipe.transform(date, 'EEEE') === 'Friday') {
         day = new Day();
         day.date = date;
         menu.meals.forEach(meal => {
