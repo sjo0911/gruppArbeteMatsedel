@@ -1,3 +1,5 @@
+<script src="https://use.fontawesome.com/ccceada4b4.js"></script>
+
 <div class="centered-content" *ngIf="week">
   <div class="menu-content">
     <div class="day-content" *ngFor="let day of week.days">
@@ -6,7 +8,10 @@
       </div>
       <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
         <div class="day-meals" *ngFor="let meal of day.meals">
-          {{ day.meals }}
+          <div class="icons" [innerHTML]="getFoodSpecs(meal)">
+          </div>
+          <i class="fas fa-seedling fa-sm" style="font-size: 0.73em;"></i>
+         {{ meal.mealName }}
         </div>
       </ng-template>
       <ng-template #elseBlock>
