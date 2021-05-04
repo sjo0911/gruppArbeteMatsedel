@@ -1,37 +1,78 @@
+@import url("https://use.fontawesome.com/releases/v5.14.0/css/all.css");
+
 .centered-content {
   // background: #063249;
   display: flex;
+  max-height: 800px;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  vertical-align: middle;
   // border-radius: 8px;
   // margin: 20px;
+
+
 }
 
 .menu-content {
-  // background: white;
+  //background: white;
+  max-width: 1000px;
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   vertical-align: middle;
-  align-items: top;
+  align-items: center;
   justify-content: center;
+
 }
+
 
 .day-content {
   background: #063249;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
   max-width: 800px;
   min-width: 800px;
   max-height: 150px;
   min-height: 150px;
   border-radius: 8px;
-  margin: 20px;
+  margin: 3px;
   padding: 20px;
+}
 
+.day-date {
+  background: #08496d;
+  display: flex;
+  max-width: 80px;
+  height: 90%;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+  margin:3px;
+  border-radius: 8px;
+  color: white;
+}
+
+.day-meals {
+  background: #08496d;
+  display: flex;
+  width: 100%;
+  height: 20%;
+  justify-content: left;
+  align-items: center;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  color: white;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  color: green;
 }
 
 

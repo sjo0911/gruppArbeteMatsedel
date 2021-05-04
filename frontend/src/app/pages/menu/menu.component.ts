@@ -5,6 +5,7 @@ import { Week } from 'src/app/models/week';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { SharingService } from 'src/app/services/sharing.service';
+import { Meal } from 'src/app/models/meal';
 
 @Component({
   selector: 'app-menu',
@@ -16,26 +17,32 @@ export class MenuComponent implements OnInit {
   menu : Menu;
   weekNr : string;
   week : Week;
+  noInput : string;
 
-  constructor(private menuService: MenuService, private route : ActivatedRoute, private dateHandlerService : DateHandlerService, private sharingService : SharingService) { }
+  constructor(private menuService: MenuService, private route : ActivatedRoute, private dateHandlerService : DateHandlerService, private sharingService : SharingService) {
+    this.noInput = "MAT SAKNAS";
+  }
 
   ngOnInit(): void {
-    // let menuId : string;
-    // this.route.params.subscribe(
-    //   (params: Params) => {
-    //     this.weekNr = params.weekNr;
-    //     menuId = params.menuId;
-    //   })
-    //   this.menuService.getMenu(menuId).subscribe((menu : Menu) => {
-    //     this.menu = menu;
-    //     this.week = this.dateHandlerService.getMealsOfWeek(this.menu, this.weekNr);
-    //   })
-
       this.sharingService.getObservable().subscribe((week : Week) => {
         this.week = week;
-        console.log(week.weekNr);
       })
 
+  }
+
+  getFoodSpecs(meal : Meal) : string {
+    let returnString : string = '';
+    meal.foodSpecs.forEach(foodSpec => {
+      if(foodSpec === 'vego') {
+        returnString += `<i class="fas fa-seedling"></i>`;
+      } else if(foodSpec === 'gurka') {
+        returnString += `<i class="fas fa-pepper-hot"></i>`;
+      } else if(foodSpec === 'pig') {
+        returnString += `<i class="fas fa-bacon"></i>`;
+      }
+      returnString += '&nbsp&nbsp';
+    });
+    return returnString;
   }
 
 

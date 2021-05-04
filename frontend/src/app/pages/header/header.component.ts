@@ -8,6 +8,7 @@ import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { MunicipalityService } from 'src/app/services/municipality.service';
 import { SharingService } from 'src/app/services/sharing.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit {
   previousWeekTitle : string;
   nextWeekTitle : string;
   currentWeek : string;
-
+  subscriptions : Subscription[] = [];
   ROOT_URL : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
@@ -43,13 +44,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.municipalityService.getMunicipalities().subscribe((municipalities: Municipality[]) => {
+    let sub: Subscription = this.municipalityService.getMunicipalities().subscribe((municipalities: Municipality[]) => {
       this.municipalities = municipalities;
     })
+    this.subscriptions.push(sub);
   }
 
   ngOnDestroy() {
-
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 
   chooseMunicipality(municipality: Municipality) {
@@ -62,20 +66,27 @@ export class HeaderComponent implements OnInit {
   chooseSchool(school: School) {
     this.chosenSchool = school;
     this.schoolTitle = this.chosenSchool.schoolName;
-    this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menu: Menu) => {
-      this.weeks = this.dateHandlerService.getWeeks(menu.startDate, menu.endDate);
+    let menu : Menu;
 
+    let sub: Subscription = this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menuu: Menu) => {
+      menu = menuu;
+    },
+    (err) => {
+
+    },
+    () => {
+      // console.log(menu);
+      this.weeks = this.dateHandlerService.getWeeks(menu);
+      // console.log(this.weeks);
       // let currentWeek = this.dateHandlerService.getCurrentWeek();
       this.weeks.forEach(week => {
         if(week.weekNr === this.currentWeek) {
           this.chosenWeek = week;
         }
       });
-      this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
-
-      this.sharingService.setWeek(this.chosenWeek);
+     this.chooseWeek(this.chosenWeek);
     });
-
+    this.subscriptions.push(sub);
   }
 
   chooseWeek(week : Week) {
