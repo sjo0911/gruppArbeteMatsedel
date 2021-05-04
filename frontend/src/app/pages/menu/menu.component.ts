@@ -40,6 +40,7 @@ export class MenuComponent implements OnInit {
       } else if(foodSpec === 'pig') {
         returnString += `<i class="fas fa-bacon"></i>`;
       }
+      returnString += '&nbsp&nbsp';
     });
     return returnString;
   }

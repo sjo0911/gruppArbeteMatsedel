@@ -10,7 +10,6 @@
         <div class="day-meals" *ngFor="let meal of day.meals">
           <div class="icons" [innerHTML]="getFoodSpecs(meal)">
           </div>
-          <i class="fas fa-seedling fa-sm" style="font-size: 0.73em;"></i>
          {{ meal.mealName }}
         </div>
       </ng-template>
