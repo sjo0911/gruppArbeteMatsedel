@@ -2,7 +2,7 @@
   <div class="menu-content" >
     <div class="day-content" *ngFor="let day of week.days">
       <div class="day-date">
-        {{day.date}}{{day.meals}}
+        {{day.date | date:'EEEE' }}<br>{{day.date | date }}{{day.meals}}
       </div>
       <div class="day-meals">
 

@@ -44,8 +44,8 @@ export class DateHandlerService {
         week.weekNr = datePipe.transform(date, 'w');
       } else if (datePipe.transform(date, 'EEEE') === 'Sunday' || datePipe.transform(date, 'mediumDate') === datePipe.transform(newEndDate, 'mediumDate')) {
         week.endDate = new Date(date);
-        let newWeek = Object.assign(week);
-        weeks.push(newWeek);
+      //  let newWeek = Object.assign(week);
+        weeks.push(week);
       }
       if (datePipe.transform(date, 'EEEE') === 'Monday' || datePipe.transform(date, 'EEEE') === 'Tuesday' || datePipe.transform(date, 'EEEE') === 'Wednesday'
       || datePipe.transform(date, 'EEEE') === 'Thursday' || datePipe.transform(date, 'EEEE') === 'Friday') {
@@ -56,8 +56,8 @@ export class DateHandlerService {
             day.meals.push(meal);
           }
         });
-        let newDay = Object.assign(day);
-        week.days.push(newDay);
+       // let newDay = Object.assign(day);
+        week.days.push(day);
       }
     }
     return weeks;
