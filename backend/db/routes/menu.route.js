@@ -51,7 +51,6 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
 
     // Lägg till datum-validering här också
-    
     Menu.findOneAndUpdate({ _id: req.params.id }, {
         $set: req.body
     }).then(() => {

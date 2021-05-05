@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.sharingService.getObservable().subscribe((week : Week) => {
+      this.sharingService.getObservableWeek().subscribe((week : Week) => {
         this.week = week;
       })
 

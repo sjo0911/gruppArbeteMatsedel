@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Menu } from '../models/menu';
 import { WebReqService } from './web-req.service';
 
 @Injectable({
@@ -14,5 +16,9 @@ export class MenuService {
 
   getMenu(_menuId: string) {
     return this.webReqService.get(`menu/${_menuId}`);
+  }
+
+  updateMenu(menu : Menu) {
+    return this.webReqService.patch(`menu/${menu._id}`, menu);
   }
 }

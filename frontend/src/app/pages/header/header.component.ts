@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
 
     },
     () => {
-      // console.log(menu);
+      this.sharingService.setMenu(menu);
       this.weeks = this.dateHandlerService.getWeeks(menu);
       // console.log(this.weeks);
       // let currentWeek = this.dateHandlerService.getCurrentWeek();

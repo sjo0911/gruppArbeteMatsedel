@@ -87,13 +87,18 @@
   border: 0px;
   border-radius: 8px;
   color: white;
-  width: 530px;
+  width: 480px;
   height: 18px;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 .icon-checkbox {
-  padding: 5px;
-  margin: 8px;
+  margin-top: 7px;
+  padding: 3px;
+  margin-left: 8px;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .vego {
@@ -106,6 +111,24 @@
 
 .pig {
   color: pink;
+}
+
+.delete-button {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  border: 0px;
+  background: transparent;
+  color: black;
+  &:active {
+    transform: translateY(4px);
+  }
+  margin-left: 26px;
+  margin-bottom: 5px;
+  // position: fixed;
+  //   right: 300px;
+    // padding: 20px;
 }
 
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Menu } from '../models/menu';
 import { Week } from '../models/week';
 
 @Injectable({
@@ -8,19 +9,26 @@ import { Week } from '../models/week';
 export class SharingService {
 
 weekObserver: Subject<Week>;
-week: Week;
+menuObserver: Subject<Menu>;
 
   constructor() {
-    this.week = new Week();
     this.weekObserver = new Subject<Week>();
+    this.menuObserver = new Subject<Menu>();
   }
 
   setWeek(week : Week) {
-    this.week = week;
     this.weekObserver.next(week);
   }
 
-  getObservable() : Subject<Week> {
+  getObservableWeek() : Subject<Week> {
     return this.weekObserver;
+  }
+
+  setMenu(menu : Menu) {
+    this.menuObserver.next(menu);
+  }
+
+  getObservableMenu() : Subject<Menu> {
+    return this.menuObserver;
   }
 }
