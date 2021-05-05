@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Meal } from 'src/app/models/meal';
 import { Week } from 'src/app/models/week';
+import { Day } from 'src/app/models/day';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { SharingService } from 'src/app/services/sharing.service';
+import { Menu } from 'src/app/models/menu';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,12 +15,18 @@ import { SharingService } from 'src/app/services/sharing.service';
 export class AdminComponent implements OnInit {
 
   week : Week;
+  menu : Menu;
 
-  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService) { }
+  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService, private menuService : MenuService) {
+
+   }
 
   ngOnInit(): void {
-    this.sharingService.getObservable().subscribe((week : Week) => {
+    this.sharingService.getObservableWeek().subscribe((week : Week) => {
       this.week = week;
+    })
+    this.sharingService.getObservableMenu().subscribe((menu : Menu) => {
+      this.menu = menu;
     })
   }
 
@@ -34,6 +43,27 @@ export class AdminComponent implements OnInit {
       returnString += '&nbsp&nbsp';
     });
     return returnString;
+  }
+
+  deleteMeal(mealId : string, day : Day) : void{
+    day.meals.forEach((meal, index) => {
+      if(meal._id === mealId) {
+        day.meals.splice(index, 1);
+      }
+    });
+
+    this.menu.meals.forEach((meal, index) => {
+      if(meal._id === mealId) {
+        this.menu.meals.splice(index, 1);
+      }
+    });
+    this.menuService.updateMenu(this.menu).subscribe(() => {
+
+    },
+    (error) => {
+      // Lös detta fel! Friendly reminder :)
+    }
+    )
   }
 
 }
