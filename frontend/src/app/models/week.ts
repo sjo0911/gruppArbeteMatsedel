@@ -8,6 +8,7 @@ export class Week {
   weekNr: string;
 
   days: Day[];
+  // menuId : string;
 
   constructor() {
     this.days = new Array();

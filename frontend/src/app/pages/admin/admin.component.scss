@@ -53,6 +53,11 @@
   color: white;
 }
 
+.meals-content {
+  display: rows;
+  width: 100%;
+}
+
 .day-meals {
   background: #08496d;
   display: flex;
@@ -60,17 +65,36 @@
   height: 20%;
   justify-content: left;
   align-items: center;
-  padding: 10px;
+  // padding: 3px;
   margin: 5px;
   border-radius: 8px;
   color: white;
 }
 
-// .icons {
-//   display: flex;
-//   align-items: center;
-//   color: black;
-// }
+.icons {
+  display: flex;
+  align-items: center;
+  color: green;
+  margin-left: 3px;
+}
+
+.footer-content {
+  padding: 20px;
+}
+
+.input-field {
+  background: #08496d;
+  border: 0px;
+  border-radius: 8px;
+  color: white;
+  width: 530px;
+  height: 18px;
+}
+
+.icon-checkbox {
+  padding: 5px;
+  margin: 8px;
+}
 
 .vego {
   color: darkgreen;
@@ -83,10 +107,5 @@
 .pig {
   color: pink;
 }
-
-.footer-content {
-  padding: 20px;
-}
-
 
 

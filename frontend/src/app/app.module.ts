@@ -7,12 +7,16 @@ import { HeaderComponent } from './pages/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './pages/menu/menu.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
+    FooterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
