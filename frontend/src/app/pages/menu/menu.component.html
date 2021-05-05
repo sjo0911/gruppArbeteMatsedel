@@ -1,23 +1,25 @@
 <script src="https://use.fontawesome.com/ccceada4b4.js"></script>
 
-<div class="centered-content" *ngIf="week">
-  <div class="menu-content">
-    <div class="day-content" *ngFor="let day of week.days">
-      <div class="day-date">
-        {{ day.date | date: "EEEE" }}<br>{{ day.date | date }}
-      </div>
-      <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
-        <div class="day-meals" *ngFor="let meal of day.meals">
-          <div class="icons" [innerHTML]="getFoodSpecs(meal)">
+<div *ngIf="week">
+  <div class="centered-content">
+    <div class="menu-content">
+      <div class="day-content" *ngFor="let day of week.days">
+        <div class="day-date">
+          {{ day.date | date: "EEEE" }}<br>{{ day.date | date }}
+        </div>
+        <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
+          <div class="day-meals" *ngFor="let meal of day.meals">
+            <div class="icons" [innerHTML]="getFoodSpecs(meal)">
+            </div>
+          {{ meal.mealName }}
           </div>
-         {{ meal.mealName }}
-        </div>
-      </ng-template>
-      <ng-template #elseBlock>
-        <div class="day-meals">
-          <a>{{ noInput }}</a>
-        </div>
-      </ng-template>
+        </ng-template>
+        <ng-template #elseBlock>
+          <div class="day-meals">
+            <a>{{ noInput }}</a>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,43 @@
+<script src="https://use.fontawesome.com/ccceada4b4.js"></script>
+
+<div *ngIf="week">
+  <div class="centered-content">
+    <div class="menu-content">
+      <div class="day-content" *ngFor="let day of week.days">
+        <div class="day-date">
+          {{ day.date | date: "EEEE" }}<br>{{ day.date | date }}
+        </div>
+        <div class="meals-content">
+          <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
+            <div class="day-meals" *ngFor="let meal of day.meals">
+              <form>
+                <input class="input-field" type="text" [value]="meal.mealName">
+                <input class="icon-checkbox" type="checkbox" name="vego" id="vego">
+                <i class="fas vego fa-seedling"></i>
+                <input class="icon-checkbox" type="checkbox" name="gurka" id="gurka">
+                <i class="fas gurka fa-pepper-hot"></i>
+                <input class="icon-checkbox" type="checkbox" name="pig" id="pig">
+                <i class="fas pig fa-bacon"></i>
+              </form>
+            </div>
+            <div class="day-meals" *ngIf="day.meals.length < 4">
+              <form>
+                <input class="input-field" type="text" [value]="">
+                <input class="icon-checkbox" type="checkbox" name="vego" id="vego">
+                <i class="fas vego fa-seedling"></i>
+                <input class="icon-checkbox" type="checkbox" name="gurka" id="gurka">
+                <i class="fas gurka fa-pepper-hot"></i>
+                <input class="icon-checkbox" type="checkbox" name="pig" id="pig">
+                <i class="fas pig fa-bacon"></i>
+              </form>
+            </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="day-meals">
+            </div>
+          </ng-template>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
