@@ -66,4 +66,46 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id/meal/:mealId', (req, res) => {
+    Menu.findOneAndUpdate({
+        _id: req.params.id
+    }, {
+        $pull: {'meals': {
+            _id: req.params.mealId
+        }}
+    }).then(() => {
+        res.sendStatus(200);
+    })
+    
+})
+
+router.post('/:id/meal/', (req, res) => {
+    Menu.findOneAndUpdate({
+        _id:req.params.id,
+    }, {
+        $push: {'meals': req.body
+
+
+    }
+    }).then((removedMealDoc) => {
+        res.send(removedMealDoc)
+    })
+})
+
+router.patch('/:id/meal/:mealId', (req, res) => {
+    Menu.findOneAndUpdate({
+        _id:req.params.id,
+        "meals._id":req.params.mealId
+        
+    }, {
+        $set: {'meals':     req.body   
+        } 
+
+    }).catch((err) => {
+        res.send(err);
+    }).then(() => {
+        res.sendStatus(200)
+    })
+})
+
 module.exports = router
