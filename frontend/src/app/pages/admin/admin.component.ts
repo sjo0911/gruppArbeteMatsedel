@@ -52,18 +52,12 @@ export class AdminComponent implements OnInit {
       }
     });
 
-    this.menu.meals.forEach((meal, index) => {
-      if(meal._id === mealId) {
-        this.menu.meals.splice(index, 1);
-      }
-    });
-    this.menuService.updateMenu(this.menu).subscribe(() => {
+    this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
 
     },
-    (error) => {
-      // Lös detta fel! Friendly reminder :)
-    }
-    )
+    (err) => {
+       // Lös detta fel! Friendly reminder :)
+    })
   }
 
 }

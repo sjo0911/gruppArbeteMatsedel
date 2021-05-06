@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const{ Menu } = require('../models');
+const { Menu } = require('../models');
 
 router.get('/', (req, res) => {
     Menu.find().then((menus) => {
@@ -29,12 +29,12 @@ router.post('/', (req, res) => {
 
     meals.forEach(meal => {
         let dateMeal = new Date(meal.mealDate);
-        if(dateMeal<dateStart || dateMeal>dateEnd) {
+        if (dateMeal < dateStart || dateMeal > dateEnd) {
             checkDate = false;
         }
     });
 
-    if(checkDate) {
+    if (checkDate) {
         let newMenu = new Menu({
             startDate,
             endDate,
@@ -70,23 +70,24 @@ router.delete('/:id/meal/:mealId', (req, res) => {
     Menu.findOneAndUpdate({
         _id: req.params.id
     }, {
-        $pull: {'meals': {
-            _id: req.params.mealId
-        }}
+        $pull: {
+            'meals': {
+                _id: req.params.mealId
+            }
+        }
     }).then(() => {
         res.sendStatus(200);
     })
-    
+
 })
 
 router.post('/:id/meal/', (req, res) => {
     Menu.findOneAndUpdate({
-        _id:req.params.id,
+        _id: req.params.id,
     }, {
-        $push: {'meals': req.body
-
-
-    }
+        $push: {
+            'meals': req.body
+        }
     }).then((removedMealDoc) => {
         res.send(removedMealDoc)
     })
@@ -94,12 +95,13 @@ router.post('/:id/meal/', (req, res) => {
 
 router.patch('/:id/meal/:mealId', (req, res) => {
     Menu.findOneAndUpdate({
-        _id:req.params.id,
-        "meals._id":req.params.mealId
-        
+        _id: req.params.id,
+        "meals._id": req.params.mealId
+
     }, {
-        $set: {'meals':     req.body   
-        } 
+        $set: {
+            'meals': req.body
+        }
 
     }).catch((err) => {
         res.send(err);

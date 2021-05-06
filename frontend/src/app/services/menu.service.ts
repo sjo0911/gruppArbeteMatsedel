@@ -1,3 +1,4 @@
+import { Meal } from 'src/app/models/meal';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Menu } from '../models/menu';
@@ -20,5 +21,17 @@ export class MenuService {
 
   updateMenu(menu : Menu) {
     return this.webReqService.patch(`menu/${menu._id}`, menu);
+  }
+
+  deleteMeal(_menuId: string, _mealId:string){
+    return this.webReqService.delete(`menu/${_menuId}/meal/${_mealId}`);
+  }
+
+  updateMeal(meal : Meal, _menuId : string) {
+    return this.webReqService.patch(`menu/${_menuId}/meal/${meal._id}`, meal);
+  }
+
+  postMeal(meal: Meal,  _menuId : string ) {
+    return this.webReqService.post(`menu/${_menuId}/meal`, meal);
   }
 }
