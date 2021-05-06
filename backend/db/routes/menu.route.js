@@ -82,14 +82,16 @@ router.delete('/:id/meal/:mealId', (req, res) => {
 })
 
 router.post('/:id/meal/', (req, res) => {
+    const myId = new mongoose.Types.ObjectId();
     Menu.findOneAndUpdate({
         _id: req.params.id,
     }, {
         $push: {
+            _id: myId,
             'meals': req.body
         }
     }).then(() => {
-        res.sendStatus(200);
+        res.send(myId);
     })
 })
 

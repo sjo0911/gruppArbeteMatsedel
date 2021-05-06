@@ -100,7 +100,6 @@ export class AdminComponent implements OnInit {
     meal.mealName = newMealName;
     meal.mealDate = new Date(day.date);
       if(veg.checked) {
-        console.log(veg);
         meal.foodSpecs.push(veg.value);
       }
       if(hot.checked) {
@@ -110,8 +109,8 @@ export class AdminComponent implements OnInit {
         meal.foodSpecs.push(pig.value);
       }
       day.meals.push(meal);
-      this.menuService.postMeal(meal, this.menu._id).subscribe((meal) => {
-
+      this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
+        console.log(mealId);
       });
 
       form.reset();
