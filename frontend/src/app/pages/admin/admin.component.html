@@ -11,14 +11,17 @@
           <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
             <div class="day-meals" *ngFor="let meal of day.meals">
                 <form>
-                  <input class="input-field" type="text" [value]="meal.mealName">
-                  <input class="icon-checkbox" type="checkbox" name="vego" id="vego">
-                  <i class="fas vego fa-seedling"></i>
-                  <input class="icon-checkbox" type="checkbox" name="gurka" id="gurka">
-                  <i class="fas gurka fa-pepper-hot"></i>
-                  <input class="icon-checkbox" type="checkbox" name="pig" id="pig">
+                  <input class="input-field" type="text" [value]="meal.mealName" #mealName>
+                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'veg')"    name="veg" id="veg" #veg>
+                  <i class="fas veg fa-seedling"></i>
+                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'hot')"  name="hot" id="hot" #hot>
+                  <i class="fas hot fa-pepper-hot"></i>
+                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'pig')"  name="pig"  id="pig" #pig>
                   <i class="fas pig fa-bacon"></i>
                 </form>
+                <button class="save-button" (click)="saveMeal(meal, day, mealName.value, veg.value, hot.value, pig.value)">
+                <i class="far fa-save"></i>
+                </button>
                 <button class="delete-button" (click)="deleteMeal(meal._id, day)">
                   <i class="fas fa-trash-alt"></i>
                 </button>
@@ -26,10 +29,10 @@
             <div class="day-meals" *ngIf="day.meals.length < 4">
               <form>
                 <input class="input-field" type="text" [value]="">
-                <input class="icon-checkbox" type="checkbox" name="vego" id="vego">
-                <i class="fas vego fa-seedling"></i>
-                <input class="icon-checkbox" type="checkbox" name="gurka" id="gurka">
-                <i class="fas gurka fa-pepper-hot"></i>
+                <input class="icon-checkbox" type="checkbox" name="veg" id="veg">
+                <i class="fas veg fa-seedling"></i>
+                <input class="icon-checkbox" type="checkbox" name="hot" id="hot">
+                <i class="fas hot fa-pepper-hot"></i>
                 <input class="icon-checkbox" type="checkbox" name="pig" id="pig">
                 <i class="fas pig fa-bacon"></i>
               </form>

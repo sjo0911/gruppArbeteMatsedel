@@ -33,9 +33,9 @@ export class AdminComponent implements OnInit {
   getFoodSpecs(meal : Meal) : string {
     let returnString : string = '';
     meal.foodSpecs.forEach(foodSpec => {
-      if(foodSpec === 'vego') {
+      if(foodSpec === 'veg') {
         returnString += `<i class="fas fa-seedling"></i>`;
-      } else if(foodSpec === 'gurka') {
+      } else if(foodSpec === 'hot') {
         returnString += `<i class="fas fa-pepper-hot"></i>`;
       } else if(foodSpec === 'pig') {
         returnString += `<i class="fas fa-bacon"></i>`;
@@ -58,6 +58,37 @@ export class AdminComponent implements OnInit {
     (err) => {
        // Lös detta fel! Friendly reminder :)
     })
+  }
+
+  checkFoodSpec(foodSpecs: string[], wantedSpec: string): boolean {
+    let bol = false;
+    foodSpecs.forEach((foodSpec) => {
+      if(foodSpec === wantedSpec) {
+        bol = true;
+      }
+    })
+    return bol;
+  }
+
+
+
+  saveMeal(meal: Meal, day: Day, mealName : string, veg : string, hot : string, pig: string) {
+    meal.mealName = mealName;
+      meal.foodSpecs.forEach((foodSpec, index) => {
+        foodSpec.slice(index, 1);
+      })
+      if(veg === "veg") {
+        meal.foodSpecs.push(veg);
+      }
+      if(hot === "hot") {
+        meal.foodSpecs.push(hot);
+      }
+      if(pig === "pig") {
+        meal.foodSpecs.push(pig);
+      }
+      this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
+
+      });
   }
 
 }
