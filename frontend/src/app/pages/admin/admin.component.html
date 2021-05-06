@@ -12,14 +12,14 @@
             <div class="day-meals" *ngFor="let meal of day.meals">
                 <form>
                   <input class="input-field" type="text" [value]="meal.mealName" #mealName>
-                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'veg')"    name="veg" id="veg" #veg>
+                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'veg')" value="veg" name="veg" id="veg" #veg>
                   <i class="fas veg fa-seedling"></i>
-                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'hot')"  name="hot" id="hot" #hot>
+                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'hot')" value="hot" name="hot" id="hot" #hot>
                   <i class="fas hot fa-pepper-hot"></i>
-                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'pig')"  name="pig"  id="pig" #pig>
+                  <input class="icon-checkbox" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'pig')" value="pig" name="pig"  id="pig" #pig>
                   <i class="fas pig fa-bacon"></i>
                 </form>
-                <button class="save-button" (click)="saveMeal(meal, day, mealName.value, veg.value, hot.value, pig.value)">
+                <button class="update-button" (click)="updateMeal(meal, day, mealName.value, veg.value, hot.value, pig.value)">
                 <i class="far fa-save"></i>
                 </button>
                 <button class="delete-button" (click)="deleteMeal(meal._id, day)">
@@ -27,15 +27,18 @@
                 </button>
             </div>
             <div class="day-meals" *ngIf="day.meals.length < 4">
-              <form>
-                <input class="input-field" type="text" [value]="">
-                <input class="icon-checkbox" type="checkbox" name="veg" id="veg">
+              <form #form>
+                <input class="input-field" type="text" [value]="" #newMealName>
+                <input class="icon-checkbox" type="checkbox" value="veg" name="veg" id="veg" #veg>
                 <i class="fas veg fa-seedling"></i>
-                <input class="icon-checkbox" type="checkbox" name="hot" id="hot">
+                <input class="icon-checkbox" type="checkbox" value="hot" name="hot" id="hot" #hot>
                 <i class="fas hot fa-pepper-hot"></i>
-                <input class="icon-checkbox" type="checkbox" name="pig" id="pig">
+                <input class="icon-checkbox" type="checkbox" value="pig" name="pig" id="pig" #pig>
                 <i class="fas pig fa-bacon"></i>
               </form>
+              <button class="save-button" (click)="saveMeal(day, newMealName.value, veg, hot, pig, form)">
+                <i class="fas fa-save"></i>
+              </button>
             </div>
           </ng-template>
           <ng-template #elseBlock>

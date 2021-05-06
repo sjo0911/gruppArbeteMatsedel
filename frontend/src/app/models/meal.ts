@@ -18,7 +18,9 @@ export class Meal {
   //   return returnString;
   // }
 
-  constructor(){}
+  constructor(){
+    this.foodSpecs = new Array();
+  }
 
   foodSpecsHTML() : string{
     let returnString : string = '';

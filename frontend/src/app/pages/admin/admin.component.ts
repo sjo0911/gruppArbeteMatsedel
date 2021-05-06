@@ -70,9 +70,7 @@ export class AdminComponent implements OnInit {
     return bol;
   }
 
-
-
-  saveMeal(meal: Meal, day: Day, mealName : string, veg : string, hot : string, pig: string) {
+  updateMeal(meal: Meal, day: Day, mealName : string, veg : string, hot : string, pig: string) {
     meal.mealName = mealName;
       meal.foodSpecs.forEach((foodSpec, index) => {
         foodSpec.slice(index, 1);
@@ -89,6 +87,27 @@ export class AdminComponent implements OnInit {
       this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
 
       });
+  }
+
+  saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
+    let meal : Meal = new Meal();
+    meal.mealName = newMealName;
+    meal.mealDate = new Date(day.date);
+      if(veg.checked()) {
+        console.log(veg);
+        meal.foodSpecs.push(veg.value);
+      }
+      if(hot.checked()) {
+        meal.foodSpecs.push(hot.value);
+      }
+      if(pig.checked()) {
+        meal.foodSpecs.push(pig.value);
+      }
+      day.meals.push(meal);
+      this.menuService.postMeal(meal, this.menu._id).subscribe(() => {
+
+      });
+      form.reset();
   }
 
 }
