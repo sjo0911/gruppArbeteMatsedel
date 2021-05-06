@@ -1,6 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const { Menu } = require('../models');
 
@@ -82,12 +83,14 @@ router.delete('/:id/meal/:mealId', (req, res) => {
 })
 
 router.post('/:id/meal/', (req, res) => {
-    const myId = new mongoose.Types.ObjectId();
+    // const myId = new mongoose.Types.ObjectId();
+    // const meal = {"_id":myId, req.body};
+    // req.body.$push(`"_id":'${myId}'`);
     Menu.findOneAndUpdate({
         _id: req.params.id,
     }, {
         $push: {
-            _id: myId,
+            // _id: myId,
             'meals': req.body
         }
     }).then(() => {
