@@ -52,6 +52,8 @@ export class AdminComponent implements OnInit {
       }
     });
 
+    // Kan ej delete efter att ha lagt till nytt meal innan uppdatering av sidan eftersom meal saknar id!!
+
     this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
 
     },
@@ -70,22 +72,26 @@ export class AdminComponent implements OnInit {
     return bol;
   }
 
-  updateMeal(meal: Meal, day: Day, mealName : string, veg : string, hot : string, pig: string) {
+  updateMeal(meal: Meal, day: Day, mealName : string, veg : any, hot : any, pig: any) {
     meal.mealName = mealName;
+    // Kolla att det inte blir dubbletter i databasen
       meal.foodSpecs.forEach((foodSpec, index) => {
         foodSpec.slice(index, 1);
       })
-      if(veg === "veg") {
-        meal.foodSpecs.push(veg);
+      if(veg.checked) {
+        meal.foodSpecs.push(veg.value);
       }
-      if(hot === "hot") {
-        meal.foodSpecs.push(hot);
+      if(hot.checked) {
+        meal.foodSpecs.push(hot.value);
       }
-      if(pig === "pig") {
-        meal.foodSpecs.push(pig);
+      if(pig.checked) {
+        meal.foodSpecs.push(pig.value);
       }
       this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
 
+      },
+      (err) => {
+         // Lös detta fel! Friendly reminder :)
       });
   }
 
@@ -93,20 +99,21 @@ export class AdminComponent implements OnInit {
     let meal : Meal = new Meal();
     meal.mealName = newMealName;
     meal.mealDate = new Date(day.date);
-      if(veg.checked()) {
+      if(veg.checked) {
         console.log(veg);
         meal.foodSpecs.push(veg.value);
       }
-      if(hot.checked()) {
+      if(hot.checked) {
         meal.foodSpecs.push(hot.value);
       }
-      if(pig.checked()) {
+      if(pig.checked) {
         meal.foodSpecs.push(pig.value);
       }
       day.meals.push(meal);
-      this.menuService.postMeal(meal, this.menu._id).subscribe(() => {
+      this.menuService.postMeal(meal, this.menu._id).subscribe((meal) => {
 
       });
+
       form.reset();
   }
 
