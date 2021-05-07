@@ -13,9 +13,11 @@ export class MenuComponent implements OnInit {
 
   week : Week;
   noInput : string;
+  dateToday: Date;
 
   constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService) {
     this.noInput = "MAT SAKNAS";
+    this.dateToday = new Date(Date.now());
   }
 
   ngOnInit(): void {
@@ -29,11 +31,17 @@ export class MenuComponent implements OnInit {
     let returnString : string = '';
     meal.foodSpecs.forEach(foodSpec => {
       if(foodSpec === 'veg') {
+<<<<<<< Updated upstream
         returnString += `<i class="fas veg fa-seedling"></i>`;
       } else if(foodSpec === 'hot') {
         returnString += `<i class="fas hot fa-pepper-hot"></i>`;
+=======
+        returnString += `<span><div><i class="fas veg fa-seedling"></i></span></div>`;
+      } else if(foodSpec === 'hot') {
+        returnString += `<span><div><i class="fas hot fa-pepper-hot"></i></span></div>`;
+>>>>>>> Stashed changes
       } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas pig fa-bacon"></i>`;
+        returnString += `<span><div><i class="fas pig fa-bacon"></i></span></div>`;
       }
       returnString += '&nbsp&nbsp';
     });

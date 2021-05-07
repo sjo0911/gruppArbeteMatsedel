@@ -78,6 +78,7 @@
 // }
 
 .veg {
+<<<<<<< Updated upstream
   // font-family:FontAwesome;
   color: darkgreen !important;
 }
@@ -85,6 +86,13 @@
 .hot {
   // font-family:FontAwesome;
   color: red !important;
+=======
+  color: darkgreen;
+}
+
+.hot {
+  color: red;
+>>>>>>> Stashed changes
 }
 
 .pig {
@@ -94,6 +102,10 @@
 
 .footer-content {
   padding: 20px;
+}
+
+.today {
+  border: solid 1px white;
 }
 
 
