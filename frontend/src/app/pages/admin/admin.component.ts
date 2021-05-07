@@ -53,14 +53,9 @@ export class AdminComponent implements OnInit {
       }
     });
 
-    // Kan ej delete efter att ha lagt till nytt meal innan uppdatering av sidan eftersom meal saknar id!!
-
     this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
 
-    },
-    (err) => {
-       // Lös detta fel! Friendly reminder :)
-    })
+    });
   }
 
   checkFoodSpec(foodSpecs: string[], wantedSpec: string): boolean {
@@ -87,9 +82,6 @@ export class AdminComponent implements OnInit {
       }
       this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
 
-      },
-      (err) => {
-         // Lös detta fel! Friendly reminder :)
       });
   }
 
@@ -110,9 +102,6 @@ export class AdminComponent implements OnInit {
       day.meals.push(meal);
       this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
 
-      },
-      (err) => {
-         // Lös detta fel! Friendly reminder :)
       });
 
       form.reset();

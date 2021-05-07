@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
             res.send(menuDoc);
         })
     } else {
-        res.send("EXCEPTION! Date is incorrect, please check date...")
+        res.send({message: 'EXCEPTION! Date is incorrect, please check date...'})
     }
 })
 
@@ -55,7 +55,7 @@ router.patch('/:id', (req, res) => {
     Menu.findOneAndUpdate({ _id: req.params.id }, {
         $set: req.body
     }).then(() => {
-        res.sendStatus(200);
+        res.send({message: 'Completed successfully'});
     });
 })
 
@@ -77,7 +77,7 @@ router.delete('/:id/meal/:mealId', (req, res) => {
             }
         }
     }).then(() => {
-        res.sendStatus(200);
+        res.send({message: 'Completed successfully'});
     })
 
 })
@@ -94,7 +94,7 @@ router.post('/:id/meal/', (req, res) => {
             'meals': req.body
         }
     }).then(() => {
-        res.sendStatus(200);
+        res.send({message: 'Completed successfully'});
     })
 })
 
@@ -122,7 +122,7 @@ router.patch('/:id/meal/:mealId', (req, res) => {
     }).catch((err) => {
         res.send(err);
     }).then(() => {
-        res.sendStatus(200)
+        res.send({message: 'Completed successfully'});
     })
 })
 
