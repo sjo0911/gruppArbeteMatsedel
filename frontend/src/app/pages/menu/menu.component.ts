@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit {
       } else if(foodSpec === 'hot') {
         returnString += `<i class="fas hot fa-pepper-hot"></i>`;
       } else if(foodSpec === 'pig') {
-        returnString += `<span><div><i class="fas pig fa-bacon"></i></span></div>`;
+        returnString += `<i class="fas pig fa-bacon"></i>`;
       }
       returnString += '&nbsp&nbsp';
     });
