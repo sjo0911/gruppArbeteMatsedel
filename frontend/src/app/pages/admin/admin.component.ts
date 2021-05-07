@@ -92,9 +92,9 @@ export class AdminComponent implements OnInit {
         meal.foodSpecs.push(pig.value);
       }
       let sub: Subscription =this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
-
+        this.subscriptions.push(sub);
       });
-      this.subscriptions.push(sub);
+
   }
 
   saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
