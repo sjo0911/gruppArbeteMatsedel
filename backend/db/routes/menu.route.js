@@ -1,6 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const { Menu } = require('../models');
 
@@ -82,14 +83,31 @@ router.delete('/:id/meal/:mealId', (req, res) => {
 })
 
 router.post('/:id/meal/', (req, res) => {
+    // const myId = new mongoose.Types.ObjectId();
+    // const meal = {"_id":myId, req.body};
+    // req.body.$push(`"_id":'${myId}'`);
     Menu.findOneAndUpdate({
         _id: req.params.id,
     }, {
         $push: {
+            // _id: myId,
             'meals': req.body
         }
-    }).then((removedMealDoc) => {
-        res.send(removedMealDoc)
+    }).then(() => {
+        res.sendStatus(200);
+    })
+})
+
+router.get('/:id/meal/:mealId', (req, res) => {
+    Menu.findOne({ 
+        _id: req.params.id,
+        "meals._id": req.params.mealId
+    }, 
+    {
+        'meals.$': 1
+    }
+    ).then((meal) => {
+        res.send(meal);
     })
 })
 
@@ -97,12 +115,10 @@ router.patch('/:id/meal/:mealId', (req, res) => {
     Menu.findOneAndUpdate({
         _id: req.params.id,
         "meals._id": req.params.mealId
-
     }, {
         $set: {
-            'meals': req.body
+            'meals.$': req.body
         }
-
     }).catch((err) => {
         res.send(err);
     }).then(() => {

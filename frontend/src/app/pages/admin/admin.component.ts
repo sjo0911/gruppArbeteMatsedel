@@ -6,6 +6,7 @@ import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Menu } from 'src/app/models/menu';
 import { MenuService } from 'src/app/services/menu.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin',
@@ -52,6 +53,8 @@ export class AdminComponent implements OnInit {
       }
     });
 
+    // Kan ej delete efter att ha lagt till nytt meal innan uppdatering av sidan eftersom meal saknar id!!
+
     this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
 
     },
@@ -70,25 +73,49 @@ export class AdminComponent implements OnInit {
     return bol;
   }
 
-
-
-  saveMeal(meal: Meal, day: Day, mealName : string, veg : string, hot : string, pig: string) {
+  updateMeal(meal: Meal, day: Day, mealName : string, veg : any, hot : any, pig: any) {
     meal.mealName = mealName;
-      meal.foodSpecs.forEach((foodSpec, index) => {
-        foodSpec.slice(index, 1);
-      })
-      if(veg === "veg") {
-        meal.foodSpecs.push(veg);
+    meal.foodSpecs = [];
+      if(veg.checked) {
+        meal.foodSpecs.push(veg.value);
       }
-      if(hot === "hot") {
-        meal.foodSpecs.push(hot);
+      if(hot.checked) {
+        meal.foodSpecs.push(hot.value);
       }
-      if(pig === "pig") {
-        meal.foodSpecs.push(pig);
+      if(pig.checked) {
+        meal.foodSpecs.push(pig.value);
       }
       this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
 
+      },
+      (err) => {
+         // Lös detta fel! Friendly reminder :)
       });
+  }
+
+  saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
+    let meal : Meal = new Meal();
+    meal.mealName = newMealName;
+    meal.mealDate = new Date(day.date);
+      if(veg.checked) {
+        meal.foodSpecs.push(veg.value);
+      }
+      if(hot.checked) {
+        meal.foodSpecs.push(hot.value);
+      }
+      if(pig.checked) {
+        meal.foodSpecs.push(pig.value);
+      }
+      meal._id = uuidv4();
+      day.meals.push(meal);
+      this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
+
+      },
+      (err) => {
+         // Lös detta fel! Friendly reminder :)
+      });
+
+      form.reset();
   }
 
 }

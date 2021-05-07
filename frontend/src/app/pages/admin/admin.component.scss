@@ -133,6 +133,24 @@
   //   right: 300px;
     // padding: 20px;
 }
+.update-button {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  border: 0px;
+  background: transparent;
+  color: black;
+  &:active {
+    transform: translateY(4px);
+  }
+  margin-left: 15px;
+  margin-bottom: 5px;
+  // position: fixed;
+  //   right: 300px;
+    // padding: 20px;
+}
+
 .save-button {
   cursor: pointer;
   height: 16px;
@@ -146,6 +164,9 @@
   }
   margin-left: 15px;
   margin-bottom: 5px;
+  // &:hover{
+  //  add hover text!
+  // }
   // position: fixed;
   //   right: 300px;
     // padding: 20px;
