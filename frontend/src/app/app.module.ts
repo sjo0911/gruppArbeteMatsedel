@@ -11,6 +11,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import sv from '@angular/common/locales/sv';
 import { registerLocaleData } from '@angular/common';
+import { LoginComponent } from './pages/login/login.component';
 
 registerLocaleData(sv);
 
@@ -20,7 +21,8 @@ registerLocaleData(sv);
     HeaderComponent,
     MenuComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

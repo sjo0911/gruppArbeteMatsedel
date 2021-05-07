@@ -12,19 +12,6 @@ export class DateHandlerService {
 
   constructor() { }
 
-  // getWeeks(startDate: Date, endDate: Date) : Week[] {
-  //   let datePipe: DatePipe = new DatePipe('en-US');
-  //   let week : Week = new Week();
-  //   let weeks : Week[] = new Array();
-  //   var newEndDate = new Date(endDate);
-  //   for (var day = new Date(startDate); day <= newEndDate; day.setDate(day.getDate() + 7)) {
-  //     week.weekNr = datePipe.transform(day, 'w');
-  //     weeks.push(week);
-  //     week = new Week();
-  //   }
-  //   return weeks;
-  // }
-
   getWeeks(menu : Menu) : Week[] {
     let datePipe: DatePipe = new DatePipe('en-US');
     let week : Week = new Week();
