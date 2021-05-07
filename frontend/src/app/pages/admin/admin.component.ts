@@ -6,6 +6,7 @@ import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Menu } from 'src/app/models/menu';
 import { MenuService } from 'src/app/services/menu.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin',
@@ -74,10 +75,7 @@ export class AdminComponent implements OnInit {
 
   updateMeal(meal: Meal, day: Day, mealName : string, veg : any, hot : any, pig: any) {
     meal.mealName = mealName;
-    // Kolla att det inte blir dubbletter i databasen
-      meal.foodSpecs.forEach((foodSpec, index) => {
-        foodSpec.slice(index, 1);
-      })
+    meal.foodSpecs = [];
       if(veg.checked) {
         meal.foodSpecs.push(veg.value);
       }
@@ -108,9 +106,13 @@ export class AdminComponent implements OnInit {
       if(pig.checked) {
         meal.foodSpecs.push(pig.value);
       }
+      meal._id = uuidv4();
       day.meals.push(meal);
       this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
-        console.log(mealId);
+
+      },
+      (err) => {
+         // Lös detta fel! Friendly reminder :)
       });
 
       form.reset();

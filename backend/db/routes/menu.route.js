@@ -94,7 +94,7 @@ router.post('/:id/meal/', (req, res) => {
             'meals': req.body
         }
     }).then(() => {
-        res.send(myId);
+        res.sendStatus(200);
     })
 })
 

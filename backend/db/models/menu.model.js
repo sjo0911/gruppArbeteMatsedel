@@ -12,7 +12,7 @@ const MenuSchema = new mongoose.Schema({
     meals: [
         {
             _id: {
-                type: mongoose.Types.ObjectId,
+                type : String,
                 required: true,
                 minlength: 1,
                 trim: true
