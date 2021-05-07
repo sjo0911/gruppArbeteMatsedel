@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Meal } from 'src/app/models/meal';
 import { Week } from 'src/app/models/week';
@@ -17,17 +18,26 @@ export class AdminComponent implements OnInit {
 
   week : Week;
   menu : Menu;
+  subscriptions : Subscription[] = [];
 
   constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService, private menuService : MenuService) {
 
    }
 
   ngOnInit(): void {
-    this.sharingService.getObservableWeek().subscribe((week : Week) => {
+    let sub: Subscription = this.sharingService.getObservableWeek().subscribe((week : Week) => {
       this.week = week;
-    })
-    this.sharingService.getObservableMenu().subscribe((menu : Menu) => {
+    });
+    this.subscriptions.push(sub);
+    let sub2 : Subscription = this.sharingService.getObservableMenu().subscribe((menu : Menu) => {
       this.menu = menu;
+    })
+    this.subscriptions.push(sub2);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
     })
   }
 
@@ -53,9 +63,10 @@ export class AdminComponent implements OnInit {
       }
     });
 
-    this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
+    let sub: Subscription =this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
 
     });
+    this.subscriptions.push(sub);
   }
 
   checkFoodSpec(foodSpecs: string[], wantedSpec: string): boolean {
@@ -80,9 +91,10 @@ export class AdminComponent implements OnInit {
       if(pig.checked) {
         meal.foodSpecs.push(pig.value);
       }
-      this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
+      let sub: Subscription =this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
 
       });
+      this.subscriptions.push(sub);
   }
 
   saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
@@ -100,10 +112,10 @@ export class AdminComponent implements OnInit {
       }
       meal._id = uuidv4();
       day.meals.push(meal);
-      this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
+      let sub : Subscription= this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
 
       });
-
+      this.subscriptions.push(sub);
       form.reset();
   }
 
