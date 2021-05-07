@@ -11,7 +11,7 @@
           <div class="meals-content">
             <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
               <div class="day-meals" *ngFor="let meal of day.meals">
-                <div class="icons" [innerHTML]="getFoodSpecs(meal)">
+                <div class="icons" [innerHTML]="sanitizer.bypassSecurityTrustHtml(getFoodSpecs(meal))">
                 </div>
                   {{ meal.mealName }}
               </div>

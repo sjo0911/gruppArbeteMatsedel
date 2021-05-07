@@ -3,6 +3,7 @@ import { Week } from 'src/app/models/week';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Meal } from 'src/app/models/meal';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,7 @@ export class MenuComponent implements OnInit {
   noInput : string;
   dateToday: Date;
 
-  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService) {
+  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService ,private sanitizer: DomSanitizer) {
     this.noInput = "MAT SAKNAS";
     this.dateToday = new Date(Date.now());
   }
@@ -29,13 +30,14 @@ export class MenuComponent implements OnInit {
 
   getFoodSpecs(meal : Meal) : string {
     let returnString : string = '';
+    returnString += '&nbsp&nbsp';
     meal.foodSpecs.forEach(foodSpec => {
       if(foodSpec === 'veg') {
-        returnString += `<i class="fas veg fa-seedling"></i>`;
+        returnString += `<i class="fas fa-seedling" style='color:darkGreen'></i>`;
       } else if(foodSpec === 'hot') {
-        returnString += `<i class="fas hot fa-pepper-hot"></i>`;
+        returnString += `<i class="fas fa-pepper-hot" style='color:red'></i>`;
       } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas pig fa-bacon"></i>`;
+        returnString += `<i class="fas fa-bacon" style='color:pink'></i>`;
       }
       returnString += '&nbsp&nbsp';
     });
