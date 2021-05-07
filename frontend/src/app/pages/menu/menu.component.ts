@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { Week } from 'src/app/models/week';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
@@ -15,6 +16,7 @@ export class MenuComponent implements OnInit {
   week : Week;
   noInput : string;
   dateToday: Date;
+  subscriptions : Subscription[] = [];
 
   constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService ,private sanitizer: DomSanitizer) {
     this.noInput = "MAT SAKNAS";
@@ -22,10 +24,17 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.sharingService.getObservableWeek().subscribe((week : Week) => {
+      let sub : Subscription = this.sharingService.getObservableWeek().subscribe((week : Week) => {
         this.week = week;
-      })
+      });
+      this.subscriptions.push(sub);
 
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 
   getFoodSpecs(meal : Meal) : string {
