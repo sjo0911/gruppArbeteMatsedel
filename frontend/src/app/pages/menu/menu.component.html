@@ -8,19 +8,22 @@
           {{ day.date | date: "EEEE" }}<br>{{ day.date | date }}
         </div>
         <div class="meals-content">
-            <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
-           <div class="day-meals" *ngFor="let meal of day.meals">
-             <div class="icons" [innerHTML]="getFoodSpecs(meal)">
-             </div>
-            {{ meal.mealName }}
-             </div>
+
+          <i class="fas hot fa-pepper-hot" style="color:red"></i>
+
+          <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
+            <div class="day-meals" *ngFor="let meal of day.meals">
+              <div class="icons" [innerHTML]="getFoodSpecs(meal)">
+              </div>
+                {{ meal.mealName }}
+            </div>
           </ng-template>
           <ng-template #elseBlock>
-           <div class="day-meals">
-            <a>{{ noInput }}</a>
-           </div>
-             </ng-template>
-      </div>
+            <div class="day-meals">
+                <a>{{ noInput }}</a>
+            </div>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>

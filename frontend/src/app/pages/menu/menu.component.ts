@@ -28,10 +28,10 @@ export class MenuComponent implements OnInit {
   getFoodSpecs(meal : Meal) : string {
     let returnString : string = '';
     meal.foodSpecs.forEach(foodSpec => {
-      if(foodSpec === 'vego') {
-        returnString += `<i class="fas vego fa-seedling"></i>`;
-      } else if(foodSpec === 'gurka') {
-        returnString += `<i class="fas gurka fa-pepper-hot"></i>`;
+      if(foodSpec === 'veg') {
+        returnString += `<i class="fas veg fa-seedling"></i>`;
+      } else if(foodSpec === 'hot') {
+        returnString += `<i class="fas hot fa-pepper-hot"></i>`;
       } else if(foodSpec === 'pig') {
         returnString += `<i class="fas pig fa-bacon"></i>`;
       }
