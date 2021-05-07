@@ -5,7 +5,7 @@
     <div class="menu-content">
       <div class="day-content" *ngFor="let day of week.days">
         <div class="day-date">
-          {{ day.date | date: "EEEE" }}<br>{{ day.date | date }}
+          {{ day.date | date: "EEEE" | titlecase }}<br>{{ day.date | date }}
         </div>
         <div class="meals-content">
           <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">

@@ -72,25 +72,33 @@
 }
 
 // .icons {
-//   display: flex;
-//   align-items: center;
-//   color: black;
+//   // display: flex;
+//   // align-items: center;
+//   // color: black;
 // }
 
-.vego {
-  color: darkgreen;
+.veg {
+ font-family:FontAwesome;
+  color: darkgreen !important;
 }
 
-.gurka {
-  color: red;
+.hot {
+   font-family:FontAwesome;
+  color: red !important;
+
 }
 
 .pig {
-  color: pink;
+  // font-family:FontAwesome;
+  color: pink !important;
 }
 
 .footer-content {
   padding: 20px;
+}
+
+.today {
+  border: solid 1px white;
 }
 
 

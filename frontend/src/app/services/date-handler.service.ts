@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, LOCALE_ID } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Week } from '../models/week';
 import { Menu } from '../models/menu';

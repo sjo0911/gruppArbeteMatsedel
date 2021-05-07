@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './pages/menu/menu.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import sv from '@angular/common/locales/sv';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(sv);
 
 @NgModule({
   declarations: [
@@ -24,7 +28,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: "sv" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
