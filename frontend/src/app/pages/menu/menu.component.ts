@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { Week } from 'src/app/models/week';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { SharingService } from 'src/app/services/sharing.service';
