@@ -13,11 +13,20 @@ router.get('/', (req, res) => {
     });
 })
 
+router.get('/Name', (req, res) => {
+    console.log("hejj");
+    Menu.find().select({'menuName':1}).then((menus) => {
+        res.send(menus);
+    })
+})
+
+
 router.get('/:id', (req, res) => {
     Menu.findOne({ _id: req.params.id }).then((menu) => {
         res.send(menu);
     })
 })
+
 
 router.post('/', (req, res) => {
     let startDate = req.body.startDate;
@@ -121,5 +130,7 @@ router.patch('/:id/meal/:mealId', (req, res) => {
         res.send({message: 'Completed successfully'});
     })
 })
+
+
 
 module.exports = router

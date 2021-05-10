@@ -9,6 +9,12 @@ const MenuSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    menuName: {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
     meals: [
         {
             _id: {
