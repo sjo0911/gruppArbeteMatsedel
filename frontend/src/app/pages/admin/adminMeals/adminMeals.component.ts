@@ -11,8 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  templateUrl: './adminMeals.component.html',
+  styleUrls: ['./adminMeals.component.scss']
 })
 export class AdminComponent implements OnInit {
 

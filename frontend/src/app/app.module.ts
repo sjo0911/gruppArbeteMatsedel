@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './pages/menu/menu.component';
 import { FooterComponent } from './pages/footer/footer.component';
-import { AdminComponent } from './pages/admin/admin.component';
+import { AdminComponent } from './pages/admin/adminMeals/admin.component';
 import sv from '@angular/common/locales/sv';
 import { registerLocaleData } from '@angular/common';
 import { LoginComponent } from './pages/login/login.component';
