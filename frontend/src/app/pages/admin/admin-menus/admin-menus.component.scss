@@ -27,13 +27,41 @@
 .choices-content {
   background: #063249;
   display: flex;
-  justify-content: left;
-  align-items: left;
+  // justify-content: left;
+  // align-items: left;
   max-width: 800px;
   min-width: 800px;
   max-height: 140px;
   min-height: 140px;
   border-radius: 8px;
   margin: 3px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.add-content {
+  justify-content: center;
+  // padding: 10px;
+  // margin: 10px;
+  margin-bottom: 1px;
+}
+
+.dropdowns {
+  width: 120px;
+  margin: 30px;
+  background: #063249;
+  color: white;
+  border: transparent;
+}
+
+.add-school-button {
+  border: 0px;
+  background: transparent;
+  color: white;
+  &:active {
+    transform: translateY(4px);
+  }
+  cursor: pointer;
   padding: 20px;
+  margin: 30px;
 }

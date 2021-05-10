@@ -2,10 +2,34 @@
 <div class="centered-content">
   <div class="admin-schools-content">
     <div class="choices-content">
-
-    </div>
-    <div class="choices-content">
-
-    </div>
+      <form class="add-content">
+        <select formControlName="website" class="dropdowns">
+          <option>Välj skola</option>
+          <option *ngFor="">{{schoolName}}</option>
+        </select>
+        <select formControlName="website" class="dropdowns">
+          <option>Välj matsedel</option>
+          <option *ngFor="">{{menuName}}</option>
+        </select>
+        <button class="manage-menu-button">
+          Lägg till matsedel till skolan
+        </button>
+      </form>
+  </div>
+  <div class="choices-content">
+    <form class="add-content">
+      <select formControlName="website" class="dropdowns">
+        <option>Välj skola</option>
+        <option *ngFor="">{{schoolName}}</option>
+      </select>
+      <label class="menuName-label" style="size: 120px;">
+        &nbsp&nbsp
+        <!-- {{menuName}} -->
+      </label>
+      <button class="manage-menu-button">
+        Ta bort matsedel från skolan
+      </button>
+    </form>
+  </div>
   </div>
 </div>
