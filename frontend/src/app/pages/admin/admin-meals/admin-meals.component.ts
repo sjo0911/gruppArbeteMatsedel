@@ -11,11 +11,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './adminMeals.component.html',
-  styleUrls: ['./adminMeals.component.scss']
+  templateUrl: './admin-meals.component.html',
+  styleUrls: ['./admin-meals.component.scss']
 })
-export class AdminComponent implements OnInit {
-
+export class AdminMealsComponent implements OnInit {
   week : Week;
   menu : Menu;
   subscriptions : Subscription[] = [];

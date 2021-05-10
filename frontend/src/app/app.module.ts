@@ -8,10 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './pages/menu/menu.component';
 import { FooterComponent } from './pages/footer/footer.component';
-import { AdminComponent } from './pages/admin/adminMeals/admin.component';
+import { AdminMealsComponent } from './pages/admin/admin-meals/admin-meals.component';
 import sv from '@angular/common/locales/sv';
 import { registerLocaleData } from '@angular/common';
 import { LoginComponent } from './pages/login/login.component';
+import { AdminSchoolsComponent } from './pages/admin/admin-schools/admin-schools.component';
+import { AdminMenusComponent } from './pages/admin/admin-menus/admin-menus.component';
 
 registerLocaleData(sv);
 
@@ -21,8 +23,10 @@ registerLocaleData(sv);
     HeaderComponent,
     MenuComponent,
     FooterComponent,
-    AdminComponent,
-    LoginComponent
+    AdminMealsComponent,
+    LoginComponent,
+    AdminSchoolsComponent,
+    AdminMenusComponent
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './pages/admin/adminMeals/admin.component';
+import { AdminMealsComponent } from './pages/admin/admin-meals/admin-meals.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MenuComponent } from './pages/menu/menu.component';
 
 const routes: Routes = [
   { path:  '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: MenuComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'adminMeals', component: AdminMealsComponent },
   { path: 'login', component: LoginComponent }
 ];
 
