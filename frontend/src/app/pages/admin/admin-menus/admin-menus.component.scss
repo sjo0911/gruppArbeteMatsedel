@@ -38,30 +38,3 @@
   padding: 10px;
   justify-content: center;
 }
-
-.add-content {
-  justify-content: center;
-  // padding: 10px;
-  // margin: 10px;
-  margin-bottom: 1px;
-}
-
-.dropdowns {
-  width: 120px;
-  margin: 30px;
-  background: #063249;
-  color: white;
-  border: transparent;
-}
-
-.add-school-button {
-  border: 0px;
-  background: transparent;
-  color: white;
-  &:active {
-    transform: translateY(4px);
-  }
-  cursor: pointer;
-  padding: 20px;
-  margin: 30px;
-}

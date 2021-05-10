@@ -3,12 +3,16 @@
   <div class="admin-schools-content">
     <div class="choices-content">
       <form class="add-content">
-        <select formControlName="website" class="dropdowns">
-          <option>Välj skola</option>
-          <option *ngFor="">{{schoolName}}</option>
+        <select class="dropdowns">
+          <option disabled selected>Välj kommun</option>
+          <option *ngFor="let municipality of municipalities" (click)="chooseMunicipalityToAdd(municipality)">{{municipality.municipalityName}}</option>
         </select>
-        <select formControlName="website" class="dropdowns">
-          <option>Välj matsedel</option>
+          <select class="dropdowns">
+            <option disabled selected>Välj skola</option>
+            <option *ngFor="let school of municipalityToAdd.schools">{{school.schoolName}}</option>
+          </select>
+        <select class="dropdowns">
+          <option disabled selected>Välj matsedel</option>
           <option *ngFor="">{{menuName}}</option>
         </select>
         <button class="manage-menu-button">
@@ -18,12 +22,15 @@
   </div>
   <div class="choices-content">
     <form class="add-content">
-      <select formControlName="website" class="dropdowns">
-        <option>Välj skola</option>
+      <select class="dropdowns">
+        <option disabled selected>Välj kommun</option>
+        <option *ngFor="">{{municipality}}</option>
+      </select>
+      <select class="dropdowns">
+        <option disabled selected>Välj skola</option>
         <option *ngFor="">{{schoolName}}</option>
       </select>
       <label class="menuName-label" style="size: 120px;">
-        &nbsp&nbsp
         <!-- {{menuName}} -->
       </label>
       <button class="manage-menu-button">

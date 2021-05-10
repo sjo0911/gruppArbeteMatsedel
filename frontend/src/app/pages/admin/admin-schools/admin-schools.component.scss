@@ -11,7 +11,7 @@
   // margin: 20px;
 }
 
-.admin-menu-content {
+.admin-schools-content {
   margin-top: 55px;
   //background: white;
   max-width: 1000px;
@@ -47,11 +47,15 @@
 }
 
 .dropdowns {
-  width: 120px;
+  width: 105px;
   margin: 30px;
   background: #063249;
   color: white;
   border: transparent;
+}
+
+option[disabled] {
+  display: none;
 }
 
 .manage-menu-button {
@@ -67,6 +71,6 @@
 }
 
 .menuName-label {
-  // width: 120px;
+  width: 120px;
   // min-width: 120px;
 }
