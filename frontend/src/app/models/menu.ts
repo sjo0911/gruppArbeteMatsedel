@@ -5,4 +5,5 @@ export class Menu {
   startDate: Date;
   endDate: Date;
   meals: Meal[];
+  menuName : string;
 }

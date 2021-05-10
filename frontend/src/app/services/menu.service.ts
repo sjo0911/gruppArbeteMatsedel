@@ -39,4 +39,8 @@ export class MenuService {
     return this.webReqService.get(`menu/${_menuId}/meal/${_mealId}`);
   }
 
+  getMenuName(_menuId : string) {
+    return this.webReqService.get(`menu/name/${_menuId}`);
+  }
+
 }

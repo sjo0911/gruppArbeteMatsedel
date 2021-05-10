@@ -3,36 +3,71 @@
   <div class="admin-schools-content">
     <div class="choices-content">
       <form class="add-content">
-        <select class="dropdowns" (change)="chooseMunicipalityToAdd(chooseMunicipality.value)" #chooseMunicipality>
-          <option disabled selected>Välj kommun</option>
-          <option *ngFor="let municipality of municipalities" [ngValue]="municipality">{{municipality.municipalityName}}</option>
-        </select>
-          <select class="dropdowns">
-            <option disabled selected>Välj skola</option>
-            <option *ngFor="let school of municipalityToAdd.schools">{{school.schoolName}}</option>
-          </select>
-        <select class="dropdowns">
-          <option disabled selected>Välj matsedel</option>
-          <option *ngFor="">{{menuName}}</option>
-        </select>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{chosenMunicipalityTitleToAdd}}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" *ngFor="let municipality of municipalities" (click)="chooseMunicipalityToAdd(municipality)">
+              <p>{{ municipality.municipalityName }}</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{chosenSchoolTitleToAdd}}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" *ngFor="let school of municipalityToAdd.schools" (click)="chooseSchoolToAdd(school)">
+              <p>{{ school.schoolName }}</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{chosenMenuTitle}}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" *ngFor="let menu of menus" (click)="chooseMenuToAdd(menu)">
+              <p>{{ menu.menuName }}</p>
+            </a>
+          </div>
+        </div>
+
         <button class="manage-menu-button">
           Lägg till matsedel till skolan
         </button>
       </form>
-  </div>
+    </div>
   <div class="choices-content">
     <form class="add-content">
-      <select class="dropdowns">
-        <option disabled selected>Välj kommun</option>
-        <option *ngFor="">{{municipality}}</option>
-      </select>
-      <select class="dropdowns">
-        <option disabled selected>Välj skola</option>
-        <option *ngFor="">{{schoolName}}</option>
-      </select>
-      <label class="menuName-label" style="size: 120px;">
-        <!-- {{menuName}} -->
-      </label>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          {{chosenMunicipalityTitleToDelete}}
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" *ngFor="let municipality of municipalities" (click)="chooseMunicipalityToDelete(municipality)">
+            <p>{{ municipality.municipalityName }}</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          {{chosenSchoolTitleToDelete}}
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" *ngFor="let school of municipalityToDelete.schools" (click)="chooseSchoolToDelete(school)">
+            <p>{{ school.schoolName }}</p>
+          </a>
+        </div>
+      </div>
+      <p class="menuName" style="size: 120px;">
+        {{ menuToDelete }}
+      </p>
       <button class="manage-menu-button">
         Ta bort matsedel från skolan
       </button>
