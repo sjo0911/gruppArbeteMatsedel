@@ -5,7 +5,7 @@
       <form class="add-content">
         <select class="dropdowns" (change)="chooseMunicipalityToAdd(chooseMunicipality.value)" #chooseMunicipality>
           <option disabled selected>Välj kommun</option>
-          <option *ngFor="let municipality of municipalities" value=municipality>{{municipality.municipalityName}}</option>
+          <option *ngFor="let municipality of municipalities" [ngValue]="municipality">{{municipality.municipalityName}}</option>
         </select>
           <select class="dropdowns">
             <option disabled selected>Välj skola</option>
