@@ -33,6 +33,21 @@ router.patch('/:id', (req, res) => {
     });
 })
 
+router.patch('/:id/school/:schoolId', (req, res) => {
+    Municipality.findOneAndUpdate({
+        _id: req.params.id,
+        "schools._id": req.params.schoolId
+    }, {
+        $set: {
+            'schools.$': req.body
+        }
+    }).catch((err) => {
+        res.send(err);
+    }).then(() => {
+        res.send({message: 'Completed successfully'});
+    })
+})
+
 router.delete('/:id', (req, res) => {
     Municipality.findOneAndRemove({
         _id: req.params.id

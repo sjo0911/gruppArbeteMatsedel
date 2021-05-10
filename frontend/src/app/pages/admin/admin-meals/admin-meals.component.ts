@@ -44,11 +44,11 @@ export class AdminMealsComponent implements OnInit {
     let returnString : string = '';
     meal.foodSpecs.forEach(foodSpec => {
       if(foodSpec === 'veg') {
-        returnString += `<i class="fas fa-seedling"></i>`;
+        returnString += `<i class="fas fa-seedling" title="Vegetarisk"></i>`;
       } else if(foodSpec === 'hot') {
-        returnString += `<i class="fas fa-pepper-hot"></i>`;
+        returnString += `<i class="fas fa-pepper-hot" title="Stark"></i>`;
       } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas fa-bacon"></i>`;
+        returnString += `<i class="fas fa-bacon" title="Fläsk"></i>`;
       }
       returnString += '&nbsp&nbsp';
     });
