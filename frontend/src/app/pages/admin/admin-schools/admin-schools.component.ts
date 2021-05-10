@@ -27,7 +27,7 @@ export class AdminSchoolsComponent implements OnInit {
   }
 
   chooseMunicipalityToAdd(municipality : Municipality) {
-    console.log("hej");
+    console.log(municipality);
     this.municipalityToAdd = municipality;
   }
 
