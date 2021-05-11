@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <button class="manage-menu-button">
+        <button class="manage-menu-button" (click)="addMenuToSchool(menuToAdd, schoolToAdd)">
           Lägg till matsedel till skolan
         </button>
       </form>
@@ -68,7 +68,7 @@
       <p class="menuName" style="size: 120px;">
         {{ menuToDelete }}
       </p>
-      <button class="manage-menu-button">
+      <button class="manage-menu-button" (click)="deleteMenuFromSchool(schoolToDelete)">
         Ta bort matsedel från skolan
       </button>
     </form>

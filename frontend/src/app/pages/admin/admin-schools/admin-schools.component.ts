@@ -73,4 +73,15 @@ export class AdminSchoolsComponent implements OnInit {
     })
   }
 
+  addMenuToSchool(menu : Menu, school : School) {
+    school._menuId = menu._id;
+    this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
+    })
+  }
+
+  deleteMenuFromSchool (school : School) {
+    school._menuId = "";
+    this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {
+    })
+  }
 }
