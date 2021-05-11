@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <input class="input-field" type="text" [value]="menuNameToEdit" placeholder="Ange matsedelns namn..." #menuName>
+        <input class="input-field" type="text" [value]="menuNameToEdit" placeholder="Ange matsedelns namn..." #menuNameEdit>
 
         <label class="date-label" for="start">Startdatum: </label>
         <input class="date-input" type="date" id="start" name="start-date" [value]="chosenMenuStartDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #startDate>
@@ -39,14 +39,30 @@
         <label class="date-label" for="start">Slutdatum: </label>
         <input class="date-input" type="date" id="end" name="end-date" [value]="chosenMenuEndDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #endDate>
 
+        <button class="manage-menu-button" (click)="saveEditedMenu(menuNameEdit.value, startDate.value, endDate.value)">
+            Spara redigerad matsedel
+        </button>
       </form>
-      <button class="manage-menu-button" (click)="saveEditedMenu(startDate.value, endDate.value)">
-          Spara redigerad matsedel
-      </button>
     </div>
 
     <div class="choices-content">
+      <form class="add-content">
 
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{ deleteMenuTitle }}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" *ngFor="let menu of $menu|async" (click)="updateDeleteMenuTitle(menu)">
+              <p>{{ menu.menuName }}</p>
+            </a>
+          </div>
+        </div>
+
+        <button class="manage-menu-button" (click)="deleteMenu()">
+          Ta bort matsedel
+      </button>
+      </form>
     </div>
   </div>
 </div>

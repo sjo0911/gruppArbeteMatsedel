@@ -18,10 +18,13 @@ export class AdminMenusComponent implements OnInit {
   menuNameToEdit : string;
   chosenMenuStartDate : Date;
   chosenMenuEndDate : Date;
+  deleteMenuTitle : string;
+  menuToDeleteId : string;
 
   constructor(private menuService : MenuService) {
     this.editMenuTitle = "Välj matsedel att redigera: "
     this.menuNameToEdit = "";
+    this.deleteMenuTitle = "Välj matsedel att ta bort: ";
   }
 
   ngOnInit(): void {
@@ -38,19 +41,32 @@ export class AdminMenusComponent implements OnInit {
   }
 
   editMenu(menu : Menu) {
+    console.log("Här" + menu.menuName);
     this.editMenuTitle = menu.menuName;
     this.menuToEdit = menu;
     this.menuNameToEdit = menu.menuName;
+    console.log("andra" + this.menuNameToEdit);
+    console.log(this.menuToEdit);
     this.chosenMenuStartDate = menu.startDate;
     this.chosenMenuEndDate = menu.endDate;
   }
 
-  saveEditedMenu(startDate : Date, endDate : Date) {
-    this.menuToEdit.menuName = this.menuNameToEdit;
+  saveEditedMenu(menuName : string, startDate : Date, endDate : Date) {
+    this.menuToEdit.menuName = menuName;
     console.log(this.menuToEdit);
     this.menuToEdit.startDate = startDate;
     this.menuToEdit.endDate = endDate;
     this.menuService.updateMenu(this.menuToEdit).subscribe(() => {
+    })
+  }
+
+  updateDeleteMenuTitle(menu : Menu) {
+    this.deleteMenuTitle = menu.menuName;
+    this.menuToDeleteId = menu._id;
+  }
+
+  deleteMenu() {
+    this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
     })
   }
 
