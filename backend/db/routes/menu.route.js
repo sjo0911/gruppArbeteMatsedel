@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/Name', (req, res) => {
-    console.log("hejj");
     Menu.find().select({'menuName':1}).then((menus) => {
         res.send(menus);
     })
@@ -27,6 +26,11 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.get('/Name/:id', (req, res) => {
+    Menu.findOne({ _id: req.params.id }).select({'menuName':1}).then((menus) => {
+        res.send(menus);
+    })
+})
 
 router.post('/', (req, res) => {
     let startDate = req.body.startDate;
@@ -34,21 +38,25 @@ router.post('/', (req, res) => {
     let dateStart = new Date(startDate);
     let dateEnd = new Date(endDate);
     let meals = req.body.meals;
+    let menuName = req.body.menuName;
 
     let checkDate = true;
 
-    meals.forEach(meal => {
-        let dateMeal = new Date(meal.mealDate);
-        if (dateMeal < dateStart || dateMeal > dateEnd) {
-            checkDate = false;
-        }
-    });
+    if(meals) {
+        meals.forEach(meal => {
+            let dateMeal = new Date(meal.mealDate);
+            if (dateMeal < dateStart || dateMeal > dateEnd) {
+                checkDate = false;
+            }
+        });
+    }
 
     if (checkDate) {
         let newMenu = new Menu({
             startDate,
             endDate,
-            meals
+            meals,
+            menuName
         });
         newMenu.save().then((menuDoc) => {
             res.send(menuDoc);

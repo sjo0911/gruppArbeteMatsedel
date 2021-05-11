@@ -15,7 +15,7 @@ const MunicipalitySchema = new mongoose.Schema({
             trim: true
         },
         _menuId: {
-            type: mongoose.Types.ObjectId
+            type: String
         }
     }]
 })

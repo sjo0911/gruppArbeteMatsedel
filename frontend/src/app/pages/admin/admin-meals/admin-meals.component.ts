@@ -11,11 +11,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  templateUrl: './admin-meals.component.html',
+  styleUrls: ['./admin-meals.component.scss']
 })
-export class AdminComponent implements OnInit {
-
+export class AdminMealsComponent implements OnInit {
   week : Week;
   menu : Menu;
   subscriptions : Subscription[] = [];
@@ -45,11 +44,11 @@ export class AdminComponent implements OnInit {
     let returnString : string = '';
     meal.foodSpecs.forEach(foodSpec => {
       if(foodSpec === 'veg') {
-        returnString += `<i class="fas fa-seedling"></i>`;
+        returnString += `<i class="fas fa-seedling" title="Vegetarisk"></i>`;
       } else if(foodSpec === 'hot') {
-        returnString += `<i class="fas fa-pepper-hot"></i>`;
+        returnString += `<i class="fas fa-pepper-hot" title="Stark"></i>`;
       } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas fa-bacon"></i>`;
+        returnString += `<i class="fas fa-bacon" title="Fläsk"></i>`;
       }
       returnString += '&nbsp&nbsp';
     });

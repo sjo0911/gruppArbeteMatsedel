@@ -42,19 +42,16 @@ export class MenuComponent implements OnInit {
     returnString += '&nbsp&nbsp';
     meal.foodSpecs.forEach(foodSpec => {
       if(foodSpec === 'veg') {
-        returnString += `<i class="fas fa-seedling" style='color:darkGreen'></i>`;
+        returnString += `<i class="fas fa-seedling" style='color:darkGreen' title="Vegetarisk"></i>`;
       } else if(foodSpec === 'hot') {
-        returnString += `<i class="fas fa-pepper-hot" style='color:red'></i>`;
+        returnString += `<i class="fas fa-pepper-hot" style='color:red' title="Stark"></i>`;
       } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas fa-bacon" style='color:pink'></i>`;
+        returnString += `<i class="fas fa-bacon" style='color:pink' title="Fläsk"></i>`;
       }
       returnString += '&nbsp&nbsp';
     });
     return returnString;
   }
-
-
-
 
 
 }
