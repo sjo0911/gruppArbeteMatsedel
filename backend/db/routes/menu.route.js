@@ -38,21 +38,25 @@ router.post('/', (req, res) => {
     let dateStart = new Date(startDate);
     let dateEnd = new Date(endDate);
     let meals = req.body.meals;
+    let menuName = req.body.menuName;
 
     let checkDate = true;
 
-    meals.forEach(meal => {
-        let dateMeal = new Date(meal.mealDate);
-        if (dateMeal < dateStart || dateMeal > dateEnd) {
-            checkDate = false;
-        }
-    });
+    if(meals) {
+        meals.forEach(meal => {
+            let dateMeal = new Date(meal.mealDate);
+            if (dateMeal < dateStart || dateMeal > dateEnd) {
+                checkDate = false;
+            }
+        });
+    }
 
     if (checkDate) {
         let newMenu = new Menu({
             startDate,
             endDate,
-            meals
+            meals,
+            menuName
         });
         newMenu.save().then((menuDoc) => {
             res.send(menuDoc);

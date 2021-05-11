@@ -2,11 +2,49 @@
 <div class="centered-content">
   <div class="admin-menu-content">
     <div class="choices-content">
+      <form class="add-content">
 
+        <input class="input-field" type="text" placeholder="Ange matsedelns namn..." #menuName>
+
+        <label class="date-label" for="start">Startdatum: </label>
+        <input class="date-input" type="date" id="start" name="start-date" [value]="currentDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #startDate>
+
+        <label class="date-label" for="start">Slutdatum: </label>
+        <input class="date-input" type="date" id="end" name="end-date" [value]="currentDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #endDate>
+
+        <button class="manage-menu-button" (click)="createMenu(menuName.value, startDate.value, endDate.value)">
+          Skapa matsedel
+        </button>
+      </form>
     </div>
+
     <div class="choices-content">
+      <form class="add-content">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{ editMenuTitle }}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" *ngFor="let menu of $menu|async" (click)="editMenu(menu)">
+              <p>{{ menu.menuName }}</p>
+            </a>
+          </div>
+        </div>
 
+        <input class="input-field" type="text" [value]="menuNameToEdit" placeholder="Ange matsedelns namn..." #menuName>
+
+        <label class="date-label" for="start">Startdatum: </label>
+        <input class="date-input" type="date" id="start" name="start-date" [value]="chosenMenuStartDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #startDate>
+
+        <label class="date-label" for="start">Slutdatum: </label>
+        <input class="date-input" type="date" id="end" name="end-date" [value]="chosenMenuEndDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #endDate>
+
+      </form>
+      <button class="manage-menu-button" (click)="saveEditedMenu(startDate.value, endDate.value)">
+          Spara redigerad matsedel
+      </button>
     </div>
+
     <div class="choices-content">
 
     </div>

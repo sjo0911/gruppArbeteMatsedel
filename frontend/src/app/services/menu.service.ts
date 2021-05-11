@@ -43,4 +43,8 @@ export class MenuService {
     return this.webReqService.get(`menu/name/${_menuId}`);
   }
 
+  postMenu(menu : Menu) {
+    return this.webReqService.post(`menu`, menu);
+  }
+
 }

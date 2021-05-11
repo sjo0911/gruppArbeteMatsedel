@@ -38,3 +38,39 @@
   padding: 10px;
   justify-content: center;
 }
+
+.input-field {
+  background: #08496d;
+  border: 0px;
+  border-radius: 8px;
+  color: white;
+  width: 200px;
+  height: 18px;
+  // margin: 15px;
+}
+
+.manage-menu-button {
+  border: 0px;
+  background: transparent;
+  color: white;
+  &:active {
+    transform: translateY(4px);
+  }
+  cursor: pointer;
+  // padding: 20px;
+  // margin: 30px;
+}
+
+.date-input {
+  background: #08496d;
+  border: 0px;
+  border-radius: 8px;
+  color: white;
+  width: 140px;
+  height: 18px;
+  // margin: 15px;
+}
+
+.date-label{
+  color: white;
+}
