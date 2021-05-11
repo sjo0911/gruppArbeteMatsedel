@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
 import { MenuComponent } from './pages/menu/menu.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { AdminMealsComponent } from './pages/admin/admin-meals/admin-meals.component';
@@ -16,6 +15,8 @@ import { AdminSchoolsComponent } from './pages/admin/admin-schools/admin-schools
 import { AdminMenusComponent } from './pages/admin/admin-menus/admin-menus.component';
 import { AdminHeaderComponent } from './pages/admin/admin-header/admin-header.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 registerLocaleData(sv);
 
@@ -38,12 +39,28 @@ registerLocaleData(sv);
     BrowserAnimationsModule,
     HttpClientModule,
     AuthModule.forRoot({
-      domain:'dev-fx63i2zd.eu.auth0.com',
-      clientId: '2vuqWSwTeaanfbRvAMkAG0qyh9ouy5v1'
+      domain: 'dev-fx63i2zd.eu.auth0.com',
+      clientId: '8XXjf29gD9QThRz9HuV6UOms71EOI7Px',
+      audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
+      httpInterceptor: {
+        allowedList: [
+
+          {
+            // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
+            uri: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/*',
+            tokenOptions: {
+              // The attached token should target this audience
+              audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
+
+            }
+          }
+        ]
+
+      }
     })
 
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "sv" }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "sv" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

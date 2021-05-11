@@ -1,3 +1,4 @@
+import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { Week } from 'src/app/models/week';
@@ -18,7 +19,11 @@ export class MenuComponent implements OnInit {
   dateToday: Date;
   subscriptions : Subscription[] = [];
 
-  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService ,private sanitizer: DomSanitizer) {
+  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService ,private sanitizer: DomSanitizer, private auth: AuthService
+    ) {
+      if(auth.isAuthenticated$ ){
+        console.log("hejsan!");
+      }
     this.noInput = "MAT SAKNAS";
     this.dateToday = new Date(Date.now());
   }

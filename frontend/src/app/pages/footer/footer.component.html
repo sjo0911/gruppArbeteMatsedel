@@ -1,3 +1,14 @@
-<button class="admin-button" routerLink="/login" routerLinkActive="is-active">
-  Admin
-</button>
+<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+  <button class="admin-button" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">
+    Logga ut
+  </button>
+  <button class="admin-button" routerLink="/admin">
+    Administrera
+  </button>
+</ng-container>
+<ng-template #loggedOut>
+  <button class="admin-button" (click)="auth.loginWithRedirect({
+  })">
+    Logga in
+  </button>
+</ng-template>

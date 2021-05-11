@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const { Menu } = require('../models');
 const jwtCheck = require('../jwtMiddleware');
 
-router.get('/private/',jwtCheck, (req, res) => {
+router.get('/', (req, res) => {
     Menu.find().then((menus) => {
         res.send(menus);
     }).catch((e) => {
@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
     }
 })
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id',jwtCheck, (req, res) => {
 
     // Lägg till datum-validering här också
     Menu.findOneAndUpdate({ _id: req.params.id }, {
@@ -77,7 +77,7 @@ router.patch('/:id', (req, res) => {
     });
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',jwtCheck, (req, res) => {
     Menu.findOneAndRemove({
         _id: req.params.id
     }).then((removedMenuDoc) => {
