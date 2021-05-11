@@ -4,8 +4,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const { Menu } = require('../models');
+const jwtCheck = require('../jwtMiddleware');
 
-router.get('/', (req, res) => {
+router.get('/private/',jwtCheck, (req, res) => {
     Menu.find().then((menus) => {
         res.send(menus);
     }).catch((e) => {
@@ -124,7 +125,7 @@ router.get('/:id/meal/:mealId', (req, res) => {
     })
 })
 
-router.patch('/:id/meal/:mealId', (req, res) => {
+router.patch('/:id/meal/:mealId',jwtCheck , (req, res) => {
     Menu.findOneAndUpdate({
         _id: req.params.id,
         "meals._id": req.params.mealId

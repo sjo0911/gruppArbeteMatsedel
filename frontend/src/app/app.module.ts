@@ -15,6 +15,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AdminSchoolsComponent } from './pages/admin/admin-schools/admin-schools.component';
 import { AdminMenusComponent } from './pages/admin/admin-menus/admin-menus.component';
 import { AdminHeaderComponent } from './pages/admin/admin-header/admin-header.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 registerLocaleData(sv);
 
@@ -29,12 +30,18 @@ registerLocaleData(sv);
     AdminSchoolsComponent,
     AdminMenusComponent,
     AdminHeaderComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule.forRoot({
+      domain:'dev-fx63i2zd.eu.auth0.com',
+      clientId: '2vuqWSwTeaanfbRvAMkAG0qyh9ouy5v1'
+    })
+
   ],
   providers: [{ provide: LOCALE_ID, useValue: "sv" }],
   bootstrap: [AppComponent]

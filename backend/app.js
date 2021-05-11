@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-
 const { mongoose } = require('./db/mongoose');
 const Municipality = require('./db/routes/municipality.route');
 const Menu = require('./db/routes/menu.route');
@@ -20,6 +19,8 @@ app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
 
-app.use('/municipality', Municipality)
-app.use('/menu', Menu)
-app.use('/user', User)
+app.use('/auth/municipality', Municipality)
+app.use('/auth/menu', Menu)
+app.use('/auth/user', User)
+
+
