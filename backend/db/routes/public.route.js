@@ -1,14 +1,18 @@
-const jwtCheck = require('../jwtMiddleware');
+const express = require('express');
+const router = express.Router();
+
+const { getMenus, getMenuNames, getMenuWithId, getMenuNameWithId } = require('../controllers/menu.controller');
+const { getMunicipalities } = require('../controllers/municipality.controller');
 
 router.get('/menu', getMenus)
 
-router.get('/menu/Name', getMenusNames)
-
+router.get('/menu/Name', getMenuNames)
 
 router.get('/menu/:id', getMenuWithId)
 
-router.get('/menu/Name/:id', (req, res) => {
-    Menu.findOne({ _id: req.params.id }).select({'menuName':1}).then((menus) => {
-        res.send(menus);
-    })
-})
+router.get('/menu/Name/:id', getMenuNameWithId)
+
+
+router.get('/municipality', getMunicipalities)
+
+module.exports = router

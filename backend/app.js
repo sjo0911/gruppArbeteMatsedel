@@ -4,6 +4,8 @@ const { mongoose } = require('./db/mongoose');
 const Municipality = require('./db/routes/municipality.route');
 const Menu = require('./db/routes/menu.route');
 const User = require('./db/routes/user.route');
+const privateRoute = require('./db/routes/private.route');
+const publicRoute = require('./db/routes/public.route');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) // To parse the incoming requests with JSON payloads
@@ -27,8 +29,11 @@ app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
 
-app.use('/auth/municipality', Municipality)
-app.use('/auth/menu', Menu)
-app.use('/auth/user', User)
+// app.use('/auth/municipality', Municipality)
+// app.use('/auth/menu', Menu)
+// app.use('/auth/user', User)
+
+app.use('/private', privateRoute)
+app.use('/public', publicRoute)
 
 

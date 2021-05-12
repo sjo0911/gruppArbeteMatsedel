@@ -33,7 +33,7 @@ exports.postMenu = function (req, res) {
     } else {
         res.send({message: 'EXCEPTION! Date is incorrect, please check date...'})
     }
-};
+}
 
 exports.deleteMenu = function(req, res) {
     console.log(req);
@@ -104,7 +104,7 @@ exports.getMenus = function(req, res) {
     });
 }
 
-exports.getMenusNames = function (req, res)  {
+exports.getMenuNames = function (req, res)  {
     Menu.find().select({'menuName':1}).then((menus) => {
         res.send(menus);
     })
@@ -113,5 +113,11 @@ exports.getMenusNames = function (req, res)  {
 exports.getMenuWithId = function(req, res)  {
     Menu.findOne({ _id: req.params.id }).then((menu) => {
         res.send(menu);
+    })
+}
+
+exports.getMenuNameWithId = function(req, res)  {
+    Menu.findOne({ _id: req.params.id }).select({'menuName':1}).then((menus) => {
+        res.send(menus);
     })
 }

@@ -10,10 +10,10 @@ export class MunicipalityService {
   constructor(private webReqService: WebReqService) { }
 
   getMunicipalities() {
-    return this.webReqService.get('municipality');
+    return this.webReqService.get('public/municipality');
   }
 
   updateSchool(municipalityId : string, school : School) {
-    return this.webReqService.patch(`municipality/${municipalityId}/school/${school._id}`, school);
+    return this.webReqService.patch(`private/municipality/${municipalityId}/school/${school._id}`, school);
   }
 }
