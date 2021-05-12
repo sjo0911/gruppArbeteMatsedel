@@ -1,39 +1,7 @@
-
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-
 const { Menu } = require('../models');
-const jwtCheck = require('../jwtMiddleware');
-
-router.get('/', (req, res) => {
-    Menu.find().then((menus) => {
-        res.send(menus);
-    }).catch((e) => {
-        res.send(e);
-    });
-})
-
-router.get('/Name', (req, res) => {
-    Menu.find().select({'menuName':1}).then((menus) => {
-        res.send(menus);
-    })
-})
 
 
-router.get('/:id', (req, res) => {
-    Menu.findOne({ _id: req.params.id }).then((menu) => {
-        res.send(menu);
-    })
-})
-
-router.get('/Name/:id', (req, res) => {
-    Menu.findOne({ _id: req.params.id }).select({'menuName':1}).then((menus) => {
-        res.send(menus);
-    })
-})
-
-router.post('/private', jwtCheck, (req, res) => {
+exports.postMenu = function (req, res) {
     let startDate = req.body.startDate;
     let endDate = req.body.endDate;
     let dateStart = new Date(startDate);
@@ -65,9 +33,18 @@ router.post('/private', jwtCheck, (req, res) => {
     } else {
         res.send({message: 'EXCEPTION! Date is incorrect, please check date...'})
     }
-})
+}
 
-router.patch('/:id',jwtCheck, (req, res) => {
+exports.deleteMenu = function(req, res) {
+    console.log(req);
+    Menu.findOneAndRemove({
+        _id: req.params.id
+    }).then((removedMenuDoc) => {
+        res.send(removedMenuDoc);
+    })
+}
+
+exports.patchMenu = function (req, res)  {
 
     // Lägg till datum-validering här också
     Menu.findOneAndUpdate({ _id: req.params.id }, {
@@ -75,18 +52,9 @@ router.patch('/:id',jwtCheck, (req, res) => {
     }).then(() => {
         res.send({message: 'Completed successfully'});
     });
-})
+}
 
-router.delete('/private/:id',jwtCheck, (req, res) => {
-    console.log(req);
-    Menu.findOneAndRemove({
-        _id: req.params.id
-    }).then((removedMenuDoc) => {
-        res.send(removedMenuDoc);
-    })
-})
-
-router.delete('/:id/meal/:mealId', (req, res) => {
+exports.deleteMeal = function(req, res) {
     Menu.findOneAndUpdate({
         _id: req.params.id
     }, {
@@ -99,9 +67,9 @@ router.delete('/:id/meal/:mealId', (req, res) => {
         res.send({message: 'Completed successfully'});
     })
 
-})
+}
 
-router.post('/:id/meal/', (req, res) => {
+exports.postMeal = function(req, res) {
     Menu.findOneAndUpdate({
         _id: req.params.id,
     }, {
@@ -111,22 +79,9 @@ router.post('/:id/meal/', (req, res) => {
     }).then(() => {
         res.send({message: 'Completed successfully'});
     })
-})
+}
 
-router.get('/:id/meal/:mealId', (req, res) => {
-    Menu.findOne({ 
-        _id: req.params.id,
-        "meals._id": req.params.mealId
-    }, 
-    {
-        'meals.$': 1
-    }
-    ).then((meal) => {
-        res.send(meal);
-    })
-})
-
-router.patch('/:id/meal/:mealId',jwtCheck , (req, res) => {
+exports.patchMeal = function(req, res) {
     Menu.findOneAndUpdate({
         _id: req.params.id,
         "meals._id": req.params.mealId
@@ -139,8 +94,30 @@ router.patch('/:id/meal/:mealId',jwtCheck , (req, res) => {
     }).then(() => {
         res.send({message: 'Completed successfully'});
     })
-})
+}
 
+exports.getMenus = function(req, res) {
+    Menu.find().then((menus) => {
+        res.send(menus);
+    }).catch((e) => {
+        res.send(e);
+    });
+}
 
+exports.getMenuNames = function (req, res)  {
+    Menu.find().select({'menuName':1}).then((menus) => {
+        res.send(menus);
+    })
+}
 
-module.exports = router
+exports.getMenuWithId = function(req, res)  {
+    Menu.findOne({ _id: req.params.id }).then((menu) => {
+        res.send(menu);
+    })
+}
+
+exports.getMenuNameWithId = function(req, res)  {
+    Menu.findOne({ _id: req.params.id }).select({'menuName':1}).then((menus) => {
+        res.send(menus);
+    })
+}

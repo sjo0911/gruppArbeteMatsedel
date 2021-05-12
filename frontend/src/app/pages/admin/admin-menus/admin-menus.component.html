@@ -14,10 +14,10 @@
           <input class="date-input" type="date" id="end" name="end-date" [value]="currentDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #endDate>
         </div>
 
-        <button class="manage-menu-button" (click)="createMenu(menuName.value, startDate.value, endDate.value)">
-          Skapa matsedel
-        </button>
       </form>
+          <button class="manage-menu-button" (click)="createMenu(menuName.value, startDate.value, endDate.value)">
+            Skapa matsedel
+          </button>
     </div>
 
     <div class="choices-content">
@@ -37,16 +37,16 @@
 
         <div class="dates">
           <label class="date-label" for="start">Startdatum: </label>
-          <input class="date-input" type="date" id="start" name="start-date" [value]="chosenMenuStartDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #startDate>
+          <input class="date-input" type="date" id="start" name="start-date" [value]="chosenMenuStartDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #chosenStartDate>
 
           <label class="date-label" for="start">Slutdatum: </label>
-          <input class="date-input" type="date" id="end" name="end-date" [value]="chosenMenuEndDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #endDate>
+          <input class="date-input" type="date" id="end" name="end-date" [value]="chosenMenuEndDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #chosenEndDate>
         </div>
 
-        <button class="manage-menu-button" (click)="saveEditedMenu(menuNameEdit.value, startDate.value, endDate.value)">
-            Spara redigerad matsedel
-        </button>
       </form>
+      <button class="manage-menu-button" (click)="saveEditedMenu(menuNameEdit.value, chosenStartDate.value, chosenEndDate.value)">
+          Spara redigerad matsedel
+      </button>
     </div>
 
     <div class="choices-content">
@@ -63,10 +63,10 @@
           </div>
         </div>
 
-        <button class="manage-menu-button" (click)="deleteMenu()">
-          Ta bort matsedel
-      </button>
       </form>
+          <button class="manage-menu-button" (click)="deleteMenu()">
+            Ta bort matsedel
+        </button>
     </div>
   </div>
 </div>
