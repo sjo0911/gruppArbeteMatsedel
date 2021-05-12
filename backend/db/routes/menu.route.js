@@ -77,7 +77,8 @@ router.patch('/:id',jwtCheck, (req, res) => {
     });
 })
 
-router.delete('/:id',jwtCheck, (req, res) => {
+router.delete('/auth/:id',jwtCheck, (req, res) => {
+    console.log(req);
     Menu.findOneAndRemove({
         _id: req.params.id
     }).then((removedMenuDoc) => {

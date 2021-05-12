@@ -48,7 +48,7 @@ export class MenuService {
   }
 
   deleteMenu(_menuId : string) {
-    return this.webReqService.delete(`menu/${_menuId}`);
+    return this.webReqService.delete(`menu/auth/${_menuId}`);
   }
 
 }

@@ -47,7 +47,7 @@ registerLocaleData(sv);
 
           {
             // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
-            uri: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/*',
+            uri: 'http://localhost:3000/auth/menu/auth/*',
             tokenOptions: {
               // The attached token should target this audience
               audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',

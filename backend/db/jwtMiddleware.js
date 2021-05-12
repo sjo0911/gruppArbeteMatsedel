@@ -9,8 +9,8 @@ const jwtCheck = jwt({
         jwksRequestsPerMinute: 5,
         jwksUri: 'https://dev-fx63i2zd.eu.auth0.com/.well-known/jwks.json'
   }),
-  audience: 'http://localhost:3000/auth',
-  issuer: 'https://dev-fx63i2zd.eu.auth0.com/',
+  audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
+  issuer: [`https://dev-fx63i2zd.eu.auth0.com/`],
   algorithms: ['RS256']
 });
 
