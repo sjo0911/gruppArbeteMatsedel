@@ -47,7 +47,8 @@
   color: white;
   width: 200px;
   height: 18px;
-  // margin: 15px;
+  // padding: 10px;
+  margin: 10px;
 }
 
 .manage-menu-button {
@@ -68,14 +69,24 @@
   border: 0px;
   border-radius: 8px;
   color: white;
-  width: 140px;
-  height: 18px;
+  width: 150px;
+  // height: 18px; //
+  padding: 10px;
   // margin: 15px;
 }
 
 .date-label{
   color: white;
+  padding: 10px;
 }
+
+// .date-label {
+//   padding: 10px;
+// }
+
+// .date-input {
+//   padding: 10px;
+// }
 
 .navbar-link {
   color: white;
@@ -115,5 +126,7 @@
 
 .dates {
   display: flex;
-  flex-direction: column;
+  vertical-align: middle;
+  // flex-direction: column;
 }
+
