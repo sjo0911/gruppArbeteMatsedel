@@ -44,11 +44,11 @@ export class MenuService {
   }
 
   postMenu(menu : Menu) {
-    return this.webReqService.post(`menu`, menu);
+    return this.webReqService.post(`menu/private`, menu);
   }
 
   deleteMenu(_menuId : string) {
-    return this.webReqService.delete(`menu/auth/${_menuId}`);
+    return this.webReqService.delete(`menu/private/${_menuId}`);
   }
 
 }
