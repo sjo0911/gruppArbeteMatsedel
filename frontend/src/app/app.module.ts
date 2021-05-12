@@ -42,6 +42,7 @@ registerLocaleData(sv);
       domain: 'dev-fx63i2zd.eu.auth0.com',
       clientId: '8XXjf29gD9QThRz9HuV6UOms71EOI7Px',
       audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
+      cacheLocation:"localstorage",
       httpInterceptor: {
         allowedList: [
 
