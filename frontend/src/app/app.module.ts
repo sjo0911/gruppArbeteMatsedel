@@ -1,7 +1,6 @@
 import { DayComponent } from './pages/menu/day/day.component';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/header/header.component';
@@ -21,6 +20,10 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { LoginFailedComponent } from './pages/login-failed/login-failed.component';
 import { CreateMenuComponent } from './pages/admin/admin-menus/create-menu/create-menu.component';
+import { UpdateMenuComponent } from './pages/admin/admin-menus/update-menu/update-menu.component';
+import { DeleteMenuComponent } from './pages/admin/admin-menus/delete-menu/delete-menu.component';
+import { AddMenuComponent } from './pages/admin/admin-schools/add-menu/add-menu.component';
+import { RemoveMenuComponent } from './pages/admin/admin-schools/remove-menu/remove-menu.component';
 
 registerLocaleData(sv);
 
@@ -38,7 +41,11 @@ registerLocaleData(sv);
     LogoutComponent,
     LoginFailedComponent,
     DayComponent,
-    CreateMenuComponent
+    CreateMenuComponent,
+    UpdateMenuComponent,
+    DeleteMenuComponent,
+    AddMenuComponent,
+    RemoveMenuComponent
 
 
   ],

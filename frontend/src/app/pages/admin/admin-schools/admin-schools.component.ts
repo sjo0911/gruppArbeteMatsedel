@@ -12,28 +12,15 @@ import { MunicipalityService } from 'src/app/services/municipality.service';
   styleUrls: ['./admin-schools.component.scss']
 })
 export class AdminSchoolsComponent implements OnInit {
-
+  menus : Menu[];
   municipalities : Municipality[];
   subscriptions : Subscription[] = [];
-  municipalityToAdd : Municipality = new Municipality();
-  municipalityToDelete : Municipality = new Municipality();
-  schoolToAdd : School = new School();
-  schoolToDelete  : School = new School();
-  menuToAdd : Menu = new Menu();
-  menuToDelete : string;
-  chosenMunicipalityTitleToAdd : string;
-  chosenSchoolTitleToAdd : string;
-  chosenMenuTitle : string;
-  menus : Menu[];
-  chosenMunicipalityTitleToDelete : string;
-  chosenSchoolTitleToDelete : string;
+
+
 
   constructor(private municipalityService : MunicipalityService, private menuService: MenuService) {
-    this.chosenMunicipalityTitleToAdd = "Välj kommun: ";
-    this.chosenSchoolTitleToAdd = "Välj skola: ";
-    this.chosenMenuTitle = "Välj matsedel: ";
-    this.chosenMunicipalityTitleToDelete = "Välj kommun: ";
-    this.chosenSchoolTitleToDelete = "Välj skola: ";
+
+ 
    }
 
   ngOnInit(): void {
@@ -43,45 +30,10 @@ export class AdminSchoolsComponent implements OnInit {
     this.menuService.getMenus().subscribe((menus : Menu[]) => {
       this.menus = menus;
     })
+
   }
 
-  chooseMunicipalityToAdd(municipality : Municipality) {
-    this.municipalityToAdd = municipality;
-    this.chosenMunicipalityTitleToAdd = municipality.municipalityName;
-  }
 
-  chooseSchoolToAdd(school : School) {
-    this.schoolToAdd = school;
-    this.chosenSchoolTitleToAdd = school.schoolName;
-  }
 
-  chooseMenuToAdd(menu : Menu) {
-    this.menuToAdd = menu;
-    this.chosenMenuTitle = menu.menuName;
-  }
 
-  chooseMunicipalityToDelete(municipality : Municipality) {
-    this.municipalityToDelete = municipality;
-    this.chosenMunicipalityTitleToDelete = municipality.municipalityName;
-  }
-
-  chooseSchoolToDelete(school : School) {
-    this.schoolToDelete = school;
-    this.chosenSchoolTitleToDelete = school.schoolName;
-    this.menuService.getMenuName(school._menuId).subscribe((menuToDelete : Menu) => {
-      this.menuToDelete = menuToDelete.menuName;
-    })
-  }
-
-  addMenuToSchool(menu : Menu, school : School) {
-    school._menuId = menu._id;
-    this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
-    })
-  }
-
-  deleteMenuFromSchool (school : School) {
-    school._menuId = "";
-    this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {
-    })
-  }
 }
