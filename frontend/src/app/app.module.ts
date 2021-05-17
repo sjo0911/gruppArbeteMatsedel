@@ -22,6 +22,8 @@ import { LoginFailedComponent } from './pages/login-failed/login-failed.componen
 import { CreateMenuComponent } from './pages/admin/admin-menus/create-menu/create-menu.component';
 import { UpdateMenuComponent } from './pages/admin/admin-menus/update-menu/update-menu.component';
 import { DeleteMenuComponent } from './pages/admin/admin-menus/delete-menu/delete-menu.component';
+import { AddMenuComponent } from './pages/admin/admin-schools/add-menu/add-menu.component';
+import { RemoveMenuComponent } from './pages/admin/admin-schools/remove-menu/remove-menu.component';
 
 registerLocaleData(sv);
 
@@ -41,7 +43,9 @@ registerLocaleData(sv);
     DayComponent,
     CreateMenuComponent,
     UpdateMenuComponent,
-    DeleteMenuComponent
+    DeleteMenuComponent,
+    AddMenuComponent,
+    RemoveMenuComponent
 
 
   ],
