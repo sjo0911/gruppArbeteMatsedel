@@ -1,5 +1,5 @@
 <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-  <button class="admin-button" (click)="auth.logout({ returnTo: 'http://localhost:4200' })">
+  <button class="admin-button" (click)="auth.logout({ returnTo: 'http://localhost:4200/logout' })">
     Logga ut
   </button>
   <button class="admin-button" routerLink="/admin">
