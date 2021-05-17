@@ -1,3 +1,4 @@
+import { DayComponent } from './pages/menu/day/day.component';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -34,7 +35,8 @@ registerLocaleData(sv);
     AdminMenusComponent,
     AdminHeaderComponent,
     LogoutComponent,
-    LoginFailedComponent
+    LoginFailedComponent,
+    DayComponent
 
   ],
   imports: [

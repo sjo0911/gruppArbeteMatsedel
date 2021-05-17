@@ -13,19 +13,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
   week : Week;
-  noInput : string;
-  dateToday: Date;
   subscriptions : Subscription[] = [];
 
-  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService ,private sanitizer: DomSanitizer, private auth: AuthService
+  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService , private auth: AuthService
     ) {
       if(auth.isAuthenticated$ ){
         console.log("hejsan!");
       }
-    this.noInput = "MAT SAKNAS";
-    this.dateToday = new Date(Date.now());
   }
 
   ngOnInit(): void {
@@ -42,21 +37,7 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  getFoodSpecs(meal : Meal) : string {
-    let returnString : string = '';
-    returnString += '&nbsp&nbsp';
-    meal.foodSpecs.forEach(foodSpec => {
-      if(foodSpec === 'veg') {
-        returnString += `<i class="fas fa-seedling" style='color:darkGreen' title="Vegetarisk"></i>`;
-      } else if(foodSpec === 'hot') {
-        returnString += `<i class="fas fa-pepper-hot" style='color:red' title="Stark"></i>`;
-      } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas fa-bacon" style='color:pink' title="Fläsk"></i>`;
-      }
-      returnString += '&nbsp&nbsp';
-    });
-    return returnString;
-  }
+
 
 
 }
