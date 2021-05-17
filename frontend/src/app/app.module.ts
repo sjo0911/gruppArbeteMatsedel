@@ -19,6 +19,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { LoginFailedComponent } from './pages/login-failed/login-failed.component';
+import { CreateMenuComponent } from './pages/admin/admin-menus/create-menu/create-menu.component';
 
 registerLocaleData(sv);
 
@@ -34,7 +35,8 @@ registerLocaleData(sv);
     AdminMenusComponent,
     AdminHeaderComponent,
     LogoutComponent,
-    LoginFailedComponent
+    LoginFailedComponent,
+    CreateMenuComponent
 
   ],
   imports: [
