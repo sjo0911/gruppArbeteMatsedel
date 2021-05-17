@@ -1,28 +1,10 @@
-<script src="https://use.fontawesome.com/ccceada4b4.js"></script>
+
 <app-header></app-header>
 <div *ngIf="week">
   <div class="centered-content">
     <div class="menu-content">
       <div *ngFor="let day of week.days">
-        <div class="day-content" >
-          <div class="day-date" [ngClass]="{'today': (day.date | date : 'mediumDate') === (dateToday | date : 'mediumDate')}">
-            {{ day.date | date: "EEEE" | titlecase }}<br>{{ day.date | date }}
-          </div>
-          <div class="meals-content">
-            <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
-              <div class="day-meals" *ngFor="let meal of day.meals">
-                <div class="icons" [innerHTML]="sanitizer.bypassSecurityTrustHtml(getFoodSpecs(meal))">
-                </div>
-                  {{ meal.mealName }}
-              </div>
-            </ng-template>
-            <ng-template #elseBlock>
-              <div class="day-meals">
-                  <p>{{ noInput }}</p>
-              </div>
-            </ng-template>
-          </div>
-        </div>
+        <app-day [day] = day></app-day>
       </div>
     </div>
   </div>
