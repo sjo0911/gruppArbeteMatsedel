@@ -36,4 +36,13 @@ describe('DateHandlerService', () => {
     expect(service.getNextWeek(weeks, weeks[2]) === weeks[5]).toBeFalsy();
   });
 
+  it('should return current week', () => {
+    const currentWeek = service.getCurrentWeek();
+    expect(currentWeek).toEqual('20');
+  });
+
+  it('should return weeks', () => {
+    expect(weeks.length).toEqual(7);
+  });
+
 });
