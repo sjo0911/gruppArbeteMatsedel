@@ -21,7 +21,7 @@ export class AddMenuComponent implements OnInit {
   chosenMenuTitle : string;
 
 
-  constructor(private municipalityService: MunicipalityService, private menuService: MenuService) {
+  constructor(private municipalityService: MunicipalityService) {
     this.chosenMunicipalityTitleToAdd = "Välj kommun: ";
     this.chosenSchoolTitleToAdd = "Välj skola: ";
     this.chosenMenuTitle = "Välj matsedel: ";

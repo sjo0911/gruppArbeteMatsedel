@@ -1,6 +1,8 @@
+import { MunicipalityService } from './../../../../services/municipality.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddMenuComponent } from './add-menu.component';
+import { By } from '@angular/platform-browser';
 
 describe('AddMenuComponent', () => {
   let component: AddMenuComponent;
@@ -8,7 +10,10 @@ describe('AddMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddMenuComponent ]
+      declarations: [ AddMenuComponent ],
+      providers: [
+        {provide: MunicipalityService, useClass: MunicipalityServiceStub}
+      ]
     })
     .compileComponents();
   });
@@ -22,4 +27,32 @@ describe('AddMenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should countain a button with text: "Lägg till matsedel till skolan"', () => {
+    const buttonElement = fixture.debugElement.query(By.css('button'));
+   expect(buttonElement.nativeNode.outerText).toBe("Lägg till matsedel till skolan");
+  })
+
+  it('should contain 3 dropdowns', () => {
+    const dropDowns = fixture.debugElement.queryAll(By.css('a.navbar-link'));
+    expect(dropDowns.length).toEqual(3);
+    //expect(dropDowns)
+  })
+
+  it('first dropdown should contain 2 municipalities', () => {
+    component.municipalities = [
+    {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
+     {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
+     fixture.detectChanges();
+     fixture.whenStable().then(() => {
+      const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
+      debugger;
+      expect(dropDown.children.length).toBe(2)
+     });
+  })
+
 });
+
+class MunicipalityServiceStub {
+
+}

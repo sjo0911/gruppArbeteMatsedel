@@ -18,6 +18,7 @@ export class AdminMealsComponent implements OnInit {
   menu : Menu;
   subscriptions : Subscription[] = [];
 
+
   constructor(private sharingService : SharingService, private menuService : MenuService) {
 
   }
