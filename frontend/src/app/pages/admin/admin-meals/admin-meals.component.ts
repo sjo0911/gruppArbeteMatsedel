@@ -19,7 +19,7 @@ export class AdminMealsComponent implements OnInit {
   menu : Menu;
   subscriptions : Subscription[] = [];
 
-  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService, private menuService : MenuService) {
+  constructor( private sharingService : SharingService, private menuService : MenuService) {
 
    }
 
