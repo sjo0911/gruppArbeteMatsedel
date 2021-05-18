@@ -20,7 +20,7 @@
                   <input class="icon-checkbox"  title="Fläsk" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'pig')" value="pig" name="pig"  id="pig" #pig>
                   <i class="fas pig fa-bacon" title="Fläsk"></i>
                 </form>
-                <button class="update-button" title="Uppdatera" (click)="updateMeal(meal, day, mealName.value, veg, hot, pig)">
+                <button class="update-button" title="Uppdatera" (click)="updateMeal(meal, day, mealName.value, veg, hot, pig)" #updateButton>
                 <i class="far fa-save"></i>
                 </button>
                 <button class="delete-button" title="Ta bort" (click)="deleteMeal(meal._id, day)">
