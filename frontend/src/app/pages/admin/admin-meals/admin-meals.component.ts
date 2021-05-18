@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Meal } from 'src/app/models/meal';
 import { Week } from 'src/app/models/week';
 import { Day } from 'src/app/models/day';
-import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Menu } from 'src/app/models/menu';
 import { MenuService } from 'src/app/services/menu.service';
@@ -19,9 +18,10 @@ export class AdminMealsComponent implements OnInit {
   menu : Menu;
   subscriptions : Subscription[] = [];
 
-  constructor( private sharingService : SharingService, private menuService : MenuService) {
 
-   }
+  constructor(private sharingService : SharingService, private menuService : MenuService) {
+
+  }
 
   ngOnInit(): void {
     let sub: Subscription = this.sharingService.getObservableWeek().subscribe((week : Week) => {

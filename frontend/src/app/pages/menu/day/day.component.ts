@@ -11,9 +11,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DayComponent implements OnInit {
 
   dateToday: Date;
+
   constructor(private sanitizer: DomSanitizer) {
     this.dateToday = new Date(Date.now());
-   }
+  }
 
   @Input() day : Day;
 
