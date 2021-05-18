@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   week : Week;
   subscriptions : Subscription[] = [];
 
-  constructor(private dateHandlerService : DateHandlerService, private sharingService : SharingService , private auth: AuthService
+  constructor( private sharingService : SharingService , private auth: AuthService
     ) {
       if(auth.isAuthenticated$ ){
         console.log("hejsan!");

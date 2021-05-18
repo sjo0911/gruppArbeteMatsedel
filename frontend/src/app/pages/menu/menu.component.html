@@ -3,7 +3,7 @@
 <div *ngIf="week">
   <div class="centered-content">
     <div class="menu-content">
-      <div *ngFor="let day of week.days">
+      <div class="day-div" *ngFor="let day of week.days">
         <app-day [day] = day></app-day>
       </div>
     </div>
