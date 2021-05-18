@@ -21,10 +21,4 @@ export class AdminMenusComponent implements OnInit {
     this.$menu = this.menuService.getMenus();
   }
 
-
-
-
-
-
-
 }
