@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminMenusComponent } from './admin-menus.component';
@@ -8,7 +9,8 @@ describe('AdminMenusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminMenusComponent ]
+      declarations: [ AdminMenusComponent ],
+      providers: [ {HttpClient} ]
     })
     .compileComponents();
   });
