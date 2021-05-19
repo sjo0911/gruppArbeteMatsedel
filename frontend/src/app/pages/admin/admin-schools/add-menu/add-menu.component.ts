@@ -4,6 +4,7 @@ import { School } from './../../../../models/school';
 import { Menu } from './../../../../models/menu';
 import { Municipality } from './../../../../models/municipality';
 import { Component, OnInit, Input } from '@angular/core';
+import { Alert } from 'src/assets/alert';
 
 @Component({
   selector: 'app-add-menu',
@@ -21,7 +22,7 @@ export class AddMenuComponent implements OnInit {
   chosenMenuTitle : string;
 
 
-  constructor(private municipalityService: MunicipalityService) {
+  constructor(private municipalityService: MunicipalityService, private alert : Alert) {
     this.chosenMunicipalityTitleToAdd = "Välj kommun: ";
     this.chosenSchoolTitleToAdd = "Välj skola: ";
     this.chosenMenuTitle = "Välj matsedel: ";
@@ -47,9 +48,14 @@ export class AddMenuComponent implements OnInit {
   }
 
   addMenuToSchool(menu : Menu, school : School) {
-    school._menuId = menu._id;
-    this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
-    })
+    if(this.chosenSchoolTitleToAdd === "Välj skola: " || this.chosenMenuTitle === "Välj matsedel: ") {
+      this.alert.showAlert('', 'Du måste välja både en skola och en matsedel att lägga till!', 'warning');
+    } else {
+      school._menuId = menu._id;
+      this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
+      })
+      this.alert.showAlertAndUpdatePage('Tillagd!', 'Matsedeln har blivit sparad i vald skola.', 'success');
+    }
   }
 
 }

@@ -2,6 +2,7 @@ import { Menu } from './../../../../models/menu';
 import { Observable } from 'rxjs';
 import { MenuService } from './../../../../services/menu.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Alert } from 'src/assets/alert';
 
 @Component({
   selector: 'app-delete-menu',
@@ -10,11 +11,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DeleteMenuComponent implements OnInit {
   @Input() $menu : Observable<any>;
-  constructor(private menuService:MenuService) { }
   deleteMenuTitle : string;
-  menuToDeleteId : string;
-  ngOnInit(): void {
+  menuToDeleteId : string = '';
 
+  constructor(private menuService:MenuService, private alert : Alert) { }
+
+  ngOnInit(): void {
     this.deleteMenuTitle = "Välj matsedel att ta bort: ";
   }
 
@@ -25,7 +27,12 @@ export class DeleteMenuComponent implements OnInit {
   }
 
   deleteMenu() {
-    this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
-    })
+    if(this.menuToDeleteId === '') {
+      this.alert.showAlert('', 'Du måste välja en matsedel att ta bort.', 'warning');
+    } else {
+      this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
+      })
+      this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen.', 'success');
+    }
   }
 }

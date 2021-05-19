@@ -24,5 +24,17 @@ export class Alert {
     })
   }
 
+  showAlertAndUpdatePage(title : string, text : string, icon : any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonColor: '#063752'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload();
+      }
+    })
+  }
 
 }
