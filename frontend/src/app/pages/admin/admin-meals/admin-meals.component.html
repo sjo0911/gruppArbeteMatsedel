@@ -12,7 +12,7 @@
           <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
             <div class="day-meals" *ngFor="let meal of day.meals">
                 <form>
-                  <input class="input-field" type="text" [value]="meal.mealName" #mealName>
+                  <input class="update-meal-input-field" type="text" [value]="meal.mealName" #mealName>
                   <input class="icon-checkbox"  title="Vegetarisk" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'veg')" value="veg" name="veg" id="veg" #veg>
                   <i class="fas veg fa-seedling" title="Vegetarisk"></i>
                   <input class="icon-checkbox"  title="Stark" type="checkbox" [checked]="checkFoodSpec(meal.foodSpecs, 'hot')" value="hot" name="hot" id="hot" #hot>
@@ -27,9 +27,9 @@
                   <i class="fas fa-trash-alt"></i>
                 </button>
             </div>
-            <div class="day-meals" *ngIf="day.meals.length < 4">
+            <div class="day-admin-meals" *ngIf="day.meals.length < 4">
               <form #form>
-                <input class="input-field" type="text" [value]="" placeholder="Skriv ny maträtt här..." #newMealName>
+                <input class="new-meal-input-field" type="text" [value]="" #newMealName placeholder="Skriv ny maträtt här...">
                 <input class="icon-checkbox" title="Vegetarisk" type="checkbox" value="veg" name="veg" id="veg" #veg>
                 <i class="fas veg fa-seedling" title="Vegetarisk"></i>
                 <input class="icon-checkbox" title="Stark" type="checkbox" value="hot" name="hot" id="hot" #hot>
