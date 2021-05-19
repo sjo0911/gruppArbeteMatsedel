@@ -70,7 +70,7 @@ describe('AdminHeaderComponent', () => {
     expect(location.path()).toBe('');
   })
 
-  it('first button should navigate to /adminMenus', () => {
+  it('first button should navigate to /adminMenus', (done) => {
     const location = TestBed.inject(Location);
     const firstButton= fixture.debugElement.queryAll(By.css('button'))[0];
     firstButton.nativeNode.click();
@@ -78,10 +78,11 @@ describe('AdminHeaderComponent', () => {
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminMenus');
     })
+    done();
 
   })
 
-  it('second button should navigate to /adminSchools', () => {
+  it('second button should navigate to /adminSchools', (done) => {
     const location = TestBed.inject(Location);
     const button = fixture.debugElement.queryAll(By.css('button'))[1];
     button.nativeNode.click();
@@ -89,9 +90,10 @@ describe('AdminHeaderComponent', () => {
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminSchools');
     })
+    done();
   })
 
-  it('third button should navigate to /adminMeals', () => {
+  it('third button should navigate to /adminMeals', (done) => {
     const location = TestBed.inject(Location);
     const button = fixture.debugElement.queryAll(By.css('button'))[2];
     button.nativeNode.click();
@@ -99,7 +101,7 @@ describe('AdminHeaderComponent', () => {
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminMeals');
     })
-
+    done();
   })
 
 });
