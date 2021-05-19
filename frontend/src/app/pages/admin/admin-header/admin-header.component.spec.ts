@@ -66,12 +66,12 @@ describe('AdminHeaderComponent', () => {
   })
 
   it('should be in root before buttonclick', () => {
-    const location = TestBed.get(Location);
+    const location = TestBed.inject(Location);
     expect(location.path()).toBe('');
   })
 
   it('first button should navigate to /adminMenus', () => {
-    const location = TestBed.get(Location);
+    const location = TestBed.inject(Location);
     const firstButton= fixture.debugElement.queryAll(By.css('button'))[0];
     firstButton.nativeNode.click();
     fixture.detectChanges();
@@ -82,7 +82,7 @@ describe('AdminHeaderComponent', () => {
   })
 
   it('second button should navigate to /adminSchools', () => {
-    const location = TestBed.get(Location);
+    const location = TestBed.inject(Location);
     const button = fixture.debugElement.queryAll(By.css('button'))[1];
     button.nativeNode.click();
     fixture.detectChanges();
@@ -92,7 +92,7 @@ describe('AdminHeaderComponent', () => {
   })
 
   it('third button should navigate to /adminMeals', () => {
-    const location = TestBed.get(Location);
+    const location = TestBed.inject(Location);
     const button = fixture.debugElement.queryAll(By.css('button'))[2];
     button.nativeNode.click();
     fixture.detectChanges();
