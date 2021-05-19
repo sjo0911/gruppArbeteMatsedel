@@ -1,3 +1,6 @@
+import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
+import { Router} from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,10 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-header.component.scss']
 })
 export class AdminHeaderComponent implements OnInit {
-
-  constructor(public auth: AuthService) { }
+  sub : Subscription;
+  constructor(public auth: AuthService, private router: Router, private location: Location) {
+    this.sub = auth.isAuthenticated$.subscribe((loggedIn) => {
+      if(!loggedIn) {
+        this.location.replaceState('/');
+        this.router.navigate(['logout']);
+      }
+    })
+   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

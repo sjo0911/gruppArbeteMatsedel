@@ -1,3 +1,4 @@
+import { Observable, of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AuthService } from '@auth0/auth0-angular';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -107,5 +108,8 @@ describe('AdminHeaderComponent', () => {
 class DummyComponent {}
 
 class AuthServiceStub {
-
+  isAuthenticated$ : Observable<boolean>;
+  constructor () {
+    this.isAuthenticated$ = of(true);
+  }
 }
