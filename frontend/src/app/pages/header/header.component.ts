@@ -10,6 +10,7 @@ import { MunicipalityService } from 'src/app/services/municipality.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Subscription } from 'rxjs';
 import  Swal  from 'sweetalert2';
+import { Alert } from 'src/assets/alert';
 
 @Component({
   selector: 'app-header',
@@ -35,7 +36,7 @@ export class HeaderComponent implements OnInit {
   ROOT_URL : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
-    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService) {
+    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert) {
     this.municipalityTitle = "Kommun";
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
@@ -66,11 +67,7 @@ export class HeaderComponent implements OnInit {
 
   chooseSchool(school: School) {
     if(school._menuId === '') {
-      Swal.fire({
-        text: 'Vald skola har ingen matsedel!',
-        icon: 'error',
-        confirmButtonColor: "#063752"
-      })
+      this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
     } else {
       this.chosenSchool = school;
       this.schoolTitle = this.chosenSchool.schoolName;

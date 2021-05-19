@@ -8,6 +8,7 @@ import { Menu } from 'src/app/models/menu';
 import { MenuService } from 'src/app/services/menu.service';
 import { v4 as uuidv4 } from 'uuid';
 import  Swal  from 'sweetalert2';
+import { Alert } from 'src/assets/alert';
 
 @Component({
   selector: 'app-admin',
@@ -20,7 +21,7 @@ export class AdminMealsComponent implements OnInit {
   subscriptions : Subscription[] = [];
 
 
-  constructor(private sharingService : SharingService, private menuService : MenuService) {
+  constructor(private sharingService : SharingService, private menuService : MenuService, private alert : Alert) {
 
   }
 
@@ -57,16 +58,7 @@ export class AdminMealsComponent implements OnInit {
   }
 
   deleteMeal(mealId : string, day : Day) : void{
-    Swal.fire({
-      title: 'VARNING',
-      text: 'Vill du ta bort denna maträtt?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Ja, ta bort',
-      cancelButtonText: 'Avbryt',
-      confirmButtonColor: "#063752",
-      cancelButtonColor: "#063752"
-    }).then((result) => {
+   this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna maträtt?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
       if (result.isConfirmed) {
         day.meals.forEach((meal, index) => {
           if(meal._id === mealId) {
@@ -77,7 +69,7 @@ export class AdminMealsComponent implements OnInit {
         });
         this.subscriptions.push(sub);
 
-        this.showAlert('Borttagen!', 'Vald maträtt har blivit borttagen.', 'success');
+        this.alert.showAlert('Borttagen!', 'Vald maträtt har blivit borttagen.', 'success');
       }
     })
 
@@ -95,9 +87,9 @@ export class AdminMealsComponent implements OnInit {
 
   updateMeal(meal: Meal, day: Day, mealName : string, veg : any, hot : any, pig: any) {
     if(mealName.length < 1) {
-      this.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
+      this.alert.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
     } else if (mealName.length > 85) {
-      this.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
+      this.alert.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
     } else {
       meal.mealName = mealName;
       meal.foodSpecs = [];
@@ -114,15 +106,15 @@ export class AdminMealsComponent implements OnInit {
           this.subscriptions.push(sub);
         });
 
-        this.showAlert('Uppdaterad!', 'Maträtten har blivit uppdaterad.', 'success');
+        this.alert.showAlert('Uppdaterad!', 'Maträtten har blivit uppdaterad.', 'success');
     }
   }
 
   saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
     if(newMealName.length < 1) {
-      this.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
+      this.alert.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
     } else if (newMealName.length > 85) {
-      this.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
+      this.alert.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
     } else {
       let meal : Meal = new Meal();
       meal.mealName = newMealName;
@@ -144,16 +136,7 @@ export class AdminMealsComponent implements OnInit {
         this.subscriptions.push(sub);
         form.reset();
 
-        this.showAlert('Sparad!', 'Maträtten har blivit sparad.', 'success');
+        this.alert.showAlert('Sparad!', 'Maträtten har blivit sparad.', 'success');
     }
-  }
-
-  showAlert(title : string, text : string, icon : any) {
-    Swal.fire({
-      title: title,
-      text: text,
-      icon: icon,
-      confirmButtonColor: '#063752'
-    })
   }
 }
