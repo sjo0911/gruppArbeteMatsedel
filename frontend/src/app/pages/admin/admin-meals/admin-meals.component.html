@@ -29,7 +29,7 @@
             </div>
             <div class="day-meals" *ngIf="day.meals.length < 4">
               <form #form>
-                <input class="input-field" type="text" [value]="" #newMealName placeholder="Skriv ny maträtt här...">
+                <input class="input-field" type="text" [value]="" placeholder="Skriv ny maträtt här..." #newMealName>
                 <input class="icon-checkbox" title="Vegetarisk" type="checkbox" value="veg" name="veg" id="veg" #veg>
                 <i class="fas veg fa-seedling" title="Vegetarisk"></i>
                 <input class="icon-checkbox" title="Stark" type="checkbox" value="hot" name="hot" id="hot" #hot>

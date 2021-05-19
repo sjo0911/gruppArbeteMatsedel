@@ -7,6 +7,7 @@ import { SharingService } from 'src/app/services/sharing.service';
 import { Menu } from 'src/app/models/menu';
 import { MenuService } from 'src/app/services/menu.service';
 import { v4 as uuidv4 } from 'uuid';
+import  Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-admin',
@@ -56,16 +57,30 @@ export class AdminMealsComponent implements OnInit {
   }
 
   deleteMeal(mealId : string, day : Day) : void{
-    day.meals.forEach((meal, index) => {
-      if(meal._id === mealId) {
-        day.meals.splice(index, 1);
+    Swal.fire({
+      title: 'VARNING',
+      text: 'Vill du ta bort denna maträtt?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja, ta bort',
+      cancelButtonText: 'Avbryt',
+      confirmButtonColor: "#063752",
+      cancelButtonColor: "#063752"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        day.meals.forEach((meal, index) => {
+          if(meal._id === mealId) {
+            day.meals.splice(index, 1);
+          }
+        });
+        let sub: Subscription =this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
+        });
+        this.subscriptions.push(sub);
+
+        this.showAlert('Borttagen!', 'Vald maträtt har blivit borttagen.', 'success');
       }
-    });
+    })
 
-    let sub: Subscription =this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
-
-    });
-    this.subscriptions.push(sub);
   }
 
   checkFoodSpec(foodSpecs: string[], wantedSpec: string): boolean {
@@ -79,43 +94,66 @@ export class AdminMealsComponent implements OnInit {
   }
 
   updateMeal(meal: Meal, day: Day, mealName : string, veg : any, hot : any, pig: any) {
-    meal.mealName = mealName;
-    meal.foodSpecs = [];
-      if(veg.checked) {
-        meal.foodSpecs.push(veg.value);
-      }
-      if(hot.checked) {
-        meal.foodSpecs.push(hot.value);
-      }
-      if(pig.checked) {
-        meal.foodSpecs.push(pig.value);
-      }
-      let sub: Subscription =this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
-        this.subscriptions.push(sub);
-      });
+    if(mealName.length < 1) {
+      this.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
+    } else if (mealName.length > 85) {
+      this.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
+    } else {
+      meal.mealName = mealName;
+      meal.foodSpecs = [];
+        if(veg.checked) {
+          meal.foodSpecs.push(veg.value);
+        }
+        if(hot.checked) {
+          meal.foodSpecs.push(hot.value);
+        }
+        if(pig.checked) {
+          meal.foodSpecs.push(pig.value);
+        }
+        let sub: Subscription =this.menuService.updateMeal(meal, this.menu._id).subscribe(() => {
+          this.subscriptions.push(sub);
+        });
 
+        this.showAlert('Uppdaterad!', 'Maträtten har blivit uppdaterad.', 'success');
+    }
   }
 
   saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
-    let meal : Meal = new Meal();
-    meal.mealName = newMealName;
-    meal.mealDate = new Date(day.date);
-      if(veg.checked) {
-        meal.foodSpecs.push(veg.value);
-      }
-      if(hot.checked) {
-        meal.foodSpecs.push(hot.value);
-      }
-      if(pig.checked) {
-        meal.foodSpecs.push(pig.value);
-      }
-      meal._id = uuidv4();
-      day.meals.push(meal);
-      let sub : Subscription= this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
+    if(newMealName.length < 1) {
+      this.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
+    } else if (newMealName.length > 85) {
+      this.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
+    } else {
+      let meal : Meal = new Meal();
+      meal.mealName = newMealName;
+      meal.mealDate = new Date(day.date);
+        if(veg.checked) {
+          meal.foodSpecs.push(veg.value);
+        }
+        if(hot.checked) {
+          meal.foodSpecs.push(hot.value);
+        }
+        if(pig.checked) {
+          meal.foodSpecs.push(pig.value);
+        }
+        meal._id = uuidv4();
+        day.meals.push(meal);
+        let sub : Subscription= this.menuService.postMeal(meal, this.menu._id).subscribe((mealId) => {
 
-      });
-      this.subscriptions.push(sub);
-      form.reset();
+        });
+        this.subscriptions.push(sub);
+        form.reset();
+
+        this.showAlert('Sparad!', 'Maträtten har blivit sparad.', 'success');
+    }
   }
 
+  showAlert(title : string, text : string, icon : any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonColor: '#063752'
+    })
+  }
 }
