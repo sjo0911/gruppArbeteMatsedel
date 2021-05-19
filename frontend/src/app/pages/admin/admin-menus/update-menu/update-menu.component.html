@@ -22,10 +22,10 @@
         <input class="date-input" type="date" id="end" name="end-date" [value]="chosenMenuEndDate | date:'yyyy-MM-dd'" min="2021-01-01" max="2030-12-31" #chosenEndDate>
       </div>
     </div>
-    <div class="button-test">
-      <button class="manage-menu-button" (click)="saveEditedMenu(menuNameEdit.value, chosenStartDate.value, chosenEndDate.value)">
-          Spara redigerad matsedel
-      </button>
-    </div>
   </form>
+  <div class="button-test">
+    <button class="manage-menu-button" (click)="saveEditedMenu(menuNameEdit.value, chosenStartDate.value, chosenEndDate.value)">
+        Spara uppdaterad matsedel
+    </button>
+  </div>
 </div>
