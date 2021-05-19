@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { SharingService } from './sharing.service';
@@ -6,7 +7,10 @@ describe('SharingService', () => {
   let service: SharingService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [SharingService]
+    });
     service = TestBed.inject(SharingService);
   });
 
