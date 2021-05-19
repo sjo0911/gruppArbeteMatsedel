@@ -58,7 +58,7 @@
   width: 100%;
 }
 
-.day-meals {
+.day-meals, day-admin-meals {
   background: #08496d;
   display: flex;
   width: 100%;
@@ -82,7 +82,7 @@
   padding: 20px;
 }
 
-.input-field {
+.new-meal-input-field .update-meal-input-field {
   background: #08496d;
   border: 0px;
   border-radius: 8px;
