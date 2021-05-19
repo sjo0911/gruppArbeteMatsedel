@@ -9,6 +9,8 @@ import { MenuService } from 'src/app/services/menu.service';
 import { MunicipalityService } from 'src/app/services/municipality.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Subscription } from 'rxjs';
+import  Swal  from 'sweetalert2';
+import { Alert } from 'src/assets/alert';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +36,7 @@ export class HeaderComponent implements OnInit {
   ROOT_URL : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
-    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService) {
+    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert) {
     this.municipalityTitle = "Kommun";
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
@@ -64,29 +66,35 @@ export class HeaderComponent implements OnInit {
   }
 
   chooseSchool(school: School) {
-    this.chosenSchool = school;
-    this.schoolTitle = this.chosenSchool.schoolName;
-    let menu : Menu;
+    if(school._menuId === '') {
+      this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
+    } else {
+      this.chosenSchool = school;
+      this.schoolTitle = this.chosenSchool.schoolName;
+      let menu : Menu;
 
-    let sub: Subscription = this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menuu: Menu) => {
-      menu = menuu;
-    },
-    (err) => {
+      let sub: Subscription = this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menuu: Menu) => {
+        menu = menuu;
+      },
+      (err) => {
 
-    },
-    () => {
-      this.sharingService.setMenu(menu);
-      this.weeks = this.dateHandlerService.getWeeks(menu);
-      // console.log(this.weeks);
-      // let currentWeek = this.dateHandlerService.getCurrentWeek();
-      this.weeks.forEach(week => {
-        if(week.weekNr === this.currentWeek) {
-          this.chosenWeek = week;
-        }
+      },
+      () => {
+        this.sharingService.setMenu(menu);
+        this.weeks = this.dateHandlerService.getWeeks(menu);
+        // console.log(this.weeks);
+        // let currentWeek = this.dateHandlerService.getCurrentWeek();
+        this.weeks.forEach(week => {
+          if(week.weekNr === this.currentWeek) {
+            this.chosenWeek = week;
+          }
+        });
+       this.chooseWeek(this.chosenWeek);
       });
-     this.chooseWeek(this.chosenWeek);
-    });
-    this.subscriptions.push(sub);
+      this.subscriptions.push(sub);
+
+    }
+
   }
 
   chooseWeek(week : Week) {

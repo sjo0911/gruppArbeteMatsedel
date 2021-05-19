@@ -24,6 +24,7 @@ import { UpdateMenuComponent } from './pages/admin/admin-menus/update-menu/updat
 import { DeleteMenuComponent } from './pages/admin/admin-menus/delete-menu/delete-menu.component';
 import { AddMenuComponent } from './pages/admin/admin-schools/add-menu/add-menu.component';
 import { RemoveMenuComponent } from './pages/admin/admin-schools/remove-menu/remove-menu.component';
+import { Alert } from 'src/assets/alert';
 
 registerLocaleData(sv);
 
@@ -77,7 +78,7 @@ registerLocaleData(sv);
     })
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "sv" }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "sv" }, { provide: Alert}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

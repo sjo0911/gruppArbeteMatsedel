@@ -19,7 +19,6 @@ export class MenuComponent implements OnInit {
   constructor( private sharingService : SharingService , private auth: AuthService
     ) {
       if(auth.isAuthenticated$ ){
-        console.log("hejsan!");
       }
   }
 
