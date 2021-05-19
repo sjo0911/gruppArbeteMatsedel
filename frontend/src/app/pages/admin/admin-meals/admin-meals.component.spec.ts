@@ -54,7 +54,7 @@ describe('AdminComponent', () => {
 
   // });
 
-  it('should produce 3 days with 1 meal per day(3 meals  in total) with mealname: "fläskpannkaka"', (done) => {
+  it('should produce 3 days with 1 meal per day(3 meals  in total) with mealname: "fläskpannkaka" and hava an "pig" icon in 4th place in its form wich is checked', (done) => {
     component.week = new Helper().getWeek(3, 1);
 
     fixture.detectChanges()
@@ -62,9 +62,12 @@ describe('AdminComponent', () => {
       const daysDiv = fixture.debugElement.queryAll(By.css('div.day-content'));
       const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
       const updateMealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
-
       expect(daysDiv.length).toBe(3);
       expect(mealsDiv.length).toBe(3);
+      mealsDiv.forEach(div => {
+        expect(div.nativeNode.children[0][3].defaultValue).toBe("pig");
+        expect(div.nativeNode.children[0][3].checked).toBe(true);
+      });
       updateMealNameInputs.forEach((input) => {
         expect(input.nativeNode.value).toBe("fläskpannkaka")
       })
