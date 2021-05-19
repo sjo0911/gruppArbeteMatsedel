@@ -40,21 +40,6 @@ export class AdminMealsComponent implements OnInit {
     })
   }
 
-  getFoodSpecs(meal : Meal) : string {
-    let returnString : string = '';
-    meal.foodSpecs.forEach(foodSpec => {
-      if(foodSpec === 'veg') {
-        returnString += `<i class="fas fa-seedling" title="Vegetarisk"></i>`;
-      } else if(foodSpec === 'hot') {
-        returnString += `<i class="fas fa-pepper-hot" title="Stark"></i>`;
-      } else if(foodSpec === 'pig') {
-        returnString += `<i class="fas fa-bacon" title="Fläsk"></i>`;
-      }
-      returnString += '&nbsp&nbsp';
-    });
-    return returnString;
-  }
-
   deleteMeal(mealId : string, day : Day) : void{
     day.meals.forEach((meal, index) => {
       if(meal._id === mealId) {
