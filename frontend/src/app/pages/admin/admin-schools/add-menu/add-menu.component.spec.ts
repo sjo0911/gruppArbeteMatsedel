@@ -34,7 +34,7 @@ describe('AddMenuComponent', () => {
   });
 
   it('Should countain a button with text: " Lägg till/ uppdatera matsedeln till skolan "', () => {
-   expect(dh.singleTextFromTagName('button')).toBe(" Lägg till/ uppdatera matsedeln till skolan ");
+   expect(dh.singleTextFromTagName('button')).toBe("Lägg till/ uppdatera matsedeln till skolan");
   })
 
   it('should contain 3 dropdowns', () => {

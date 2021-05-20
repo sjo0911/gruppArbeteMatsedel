@@ -50,15 +50,15 @@ describe('AdminHeaderComponent', () => {
   })
 
   it('first button should have text: "Administrera matsedel"', () => {
-    expect(dh.singleTextFromTagName("button")).toBe(" Administrera matsedel ");
+    expect(dh.singleTextFromTagName("button").trim()).toBe("Administrera matsedel");
   })
 
   it('second button should have text: "Administrera skola"', () => {
-    expect(dh.getSpecificElement("button", 1).textContent).toBe(" Administrera skola ");
+    expect(dh.getSpecificElement("button", 1).textContent.trim()).toBe("Administrera skola");
   })
 
   it('third button should have text: "Administrera maträtter"', () => {
-    expect(dh.getSpecificElement("button", 2).textContent).toBe(" Administrera maträtter ");
+    expect(dh.getSpecificElement("button", 2).textContent.trim()).toBe("Administrera maträtter");
   })
 
   it('should be in root before buttonclick', () => {
@@ -68,7 +68,7 @@ describe('AdminHeaderComponent', () => {
 
   it('first button should navigate to /adminMenus', (done) => {
     const location = TestBed.inject(Location);
-    dh.getSpecificElement("button", 0).click();
+    dh.clickButton("Administrera matsedel");
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminMenus');
@@ -79,7 +79,7 @@ describe('AdminHeaderComponent', () => {
 
   it('second button should navigate to /adminSchools', (done) => {
     const location = TestBed.inject(Location);
-    dh.getSpecificElement("button", 1).click();
+    dh.clickButton("Administrera skola");
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminSchools');
@@ -89,7 +89,7 @@ describe('AdminHeaderComponent', () => {
 
   it('third button should navigate to /adminMeals', (done) => {
     const location = TestBed.inject(Location);
-    dh.getSpecificElement("button", 2).click();
+    dh.clickButton("Administrera maträtter");
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminMeals');
