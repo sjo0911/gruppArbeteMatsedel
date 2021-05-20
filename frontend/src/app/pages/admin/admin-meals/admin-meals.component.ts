@@ -44,19 +44,12 @@ export class AdminMealsComponent implements OnInit {
 
   deleteMeal(mealId : string, day : Day) : void{
    this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna maträtt?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
-    console.log(result.isConfirmed);
       if (result.isConfirmed) {
-        console.log(result.isConfirmed);
-        console.log(day.meals);
         day.meals.forEach((meal, index) => {
           if(meal._id === mealId) {
-
             day.meals.splice(index, 1);
-
           }
         });
-        this.changeDetector.markForCheck();
-        console.log(day.meals);
         let sub: Subscription =this.menuService.deleteMeal(this.menu._id, mealId).subscribe(() => {
         });
         this.subscriptions.push(sub);
