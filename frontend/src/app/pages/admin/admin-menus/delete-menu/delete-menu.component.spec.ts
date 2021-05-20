@@ -53,7 +53,7 @@ describe('DeleteMenuComponent', () => {
   it('should call deleteMenu() when "Ta bort matsedel" button has been clicked and ', () => {
     spyOn(component, 'deleteMenu');
     dh.clickButton("Ta bort matsedel");
-    expect(component.deleteMenu).toHaveBeenCalled;
+    expect(component.deleteMenu).toHaveBeenCalledTimes(1);
   })
 
   it('menuService.deleteMenu should be called when menu is selected and "Ta bort matsedel" button clicked', (done) => {
