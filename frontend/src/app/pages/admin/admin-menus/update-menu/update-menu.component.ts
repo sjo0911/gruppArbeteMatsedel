@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
 })
 export class UpdateMenuComponent implements OnInit {
 
-  @Input() $menu : Observable<any>;
+  @Input() $menus : Observable<any>;
   editMenuTitle : string;
   menuToEdit : Menu = new Menu();
   menuNameToEdit : string;
@@ -26,7 +26,6 @@ export class UpdateMenuComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.$menu = this.menuService.getMenus();
   }
 
   editMenu(menu : Menu) {

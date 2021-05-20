@@ -61,4 +61,8 @@ class MenuServiceStub {
   getMenus() : Observable<Menu> {
     return of(new MenuMockup().getMenu())
   }
+
+  deleteMenu() {
+
+  }
 }

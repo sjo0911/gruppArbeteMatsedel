@@ -25,7 +25,6 @@ export class DOMHelper <T> {
     const button = buttons.filter(button => {
       return button.nativeElement.textContent.trim() === buttonText;
     })[0]
-    console.log(button);
     button.nativeElement.click();
   }
 
