@@ -95,18 +95,11 @@ describe('AdminComponent', () => {
     component.week = new Helper().getWeek(5, 3);
     fixture.detectChanges()
     fixture.whenStable().then(() => {
-      const daysDiv = fixture.debugElement.queryAll(By.css('div.day-content'));
-      const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
-      expect(daysDiv.length).toBe(5);
-      expect(mealsDiv.length).toBe(15);
-      const deleteButtons = fixture.debugElement.queryAll(By.css('button.delete-button'));
-
-      deleteButtons.forEach(button => {
-        button.nativeNode.click();
-      });
+      expect(dh.countFromTagName('div.day-content')).toBe(5);
+      expect(dh.countFromTagName('div.day-meals')).toBe(15);
+      dh.clickAllButtons('button.delete-button');
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        const mealsDiv2 = fixture.debugElement.queryAll(By.css('div.day-meals'));
          component.week.days.forEach(day => {
            expect(day.meals.length).toBe(0);
          })
@@ -119,22 +112,16 @@ describe('AdminComponent', () => {
     component.week = new Helper().getWeek(3, 0);
     fixture.detectChanges()
     fixture.whenStable().then(() => {
-      const daysDiv = fixture.debugElement.queryAll(By.css('div.day-content'));
-      const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
-      expect(daysDiv.length).toBe(3);
-      expect(mealsDiv.length).toBe(0);
+      expect(dh.countFromTagName('div.day-content')).toBe(3);
+      expect(dh.countFromTagName('div.day-meals')).toBe(0);
       const inputFields = fixture.debugElement.queryAll(By.css('input.new-meal-input-field'));
-      const saveButton = fixture.debugElement.queryAll(By.css('button.save-button'));
       inputFields.forEach(inputField => {
         inputField.nativeNode.value = "glassbåtar";
       })
-      saveButton.forEach(button => {
-        button.nativeNode.click();
-      });
+      dh.clickAllButtons("button.save-button");
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        const mealsDiv2 = fixture.debugElement.queryAll(By.css('div.day-meals'));
-        expect(mealsDiv2.length).toBe(3);
+        expect(dh.countFromTagName('div.day-meals')).toBe(3);
         component.week.days.forEach(day => {
           expect(day.meals.length).toBe(1);
         })
@@ -145,19 +132,14 @@ describe('AdminComponent', () => {
 
   it('should produce 3 days with 1 meal per day(3 meals  in total) and update their meal names to glassbåtar"', (done) => {
     component.week = new Helper().getWeek(3, 1);
-
     fixture.detectChanges()
     fixture.whenStable().then(() => {
       const updateMealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
-      const updateButtons = fixture.debugElement.queryAll(By.css('button.update-button'));
       updateMealNameInputs.forEach((input) => {
         expect(input.nativeNode.value).toBe("fläskpannkaka");
         input.nativeNode.value = "glassbåtar";
       })
-      updateButtons.forEach((button) => {
-        button.nativeElement.click();
-        fixture.detectChanges();
-      })
+      dh.clickAllButtons("button.update-button");
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         component.week.days.forEach(day => {
