@@ -1,3 +1,4 @@
+import { DOMHelper } from './../../../mockups/DOMHelper';
 import { Observable, of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AuthService } from '@auth0/auth0-angular';
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
 describe('AdminHeaderComponent', () => {
   let component: AdminHeaderComponent;
   let fixture: ComponentFixture<AdminHeaderComponent>;
+  let dh: DOMHelper<AdminHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,6 +38,7 @@ describe('AdminHeaderComponent', () => {
     fixture = TestBed.createComponent(AdminHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    dh = new DOMHelper(fixture);
   });
 
   it('should create', () => {
@@ -43,26 +46,19 @@ describe('AdminHeaderComponent', () => {
   });
 
   it('should contain 3 buttons', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('button'));
-    expect(buttons.length).toEqual(3);
+    expect(dh.countFromTagName("button")).toEqual(3);
   })
 
   it('first button should have text: "Administrera matsedel"', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('button'));
-    const firstButton = buttons[0];
-    expect(firstButton.nativeNode.outerText).toBe("Administrera matsedel");
+    expect(dh.singleTextFromTagName("button")).toBe(" Administrera matsedel ");
   })
 
   it('second button should have text: "Administrera skola"', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('button'));
-    const secondButton = buttons[1];
-    expect(secondButton.nativeNode.outerText).toBe("Administrera skola");
+    expect(dh.getSpecificElement("button", 1).textContent).toBe(" Administrera skola ");
   })
 
   it('third button should have text: "Administrera maträtter"', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('button'));
-    const thirdButton = buttons[2];
-    expect(thirdButton.nativeNode.outerText).toBe("Administrera maträtter");
+    expect(dh.getSpecificElement("button", 2).textContent).toBe(" Administrera maträtter ");
   })
 
   it('should be in root before buttonclick', () => {
@@ -72,8 +68,7 @@ describe('AdminHeaderComponent', () => {
 
   it('first button should navigate to /adminMenus', (done) => {
     const location = TestBed.inject(Location);
-    const firstButton= fixture.debugElement.queryAll(By.css('button'))[0];
-    firstButton.nativeNode.click();
+    dh.getSpecificElement("button", 0).click();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminMenus');
@@ -84,8 +79,7 @@ describe('AdminHeaderComponent', () => {
 
   it('second button should navigate to /adminSchools', (done) => {
     const location = TestBed.inject(Location);
-    const button = fixture.debugElement.queryAll(By.css('button'))[1];
-    button.nativeNode.click();
+    dh.getSpecificElement("button", 1).click();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminSchools');
@@ -95,8 +89,7 @@ describe('AdminHeaderComponent', () => {
 
   it('third button should navigate to /adminMeals', (done) => {
     const location = TestBed.inject(Location);
-    const button = fixture.debugElement.queryAll(By.css('button'))[2];
-    button.nativeNode.click();
+    dh.getSpecificElement("button", 2).click();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(location.path()).toBe('/adminMeals');

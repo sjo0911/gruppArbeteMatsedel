@@ -28,7 +28,7 @@
         {{chosenMenuTitle}}
       </a>
       <div class="navbar-dropdown">
-        <a class="navbar-item" *ngFor="let menu of menus" (click)="chooseMenuToAdd(menu)">
+        <a class="navbar-item menuDropDown" *ngFor="let menu of menus" (click)="chooseMenuToAdd(menu)">
           <p>{{ menu.menuName }}</p>
         </a>
       </div>
