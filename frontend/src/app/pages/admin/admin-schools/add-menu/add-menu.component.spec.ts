@@ -1,3 +1,4 @@
+import { Alert } from 'src/assets/alert';
 import { MunicipalityService } from './../../../../services/municipality.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -12,7 +13,8 @@ describe('AddMenuComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddMenuComponent ],
       providers: [
-        {provide: MunicipalityService, useClass: MunicipalityServiceStub}
+        {provide: MunicipalityService, useClass: MunicipalityServiceStub},
+        {provide: Alert, useClass: AlertStub}
       ]
     })
     .compileComponents();
@@ -30,7 +32,7 @@ describe('AddMenuComponent', () => {
 
   it('Should countain a button with text: "Lägg till matsedel till skolan"', () => {
     const buttonElement = fixture.debugElement.query(By.css('button'));
-   expect(buttonElement.nativeNode.outerText).toBe("Lägg till matsedel till skolan");
+   expect(buttonElement.nativeNode.outerText).toBe("Lägg till/ uppdatera matsedeln till skolan");
   })
 
   it('should contain 3 dropdowns', () => {
@@ -71,4 +73,20 @@ describe('AddMenuComponent', () => {
 
 class MunicipalityServiceStub {
 
+}
+
+class AlertStub {
+  showAdvancedAlert() {
+    //Mockup på Alert. Skickar tillbacka ett object med isConfirmed = true. isConfirmed används
+    //för att kolla om en måltid ska tas bort. Med denna mockup tas den alltid bort.
+    const promise = new Promise((res, rej) => {
+      const result = {isConfirmed : true};
+      res(result);
+    });
+    return promise;
+  }
+
+  showAlert(){
+
+  }
 }

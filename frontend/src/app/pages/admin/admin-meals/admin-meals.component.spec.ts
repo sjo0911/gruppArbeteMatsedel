@@ -1,3 +1,4 @@
+import { Alert } from 'src/assets/alert';
 import { By } from '@angular/platform-browser';
 import { Day } from './../../../models/day';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -11,6 +12,8 @@ import { of, Subject } from 'rxjs';
 import { Week } from 'src/app/models/week';
 import { Menu } from 'src/app/models/menu';
 import { Button } from 'protractor';
+import { debug } from 'console';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('AdminComponent', () => {
   let component: AdminMealsComponent;
@@ -23,8 +26,11 @@ describe('AdminComponent', () => {
       declarations: [ AdminMealsComponent ],
       providers: [
         {provide: SharingService, useClass: SharingServiceStub},
-        {provide: MenuService, useClass: MenuServiceStub}
+        {provide: MenuService, useClass: MenuServiceStub},
+        {provide: Alert, useClass: AlertStub}
       ]
+    }).overrideComponent(AdminMealsComponent, {
+      set: { changeDetection: ChangeDetectionStrategy.Default }
     })
     .compileComponents();
   });
@@ -34,6 +40,7 @@ describe('AdminComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     menuMockup = new MenuMockup();
+    component.menu = menuMockup.getMenu();
   });
 
   // it('should create', () => {
@@ -84,13 +91,13 @@ describe('AdminComponent', () => {
       expect(daysDiv.length).toBe(5);
       expect(mealsDiv.length).toBe(15);
       const deleteButtons = fixture.debugElement.queryAll(By.css('button.delete-button'));
+
       deleteButtons.forEach(button => {
         button.nativeNode.click();
       });
-      fixture.detectChanges()
+      fixture.detectChanges();
       fixture.whenStable().then(() => {
         const mealsDiv2 = fixture.debugElement.queryAll(By.css('div.day-meals'));
-         expect(mealsDiv2.length).toBe(0);
          component.week.days.forEach(day => {
            expect(day.meals.length).toBe(0);
          })
@@ -109,7 +116,6 @@ describe('AdminComponent', () => {
       expect(mealsDiv.length).toBe(0);
       const inputFields = fixture.debugElement.queryAll(By.css('input.new-meal-input-field'));
       const saveButton = fixture.debugElement.queryAll(By.css('button.save-button'));
-      debugger;
       inputFields.forEach(inputField => {
         inputField.nativeNode.value = "glassbåtar";
       })
@@ -141,6 +147,7 @@ describe('AdminComponent', () => {
       })
       updateButtons.forEach((button) => {
         button.nativeElement.click();
+        fixture.detectChanges();
       })
       fixture.detectChanges();
       fixture.whenStable().then(() => {
@@ -165,7 +172,9 @@ class SharingServiceStub {
 }
 
 class MenuServiceStub {
-
+  deleteMeal(){
+    return of({})
+  }
 }
 
 class Helper {
@@ -185,5 +194,21 @@ class Helper {
       week.days.push(day);
     }
     return week;
+  }
+
+}
+class AlertStub {
+  showAdvancedAlert() {
+    //Mockup på Alert. Skickar tillbacka ett object med isConfirmed = true. isConfirmed används
+    //för att kolla om en måltid ska tas bort. Med denna mockup tas den alltid bort.
+    const promise = new Promise((res, rej) => {
+      const result = {isConfirmed : true};
+      res(result);
+    });
+    return promise;
+  }
+
+  showAlert(){
+
   }
 }
