@@ -1,3 +1,4 @@
+import { DOMHelper } from './../../../mockups/DOMHelper';
 import { Alert } from 'src/assets/alert';
 import { By } from '@angular/platform-browser';
 import { Day } from './../../../models/day';
@@ -18,7 +19,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 describe('AdminComponent', () => {
   let component: AdminMealsComponent;
   let fixture: ComponentFixture<AdminMealsComponent>;
-
+  let dh: DOMHelper<AdminMealsComponent>;
   let menuMockup : MenuMockup;
 
   beforeEach(async () => {
@@ -41,6 +42,7 @@ describe('AdminComponent', () => {
     fixture.detectChanges();
     menuMockup = new MenuMockup();
     component.menu = menuMockup.getMenu();
+    dh = new DOMHelper(fixture);
   });
 
   // it('should create', () => {
@@ -61,21 +63,28 @@ describe('AdminComponent', () => {
 
   // });
 
-  it('should produce 3 days with 1 meal per day(3 meals  in total) with mealname: "fläskpannkaka" and hava an "pig" icon in 4th place in its form wich is checked', (done) => {
+  it('should produce 3 days with 1 meal per day(3 meals  in total)', (done) => {
+    component.week = new Helper().getWeek(3, 1);
+    fixture.detectChanges()
+    fixture.whenStable().then(() => {
+      expect(dh.countFromTagName("div.day-content")).toBe(3);
+      expect(dh.countFromTagName("div.day-meals")).toBe(3);
+    });
+    done();
+  })
+
+  it('should produce meals with mealname: "fläskpannkaka" and hava an "pig" icon in 4th place in its form wich is checked', (done) => {
     component.week = new Helper().getWeek(3, 1);
 
     fixture.detectChanges()
     fixture.whenStable().then(() => {
-      const daysDiv = fixture.debugElement.queryAll(By.css('div.day-content'));
       const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
-      const updateMealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
-      expect(daysDiv.length).toBe(3);
-      expect(mealsDiv.length).toBe(3);
+      const MealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
       mealsDiv.forEach(div => {
         expect(div.nativeNode.children[0][3].defaultValue).toBe("pig");
         expect(div.nativeNode.children[0][3].checked).toBe(true);
       });
-      updateMealNameInputs.forEach((input) => {
+      MealNameInputs.forEach((input) => {
         expect(input.nativeNode.value).toBe("fläskpannkaka")
       })
     });
