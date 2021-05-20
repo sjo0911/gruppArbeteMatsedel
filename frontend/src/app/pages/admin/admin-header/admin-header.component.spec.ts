@@ -1,13 +1,12 @@
 import { DOMHelper } from './../../../mockups/DOMHelper';
 import { Observable, of } from 'rxjs';
-import { By } from '@angular/platform-browser';
 import { AuthService } from '@auth0/auth0-angular';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminHeaderComponent } from './admin-header.component';
-import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 describe('AdminHeaderComponent', () => {
   let component: AdminHeaderComponent;
@@ -18,13 +17,7 @@ describe('AdminHeaderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AdminHeaderComponent ],
       imports: [
-        RouterTestingModule.withRoutes(
-          [
-          { path:'adminMenus', component: DummyComponent},
-          { path:'adminSchools', component: DummyComponent},
-          { path:'adminMeals', component: DummyComponent}
-          ]
-        )
+        RouterTestingModule
       ],
       providers:  [
         {provide: AuthService, useClass: AuthServiceStub}
@@ -66,41 +59,35 @@ describe('AdminHeaderComponent', () => {
     expect(location.path()).toBe('');
   })
 
-  it('first button should navigate to /adminMenus', (done) => {
-    const location = TestBed.inject(Location);
+  it('"Administrera matsedel" button should navigate to /adminMenus', (done) => {
+    const router = TestBed.get(Router);
+    spyOn(router, 'navigateByUrl')
     dh.clickButton("Administrera matsedel");
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(location.path()).toBe('/adminMenus');
-    })
+    expect(router.navigateByUrl).
+    toHaveBeenCalledWith(router.createUrlTree(['/adminMenus']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
     done();
 
   })
 
-  it('second button should navigate to /adminSchools', (done) => {
-    const location = TestBed.inject(Location);
+  it('"Administrera skola" button should navigate to /adminSchools', (done) => {
+    const router = TestBed.get(Router);
+    spyOn(router, 'navigateByUrl');
     dh.clickButton("Administrera skola");
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(location.path()).toBe('/adminSchools');
-    })
+    expect(router.navigateByUrl).
+    toHaveBeenCalledWith(router.createUrlTree(['/adminSchools']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
     done();
   })
 
-  it('third button should navigate to /adminMeals', (done) => {
-    const location = TestBed.inject(Location);
+  it('"Administrera maträtter" button should navigate to /adminMeals', (done) => {
+    const router = TestBed.get(Router);
+    spyOn(router, 'navigateByUrl');
     dh.clickButton("Administrera maträtter");
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(location.path()).toBe('/adminMeals');
-    })
+    expect(router.navigateByUrl).
+    toHaveBeenCalledWith(router.createUrlTree(['/adminMeals']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
     done();
   })
 
 });
-
-@Component({template: ''})
-class DummyComponent {}
 
 class AuthServiceStub {
   isAuthenticated$ : Observable<boolean>;
