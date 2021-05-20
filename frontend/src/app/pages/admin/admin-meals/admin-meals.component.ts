@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Meal } from 'src/app/models/meal';
 import { Week } from 'src/app/models/week';
 import { Day } from 'src/app/models/day';
@@ -21,7 +21,7 @@ export class AdminMealsComponent implements OnInit {
   subscriptions : Subscription[] = [];
 
 
-  constructor(private sharingService : SharingService, private menuService : MenuService, private alert : Alert) {
+  constructor(private sharingService : SharingService, private menuService : MenuService, private alert : Alert,private changeDetector: ChangeDetectorRef) {
 
   }
 

@@ -60,7 +60,6 @@ describe('FooterComponent', () => {
       expect(location.path()).toBe('authLogin')
     })
     }
-
   }));
   /*it('should navigate to /home on first button click', fakeAsync(() => {
 
