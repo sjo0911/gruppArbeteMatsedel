@@ -18,10 +18,7 @@ export class AdminSchoolsComponent implements OnInit {
 
 
 
-  constructor(private municipalityService : MunicipalityService, private menuService: MenuService) {
-
- 
-   }
+  constructor(private municipalityService : MunicipalityService, private menuService: MenuService) {}
 
   ngOnInit(): void {
     this.municipalityService.getMunicipalities().subscribe((municipalities : Municipality[]) => {

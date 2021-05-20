@@ -3,7 +3,6 @@ import { MenuMockup } from './../../../mockups/menu-mockup';
 import { Observable, of } from 'rxjs';
 import { MenuService } from './../../../services/menu.service';
 import { Alert } from 'src/assets/alert';
-import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminMenusComponent } from './admin-menus.component';
@@ -11,6 +10,7 @@ import { AdminMenusComponent } from './admin-menus.component';
 describe('AdminMenusComponent', () => {
   let component: AdminMenusComponent;
   let fixture: ComponentFixture<AdminMenusComponent>;
+  let mockService : MenuService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,11 +26,19 @@ describe('AdminMenusComponent', () => {
     fixture = TestBed.createComponent(AdminMenusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    mockService = TestBed.inject(MenuService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call NgOnInit() & getMenus()', () => {
+    const component = fixture.debugElement.componentInstance;
+    let mockSpy = spyOn(mockService,"getMenus");
+    component.ngOnInit();
+    expect(mockSpy).toHaveBeenCalled();
+  })
 });
 
 class AlertStub {
