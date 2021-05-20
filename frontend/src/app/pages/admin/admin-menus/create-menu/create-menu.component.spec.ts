@@ -38,6 +38,18 @@ describe('CreateMenuComponent', () => {
     const buttonElement = fixture.debugElement.query(By.css('button'));
     expect(buttonElement.nativeElement.outerText).toBe("Skapa matsedel");
   });
+  it('calls the createMenu method', ()=>{
+    const buttonElement = fixture.debugElement.query(By.css('.manage-menu-button'));
+    let startDate = new Date("2021-05-03");
+    let endDate = new Date("2021-06-20");
+    spyOn(component, 'createMenu').withArgs('newMenu', startDate, endDate);
+
+    buttonElement.triggerEventHandler('click', null);
+    fixture.whenStable().then(()=>{
+      expect(component.createMenu('newMenu', startDate, endDate)).toHaveBeenCalled();
+    });
+
+  }) ;
 
 });
 
