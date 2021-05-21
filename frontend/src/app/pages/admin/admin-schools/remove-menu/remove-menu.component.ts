@@ -37,9 +37,7 @@ export class RemoveMenuComponent implements OnInit {
   chooseSchoolToDelete(school: School) {
     this.schoolToDelete = school;
     this.chosenSchoolTitleToDelete = school.schoolName;
-    this.menuService
-      .getMenuName(school._menuId)
-      .subscribe((menuToDelete: Menu) => {
+    this.menuService.getMenuName(school._menuId).subscribe((menuToDelete: Menu) => {
         this.menuToDelete = menuToDelete.menuName;
       });
   }
@@ -51,9 +49,7 @@ export class RemoveMenuComponent implements OnInit {
       this.alert.showAlert('', 'Den valda skolan har ingen matsedel att ta bort!', 'warning');
     } else {
       school._menuId = '';
-      this.municipalityService
-        .updateSchool(this.municipalityToDelete._id, school)
-        .subscribe(() => {});
+      this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {});
       this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen från den valda skolan.', 'success');
     }
   }
