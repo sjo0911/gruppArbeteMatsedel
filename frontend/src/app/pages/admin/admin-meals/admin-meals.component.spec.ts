@@ -1,4 +1,4 @@
-import { DOMHelper } from './../../../mockups/DOMHelper';
+import { DOMHelper } from '../../../mockups/DOM-helper';
 import { Alert } from 'src/assets/alert';
 import { By } from '@angular/platform-browser';
 import { Day } from './../../../models/day';

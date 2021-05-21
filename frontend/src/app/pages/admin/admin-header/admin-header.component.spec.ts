@@ -1,4 +1,4 @@
-import { DOMHelper } from './../../../mockups/DOMHelper';
+import { DOMHelper } from '../../../mockups/DOM-helper';
 import { Observable, of } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 import { RouterTestingModule } from '@angular/router/testing';

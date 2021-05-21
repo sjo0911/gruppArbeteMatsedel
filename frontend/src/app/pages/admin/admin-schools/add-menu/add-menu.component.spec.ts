@@ -1,4 +1,4 @@
-import { DOMHelper } from './../../../../mockups/DOMHelper';
+import { DOMHelper } from '../../../../mockups/DOM-helper';
 import { Alert } from 'src/assets/alert';
 import { MunicipalityService } from './../../../../services/municipality.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';

@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RemoveMenuComponent } from './remove-menu.component';
 import { Municipality } from 'src/app/models/municipality';
 import { By } from '@angular/platform-browser';
-import { DOMHelper } from './../../../../mockups/DOMHelper';
+import { DOMHelper } from '../../../../mockups/DOM-helper';
 
 describe('RemoveMenuComponent', () => {
   let component: RemoveMenuComponent;

@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { MenuService } from './../../../../services/menu.service';
 import { Alert } from 'src/assets/alert';
 import { AdminHeaderComponent } from './../../admin-header/admin-header.component';
-import { DOMHelper } from './../../../../mockups/DOMHelper';
+import { DOMHelper } from '../../../../mockups/DOM-helper';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteMenuComponent } from './delete-menu.component';
