@@ -8,6 +8,7 @@ import { By } from '@angular/platform-browser';
 
 import { CreateMenuComponent } from './create-menu.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { doesNotReject } from 'node:assert';
 
 describe('CreateMenuComponent', () => {
   let component: CreateMenuComponent;
@@ -23,6 +24,7 @@ describe('CreateMenuComponent', () => {
     })
     .compileComponents();
   });
+
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateMenuComponent);
@@ -40,15 +42,9 @@ describe('CreateMenuComponent', () => {
   });
   it('calls the createMenu method', ()=>{
     const buttonElement = fixture.debugElement.query(By.css('.manage-menu-button'));
-    let startDate = new Date("2021-05-03");
-    let endDate = new Date("2021-06-20");
-    spyOn(component, 'createMenu').withArgs('newMenu', startDate, endDate);
-
+    spyOn(component, 'createMenu')
     buttonElement.triggerEventHandler('click', null);
-    fixture.whenStable().then(()=>{
-      expect(component.createMenu('newMenu', startDate, endDate)).toHaveBeenCalled();
-    });
-
+    expect(component.createMenu).toHaveBeenCalled();
   }) ;
 
 });
@@ -74,3 +70,7 @@ class MenuServiceStub {
     return of(new MenuMockup().getMenu())
   }
 }
+function Done() {
+  throw new Error('Function not implemented.');
+}
+
