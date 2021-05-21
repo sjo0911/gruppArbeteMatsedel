@@ -10,7 +10,7 @@ import { Alert } from 'src/assets/alert';
   styleUrls: ['./delete-menu.component.scss']
 })
 export class DeleteMenuComponent implements OnInit {
-  @Input() $menu : Observable<any>;
+  @Input() $menus : Observable<any>;
   deleteMenuTitle : string;
   menuToDeleteId : string = '';
 

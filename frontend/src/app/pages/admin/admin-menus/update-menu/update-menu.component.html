@@ -6,7 +6,7 @@
         {{ editMenuTitle }}
       </a>
       <div class="navbar-dropdown">
-        <a class="navbar-item" *ngFor="let menu of $menu|async" (click)="editMenu(menu)">
+        <a class="navbar-item" *ngFor="let menu of $menus|async" (click)="editMenu(menu)">
           <p>{{ menu.menuName }}</p>
         </a>
       </div>

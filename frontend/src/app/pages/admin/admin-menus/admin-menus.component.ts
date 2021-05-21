@@ -11,14 +11,14 @@ import { MenuService } from 'src/app/services/menu.service';
 export class AdminMenusComponent implements OnInit {
 
   subscriptions : Subscription[] = [];
-  $menu :Observable<any>;
+  $menus :Observable<any>;
 
   constructor(private menuService : MenuService) {
 
   }
 
   ngOnInit(): void {
-    this.$menu = this.menuService.getMenus();
+    this.$menus = this.menuService.getMenus();
   }
 
 }
