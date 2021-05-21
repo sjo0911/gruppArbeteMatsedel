@@ -29,6 +29,10 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn 
       - run:
+          name: install angular
+          command: cd frontend && npm install -g @angular/cli
+
+      - run:
           name: npm install frontend
           command: cd frontend && npm install
 
