@@ -40,7 +40,8 @@ jobs:
           command: cd frontend && npm run build
       - run:
           name: run test frontend
-          command: cd frontend && env | grep CHROME_BIN &&npm run test
+          
+          command: cd frontend && CHROME_BIN=/usr/bin/google-chrome karma start --single-run && env | grep CHROME_BIN && npm run test
 
 
 workflows:
