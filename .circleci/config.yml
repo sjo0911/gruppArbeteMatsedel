@@ -36,8 +36,11 @@ jobs:
           name: npm install frontend
           command: cd frontend && npm install
       - run:
-          name: ng install
+          name: ng build
           command: cd frontend && npm run build
+      - run:
+          name: run test frontend
+          command: cd frontend && npm run test
 
 
 workflows:
