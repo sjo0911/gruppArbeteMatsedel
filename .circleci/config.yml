@@ -35,6 +35,10 @@ jobs:
       - run:
           name: npm install frontend
           command: cd frontend && npm install
+      - run:
+          name: ng install
+          command: cd frontend && ng build
+
 
 workflows:
   # Below is the definition of your workflow.
