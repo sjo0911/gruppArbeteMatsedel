@@ -8,6 +8,7 @@ import { By } from '@angular/platform-browser';
 
 import { CreateMenuComponent } from './create-menu.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { doesNotReject } from 'node:assert';
 
 describe('CreateMenuComponent', () => {
   let component: CreateMenuComponent;
@@ -24,6 +25,7 @@ describe('CreateMenuComponent', () => {
     .compileComponents();
   });
 
+
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateMenuComponent);
     component = fixture.componentInstance;
@@ -38,6 +40,12 @@ describe('CreateMenuComponent', () => {
     const buttonElement = fixture.debugElement.query(By.css('button'));
     expect(buttonElement.nativeElement.outerText).toBe("Skapa matsedel");
   });
+  it('calls the createMenu method', ()=>{
+    const buttonElement = fixture.debugElement.query(By.css('.manage-menu-button'));
+    spyOn(component, 'createMenu')
+    buttonElement.triggerEventHandler('click', null);
+    expect(component.createMenu).toHaveBeenCalled();
+  }) ;
 
 });
 
@@ -62,3 +70,7 @@ class MenuServiceStub {
     return of(new MenuMockup().getMenu())
   }
 }
+function Done() {
+  throw new Error('Function not implemented.');
+}
+
