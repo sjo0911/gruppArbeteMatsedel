@@ -6,10 +6,16 @@ import { Observable, of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateMenuComponent } from './update-menu.component';
+import { By } from '@angular/platform-browser';
+import { DOMHelper } from 'src/app/mockups/DOM-helper';
 
 describe('UpdateMenuComponent', () => {
   let component: UpdateMenuComponent;
   let fixture: ComponentFixture<UpdateMenuComponent>;
+  let menuMockup = new MenuMockup();
+  let menu : any;
+  let dh: DOMHelper<UpdateMenuComponent>;
+  let mockService : MenuService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,10 +31,49 @@ describe('UpdateMenuComponent', () => {
     fixture = TestBed.createComponent(UpdateMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    menu = menuMockup.getMenu();
+    dh = new DOMHelper(fixture);
+    mockService = TestBed.inject(MenuService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should contain a button with text "Spara uppdaterad matsedel"', ()=> {
+    expect(dh.singleTextFromTagName("button")).toBe("Spara uppdaterad matsedel");
+  })
+
+  it('should contain a dropdown with 3 menus', (done) => {
+    component.$menus = of([
+      {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+      {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+      {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
+    ]);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(dh.countFromTagName("a.navbar-item")).toBe(3);
+    })
+    done();
+  })
+
+  it('should call editMenu() when dropdown is clicked', (done) => {
+    component.$menus = of([menu]);
+    let mockSpy = spyOn(component, 'editMenu');
+    fixture.detectChanges();
+     fixture.whenStable().then(() => {
+      const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
+      dropDown.children[0].nativeElement.click();
+      expect(mockSpy).toHaveBeenCalledTimes(1);
+     })
+     done();
+  });
+
+  // Lägg till expect för att se att menuService körs
+  it('should click saveEditedMenu button and call saveEditedMenu()', () => {
+    let mockSpy = spyOn(component, "saveEditedMenu");
+    dh.clickButton("Spara uppdaterad matsedel");
+    expect(mockSpy).toHaveBeenCalledTimes(1);
   });
 });
 
