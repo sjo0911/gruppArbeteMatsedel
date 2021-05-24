@@ -1,4 +1,5 @@
 <script src="https://use.fontawesome.com/ccceada4b4.js"></script>
+<div *ngIf="day">
 <div class="day-content" >
   <div class="day-date" [ngClass]="{'today': (day.date | date : 'mediumDate') === (dateToday | date : 'mediumDate')}">
     {{ day.date | date: "EEEE" | titlecase }}<br>{{ day.date | date }}
@@ -12,4 +13,5 @@
       </div>
     </ng-template>
   </div>
+</div>
 </div>
