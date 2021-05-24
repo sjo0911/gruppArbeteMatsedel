@@ -10,7 +10,6 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { AdminMealsComponent } from './pages/admin/admin-meals/admin-meals.component';
 import sv from '@angular/common/locales/sv';
 import { registerLocaleData } from '@angular/common';
-import { LoginComponent } from './pages/login/login.component';
 import { AdminSchoolsComponent } from './pages/admin/admin-schools/admin-schools.component';
 import { AdminMenusComponent } from './pages/admin/admin-menus/admin-menus.component';
 import { AdminHeaderComponent } from './pages/admin/admin-header/admin-header.component';
@@ -35,7 +34,6 @@ registerLocaleData(sv);
     MenuComponent,
     FooterComponent,
     AdminMealsComponent,
-    LoginComponent,
     AdminSchoolsComponent,
     AdminMenusComponent,
     AdminHeaderComponent,
