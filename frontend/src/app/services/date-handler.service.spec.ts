@@ -4,6 +4,7 @@ import { MenuMockup } from '../mockups/menu-mockup';
 import { Week } from '../models/week';
 
 import { DateHandlerService } from './date-handler.service';
+import { DatePipe } from '@angular/common';
 
 describe('DateHandlerService', () => {
   let service: DateHandlerService;
@@ -38,7 +39,12 @@ describe('DateHandlerService', () => {
 
   it('should return current week', () => {
     const currentWeek = service.getCurrentWeek();
-    expect(currentWeek).toEqual('20');
+    expect(currentWeek).toBeGreaterThan(0);
+    expect(currentWeek).toBeLessThan(54);
+
+    let dateNow : Date = new Date(Date.now());
+    let datePipe: DatePipe = new DatePipe('en-US');
+    expect(currentWeek).toBe(datePipe.transform(dateNow, 'w'));
   });
 
   it('should return weeks', () => {
