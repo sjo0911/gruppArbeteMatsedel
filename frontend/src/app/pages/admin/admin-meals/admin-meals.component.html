@@ -9,7 +9,7 @@
           {{ day.date | date: "EEEE" | titlecase }}<br>{{ day.date | date }}
         </div>
         <div class="meals-content">
-          <ng-template [ngIf]="day.meals" [ngIfElse]="elseBlock">
+          <ng-template [ngIf]="day.meals">
             <div class="day-meals" *ngFor="let meal of day.meals">
                 <form>
                   <input class="update-meal-input-field" type="text" [value]="meal.mealName" #mealName>
@@ -40,10 +40,6 @@
               <button class="save-button" title="Spara" (click)="saveMeal(day, newMealName.value, veg, hot, pig, form)">
                 <i class="fas fa-save"></i>
               </button>
-            </div>
-          </ng-template>
-          <ng-template #elseBlock>
-            <div class="day-meals">
             </div>
           </ng-template>
       </div>
