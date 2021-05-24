@@ -42,6 +42,8 @@ jobs:
           command: cd frontend && npm run build
       - run:
           name: run test frontend
+          environment:
+            CHROME_BIN: /usr/bin/google-chrome karma start --single-run
           command: cd frontend && npm run test
 
 
