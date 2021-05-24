@@ -16,9 +16,7 @@ jobs:
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
     docker:
-      - image: cimg/node:15.1
-        environment:
-            CHROME_BIN: /usr/bin/google-chrome karma start --single-run
+      - image: circleci/node:15-browsers
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
     steps:
@@ -42,9 +40,7 @@ jobs:
           command: cd frontend && npm run build
       - run:
           name: run test frontend
-          environment:
-            CHROME_BIN: /usr/bin/google-chrome karma start --single-run
-          command: env | grep CHROME_BIN && cd frontend && npm run test
+          command: cd frontend && npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
 
 workflows:

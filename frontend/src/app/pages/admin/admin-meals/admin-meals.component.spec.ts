@@ -67,7 +67,7 @@ describe('AdminComponent', () => {
     component.week = new Helper().getWeek(3, 1);
     fixture.detectChanges()
     fixture.whenStable().then(() => {
-      expect(dh.countFromTagName("div.day-content")).toBe(3);
+      expect(dh.countFromTagName("input.update-meal-input-field")).toBe(3);
       expect(dh.countFromTagName("div.day-meals")).toBe(3);
     });
     done();
@@ -176,7 +176,7 @@ class Helper {
     let endDateString = "2021-05-" + endDay;
     week.endDate = new Date(endDateString);
     let date = new Date(week.startDate);
-    for(date; date <= week.endDate; date.setDate(date.getDate() + 1)) {
+    for(date; date < week.endDate; date.setDate(date.getDate() + 1)) {
       let day : Day = new Day;
       day.date = new Date(date);
       for(let i = 0; i < mealsPerDay; i++) {
