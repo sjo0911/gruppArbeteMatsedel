@@ -41,6 +41,9 @@ jobs:
           name: ng build
           command: cd frontend && npm run build
       - run:
+          name: install chrome
+          command: browser-tools/install-browser-tools
+      - run:
           name: run test frontend
           environment:
             CHROME_BIN: /usr/bin/google-chrome karma start --single-run
