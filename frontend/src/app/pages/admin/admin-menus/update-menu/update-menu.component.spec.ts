@@ -16,13 +16,16 @@ describe('UpdateMenuComponent', () => {
   let menu : any;
   let dh: DOMHelper<UpdateMenuComponent>;
   let mockService : MenuService;
+  let menuServiceMock : MenuService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ UpdateMenuComponent ],
       providers: [
         {provide: MenuService, useClass: MenuServiceStub},
-        {provide: Alert, useClass: AlertStub}   ],
+        {provide: Alert, useClass: AlertStub},
+        {provide: MenuService, useValue: menuServiceMock}
+      ]
     })
     .compileComponents();
   });
@@ -69,11 +72,13 @@ describe('UpdateMenuComponent', () => {
      done();
   });
 
-  // Lägg till expect för att se att menuService körs
   it('should click saveEditedMenu button and call saveEditedMenu()', () => {
     let mockSpy = spyOn(component, "saveEditedMenu");
+    menuServiceMock = jasmine.createSpyObj('MenuService', ['updateMenu']);
+    menuServiceMock.updateMenu(menu);
     dh.clickButton("Spara uppdaterad matsedel");
     expect(mockSpy).toHaveBeenCalledTimes(1);
+    expect(menuServiceMock.updateMenu).toHaveBeenCalledTimes(1);
   });
 });
 

@@ -17,6 +17,8 @@ describe('RemoveMenuComponent', () => {
   municipalitiesMockup = {_id: "123", municipalityName: "Umeå", schools: [{_id: "1", schoolName: "Dragonskolan", _menuId: "2"}]};
   let menuServiceStub : MenuService;
   let dh: DOMHelper<RemoveMenuComponent>;
+  let menuServiceMock : MenuService;
+  let municipalityServiceMock : MunicipalityService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,7 +26,10 @@ describe('RemoveMenuComponent', () => {
       providers: [
         {provide: MenuService, useClass: MenuServiceStub},
         {provide: Alert, useClass: AlertStub}  ,
-        {provide: MunicipalityService, useClass: MunicipalityServiceStub}, ],
+        {provide: MunicipalityService, useClass: MunicipalityServiceStub},
+        {provide: MenuService, useValue: menuServiceMock},
+        {provide: MunicipalityService, useValue: municipalityServiceMock}
+      ],
 
     })
     .compileComponents();
@@ -54,11 +59,12 @@ describe('RemoveMenuComponent', () => {
      done();
   });
 
-  // Lägg till för att kolla så att getMenuName i service också körs
   it('should call chooseSchoolToDelete()', (done) => {
     component.municipalities = [municipalitiesMockup];
     component.schoolToDelete = municipalitiesMockup.schools[0];
     let mockSpy = spyOn(component, 'chooseSchoolToDelete');
+    menuServiceMock = jasmine.createSpyObj('MenuService', ['getMenuName']);
+    menuServiceMock.getMenuName(municipalitiesMockup.schools[0]._id);
     fixture.detectChanges();
      fixture.whenStable().then(() => {
       const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
@@ -68,6 +74,7 @@ describe('RemoveMenuComponent', () => {
      const dropDown2 = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[1];
      dropDown2.children[0].nativeElement.click();
      expect(mockSpy).toHaveBeenCalledTimes(1);
+     expect(menuServiceMock.getMenuName).toHaveBeenCalledTimes(1);
     })
   })
     done();
@@ -76,8 +83,11 @@ describe('RemoveMenuComponent', () => {
   it('should click deleteMenuFromSchool button and call deleteMenuFromSchool()', () => {
     component.schoolToDelete = municipalitiesMockup.schools[0];
     let mockSpy = spyOn(component, 'deleteMenuFromSchool');
+    municipalityServiceMock = jasmine.createSpyObj('MunicipalityService', ['updateSchool']);
+    municipalityServiceMock.updateSchool(municipalitiesMockup._id, municipalitiesMockup.schools[0]);
     dh.clickButton("Ta bort matsedel från skolan");
     expect(mockSpy).toHaveBeenCalledTimes(1);
+    expect(municipalityServiceMock.updateSchool).toHaveBeenCalledTimes(1);
   });
 
 });
