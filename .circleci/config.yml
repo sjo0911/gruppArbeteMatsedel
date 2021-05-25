@@ -42,14 +42,8 @@ jobs:
           name: run test frontend 
           command: cd frontend && npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
       - run:
-          name: npm install node
-          command: cd backend && node --version
-      - run:
           name: npm install backend dependencies
           command: cd backend && npm install
-      - run:
-          name: npm install backend dev dependencies
-          command: cd backend && npm install dev
       - run:
           name: npm nodejs tests
           command: cd backend && npm test
