@@ -19,7 +19,9 @@ exports.postMunicipality = function (req, res) {
     });
     newMunicipality.save().then((municipalityDoc) => {
         res.send(municipalityDoc);
-    })
+    }).catch((e) => {
+        res.send(e);
+    });
 }
 
 exports.patchMunicipality = function (req, res) {
