@@ -33,14 +33,20 @@ jobs:
           command: cd frontend && npm install @angular/cli
 
       - run:
-          name: npm install frontend
+          name: npm install frontend dependencies
           command: cd frontend && npm install
       - run:
           name: ng build
           command: cd frontend && npm run build
       - run:
-          name: run test frontend
+          name: run test frontend 
           command: cd frontend && npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - run:
+          name: npm install backend dependencies
+          command: cd backend && npm install && npm install dev
+      - run:
+          name: npm nodejs tests
+          command: cd backend && npm test
 
 
 workflows:
