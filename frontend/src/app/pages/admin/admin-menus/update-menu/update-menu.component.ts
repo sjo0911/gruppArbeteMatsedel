@@ -44,10 +44,6 @@ export class UpdateMenuComponent implements OnInit {
       this.alert.showAlert('', 'Input för menynamnet är för kort. Testa igen!', 'warning');
     } else if (menuName.length > 40) {
       this.alert.showAlert('', 'Input för menynamnet är för långt. Testa igen!', 'warning');
-    } else if (!(datePipe.transform(startDate, 'EEEE') === 'Monday')) {
-      this.alert.showAlert('', 'Startdatum för matsedeln måste vara en måndag!', 'warning');
-    } else if (!(datePipe.transform(endDate, 'EEEE') === 'Sunday')) {
-      this.alert.showAlert('', 'Slutdatum för matsedeln måste vara en söndag!', 'warning');
     } else {
       this.menuToEdit.menuName = menuName;
       this.menuToEdit.startDate = startDate;
