@@ -41,12 +41,45 @@ describe('Municipality', () => {
             .not
             .toThrow();
     });
+    it('Cant post municipality with short name', async () => {
+        municipalityController.postMunicipality(municipalityWithShortName, {
+            send(err) {
+                expect(err.message).toContain("Municipality name length should be atleast 2")
+            }
+        })
+    });
+    it('Cant post municipality with no name', async () => {
+        municipalityController.postMunicipality(municipalityWithNoName, {
+            send(err) {
+                expect(err.message).toContain("Municipality name required")
+            }
+        })
+    });
+
 });
 
 const municipality = {
-    body: {id: mongoose.Types.ObjectId(), municipalityName: 'Bjur',
-    schools: [{id: mongoose.Types.ObjectId(), schoolName: 'Skolan'}] },
-    params: {id: mongoose.Types.ObjectId()}
+    body: {
+        id: mongoose.Types.ObjectId(), municipalityName: 'Bjur',
+        schools: [{ id: mongoose.Types.ObjectId(), schoolName: 'Skolan' }]
+    },
+    params: { id: mongoose.Types.ObjectId() }
+};
+
+const municipalityWithShortName = {
+    body: {
+        id: mongoose.Types.ObjectId(), municipalityName: 'a',
+        schools: []
+    },
+    params: { id: mongoose.Types.ObjectId() }
+};
+
+const municipalityWithNoName = {
+    body: {
+        id: mongoose.Types.ObjectId(), municipalityName: '',
+        schools: []
+    },
+    params: { id: mongoose.Types.ObjectId() }
 };
 
 const res = {
@@ -54,11 +87,12 @@ const res = {
         let isErr = false;
         try {
             isErr = doc instanceof mongoose.Error;
-        } catch(err) {
+        } catch (err) {
         }
-        if(isErr) {
-            throw(doc);
+        if (isErr) {
+            throw new Error(doc.message);
         }
     },
-    sendStatus(statusNumber){}
+
+    sendStatus(statusNumber) { }
 }

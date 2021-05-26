@@ -4,14 +4,14 @@ const MunicipalitySchema = new mongoose.Schema({
     municipalityName: {
         type: String,
         required: [true, "Municipality name required"],
-        minlength: [2, "Municipality name lengt should be atleast 2"],
+        minlength: [2, "Municipality name length should be atleast 2"],
         trim: true
     },
     schools: [{
         schoolName: {
             type: String,
             required: [true, "School name required"],
-            minlength: [1, "School name lengt should be atleast 1"],
+            minlength: [1, "School name length should be atleast 1"],
             trim: true
         },
         _menuId: {
