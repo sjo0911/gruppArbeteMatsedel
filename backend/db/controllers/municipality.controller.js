@@ -27,6 +27,8 @@ exports.postMunicipality = function (req, res) {
 exports.patchMunicipality = function (req, res) {
     Municipality.findOneAndUpdate({ _id: req.params.id }, {
         $set: req.body
+    }).catch((e) => {
+        res.send(e);
     }).then(() => {
         res.sendStatus(200);
     });
@@ -44,13 +46,15 @@ exports.patchSchool = function (req, res) {
         res.send(err);
     }).then(() => {
         res.send({message: 'Completed successfully'});
-    })
+    });
 }
 
 exports.deleteMunicipality = function (req, res) {
     Municipality.findOneAndRemove({
         _id: req.params.id
+    }).catch((e) => {
+        res.send(e);
     }).then((removedMunicipalityDoc) => {
         res.send(removedMunicipalityDoc);
-    })
+    });
 }

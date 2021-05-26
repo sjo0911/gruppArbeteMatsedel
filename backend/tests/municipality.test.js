@@ -9,7 +9,7 @@ afterEach(async () => await dbHandler.clearDatabase());
 
 afterAll(async () => await dbHandler.closeDatabase());
 
-describe('Municipality ', () => {
+describe('Municipality', () => {
 
     // Lägg till toThrow() kanske möjligtvis litegrann
     it('Can post municipality', async () => {
@@ -35,14 +35,30 @@ describe('Municipality ', () => {
             .not
             .toThrow();
     });
+
+    it('Can patch schools', async () => {
+        expect(() => municipalityController.patchSchool(municipality, res))
+            .not
+            .toThrow();
+    });
 });
 
 const municipality = {
     body: {id: mongoose.Types.ObjectId(), municipalityName: 'Bjur',
-    schools: [] },
+    schools: [{id: mongoose.Types.ObjectId(), schoolName: 'Skolan'}] },
     params: {id: mongoose.Types.ObjectId()}
 };
+
 const res = {
-    send(doc) {},
+    send(doc) {
+        let isErr = false;
+        try {
+            isErr = doc instanceof mongoose.Error;
+        } catch(err) {
+        }
+        if(isErr) {
+            throw(doc);
+        }
+    },
     sendStatus(statusNumber){}
 }
