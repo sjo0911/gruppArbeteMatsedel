@@ -63,12 +63,43 @@ describe('Menu', () => {
             .not
             .toThrow();
     });
+    it('Cant post menu with no name', async () => {
+        menuController.postMenu(menuWithNoName, {
+            send(err) {
+                if(err != undefined) {
+                    expect(err.message).toContain(" Menu name required");
+                }             
+            }
+        })
+    });
+    it('Cant post menu with meals with unsupported foodspecs', async () => {
+        menuController.postMenu(menuWithBadFoodspec, {
+            send(err) {
+                if(err != undefined) {
+                    expect(err.message).toContain("is not supported. hot, pig and veg is supported values");
+                }             
+            }
+        })
+    });
+    
 
 });
 
 const menu = {
     body: {id: mongoose.Types.ObjectId(), startDate: new Date('2021-05-03'), endDate: new Date('2021-05-31'), menuName: 'Matsedel test',
     meals: [{_id: 'abc123', mealName: 'Korv', mealDate: new Date('2021-05-26')}] },
+    params: {id: mongoose.Types.ObjectId()}
+};
+
+const menuWithNoName = {
+    body: {id: mongoose.Types.ObjectId(), startDate: new Date('2021-05-03'), endDate: new Date('2021-05-31'), menuName: '',
+    meals: [{_id: 'abc123', mealName: 'Korv', mealDate: new Date('2021-05-26')}] },
+    params: {id: mongoose.Types.ObjectId()}
+};
+
+const menuWithBadFoodspec= {
+    body: {id: mongoose.Types.ObjectId(), startDate: new Date('2021-05-03'), endDate: new Date('2021-05-31'), menuName: 'namnet',
+    meals: [{_id: 'abc123', mealName: 'Korv', mealDate: new Date('2021-05-26'), foodSpecs: ['kyckling']}] },
     params: {id: mongoose.Types.ObjectId()}
 };
 
