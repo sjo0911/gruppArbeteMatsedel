@@ -1,6 +1,7 @@
 const { Municipality } = require('../models');
+const patchValidation = { runValidators: true };
 
-exports.getMunicipalities = function (req, res) {
+exports.getMunicipalities = function(req, res) {
     // Return array of all districts in database
     Municipality.find().then((municipalities) => {
         res.send(municipalities);
@@ -9,7 +10,7 @@ exports.getMunicipalities = function (req, res) {
     });
 }
 
-exports.postMunicipality = function (req, res) {
+exports.postMunicipality = function(req, res) {
     // Create district and return new district to user
     let municipalityName = req.body.municipalityName;
     let schools = req.body.schools;
@@ -24,37 +25,41 @@ exports.postMunicipality = function (req, res) {
     });
 }
 
-exports.patchMunicipality = function (req, res) {
+exports.patchMunicipality = function(req, res) {
     Municipality.findOneAndUpdate({ _id: req.params.id }, {
-        $set: req.body
-    }).then(() => {
-        res.sendStatus(200);
-    }).catch((e) => {
-        res.send(e);
-    });
+            $set: req.body
+        }, patchValidation).then(() => {
+            res.sendStatus(200);
+        })
+        .catch((e) => {
+            res.send(e);
+
+        });
 }
 
-exports.patchSchool = function (req, res) {
+exports.patchSchool = function(req, res) {
     Municipality.findOneAndUpdate({
-        _id: req.params.id,
-        "schools._id": req.params.schoolId
-    }, {
-        $set: {
-            'schools.$': req.body
-        }
-    }).catch((err) => {
-        res.send(err);
-    }).then(() => {
-        res.send({message: 'Completed successfully'});
-    });
+            _id: req.params.id,
+            "schools._id": req.params.schoolId
+        }, {
+            $set: {
+                'schools.$': req.body
+            }
+        }, patchValidation).then(() => {
+            res.send({ message: 'Completed successfully' });
+        })
+        .catch((err) => {
+            res.send(err);
+        });
 }
 
-exports.deleteMunicipality = function (req, res) {
+exports.deleteMunicipality = function(req, res) {
     Municipality.findOneAndRemove({
-        _id: req.params.id
-    }).catch((e) => {
-        res.send(e);
-    }).then((removedMunicipalityDoc) => {
-        res.send(removedMunicipalityDoc);
-    });
+            _id: req.params.id
+        }).then((removedMunicipalityDoc) => {
+            res.send(removedMunicipalityDoc);
+        })
+        .catch((e) => {
+            res.send(e);
+        });
 }
