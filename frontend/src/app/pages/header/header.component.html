@@ -17,7 +17,7 @@
             {{municipalityTitle}}
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" *ngFor="let municipality of municipalities"
+            <a class="navbar-item" *ngFor="let municipality of $municipalities | async"
               (click)="chooseMunicipality(municipality)">
               <p>{{ municipality.municipalityName }}</p>
             </a>

@@ -21,13 +21,18 @@ export class AdminSchoolsComponent implements OnInit {
   constructor(private municipalityService : MunicipalityService, private menuService: MenuService) {}
 
   ngOnInit(): void {
-    this.municipalityService.getMunicipalities().subscribe((municipalities : Municipality[]) => {
+    this.subscriptions.push(this.municipalityService.getMunicipalities().subscribe((municipalities : Municipality[]) => {
       this.municipalities = municipalities;
-    })
-    this.menuService.getMenus().subscribe((menus : Menu[]) => {
+    }))
+    this.subscriptions.push(this.menuService.getMenus().subscribe((menus : Menu[]) => {
       this.menus = menus;
-    })
+    }))
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    })
   }
 
 
