@@ -1,21 +1,11 @@
 @import url("https://use.fontawesome.com/releases/v5.14.0/css/all.css");
 
 .centered-content {
-  // background: #063249;
-  display: flex;
-  max-height: 800px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   height: 100%;
-  vertical-align: middle;
-  // border-radius: 8px;
-  // margin: 20px;
 }
 
 .menu-content {
   margin-top: 55px;
-  //background: white;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -65,7 +55,6 @@
   height: 20%;
   justify-content: left;
   align-items: center;
-  // padding: 3px;
   margin: 5px;
   border-radius: 8px;
   color: white;
@@ -126,13 +115,8 @@
   }
   margin-left: 3px;
   margin-bottom: 5px;
-  // &:hover{
-  //  add hover text!
-  // }
-  // position: fixed;
-  //   right: 300px;
-    // padding: 20px;
 }
+
 .update-button {
   cursor: pointer;
   height: 16px;
@@ -146,9 +130,6 @@
   }
   margin-left: 15px;
   margin-bottom: 5px;
-  // position: fixed;
-  //   right: 300px;
-    // padding: 20px;
 }
 
 .save-button {
@@ -164,12 +145,6 @@
   }
   margin-left: 15px;
   margin-bottom: 5px;
-  // &:hover{
-  //  add hover text!
-  // }
-  // position: fixed;
-  //   right: 300px;
-    // padding: 20px;
 }
 
 

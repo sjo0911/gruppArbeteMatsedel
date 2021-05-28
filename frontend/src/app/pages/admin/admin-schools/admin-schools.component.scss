@@ -1,65 +1,8 @@
-.centered-content {
-  // background: #063249;
-  display: flex;
-  max-height: 800px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 500px;
-  vertical-align: middle;
-  // border-radius: 8px;
-  // margin: 20px;
-}
-
-.admin-schools-content {
-  margin-top: 55px;
-  //background: white;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-  align-items: center;
-  justify-content: center;
-}
-
-.choices-content {
-  background: #063249;
-  display: flex;
-  // justify-content: left;
-  // align-items: left;
-  max-width: 800px;
-  min-width: 800px;
-  max-height: 140px;
-  min-height: 140px;
-  border-radius: 8px;
-  margin: 3px;
-  padding: 10px;
-  justify-content: center;
-  // flex-direction: columns;
-}
-
 .add-content {
   justify-content: center;
-  // padding: 10px;
-  // margin: 10px;
-  // margin-bottom: 1px;
   display: flex;
   flex-direction: columns;
 }
-
-// .dropdowns {
-//   width: 105px;
-//   margin: 30px;
-//   background: #063249;
-//   color: white;
-//   border: transparent;
-// }
-
-// option[disabled] {
-//   display: none;
-// }
 
 .manage-menu-button {
   border: 0px;
@@ -76,13 +19,8 @@
 .menuName {
   max-width: 200px;
   color: white;
-  // min-width: 120px;
   padding: 20px;
   margin: 30px;
-}
-
-.navbar-link {
-  color: white;
 }
 
 .navbar-item {
@@ -96,16 +34,8 @@
       }
   }
   max-width: 250px;
-  // &:active {
-  //   transform: translateY(4px);
-  // }
 }
 
 .navbar-dropdown {
-  background: #063752;
-  overflow-y: auto;
   height: 250px;
-}
-.navbar-item {
-  color: white;
 }
