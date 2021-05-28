@@ -47,8 +47,6 @@ describe('FooterComponent', () => {
   });
 
   it('should navigate to /home on first button click', fakeAsync(() => {
-
-
   const location=TestBed.inject(Location);
     const loginButton = fixture.debugElement.queryAll(By.css('button'));
     if(expect(loginButton[0].nativeNode.outerText).toBe("Logga ut")){
