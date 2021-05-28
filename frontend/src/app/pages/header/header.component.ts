@@ -8,7 +8,7 @@ import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { MunicipalityService } from 'src/app/services/municipality.service';
 import { SharingService } from 'src/app/services/sharing.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import  Swal  from 'sweetalert2';
 import { Alert } from 'src/assets/alert';
 
@@ -19,10 +19,9 @@ import { Alert } from 'src/assets/alert';
 })
 
 export class HeaderComponent implements OnInit {
-  municipalities: Municipality[];
+  $municipalities: Observable<any>;
   chosenMunicipality: Municipality;
   municipalityTitle: string;
-  chosenSchool: School;
   schoolTitle: string;
   weeks : Week[];
   weekTitle : string;
@@ -45,11 +44,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    let sub: Subscription = this.municipalityService.getMunicipalities().subscribe((municipalities: Municipality[]) => {
-      this.municipalities = municipalities;
-    })
-    this.subscriptions.push(sub);
+    this.$municipalities = this.municipalityService.getMunicipalities();
   }
 
   ngOnDestroy() {
@@ -69,11 +64,10 @@ export class HeaderComponent implements OnInit {
     if(school._menuId === '') {
       this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
     } else {
-      this.chosenSchool = school;
-      this.schoolTitle = this.chosenSchool.schoolName;
+      this.schoolTitle = school.schoolName;
       let menu : Menu;
 
-      let sub: Subscription = this.menuService.getMenu(this.chosenSchool._menuId).subscribe((menuu: Menu) => {
+      let sub: Subscription = this.menuService.getMenu(school._menuId).subscribe((menuu: Menu) => {
         menu = menuu;
       },
       (err) => {

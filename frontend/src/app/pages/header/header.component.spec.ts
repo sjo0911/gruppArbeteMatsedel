@@ -63,18 +63,16 @@ describe('HeaderComponent', () => {
   it('should call getMunicipalities() from municipalityService on NgOnInit()', () => {
     // spyOn(municipalityServiceMock, 'getMunicipalities');
     // component.ngOnInit();
-    expect(component.municipalities).toBeDefined();
-    expect(component.municipalities).not.toBeNull();
-    expect(component.municipalities).toEqual([]);
-
+    expect(component.$municipalities).toBeDefined();
+    expect(component.$municipalities).not.toBeNull();
     expect(municipalityServiceMock.getMunicipalities).toHaveBeenCalledTimes(1);
   });
 
   it('should call method chooseMunicipality() when a municipality is clicked in dropdown', (done) => {
     spyOn(component, 'chooseMunicipality');
-    component.municipalities = [
+    component.$municipalities = of([
       {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
+      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
        fixture.detectChanges();
        fixture.whenStable().then(() => {
         const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
@@ -89,9 +87,9 @@ describe('HeaderComponent', () => {
 
   it('should call method chooseMunicipality() with chosen(first) municipality', (done) => {
     spyOn(component, 'chooseMunicipality');
-    component.municipalities = [
+    component.$municipalities = of([
       {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
+      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
        fixture.detectChanges();
        fixture.whenStable().then(() => {
         const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
@@ -99,7 +97,8 @@ describe('HeaderComponent', () => {
         dropDownMunicipalities.children[0].nativeElement.click();
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect(component.chooseMunicipality).toHaveBeenCalledWith(component.municipalities[0]);
+          expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);
+          expect(component.chooseMunicipality).toHaveBeenCalledWith({_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]});
          });
        });
        done();
@@ -107,9 +106,9 @@ describe('HeaderComponent', () => {
 
   it('should call method chooseSchool() with chosen school when a school is clicked in dropdown', (done) => {
     spyOn(component, 'chooseSchool');
-    component.municipalities = [
+    component.$municipalities = of([
       {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
+      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
        fixture.detectChanges();
        fixture.whenStable().then(() => {
         const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
@@ -123,7 +122,7 @@ describe('HeaderComponent', () => {
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(component.chooseSchool).toHaveBeenCalledTimes(1);
-            expect(component.chooseSchool).toHaveBeenCalledWith(component.municipalities[0].schools[0]);
+            expect(component.chooseSchool).toHaveBeenCalledWith({_id:'abc123', schoolName:'Balderskolan', _menuId:'123'});
           });
          });
        });
@@ -132,9 +131,9 @@ describe('HeaderComponent', () => {
 
   it('should call method chooseWeek() with chosen week when a week is clicked in dropdown', (done) => {
     spyOn(component, 'chooseWeek');
-    component.municipalities = [
+    component.$municipalities = of([
       {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
+      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
     component.weeks = [{startDate: new Date('2021-05-24'), endDate: new Date('2021-05-30'), weekNr: '21', days: []}];
        fixture.detectChanges();
        fixture.whenStable().then(() => {
