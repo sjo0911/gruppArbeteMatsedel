@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const { mongoose } = require('./db/mongoose');
-const Municipality = require('./db/routes/municipality.route');
-const Menu = require('./db/routes/menu.route');
 const User = require('./db/routes/user.route');
 const privateRoute = require('./db/routes/private.route');
 const publicRoute = require('./db/routes/public.route');
@@ -35,5 +33,3 @@ app.listen(3000, () => {
 
 app.use('/private', privateRoute)
 app.use('/public', publicRoute)
-
-
