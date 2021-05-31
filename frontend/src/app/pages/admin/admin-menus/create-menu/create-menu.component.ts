@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Menu } from './../../../../models/menu';
 import { MenuService } from './../../../../services/menu.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,9 +13,16 @@ import { DatePipe } from '@angular/common';
 })
 export class CreateMenuComponent implements OnInit {
   currentDate = new Date();
+  subrscriptions : Subscription[];
   constructor(private menuService : MenuService, private alert : Alert) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subrscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    })
   }
 
   createMenu(menuName : string, startDate : Date, endDate : Date) {
@@ -28,8 +36,9 @@ export class CreateMenuComponent implements OnInit {
       menu.menuName = menuName;
       menu.startDate = startDate;
       menu.endDate = endDate;
-      this.menuService.postMenu(menu).subscribe(() => {
+      let sub: Subscription = this.menuService.postMenu(menu).subscribe(() => {
       })
+      this.subrscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success');
     }
   }

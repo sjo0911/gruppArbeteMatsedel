@@ -1,5 +1,5 @@
 import { Menu } from './../../../../models/menu';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MenuService } from './../../../../services/menu.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Alert } from 'src/assets/alert';
@@ -13,11 +13,18 @@ export class DeleteMenuComponent implements OnInit {
   @Input() $menus : Observable<any>;
   deleteMenuTitle : string;
   menuToDeleteId : string = '';
+  subscriptions : Subscription[];
 
   constructor(private menuService:MenuService, private alert : Alert) { }
 
   ngOnInit(): void {
     this.deleteMenuTitle = "Välj matsedel att ta bort: ";
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    })
   }
 
 
@@ -30,8 +37,9 @@ export class DeleteMenuComponent implements OnInit {
     if(this.menuToDeleteId === '') {
       this.alert.showAlert('', 'Du måste välja en matsedel att ta bort.', 'warning');
     } else {
-      this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
-      })
+      let sub: Subscription =this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
+      });
+      this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen.', 'success');
     }
   }
