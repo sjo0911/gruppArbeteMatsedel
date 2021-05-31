@@ -27,25 +27,32 @@ describe('MunicipalityService', () => {
     httpMock.verify();
   })
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should retrieve municipalities from API via GET', ()=> {
-    service.getMunicipalities().subscribe(municipalities => {
-      expect(municipalities).toEqual(municipalitiesMockup);
+  describe('Create', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
     });
-    const request = httpMock.expectOne(`${ROOT_URL}/public/municipality`);
-    expect(request.request.method).toBe('GET');
-    request.flush(municipalitiesMockup);
-})
-
-it('should update schools from API via PATCH', ()=> {
-  service.updateSchool(municipalityId, school).subscribe(municipalities => {
-    expect(municipalities).toEqual(municipalitiesMockup);
   });
-  const request = httpMock.expectOne(`${ROOT_URL}/private/municipality/${municipalityId}/school/${schoolId}`);
-  expect(request.request.method).toBe('PATCH');
-  request.flush(municipalitiesMockup);
-})
+
+  describe('API via get', () => {
+    it('should retrieve municipalities from API via GET', ()=> {
+      service.getMunicipalities().subscribe(municipalities => {
+        expect(municipalities).toEqual(municipalitiesMockup);
+      });
+      const request = httpMock.expectOne(`${ROOT_URL}/public/municipality`);
+      expect(request.request.method).toBe('GET');
+      request.flush(municipalitiesMockup);
+    });
+
+  });
+
+  describe('API via patch', () => {
+    it('should update schools from API via PATCH', ()=> {
+      service.updateSchool(municipalityId, school).subscribe(municipalities => {
+        expect(municipalities).toEqual(municipalitiesMockup);
+      });
+      const request = httpMock.expectOne(`${ROOT_URL}/private/municipality/${municipalityId}/school/${schoolId}`);
+      expect(request.request.method).toBe('PATCH');
+      request.flush(municipalitiesMockup);
+    });
+  });
 });

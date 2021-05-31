@@ -14,7 +14,9 @@ describe('WebReqService', () => {
     service = TestBed.inject(WebReqService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  describe('Create', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
   });
 });

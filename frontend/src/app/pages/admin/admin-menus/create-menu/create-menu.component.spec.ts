@@ -32,20 +32,27 @@ describe('CreateMenuComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
-
-  it('should contain a button with text "Skapa matsedel"', () => {
-    const buttonElement = fixture.debugElement.query(By.css('button'));
-    expect(buttonElement.nativeElement.outerText).toBe("Skapa matsedel");
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
-  it('calls the createMenu method', ()=>{
-    const buttonElement = fixture.debugElement.query(By.css('.manage-menu-button'));
-    spyOn(component, 'createMenu')
-    buttonElement.triggerEventHandler('click', null);
-    expect(component.createMenu).toHaveBeenCalled();
-  }) ;
+
+  describe('HTML', () => {
+    it('should contain a button with text "Skapa matsedel"', () => {
+      const buttonElement = fixture.debugElement.query(By.css('button'));
+      expect(buttonElement.nativeElement.outerText).toBe("Skapa matsedel");
+    });
+  });
+
+  describe('Check methods', () => {
+    it('calls the createMenu method', ()=>{
+      const buttonElement = fixture.debugElement.query(By.css('.manage-menu-button'));
+      spyOn(component, 'createMenu')
+      buttonElement.triggerEventHandler('click', null);
+      expect(component.createMenu).toHaveBeenCalledTimes(1);
+    }) ;
+  });
 
 });
 
@@ -59,9 +66,7 @@ class AlertStub {
     });
     return promise;
   }
-
   showAlert(){
-
   }
 }
 

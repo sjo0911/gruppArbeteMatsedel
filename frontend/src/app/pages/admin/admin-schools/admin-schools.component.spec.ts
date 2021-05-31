@@ -30,30 +30,34 @@ describe('AdminSchoolsComponent', () => {
     mockMunicipalityService = TestBed.inject(MunicipalityService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('should call NgOnInit() & getMunicipalities()', () => {
-    component.ngOnInit();
-    expect(component.municipalities).toBeDefined();
-    expect(component.municipalities).not.toBeNull();
-    expect(component.municipalities).toEqual([]);
-  })
+  describe('Check ngOnInit methods', () => {
+    it('should call NgOnInit() & getMunicipalities()', () => {
+      component.ngOnInit();
+      expect(component.municipalities).toBeDefined();
+      expect(component.municipalities).not.toBeNull();
+      expect(component.municipalities).toEqual([]);
+    });
 
-  it('should call NgOnInit() & getMenus()', () => {
-    component.ngOnInit();
-    expect(component.menus).toBeDefined();
-    expect(component.menus).not.toBeNull();
-    expect(component.menus).toEqual([]);
-  })
+    it('should call NgOnInit() & getMenus()', () => {
+      component.ngOnInit();
+      expect(component.menus).toBeDefined();
+      expect(component.menus).not.toBeNull();
+      expect(component.menus).toEqual([]);
+    });
+  });
+
 });
 
 class MunicipalityServiceStub {
   getMunicipalities() {
     return of([]);
   }
-
 }
 
 class MenuServiceStub {

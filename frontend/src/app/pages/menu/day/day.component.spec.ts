@@ -24,16 +24,18 @@ describe('DayComponent', () => {
     menuMockup = new MenuMockup();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-
-  it('should return foodspec', () => {
-    component.day = dayCreator.getDay(1);
-    expect(component.getFoodSpecs(menuMockup.getMenu().meals[0])).toContain('Fläsk');
+  describe('Check foodspecs', () => {
+    it('should return foodspec', () => {
+      component.day = dayCreator.getDay(1);
+      expect(component.getFoodSpecs(menuMockup.getMenu().meals[0])).toContain('Fläsk');
+    });
   });
-
 
 });
 

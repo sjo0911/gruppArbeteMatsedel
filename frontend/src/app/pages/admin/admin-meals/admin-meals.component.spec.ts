@@ -45,109 +45,114 @@ describe('AdminComponent', () => {
     dh = new DOMHelper(fixture);
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
-
-  it('should return true boolean if meal contains "pig"', () => {
-    expect(component.checkFoodSpec(menuMockup.getMenu().meals[0].foodSpecs, "pig")).toBeTruthy();
-  });
-
-  it('should return false boolean if meal does not contain "veg"', () => {
-    expect(component.checkFoodSpec(menuMockup.getMenu().meals[0].foodSpecs, "veg")).toBeFalsy();
-  });
-
-  // it('should contain a button with title "Uppdatera"', () => {
-  //   const btn = fixture.debugElement.nativeElement.querySelector('#updateButton');
-  //   expect(btn.title).toContain('Uppdatera');
-
-  // });
-
-  it('should produce 3 days with 1 meal per day(3 meals  in total)', (done) => {
-    component.week = new Helper().getWeek(3, 1);
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(dh.countFromTagName("input.update-meal-input-field")).toBe(3);
-      expect(dh.countFromTagName("div.day-meals")).toBe(3);
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
     });
-    done();
-  })
+  });
 
-  it('should produce meals with mealname: "fläskpannkaka" and hava an "pig" icon in 4th place in its form wich is checked', (done) => {
-    component.week = new Helper().getWeek(3, 1);
+  describe('Get menu foodspecs', () => {
+    it('should return true boolean if meal contains "pig"', () => {
+      expect(component.checkFoodSpec(menuMockup.getMenu().meals[0].foodSpecs, "pig")).toBeTruthy();
+    });
 
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
-      const MealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
-      mealsDiv.forEach(div => {
-        expect(div.nativeNode.children[0][3].defaultValue).toBe("pig");
-        expect(div.nativeNode.children[0][3].checked).toBe(true);
+    it('should return false boolean if meal does not contain "veg"', () => {
+      expect(component.checkFoodSpec(menuMockup.getMenu().meals[0].foodSpecs, "veg")).toBeFalsy();
+    });
+
+  });
+
+  describe('Produce days with meals', () => {
+    it('should produce 3 days with 1 meal per day(3 meals  in total)', (done) => {
+      component.week = new Helper().getWeek(3, 1);
+      fixture.detectChanges()
+      fixture.whenStable().then(() => {
+        expect(dh.countFromTagName("input.update-meal-input-field")).toBe(3);
+        expect(dh.countFromTagName("div.day-meals")).toBe(3);
       });
-      MealNameInputs.forEach((input) => {
-        expect(input.nativeNode.value).toBe("fläskpannkaka")
-      })
-    });
-    done();
-  });
+      done();
+    })
 
-  it('should produce 5 days with 3 meals per day and delete each meal when each delete buttons i clicked', (done) => {
-    component.week = new Helper().getWeek(5, 3);
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(dh.countFromTagName('div.day-content')).toBe(5);
-      expect(dh.countFromTagName('div.day-meals')).toBe(15);
-      dh.clickAllButtons('button.delete-button');
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-         component.week.days.forEach(day => {
-           expect(day.meals.length).toBe(0);
-         })
-      });
-    });
-    done();
-  })
+    it('should produce meals with mealname: "fläskpannkaka" and hava a "pig" icon in 4th place in its form wich is checked', (done) => {
+      component.week = new Helper().getWeek(3, 1);
 
-  it('should produce 3 days with 0 meals and write in mealname and click save in each day to get 3 meals', (done) => {
-    component.week = new Helper().getWeek(3, 0);
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(dh.countFromTagName('div.day-content')).toBe(3);
-      expect(dh.countFromTagName('div.day-meals')).toBe(0);
-      const inputFields = fixture.debugElement.queryAll(By.css('input.new-meal-input-field'));
-      inputFields.forEach(inputField => {
-        inputField.nativeNode.value = "glassbåtar";
-      })
-      dh.clickAllButtons("button.save-button");
-      fixture.detectChanges();
+      fixture.detectChanges()
       fixture.whenStable().then(() => {
-        expect(dh.countFromTagName('div.day-meals')).toBe(3);
-        component.week.days.forEach(day => {
-          expect(day.meals.length).toBe(1);
-        })
-      })
-    });
-    done();
-  })
-
-  it('should produce 3 days with 1 meal per day(3 meals  in total) and update their meal names to glassbåtar"', (done) => {
-    component.week = new Helper().getWeek(3, 1);
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      const updateMealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
-      updateMealNameInputs.forEach((input) => {
-        expect(input.nativeNode.value).toBe("fläskpannkaka");
-        input.nativeNode.value = "glassbåtar";
-      })
-      dh.clickAllButtons("button.update-button");
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        component.week.days.forEach(day => {
-          expect(day.meals[0].mealName).toBe("glassbåtar");
+        const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
+        const MealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
+        mealsDiv.forEach(div => {
+          expect(div.nativeNode.children[0][3].defaultValue).toBe("pig");
+          expect(div.nativeNode.children[0][3].checked).toBe(true);
         });
-      })
+        MealNameInputs.forEach((input) => {
+          expect(input.nativeNode.value).toBe("fläskpannkaka")
+        })
+      });
+      done();
     });
-    done();
+  });
+
+
+  describe('Save/ update/ delete days with meals', () => {
+    it('should produce 5 days with 3 meals per day and delete each meal when each delete buttons i clicked', (done) => {
+      component.week = new Helper().getWeek(5, 3);
+      fixture.detectChanges()
+      fixture.whenStable().then(() => {
+        expect(dh.countFromTagName('div.day-content')).toBe(5);
+        expect(dh.countFromTagName('div.day-meals')).toBe(15);
+        dh.clickAllButtons('button.delete-button');
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+           component.week.days.forEach(day => {
+             expect(day.meals.length).toBe(0);
+           })
+        });
+      });
+      done();
+    })
+
+    it('should produce 3 days with 0 meals and write in mealname and click save in each day to get 3 meals', (done) => {
+      component.week = new Helper().getWeek(3, 0);
+      fixture.detectChanges()
+      fixture.whenStable().then(() => {
+        expect(dh.countFromTagName('div.day-content')).toBe(3);
+        expect(dh.countFromTagName('div.day-meals')).toBe(0);
+        const inputFields = fixture.debugElement.queryAll(By.css('input.new-meal-input-field'));
+        inputFields.forEach(inputField => {
+          inputField.nativeNode.value = "glassbåtar";
+        })
+        dh.clickAllButtons("button.save-button");
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(dh.countFromTagName('div.day-meals')).toBe(3);
+          component.week.days.forEach(day => {
+            expect(day.meals.length).toBe(1);
+          })
+        })
+      });
+      done();
+    })
+
+    it('should produce 3 days with 1 meal per day(3 meals  in total) and update their meal names to glassbåtar"', (done) => {
+      component.week = new Helper().getWeek(3, 1);
+      fixture.detectChanges()
+      fixture.whenStable().then(() => {
+        const updateMealNameInputs = fixture.debugElement.queryAll(By.css('input.update-meal-input-field'));
+        updateMealNameInputs.forEach((input) => {
+          expect(input.nativeNode.value).toBe("fläskpannkaka");
+          input.nativeNode.value = "glassbåtar";
+        })
+        dh.clickAllButtons("button.update-button");
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          component.week.days.forEach(day => {
+            expect(day.meals[0].mealName).toBe("glassbåtar");
+          });
+        })
+      });
+      done();
+    });
+
   });
 
 });
@@ -188,6 +193,7 @@ class Helper {
   }
 
 }
+
 class AlertStub {
   showAdvancedAlert() {
     //Mockup på Alert. Skickar tillbacka ett object med isConfirmed = true. isConfirmed används
@@ -198,8 +204,6 @@ class AlertStub {
     });
     return promise;
   }
-
   showAlert(){
-
   }
 }

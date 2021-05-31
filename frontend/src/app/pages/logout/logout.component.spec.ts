@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@auth0/auth0-angular';
@@ -27,21 +28,36 @@ describe('LogoutComponent', () => {
   });
 
   beforeEach(() => {
-
     fixture = TestBed.createComponent(LogoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     helpers= new DOMHelper(fixture);
   });
-/*
-  it('"Till startsidan" button should navigate to /', (done) => {
-    const router = TestBed.get(Router);
-    spyOn(router, 'navigateByUrl');
-    helpers.clickButton("Till startsidan");
-    expect(router.navigateByUrl).
-    toHaveBeenCalledWith(router.createUrlTree(['/']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
-    done();
-  })*/
+
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });
+
+  describe('HTML', () => {
+    it('should contain a button with text "Till startsidan"', () => {
+      const buttonElement = fixture.debugElement.query(By.css('button'));
+      expect(buttonElement.nativeElement.outerText).toBe("Till startsidan");
+    });
+  });
+
+  // describe('Navigation', () => {
+  //   // it('"Till startsidan" button should navigate to /', (done) => {
+  //   //   const router = TestBed.get(Router);
+  //   //   spyOn(router, 'navigateByUrl');
+  //   //   helpers.clickButton("Till startsidan");
+  //   //   expect(router.navigateByUrl).
+  //   //   toHaveBeenCalledWith(router.createUrlTree(['/']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
+  //   //   done();
+  //   // });
+  // });
+
 });
 
 @Component({template: ''})
