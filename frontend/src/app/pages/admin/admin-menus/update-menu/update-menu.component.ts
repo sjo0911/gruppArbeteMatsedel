@@ -1,5 +1,5 @@
 import { MenuService } from './../../../../services/menu.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Menu } from './../../../../models/menu';
 import { Component, OnInit, Input } from '@angular/core';
 import { Alert } from 'src/assets/alert';
@@ -18,6 +18,7 @@ export class UpdateMenuComponent implements OnInit {
   menuNameToEdit : string;
   chosenMenuStartDate : Date;
   chosenMenuEndDate : Date;
+  subscriptions : Subscription[];
 
   constructor(private menuService: MenuService, private alert : Alert) {
     this.editMenuTitle = "Välj matsedel att redigera: "
@@ -26,6 +27,12 @@ export class UpdateMenuComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    })
   }
 
   editMenu(menu : Menu) {
@@ -48,8 +55,9 @@ export class UpdateMenuComponent implements OnInit {
       this.menuToEdit.menuName = menuName;
       this.menuToEdit.startDate = startDate;
       this.menuToEdit.endDate = endDate;
-      this.menuService.updateMenu(this.menuToEdit).subscribe(() => {
-      })
+      let sub: Subscription = this.menuService.updateMenu(this.menuToEdit).subscribe(() => {
+      });
+      this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Uppdaterad!', 'Matsedeln har blivit uppdaterad.', 'success');
     }
   }
