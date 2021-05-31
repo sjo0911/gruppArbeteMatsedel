@@ -1,39 +1,67 @@
-
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        minlength: 1,
+        minlength: [1, "Users first name must be at least 1 character long!"],
         trim: true
     },
     lastName: {
         type: String,
-        required: true,
-        minlength: 1,
+        required: [true, "User must have a last name"],
+        minlength: [1, "Users last name must be at least 1 character long!"],
         trim: true
     },
     email: {
         type: String,
-        required: true,
-        minlength: 5,
+        required: [true, "User must have an email"],
+        minlength: [5, "Users email must be at least 1 character long!"],
         trim: true,
         unique: true
     },
     password: {
         type: String,
-        required: true,
-        minlength: 5,
+        required: [true, "User must have a password"],
+        minlength: [5, "Users password must be at least 1 character long!"],
         trim: true
     },
-    municipalityIds: [
-        {
-            _id: {
-                type: mongoose.Types.ObjectId
-            }
+    schoolIds: [{
+        _id: {
+            type: mongoose.Types.ObjectId
         }
-    ]
+    }],
+    permissions: [{
+        type: String,
+        enum: {
+            values: ['admin'],
+            message: 'value is not supported'
+
+        }
+    }],
+    menuId: [{
+        type: mongoose.Types.ObjectId
+    }],
+
 })
+UserSchema.pre('save', function(next) {
+    let user = this;
+    let costFactor = 10;
+
+    if (user.isModified('password')) {
+        // if the password field has been edited/changed then run this code.
+
+        // Generate salt and hash password
+        bcrypt.genSalt(costFactor, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                user.password = hash;
+                next();
+            })
+        })
+    } else {
+        next();
+    }
+});
 
 const User = mongoose.model('User', UserSchema);
 

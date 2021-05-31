@@ -24,6 +24,7 @@ import { DeleteMenuComponent } from './pages/admin/admin-menus/delete-menu/delet
 import { AddMenuComponent } from './pages/admin/admin-schools/add-menu/add-menu.component';
 import { RemoveMenuComponent } from './pages/admin/admin-schools/remove-menu/remove-menu.component';
 import { Alert } from 'src/assets/alert';
+import { UserAccountComponent } from './pages/admin/user-account/user-account.component';
 
 registerLocaleData(sv);
 
@@ -44,7 +45,8 @@ registerLocaleData(sv);
     UpdateMenuComponent,
     DeleteMenuComponent,
     AddMenuComponent,
-    RemoveMenuComponent
+    RemoveMenuComponent,
+    UserAccountComponent
 
 
   ],
