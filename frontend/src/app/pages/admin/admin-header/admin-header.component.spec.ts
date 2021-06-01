@@ -94,6 +94,12 @@ class AuthServiceStub {
   isAuthenticated$ : Observable<boolean>;
   constructor () {
     this.isAuthenticated$ = of(true);
-    this.user$ = of({});
+    this.user$ = of({
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []});
   }
 }
