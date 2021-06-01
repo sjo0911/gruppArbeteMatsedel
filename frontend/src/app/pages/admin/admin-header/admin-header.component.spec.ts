@@ -90,8 +90,10 @@ describe('AdminHeaderComponent', () => {
 });
 
 class AuthServiceStub {
+  user$ : Observable<any>;
   isAuthenticated$ : Observable<boolean>;
   constructor () {
     this.isAuthenticated$ = of(true);
+    this.user$ = of({});
   }
 }

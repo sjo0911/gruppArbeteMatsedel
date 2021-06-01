@@ -5,10 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 import { FooterComponent } from './footer.component';
 import { Component } from '@angular/core';
-
-@Component({template: ''})
-class TempRouter{}
-class AuthServiceStub{}
+import { Observable, of } from 'rxjs';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -76,3 +73,14 @@ describe('FooterComponent', () => {
 
   }));*/
 });
+
+@Component({template: ''})
+
+class TempRouter{}
+
+class AuthServiceStub{
+  user$ : Observable<any>;
+  constructor () {
+    this.user$ = of({});
+  }
+}
