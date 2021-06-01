@@ -41,17 +41,17 @@ describe('AddMenuComponent', () => {
     expect(dh.countFromTagName("a.navbar-link")).toEqual(3);
   })
 
-  it('first dropdown should contain 2 municipalities', (done) => {
-    component.municipalities = [
-    {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-     {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
-     fixture.detectChanges();
-     fixture.whenStable().then(() => {
-      const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
-      expect(dropDown.children.length).toBe(2);
-     });
-     done();
-  })
+  // it('first dropdown should contain 2 municipalities', (done) => {
+  //   component.municipalities = [
+  //   {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
+  //    {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
+  //    fixture.detectChanges();
+  //    fixture.whenStable().then(() => {
+  //     const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
+  //     expect(dropDown.children.length).toBe(2);
+  //    });
+  //    done();
+  // })
 
   it('when first municipality is selected that municipalitys school should be avalible in next dropdown', (done) => {
     component.municipalities = [

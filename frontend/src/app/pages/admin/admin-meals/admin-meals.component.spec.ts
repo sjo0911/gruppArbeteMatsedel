@@ -166,6 +166,8 @@ class MenuServiceStub {
   deleteMeal(){
     return of({})
   }
+  postMeal() {
+  }
 }
 
 class Helper {
