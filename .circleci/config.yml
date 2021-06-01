@@ -47,6 +47,12 @@ jobs:
       - run:
           name: npm nodejs tests
           command: cd backend && npm test
+      - run:
+          name: npm install heroku
+          command: npm install -g heroku
+      - run:
+          name: heroku login
+          command: heroku login -i
 
 
 workflows:
