@@ -79,8 +79,14 @@ describe('FooterComponent', () => {
 class TempRouter{}
 
 class AuthServiceStub{
-  user$ : Observable<any>;
+  // user$ : Observable<any>;
   constructor () {
-    this.user$ = of({});
+    // this.user$ = of({
+    //   "firstName": "Jakob",
+    //   "lastName": "Öhlén",
+    //   "email": "kungen@hubbahubba.com",
+    //   "schoolIds": [],
+    //   "permissions": ["admin"],
+    //   "menuId": []});
   }
 }

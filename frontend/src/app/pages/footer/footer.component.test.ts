@@ -11,9 +11,17 @@ import { Observable, of } from 'rxjs';
 class TempRouter{}
 class AuthServiceStub {
   //is authicated is needed to so we can test from a logged in page
+  // user$ : Observable<any>;
   isAuthenticated$ : Observable<boolean>;
   constructor () {
     this.isAuthenticated$ = of(true);
+    // this.user$ = of({
+    //   "firstName": "Jakob",
+    //   "lastName": "Öhlén",
+    //   "email": "kungen@hubbahubba.com",
+    //   "schoolIds": [],
+    //   "permissions": ["admin"],
+    //   "menuId": []});
   }
 }
 
