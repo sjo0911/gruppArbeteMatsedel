@@ -33,51 +33,61 @@ describe('DeleteMenuComponent', () => {
     mockService = TestBed.inject(MenuService);
   });
 
-  it('should contain a button with text "Ta bort matsedel"', ()=> {
-    expect(dh.singleTextFromTagName("button")).toBe("Ta bort matsedel")
-  })
-
-  it('should contain a dropdown with 3 menus', (done) => {
-    component.$menus = of([
-      {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
-      {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
-      {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
-    ]);
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(dh.countFromTagName("a.navbar-item")).toBe(3);
-    })
-    done();
-  })
-
-  it('should call deleteMenu() when "Ta bort matsedel" button has been clicked', () => {
-    spyOn(component, 'deleteMenu');
-    dh.clickButton("Ta bort matsedel");
-    expect(component.deleteMenu).toHaveBeenCalledTimes(1);
-  })
-
-  it('menuService.deleteMenu should be called when a menu is selected and "Ta bort matsedel" button clicked', (done) => {
-    component.$menus = of([
-      {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
-      {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
-      {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
-    ]);
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.debugElement.query(By.css("a.navbar-item")).nativeElement.click();
-      let mockSpy = spyOn(mockService,"deleteMenu");
-      dh.clickButton("Ta bort matsedel");
-      expect(mockSpy).toHaveBeenCalledTimes(1);
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
     });
-    done();
-  })
+  });
 
-  it('menuService.deleteMenu should not be called when no menu is selected and "Ta bort matsedel" button clicked', () => {
-      let mockSpy = spyOn(mockService,"deleteMenu");
+  describe('HTML', () => {
+    it('should contain a button with text "Ta bort matsedel"', ()=> {
+      expect(dh.singleTextFromTagName("button")).toBe("Ta bort matsedel")
+    });
+
+    it('should contain a dropdown with 3 menus', (done) => {
+      component.$menus = of([
+        {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+        {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+        {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
+      ]);
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        expect(dh.countFromTagName("a.navbar-item")).toBe(3);
+      })
+      done();
+    });
+  });
+
+  describe('Check methods when buttons are clicked', () => {
+    it('should call deleteMenu() when "Ta bort matsedel" button has been clicked', () => {
+      spyOn(component, 'deleteMenu');
       dh.clickButton("Ta bort matsedel");
-      expect(mockSpy).toHaveBeenCalledTimes(0);
-  })
+      expect(component.deleteMenu).toHaveBeenCalledTimes(1);
+    });
 
+    it('menuService.deleteMenu should be called when a menu is selected and "Ta bort matsedel" button clicked', (done) => {
+      component.$menus = of([
+        {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+        {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+        {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
+      ]);
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        fixture.debugElement.query(By.css("a.navbar-item")).nativeElement.click();
+        let mockSpy = spyOn(mockService,"deleteMenu");
+        dh.clickButton("Ta bort matsedel");
+        expect(mockSpy).toHaveBeenCalledTimes(1);
+      });
+      done();
+    });
+
+    it('menuService.deleteMenu should not be called when no menu is selected and "Ta bort matsedel" button clicked', () => {
+        let mockSpy = spyOn(mockService,"deleteMenu");
+        dh.clickButton("Ta bort matsedel");
+        expect(mockSpy).toHaveBeenCalledTimes(0);
+    });
+
+  });
 });
 
 class AlertStub {
@@ -90,9 +100,7 @@ class AlertStub {
     });
     return promise;
   }
-
   showAlert(){
-
   }
 }
 
@@ -101,6 +109,5 @@ class MenuServiceStub {
     return of({})
   }
   deleteMenu() {
-
   }
 }
