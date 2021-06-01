@@ -1,26 +1,9 @@
 const { User } = require('../models');
 const patchValidation = { runValidators: true };
-const bcrypt = require('bcrypt');
 
 exports.postUser = function(req, res) {
-    let firstName = req.body.firstName;
-    let lastName = req.body.lastName;
-    let email = req.body.email;
-    let password = req.body.password;
-    let school = req.body.school;
-    let permission = req.body.permission;
-    let menu = req.body.menu;
 
-    let user = new User({
-        firstName,
-        lastName,
-        email,
-        password,
-        school,
-        permission,
-        menu
-
-    });
+    let user = new User(req.body);
 
     user.save().then((userDoc) => {
         res.send(userDoc)

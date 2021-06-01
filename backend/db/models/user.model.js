@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
 
         }
     }],
-    menuId: [{
+    menuIds: [{
         type: mongoose.Types.ObjectId
     }],
 
