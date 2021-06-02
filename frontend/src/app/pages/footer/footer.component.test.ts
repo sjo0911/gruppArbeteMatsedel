@@ -7,16 +7,6 @@ import { FooterComponent } from './footer.component';
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-@Component({template: ''})
-class TempRouter{}
-class AuthServiceStub {
-  //is authicated is needed to so we can test from a logged in page
-  isAuthenticated$ : Observable<boolean>;
-  constructor () {
-    this.isAuthenticated$ = of(true);
-  }
-}
-
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
@@ -55,12 +45,10 @@ describe('FooterComponent', () => {
       fixture.detectChanges();
       fixture.whenStable().then(()=>{
       expect(location.path()).toBe('home')
-
-    })
+      })
     }
-
-
   }));
+
   it('should navigate to /admin on second button click', fakeAsync(() => {
     const location=TestBed.inject(Location);
     const administrera = fixture.debugElement.queryAll(By.css('button'));
@@ -70,9 +58,27 @@ describe('FooterComponent', () => {
       fixture.detectChanges();
       fixture.whenStable().then(()=>{
       expect(location.path()).toBe('/admin')
-
-    })
-  }
-
-}));
+      })
+    }
+  }));
 });
+
+@Component({template: ''})
+
+class TempRouter{}
+
+class AuthServiceStub {
+  //is authicated is needed to so we can test from a logged in page
+  user$ : Observable<any>;
+  isAuthenticated$ : Observable<boolean>;
+  constructor () {
+    this.isAuthenticated$ = of(true);
+    this.user$ = of({"picture": {
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []}});
+  }
+}

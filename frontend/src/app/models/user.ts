@@ -3,6 +3,16 @@ export class User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  municipalityIds: string[];
+  schoolIds: string[];
+	permissions: string[];
+  menuId: string[];
+
+  constructor(user) {
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
+    this.email = user.email;
+    this.schoolIds = user.schoolIds;
+    this.permissions = user.permissions;
+    this.menuId = user.menuId;
+  }
 }

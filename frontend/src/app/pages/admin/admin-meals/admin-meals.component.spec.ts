@@ -59,7 +59,6 @@ describe('AdminComponent', () => {
     it('should return false boolean if meal does not contain "veg"', () => {
       expect(component.checkFoodSpec(menuMockup.getMenu().meals[0].foodSpecs, "veg")).toBeFalsy();
     });
-
   });
 
   describe('Produce days with meals', () => {
@@ -75,7 +74,6 @@ describe('AdminComponent', () => {
 
     it('should produce meals with mealname: "fläskpannkaka" and hava a "pig" icon in 4th place in its form wich is checked', (done) => {
       component.week = new Helper().getWeek(3, 1);
-
       fixture.detectChanges()
       fixture.whenStable().then(() => {
         const mealsDiv = fixture.debugElement.queryAll(By.css('div.day-meals'));
@@ -170,6 +168,8 @@ class SharingServiceStub {
 class MenuServiceStub {
   deleteMeal(){
     return of({})
+  }
+  postMeal() {
   }
 }
 

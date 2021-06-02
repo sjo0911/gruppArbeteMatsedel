@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const { Menu } = require('../models');
 const jwtCheck = require('../jwtMiddleware');
 const { postMenu, patchMenu, deleteMenu, deleteMeal, postMeal, patchMeal } = require('../controllers/menu.controller');
-const { postMunicipality, patchMunicipality, patchSchool, deleteMunicipality} = require('../controllers/municipality.controller');
+const { postMunicipality, patchMunicipality, patchSchool, deleteMunicipality } = require('../controllers/municipality.controller');
+const { postUser, patchUser, deleteUser, getUser } = require('../controllers/user.controller');
 
 router.post('/menu', jwtCheck, postMenu)
 
@@ -27,5 +28,13 @@ router.patch('/municipality/:id', jwtCheck, patchMunicipality)
 router.patch('/municipality/:id/school/:schoolId', jwtCheck, patchSchool)
 
 router.delete('/municipality/:id', jwtCheck, deleteMunicipality)
+
+router.post('/user', jwtCheck, postUser)
+
+router.patch('/user/:id', jwtCheck, patchUser)
+
+router.delete('/user/:id', jwtCheck, deleteUser)
+
+router.get('/user', jwtCheck, getUser)
 
 module.exports = router
