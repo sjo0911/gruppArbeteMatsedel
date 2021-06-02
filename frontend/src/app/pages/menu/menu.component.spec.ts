@@ -42,18 +42,22 @@ describe('MenuComponent', () => {
     component.week = week;
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('should create 1 div for each day', (done) => {
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      const dayElement = fixture.debugElement.queryAll(By.css('.day-div'));
-      expect(dayElement.length).toBe(3);
-    })
-    done();
-  })
+  describe('HTML', () => {
+    it('should create 1 div for each day', (done) => {
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        const dayElement = fixture.debugElement.queryAll(By.css('.day-div'));
+        expect(dayElement.length).toBe(3);
+      })
+      done();
+    });
+  });
 
 });
 
@@ -73,7 +77,6 @@ class SharingServiceStub {
     day3.date = new Date("2021-05-19");
     week.days.push(day1, day2, day3)
     this.sub.next(week);
-
     return this.sub;
   }
 
@@ -93,5 +96,4 @@ class SharingServiceStub {
 }
 
 class AuthServiceStub {
-
 }

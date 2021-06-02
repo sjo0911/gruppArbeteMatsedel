@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Menu } from './../../../../models/menu';
 import { MunicipalityService } from './../../../../services/municipality.service';
 import { MenuService } from './../../../../services/menu.service';
@@ -13,21 +14,24 @@ import { Alert } from 'src/assets/alert';
 })
 export class RemoveMenuComponent implements OnInit {
   @Input() municipalities: Municipality[];
-
   municipalityToDelete: Municipality = new Municipality();
-
   schoolToDelete: School = new School();
-
   menuToDelete: string;
-
   chosenMunicipalityTitleToDelete: string;
   chosenSchoolTitleToDelete: string;
+  subscriptions : Subscription[];
 
   constructor(private menuService: MenuService, private municipalityService : MunicipalityService, private alert : Alert) {
     this.chosenMunicipalityTitleToDelete = "Välj kommun: ";
     this.chosenSchoolTitleToDelete = "Välj skola: ";
   }
   ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    })
+  }
 
   chooseMunicipalityToDelete(municipality: Municipality) {
     this.municipalityToDelete = municipality;
@@ -37,9 +41,10 @@ export class RemoveMenuComponent implements OnInit {
   chooseSchoolToDelete(school: School) {
     this.schoolToDelete = school;
     this.chosenSchoolTitleToDelete = school.schoolName;
-    this.menuService.getMenuName(school._menuId).subscribe((menuToDelete: Menu) => {
+    let sub: Subscription = this.menuService.getMenuName(school._menuId).subscribe((menuToDelete: Menu) => {
         this.menuToDelete = menuToDelete.menuName;
-      });
+    });
+    this.subscriptions.push(sub);
   }
 
   deleteMenuFromSchool(school: School) {
@@ -49,7 +54,8 @@ export class RemoveMenuComponent implements OnInit {
       this.alert.showAlert('', 'Den valda skolan har ingen matsedel att ta bort!', 'warning');
     } else {
       school._menuId = '';
-      this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {});
+      let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {});
+      this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen från den valda skolan.', 'success');
     }
   }

@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { MenuService } from './../../../../services/menu.service';
 import { MunicipalityService } from './../../../../services/municipality.service';
 import { School } from './../../../../models/school';
@@ -20,6 +21,7 @@ export class AddMenuComponent implements OnInit {
   chosenMunicipalityTitleToAdd : string;
   chosenSchoolTitleToAdd : string;
   chosenMenuTitle : string;
+  subscriptions: Subscription[];
 
 
   constructor(private municipalityService: MunicipalityService, private alert : Alert) {
@@ -30,6 +32,12 @@ export class AddMenuComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    })
   }
 
   chooseMunicipalityToAdd(municipality : Municipality) {
@@ -52,8 +60,9 @@ export class AddMenuComponent implements OnInit {
       this.alert.showAlert('', 'Du måste välja både en skola och en matsedel att lägga till!', 'warning');
     } else {
       school._menuId = menu._id;
-      this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
-      })
+      let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
+      });
+      this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Tillagd!', 'Matsedeln har blivit sparad i vald skola.', 'success');
     }
   }

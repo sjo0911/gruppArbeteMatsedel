@@ -29,16 +29,20 @@ describe('AdminMenusComponent', () => {
     mockService = TestBed.inject(MenuService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('should call NgOnInit() & getMenus()', () => {
-    const component = fixture.debugElement.componentInstance;
-    let mockSpy = spyOn(mockService,"getMenus");
-    component.ngOnInit();
-    expect(mockSpy).toHaveBeenCalled();
-  })
+  describe('Check ngOnInit', () => {
+    it('should call NgOnInit() & getMenus()', () => {
+      const component = fixture.debugElement.componentInstance;
+      let mockSpy = spyOn(mockService,"getMenus");
+      component.ngOnInit();
+      expect(mockSpy).toHaveBeenCalled();
+    });
+  });
 });
 
 class AlertStub {

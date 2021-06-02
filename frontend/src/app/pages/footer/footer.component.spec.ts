@@ -37,41 +37,48 @@ describe('FooterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should navigate to / before fisrt button click', fakeAsync(() => {
-    const location=TestBed.inject(Location);
-    const loginButton = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(loginButton[1].nativeNode.outerText).toBe("Logga in")){
-      expect(location['$$path']()).toBe('');
-    }
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });
 
-  }));
-  it('should navigate to /authLogin on first button click', fakeAsync(() => {
+  describe('Navigation', () => {
+    it('should navigate to / before fisrt button click', fakeAsync(() => {
+      const location=TestBed.inject(Location);
+      const loginButton = fixture.debugElement.queryAll(By.css('button'));
+      if(expect(loginButton[1].nativeNode.outerText).toBe("Logga in")){
+        expect(location['$$path']()).toBe('');
+      }
+    }));
 
-    const location=TestBed.inject(Location);
-    const loginButton = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(loginButton[1].nativeNode.outerText).toBe("Logga in")){
-      const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
-      nativeButton.click();
-      fixture.detectChanges();
-      fixture.whenStable().then(()=>{
-      expect(location.path()).toBe('authLogin')
-    })
-    }
-  }));
-  /*it('should navigate to /home on first button click', fakeAsync(() => {
+    it('should navigate to /authLogin on first button click', fakeAsync(() => {
+      const location=TestBed.inject(Location);
+      const loginButton = fixture.debugElement.queryAll(By.css('button'));
+      if(expect(loginButton[1].nativeNode.outerText).toBe("Logga in")){
+        const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
+        nativeButton.click();
+        fixture.detectChanges();
+        fixture.whenStable().then(()=>{
+        expect(location.path()).toBe('authLogin')
+      })
+      }
+    }));
 
-    const location=TestBed.inject(Location);
-    const loginButton = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(loginButton[0].nativeNode.outerText).toBe("Logga ut")){
-      const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
-      nativeButton.click();
-      fixture.detectChanges();
-      fixture.whenStable().then(()=>{
-      expect(location.path()).toBe('home')
-    })
-    }
+    /*it('should navigate to /home on first button click', fakeAsync(() => {
+      const location=TestBed.inject(Location);
+      const loginButton = fixture.debugElement.queryAll(By.css('button'));
+      if(expect(loginButton[0].nativeNode.outerText).toBe("Logga ut")){
+        const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
+        nativeButton.click();
+        fixture.detectChanges();
+        fixture.whenStable().then(()=>{
+        expect(location.path()).toBe('home')
+      })
+      }
+    }));*/
+  });
 
-  }));*/
 });
 
 @Component({template: ''})

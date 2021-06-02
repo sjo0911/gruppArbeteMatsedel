@@ -14,7 +14,9 @@ describe('SharingService', () => {
     service = TestBed.inject(SharingService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  describe('Create', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
   });
 });
