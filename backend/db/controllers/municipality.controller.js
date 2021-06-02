@@ -63,3 +63,17 @@ exports.deleteMunicipality = function(req, res) {
             res.send(e);
         });
 }
+
+exports.getSchools = function(req, res) {
+    Municipality.find().select({'_id': 0,'schools': 1}).then((schools) => {
+        const allSchools = [];
+        schools.forEach(school => {
+            school.schools.forEach(element => {
+                allSchools.push(element);
+            });
+        });
+        res.send({'schools': allSchools});
+    }).catch((e) => {
+        res.send(e);
+    });
+}

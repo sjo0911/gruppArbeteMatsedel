@@ -13,14 +13,16 @@ import { DatePipe } from '@angular/common';
 })
 export class CreateMenuComponent implements OnInit {
   currentDate = new Date();
-  subrscriptions : Subscription[];
-  constructor(private menuService : MenuService, private alert : Alert) { }
+  subscriptions : Subscription[];
+  constructor(private menuService : MenuService, private alert : Alert) {
+    this.subscriptions = [];
+  }
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
-    this.subrscriptions.forEach((sub) => {
+    this.subscriptions.forEach((sub) => {
       sub.unsubscribe();
     })
   }
@@ -38,7 +40,7 @@ export class CreateMenuComponent implements OnInit {
       menu.endDate = endDate;
       let sub: Subscription = this.menuService.postMenu(menu).subscribe(() => {
       })
-      this.subrscriptions.push(sub);
+      this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success');
     }
   }

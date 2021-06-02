@@ -15,7 +15,9 @@ export class DeleteMenuComponent implements OnInit {
   menuToDeleteId : string = '';
   subscriptions : Subscription[];
 
-  constructor(private menuService:MenuService, private alert : Alert) { }
+  constructor(private menuService:MenuService, private alert : Alert) {
+    this.subscriptions = [];
+  }
 
   ngOnInit(): void {
     this.deleteMenuTitle = "Välj matsedel att ta bort: ";

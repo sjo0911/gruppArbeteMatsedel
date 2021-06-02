@@ -23,7 +23,7 @@ export class UpdateMenuComponent implements OnInit {
   constructor(private menuService: MenuService, private alert : Alert) {
     this.editMenuTitle = "Välj matsedel att redigera: "
     this.menuNameToEdit = "";
-
+    this.subscriptions = [];
    }
 
   ngOnInit(): void {

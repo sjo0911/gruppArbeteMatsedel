@@ -26,6 +26,7 @@
     "icons": "^1.0.0",
     "material": "^0.4.3",
     "moment": "^2.29.1",
+    "ng-multiselect-dropdown": "^0.3.4",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.0.8",
     "tslib": "^2.0.0",

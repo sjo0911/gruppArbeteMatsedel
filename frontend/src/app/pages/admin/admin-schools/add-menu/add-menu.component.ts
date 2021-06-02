@@ -28,6 +28,7 @@ export class AddMenuComponent implements OnInit {
     this.chosenMunicipalityTitleToAdd = "Välj kommun: ";
     this.chosenSchoolTitleToAdd = "Välj skola: ";
     this.chosenMenuTitle = "Välj matsedel: ";
+    this.subscriptions = [];
   }
 
   ngOnInit(): void {

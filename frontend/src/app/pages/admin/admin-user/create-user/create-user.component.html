@@ -1,0 +1,61 @@
+<app-user-header></app-user-header>
+<div class="centered-content">
+  <div class="choices-content">
+    <form class="form-content">
+      <div class="fields-content">
+        <div class="element">
+              <input class="input-field" type="text" placeholder="Ange förnamn:" />
+        </div>
+
+        <div class="element">
+              <input class="input-field" type="text" placeholder="Ange efternamn:" />
+        </div>
+
+        <div class="element">
+              <input class="input-field" type="email" placeholder="Ange email:" />
+        </div>
+
+        <div class="element">
+              <input class="input-field" type="password" placeholder="Ange lösenord:" />
+        </div>
+      </div>
+
+      <div class="other-content">
+        <div class="element">
+
+          <ng-multiselect-dropdown name="city" [placeholder]="'Select City'" [data]="city.data" formControlName="city" [disabled]="disabled" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+          </ng-multiselect-dropdown>
+          <!-- <div ng-dropdown-multiselect="" data="schoolsToChoose" selected-model="chosenSchools" checkboxes="true">
+            <a class="navbar-link">
+              {{ schoolsTitle }}
+            </a>
+          </div> -->
+
+          <!-- <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              {{ schoolsTitle }}
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" >
+                <p></p>
+              </a>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="element">
+          <label class="permissions-label">Behörigheter: </label>
+          <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
+          <label class="admin-label">Admin</label>
+        </div>
+      </div>
+
+      <div class="button-content">
+        <button class="create-button" >
+          Spara användare
+      </button>
+      </div>
+
+    </form>
+  </div>
+</div>
