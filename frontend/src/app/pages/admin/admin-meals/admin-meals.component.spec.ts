@@ -45,9 +45,9 @@ describe('AdminComponent', () => {
     dh = new DOMHelper(fixture);
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
   it('should return true boolean if meal contains "pig"', () => {
     expect(component.checkFoodSpec(menuMockup.getMenu().meals[0].foodSpecs, "pig")).toBeTruthy();
@@ -58,9 +58,9 @@ describe('AdminComponent', () => {
   });
 
   // it('should contain a button with title "Uppdatera"', () => {
-  //   const btn = fixture.debugElement.nativeElement.querySelector('#updateButton');
-  //   expect(btn.title).toContain('Uppdatera');
-
+  //   // expect(dh.getSpecificElement('button.update-button', 0).title).toBe('Uppdatera');
+  //   // const btn = fixture.debugElement.nativeElement.querySelector('#updateButton');
+  //   // expect(btn.title).toContain('Uppdatera');
   // });
 
   it('should produce 3 days with 1 meal per day(3 meals  in total)', (done) => {

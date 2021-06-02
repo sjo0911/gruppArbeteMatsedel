@@ -40,7 +40,7 @@ describe('FooterComponent', () => {
   it('should navigate to / before fisrt button click', fakeAsync(() => {
     const location=TestBed.inject(Location);
     const loginButton = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(loginButton[0].nativeNode.outerText).toBe("Logga in")){
+    if(expect(loginButton[1].nativeNode.outerText).toBe("Logga in")){
       expect(location['$$path']()).toBe('');
     }
 
@@ -49,7 +49,7 @@ describe('FooterComponent', () => {
 
     const location=TestBed.inject(Location);
     const loginButton = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(loginButton[0].nativeNode.outerText).toBe("Logga in")){
+    if(expect(loginButton[1].nativeNode.outerText).toBe("Logga in")){
       const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
       nativeButton.click();
       fixture.detectChanges();
@@ -79,14 +79,14 @@ describe('FooterComponent', () => {
 class TempRouter{}
 
 class AuthServiceStub{
-  // user$ : Observable<any>;
+  user$ : Observable<any>;
   constructor () {
-    // this.user$ = of({
-    //   "firstName": "Jakob",
-    //   "lastName": "Öhlén",
-    //   "email": "kungen@hubbahubba.com",
-    //   "schoolIds": [],
-    //   "permissions": ["admin"],
-    //   "menuId": []});
+    this.user$ = of({"picture": {
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []}});
   }
 }
