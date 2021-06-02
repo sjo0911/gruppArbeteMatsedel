@@ -5,7 +5,8 @@ export class User {
   email: string;
   schoolIds: string[];
 	permissions: string[];
-  menuId: string[];
+  menuIds: string[];
+  password: string;
 
   constructor(user) {
     this.firstName = user.firstName;
@@ -13,6 +14,7 @@ export class User {
     this.email = user.email;
     this.schoolIds = user.schoolIds;
     this.permissions = user.permissions;
-    this.menuId = user.menuId;
+    this.menuIds = user.menuId;
   }
+
 }

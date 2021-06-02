@@ -88,3 +88,22 @@
   margin-left: 100px;
 }
 
+.school-dropdown {
+  color:white;
+  cursor: pointer;
+  // min-width: 300px !important;
+  // max-width: 300px !important;
+  // border: 0px !important;
+}
+
+.multiselect-parent {
+  width: 300px;
+}
+
+.multiselect-parent .dropdown-toggle {
+  width: 300px;
+}
+
+.multiselect-parent .dropdown-menu {
+  width: 300px;
+}

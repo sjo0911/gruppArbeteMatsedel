@@ -2,9 +2,7 @@ const { User } = require('../models');
 const patchValidation = { runValidators: true };
 
 exports.postUser = function(req, res) {
-
     let user = new User(req.body);
-
     user.save().then((userDoc) => {
         res.send(userDoc)
     });

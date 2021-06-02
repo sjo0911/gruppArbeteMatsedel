@@ -4,27 +4,36 @@
     <form class="form-content">
       <div class="fields-content">
         <div class="element">
-              <input class="input-field" type="text" placeholder="Ange förnamn:" />
+              <input class="input-field" type="text" placeholder="Ange förnamn:" #firstName/>
         </div>
 
         <div class="element">
-              <input class="input-field" type="text" placeholder="Ange efternamn:" />
+              <input class="input-field" type="text" placeholder="Ange efternamn:" #lastName/>
         </div>
 
         <div class="element">
-              <input class="input-field" type="email" placeholder="Ange email:" />
+              <input class="input-field" type="email" placeholder="Ange email:" #email/>
         </div>
 
         <div class="element">
-              <input class="input-field" type="password" placeholder="Ange lösenord:" />
+              <input class="input-field" type="password" placeholder="Ange lösenord:" #password/>
         </div>
       </div>
 
       <div class="other-content">
+
+        <div class="element">
+          <label class="permissions-label">Behörigheter: </label>
+          <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
+          <label class="admin-label">Admin</label>
+        </div>
+
         <div class="element">
 
-          <ng-multiselect-dropdown name="city" [placeholder]="'Select City'" [data]="city.data" formControlName="city" [disabled]="disabled" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+          <!-- <form [formGroup]="myForm"> -->
+          <ng-multiselect-dropdown class="school-dropdown" name="schools" [placeholder]="'Välj skolor att tilldela'" [data]="schoolsToChoose" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" #schools>
           </ng-multiselect-dropdown>
+
           <!-- <div ng-dropdown-multiselect="" data="schoolsToChoose" selected-model="chosenSchools" checkboxes="true">
             <a class="navbar-link">
               {{ schoolsTitle }}
@@ -41,17 +50,12 @@
               </a>
             </div>
           </div> -->
-        </div>
-
-        <div class="element">
-          <label class="permissions-label">Behörigheter: </label>
-          <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
-          <label class="admin-label">Admin</label>
+          <!-- </form> -->
         </div>
       </div>
 
       <div class="button-content">
-        <button class="create-button" >
+        <button class="create-button" (click)="createUser(firstName.value, lastName.value, email.value, password.value, admin.value, schools.selectedItems)">
           Spara användare
       </button>
       </div>

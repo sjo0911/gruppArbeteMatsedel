@@ -1,5 +1,5 @@
 import { DayComponent } from './pages/menu/day/day.component';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { Injectable, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,9 +30,9 @@ import { UpdateUserComponent } from './pages/admin/admin-user/update-user/update
 import { DeleteUserComponent } from './pages/admin/admin-user/delete-user/delete-user.component';
 import { UserHeaderComponent } from './pages/admin/admin-user/user-header/user-header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(sv);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,10 +56,10 @@ registerLocaleData(sv);
     UpdateUserComponent,
     DeleteUserComponent,
     UserHeaderComponent
-
-
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     NgMultiSelectDropDownModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
@@ -72,21 +72,17 @@ registerLocaleData(sv);
       cacheLocation:"localstorage",
       httpInterceptor: {
         allowedList: [
-
           {
             // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
             uri: 'http://localhost:3000/private/*',
             tokenOptions: {
               // The attached token should target this audience
               audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
-
             }
           }
         ]
-
       }
     })
-
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "sv" }, { provide: Alert}],
   bootstrap: [AppComponent]

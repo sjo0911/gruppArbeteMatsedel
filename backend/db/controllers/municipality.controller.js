@@ -72,7 +72,7 @@ exports.getSchools = function(req, res) {
                 allSchools.push(element);
             });
         });
-        res.send({'schools': allSchools});
+        res.send(allSchools);
     }).catch((e) => {
         res.send(e);
     });
