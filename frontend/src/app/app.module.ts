@@ -1,5 +1,5 @@
 import { DayComponent } from './pages/menu/day/day.component';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { Injectable, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,10 +24,15 @@ import { DeleteMenuComponent } from './pages/admin/admin-menus/delete-menu/delet
 import { AddMenuComponent } from './pages/admin/admin-schools/add-menu/add-menu.component';
 import { RemoveMenuComponent } from './pages/admin/admin-schools/remove-menu/remove-menu.component';
 import { Alert } from 'src/assets/alert';
-import { UserAccountComponent } from './pages/admin/user-account/user-account.component';
+import { UserAccountComponent } from './pages/admin/admin-user/user-account/user-account.component';
+import { CreateUserComponent } from './pages/admin/admin-user/create-user/create-user.component';
+import { UpdateUserComponent } from './pages/admin/admin-user/update-user/update-user.component';
+import { DeleteUserComponent } from './pages/admin/admin-user/delete-user/delete-user.component';
+import { UserHeaderComponent } from './pages/admin/admin-user/user-header/user-header.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(sv);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,11 +51,16 @@ registerLocaleData(sv);
     DeleteMenuComponent,
     AddMenuComponent,
     RemoveMenuComponent,
-    UserAccountComponent
-
-
+    UserAccountComponent,
+    CreateUserComponent,
+    UpdateUserComponent,
+    DeleteUserComponent,
+    UserHeaderComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -62,21 +72,17 @@ registerLocaleData(sv);
       cacheLocation:"localstorage",
       httpInterceptor: {
         allowedList: [
-
           {
             // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
             uri: 'http://localhost:3000/private/*',
             tokenOptions: {
               // The attached token should target this audience
               audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
-
             }
           }
         ]
-
       }
     })
-
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "sv" }, { provide: Alert}],
   bootstrap: [AppComponent]

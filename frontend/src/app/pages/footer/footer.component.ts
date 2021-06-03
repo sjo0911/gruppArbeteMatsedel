@@ -3,6 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',

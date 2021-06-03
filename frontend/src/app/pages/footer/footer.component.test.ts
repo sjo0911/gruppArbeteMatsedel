@@ -52,7 +52,7 @@ describe('FooterComponent', () => {
   it('should navigate to /admin on second button click', fakeAsync(() => {
     const location=TestBed.inject(Location);
     const administrera = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(administrera[1].nativeNode.outerText).toBe("Administrera")){
+    if(expect(administrera[1].nativeNode.outerText).toBe("Administrera matsedel")){
       const nativeButton: HTMLButtonElement=administrera[1].nativeElement;
       nativeButton.click();
       fixture.detectChanges();

@@ -24,6 +24,7 @@ export class RemoveMenuComponent implements OnInit {
   constructor(private menuService: MenuService, private municipalityService : MunicipalityService, private alert : Alert) {
     this.chosenMunicipalityTitleToDelete = "Välj kommun: ";
     this.chosenSchoolTitleToDelete = "Välj skola: ";
+    this.subscriptions = [];
   }
   ngOnInit(): void {}
 

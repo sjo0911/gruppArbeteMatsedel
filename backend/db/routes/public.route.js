@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { getMenus, getMenuNames, getMenuWithId, getMenuNameWithId } = require('../controllers/menu.controller');
-const { getMunicipalities } = require('../controllers/municipality.controller');
+const { getMunicipalities, getSchools } = require('../controllers/municipality.controller');
 
 router.get('/menu', getMenus)
 
@@ -14,5 +14,7 @@ router.get('/menu/Name/:id', getMenuNameWithId)
 
 
 router.get('/municipality', getMunicipalities)
+
+router.get('/schools', getSchools)
 
 module.exports = router

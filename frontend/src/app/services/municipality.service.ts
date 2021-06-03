@@ -16,4 +16,8 @@ export class MunicipalityService {
   updateSchool(municipalityId : string, school : School) {
     return this.webReqService.patch(`private/municipality/${municipalityId}/school/${school._id}`, school);
   }
+
+  getSchools() {
+    return this.webReqService.get('public/schools');
+  }
 }

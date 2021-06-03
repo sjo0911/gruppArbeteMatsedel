@@ -16,20 +16,18 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, "User must have an email"],
-        minlength: [5, "Users email must be at least 1 character long!"],
+        minlength: [5, "Users email must be at least 5 character long!"],
         trim: true,
         unique: true
     },
     password: {
         type: String,
         required: [true, "User must have a password"],
-        minlength: [5, "Users password must be at least 1 character long!"],
+        minlength: [5, "Users password must be at least 5 characters long!"],
         trim: true
     },
     schoolIds: [{
-        _id: {
-            type: mongoose.Types.ObjectId
-        }
+        type: mongoose.Types.ObjectId
     }],
     permissions: [{
         type: String,
@@ -42,8 +40,8 @@ const UserSchema = new mongoose.Schema({
     menuIds: [{
         type: mongoose.Types.ObjectId
     }],
-
 })
+
 UserSchema.pre('save', function(next) {
     let user = this;
     let costFactor = 10;
