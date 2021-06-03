@@ -64,7 +64,7 @@ jobs:
           command: cd frontend && npm run build
       - run:
           name: push to heroku
-          command: git subtree --prefix backend push https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git master
+          command: git subtree --prefix backend push https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git master --force
 
 
 
