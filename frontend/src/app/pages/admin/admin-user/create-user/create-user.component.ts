@@ -53,14 +53,14 @@ export class CreateUserComponent implements OnInit {
     newUser.password = password;
     if(admin) {
       newUser.permissions.push('admin');
-    }
-    if(schools) {
+    } else if(schools) {
       schools.forEach(school => {
         schoolIds.push(school.id);
       });
     }
     newUser.schoolIds = schoolIds;
-    this.userService.postUser(newUser).subscribe();
+    this.userService.postUser(newUser).subscribe(() => {
+    })
   }
 
 }

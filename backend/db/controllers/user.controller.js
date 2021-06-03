@@ -6,8 +6,7 @@ exports.postUser = function(req, res) {
     user.save().then((userDoc) => {
         res.send(userDoc)
     });
-
-}
+};
 
 exports.patchUser = function(req, res) {
     User.findOneAndUpdate({ _id: req.params.id }, {
@@ -17,7 +16,8 @@ exports.patchUser = function(req, res) {
     }).catch((e) => {
         res.send(e);
     });
-}
+};
+
 exports.deleteUser = function(req, res) {
     User.findOneAndRemove({
         _id: req.params.id
@@ -26,11 +26,12 @@ exports.deleteUser = function(req, res) {
     }).catch((e) => {
         res.send(e);
     });
-}
+};
+
 exports.getUser = function(req, res) {
     User.find().then((users) => {
         res.send(users);
     }).catch((e) => {
         res.send(e);
     })
-}
+};

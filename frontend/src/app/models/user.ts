@@ -3,9 +3,9 @@ export class User {
   firstName: string;
   lastName: string;
   email: string;
-  schoolIds: string[];
+  schoolIds: any[];
 	permissions: string[];
-  menuIds: string[];
+  menuIds: any[];
   password: string;
 
   constructor(user) {
