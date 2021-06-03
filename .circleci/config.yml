@@ -54,20 +54,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install angular
-          command: cd frontend && npm install @angular/cli
-      - run:
-          name: npm install frontend dependencies
-          command: cd frontend && npm install
-      - run:
-          name: ng build --prod
-          command: cd frontend && npm run build
-      - run:
-          name: split rep
-          command: $id = git subtree --prefix backend  
-      - run:
           name: push to heroku
-          command: git push --force https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git master $id:master
+          command: git push --force https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git master 
 
 
 
