@@ -49,12 +49,10 @@ jobs:
           name: npm nodejs tests
           command: cd backend && npm test
   deploy-main:
-    executor: heroku/default
+    docker:
+      - image: circleci/node:15-browsers
     steps:
       - checkout
-      - run:
-          name: sudo pip install
-          command: sudo pip install
       - run:
           name: install angular
           command: cd frontend && npm install @angular/cli
