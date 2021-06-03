@@ -10,7 +10,7 @@ app.use(express.json()) // To parse the incoming requests with JSON payloads
 
 app.use(express.static('./dist/'));
 
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
     res.sendFile('index.html', { root: 'dist/' }
     );
 });
