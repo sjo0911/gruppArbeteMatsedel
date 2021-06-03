@@ -34,19 +34,19 @@ jobs:
           command: cd frontend && npm install @angular/cli
 
       - run:
-          name: npm install frontend dependencies
+          name: install frontend dependencies
           command: cd frontend && npm install
       - run:
-          name: ng build
+          name: compile angular project 
           command: cd frontend && npm run build
       - run:
           name: run test frontend 
           command: cd frontend && npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
       - run:
-          name: npm install backend dependencies
+          name: install backend dependencies
           command: cd backend && npm install
       - run:
-          name: npm nodejs tests
+          name: run nodejs tests
           command: cd backend && npm test
   deploy-main:
     docker:
@@ -54,7 +54,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: push to heroku
+          name: deploy to heroku
           command: git push --force https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git main:main
 
 
