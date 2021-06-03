@@ -55,7 +55,7 @@ jobs:
       - checkout
       - run:
           name: push to heroku
-          command: git push --force https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git prepare-deploy:main
+          command: git push --force https://heroku:55fe7504-29a7-4780-8b77-e17644d7f8dd@git.heroku.com/matsedeln.git main:main
 
 
 
