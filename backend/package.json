@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jest --runInBand ./test"
+    "test": "jest --runInBand ./test",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
