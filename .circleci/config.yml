@@ -53,6 +53,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: sudo pip install
+          command: sudo pip install
+      - run:
           name: install angular
           command: cd frontend && npm install @angular/cli
       - run:
