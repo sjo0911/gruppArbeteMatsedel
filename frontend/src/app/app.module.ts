@@ -31,7 +31,7 @@ import { DeleteUserComponent } from './pages/admin/admin-user/delete-user/delete
 import { UserHeaderComponent } from './pages/admin/admin-user/user-header/user-header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+//
 registerLocaleData(sv);
 @NgModule({
   declarations: [

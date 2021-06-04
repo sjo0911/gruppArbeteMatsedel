@@ -8,7 +8,24 @@ const publicRoute = require('./db/routes/public.route');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) // To parse the incoming requests with JSON payloads
 
+app.use(express.static('./dist/'));
 app.use(function(req, res, next) {
+    // The 'x-forwarded-proto' check is for Heroku
+    if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
+        return res.redirect('https://' + req.get('host') + req.url);
+    }
+    next();
+})
+
+app.get('/', function (req, res) {
+    res.sendFile('index.html', { root: 'dist/' }
+    );
+});
+
+app.listen(process.env.PORT || 8080);
+
+//
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true")
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
@@ -22,10 +39,6 @@ app.use(function(req, res, next) {
 });
 
 
-
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000");
-})
 
 // app.use('/auth/municipality', Municipality)
 // app.use('/auth/menu', Menu)

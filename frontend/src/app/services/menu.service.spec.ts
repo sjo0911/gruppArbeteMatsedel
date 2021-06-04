@@ -2,12 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MenuService } from './menu.service';
 import { MenuMockup } from '../mockups/menu-mockup';
+import { environment } from './../../environments/environment';
 
 describe('MenuService', () => {
   let service: MenuService;
   let httpMock : HttpTestingController;
   let menuMockup : MenuMockup = new MenuMockup();
-  let ROOT_URL = 'http://localhost:3000';
+  let ROOT_URL = environment.ROOT_URL;
   let menuId = menuMockup.getMenu()._id;
   let mealId = menuMockup.getMenu().meals[0]._id;
   let meal = menuMockup.getMenu().meals[0];

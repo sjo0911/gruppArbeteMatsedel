@@ -1,12 +1,13 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { environment } from 'src/environments/environment';
 import { Municipality } from '../models/municipality';
 
 import { MunicipalityService } from './municipality.service';
 
 describe('MunicipalityService', () => {
   let service: MunicipalityService;
-  let ROOT_URL = 'http://localhost:3000';
+  let ROOT_URL = environment.ROOT_URL;
   let httpMock : HttpTestingController;
   let municipalitiesMockup = new Municipality();
   municipalitiesMockup = {_id: "123", municipalityName: "Umeå", schools: [{_id: "1", schoolName: "Dragonskolan", _menuId: "2"}]};
