@@ -24,7 +24,6 @@ import { DeleteMenuComponent } from './pages/admin/admin-menus/delete-menu/delet
 import { AddMenuComponent } from './pages/admin/admin-schools/add-menu/add-menu.component';
 import { RemoveMenuComponent } from './pages/admin/admin-schools/remove-menu/remove-menu.component';
 import { Alert } from 'src/assets/alert';
-import { UserAccountComponent } from './pages/admin/admin-user/user-account/user-account.component';
 import { CreateUserComponent } from './pages/admin/admin-user/create-user/create-user.component';
 import { UpdateUserComponent } from './pages/admin/admin-user/update-user/update-user.component';
 import { DeleteUserComponent } from './pages/admin/admin-user/delete-user/delete-user.component';
@@ -51,7 +50,6 @@ registerLocaleData(sv);
     DeleteMenuComponent,
     AddMenuComponent,
     RemoveMenuComponent,
-    UserAccountComponent,
     CreateUserComponent,
     UpdateUserComponent,
     DeleteUserComponent,

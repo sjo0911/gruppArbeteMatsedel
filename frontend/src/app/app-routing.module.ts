@@ -7,7 +7,6 @@ import { AdminSchoolsComponent } from './pages/admin/admin-schools/admin-schools
 import { CreateUserComponent } from './pages/admin/admin-user/create-user/create-user.component';
 import { DeleteUserComponent } from './pages/admin/admin-user/delete-user/delete-user.component';
 import { UpdateUserComponent } from './pages/admin/admin-user/update-user/update-user.component';
-import { UserAccountComponent } from './pages/admin/admin-user/user-account/user-account.component';
 import { UserHeaderComponent } from './pages/admin/admin-user/user-header/user-header.component';
 
 import { LoginFailedComponent } from './pages/login-failed/login-failed.component';
