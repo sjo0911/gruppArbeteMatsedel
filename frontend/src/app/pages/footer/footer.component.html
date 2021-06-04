@@ -7,7 +7,7 @@
   <button class="admin-button" routerLink="/admin">
     Administrera matsedel
   </button>
-  <button class="admin-button" (click)="auth.logout({ returnTo: 'http://localhost:4200/logout' })">
+  <button class="admin-button" (click)="auth.logout({ returnTo: ROOT_URL + '/logout' })">
   Logga ut
 </button>
 </ng-container>
