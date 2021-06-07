@@ -72,7 +72,23 @@ registerLocaleData(sv);
         allowedList: [
           {
             // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
-            uri: 'http://localhost:3000/private/*',
+            uri: 'https://matsedeln.herokuapp.com/private/*',
+            tokenOptions: {
+              // The attached token should target this audience
+              audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
+            }
+          },
+          {
+            // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
+            uri: 'http://localhost:4200/private/*',
+            tokenOptions: {
+              // The attached token should target this audience
+              audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
+            }
+          },
+          {
+            // Match any request that starts 'https://dev-fx63i2zd.eu.auth0.com/api/v2/' (note the asterisk)
+            uri: 'http://localhost:8080/private/*',
             tokenOptions: {
               // The attached token should target this audience
               audience: 'https://dev-fx63i2zd.eu.auth0.com/api/v2/',
