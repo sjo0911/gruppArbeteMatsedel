@@ -1,27 +1,29 @@
 <app-user-header></app-user-header>
 <div class="centered-content">
-  <div class="choices-content">
+    <div class="choices-content">
 
 
-    <!-- <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        {{ userToDelete }}
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+        {{ NameOfUserToDelete }}
       </a>
-      <div class="navbar-dropdown">
-        <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToDelete()">
-          <p>{{ user.email }}</p>
-        </a>
-      </div>
-    </div>
+            <div class="navbar-dropdown">
+                <a class="navbar-item" *ngFor="let user of $users | async" (click)="UserToDelete(user)">
+                    <p>{{ user.email }}</p>
+                </a>
+            </div>
+        </div>
+        <!-- <p class="firstName" style="size: 120px">
+            {{ NameOfUserToDelete }}
+        </p> -->
 
-
-    <div class="button-content">
-      <button class="create-button" (click)="deleteUser()">
-        Spara användare
+        <div class="button-content">
+            <button class="delete-button" (click)="deleteUser()">
+        Ta bort användare
     </button>
-    </div> -->
+        </div>
 
 
 
-  </div>
+    </div>
 </div>
