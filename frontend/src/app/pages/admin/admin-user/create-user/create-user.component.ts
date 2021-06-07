@@ -64,7 +64,8 @@ export class CreateUserComponent implements OnInit {
     } else if(password.length < 5) {
       this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'warning');
     } else {
-      let newUser = new User({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
+      let newUser = new User();
+      newUser.setUserFromAuthPic({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
       let schoolIds = [];
       newUser.password = password;
       if(admin) {
