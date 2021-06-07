@@ -13,6 +13,7 @@ import { Alert } from 'src/assets/alert';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
+
 export class CreateUserComponent implements OnInit {
   schoolsTitle : string;
   schoolsToChoose : School[];
@@ -56,7 +57,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
-
     if(lastName.length < 1) {
       this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
     } else if(email.length < 5) {
@@ -79,9 +79,7 @@ export class CreateUserComponent implements OnInit {
       })
       this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
-    }
-
-
-  }
+    };
+  };
 
 }

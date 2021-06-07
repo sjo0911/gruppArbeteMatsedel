@@ -5,6 +5,8 @@ exports.postUser = function(req, res) {
     let user = new User(req.body);
     user.save().then((userDoc) => {
         res.send(userDoc)
+    }).catch((e) => {
+        res.send(e);
     });
 };
 
