@@ -3,3 +3,25 @@
     align-items: center;
     flex-direction: row;
 }
+
+.navbar-dropdown {
+    height: 200px;
+}
+
+.button-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 100px;
+}
+
+.delete-button {
+    width: 150px;
+    border: 0px;
+    background: transparent;
+    color: white;
+    &:active {
+        transform: translateY(4px);
+    }
+    cursor: pointer;
+}
