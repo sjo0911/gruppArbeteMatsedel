@@ -21,12 +21,10 @@ app.use(function(req, res, next) {
     }
 })
 
-app.get('/', function (req, res) {
-    res.sendFile('index.html', { root: 'dist/' }
-    );
-});
+app.use('/private', privateRoute)
+app.use('/public', publicRoute)
 
-app.get('/logout', function (req, res) {
+app.get('/*', function (req, res) {
     res.sendFile('index.html', { root: 'dist/' }
     );
 });
@@ -52,6 +50,3 @@ app.use(function (req, res, next) {
 // app.use('/auth/municipality', Municipality)
 // app.use('/auth/menu', Menu)
 // app.use('/auth/user', User)
-
-app.use('/private', privateRoute)
-app.use('/public', publicRoute)
