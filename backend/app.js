@@ -16,8 +16,10 @@ app.use(function(req, res, next) {
             return res.redirect('https://' + req.get('host') + req.url);
         }
         next();
+    } else {
+        next();
     }
-    next();
+
 })
 
 app.get('/', function (req, res) {
