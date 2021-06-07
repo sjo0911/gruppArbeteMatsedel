@@ -2,5 +2,26 @@
 <div class="centered-content">
   <div class="choices-content">
 
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        {{ userToDelete }}
+      </a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToDelete(municipality)">
+          <p>{{ user.email }}</p>
+        </a>
+      </div>
+    </div>
+
+
+    <div class="button-content">
+      <button class="create-button" (click)="deleteUser()">
+        Spara användare
+    </button>
+    </div>
+
+
+
   </div>
 </div>
