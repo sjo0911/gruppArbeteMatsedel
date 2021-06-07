@@ -3,35 +3,35 @@
   <div class="choices-content">
     <form class="form-content">
 
-      <div class="first-content">
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            {{ userToUpdate }}
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToUpdate(user)">
-              <p>{{ user }}</p>
-            </a>
-          </div>
-        </div>
-      </div>
-
       <div class="second-content">
+
         <div class="fields-content">
-          <div class="element">
-                <input class="input-field" type="text" placeholder="Ange förnamn:" #firstName/>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              {{ userToUpdateTitle }}
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToUpdate(user)">
+                <p>{{ user.email }}</p>
+              </a>
+            </div>
           </div>
 
           <div class="element">
-                <input class="input-field" type="text" placeholder="Ange efternamn:" #lastName/>
+                <input class="input-field" type="text" placeholder="Ange förnamn:" [value]="firstNameToEdit" #firstName/>
           </div>
 
           <div class="element">
-                <input class="input-field" type="email" placeholder="Ange email:" #email/>
+                <input class="input-field" type="text" placeholder="Ange efternamn:" [value]="lastNameToEdit" #lastName/>
           </div>
 
           <div class="element">
-                <input class="input-field" type="password" placeholder="Ange lösenord:" #password/>
+                <input class="input-field" type="email" placeholder="Ange email:" [value]="emailToEdit" #email/>
+          </div>
+
+          <div class="element">
+                <input class="input-field" type="password" placeholder="Ange lösenord:" [value]="passwordToEdit" #password/>
           </div>
         </div>
 
@@ -39,7 +39,7 @@
 
           <div class="element">
             <label class="permissions-label">Behörigheter: </label>
-            <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
+            <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" [checked]="checkAdmin(userToUpdate)" #admin>
             <label class="admin-label">Admin</label>
           </div>
 

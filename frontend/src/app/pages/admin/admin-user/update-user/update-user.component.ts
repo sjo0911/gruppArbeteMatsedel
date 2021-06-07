@@ -21,20 +21,31 @@ export class UpdateUserComponent implements OnInit {
   myForm: FormGroup;
   dropdownSettings: IDropdownSettings = {};
   subscriptions : Subscription[];
-  userToUpdate : string;
+  userToUpdateTitle : string;
   users : any;
+  userToUpdate : User;
+  firstNameToEdit : string;
+  lastNameToEdit : string;
+  emailToEdit : string;
+  passwordToEdit : string;
 
   constructor(private municipalityService : MunicipalityService, private fb : FormBuilder, private userService : UserService, private alert : Alert) {
     this.schoolsTitle = 'Välj skolor till användare';
     this.subscriptions = [];
-    this.users = this.userService.getUsers();
-    this.userToUpdate = 'Välj användare att uppdatera: ';
+    this.userToUpdateTitle = 'Välj användare att uppdatera: ';
+    this.userToUpdate = new User();
   }
 
   ngOnInit(): void {
-    this.municipalityService.getSchools().subscribe((schools : School[]) => {
+    let sub = this.userService.getUsers().subscribe((users : any) => {
+      this.users = users;
+    });
+    this.subscriptions.push(sub);
+
+    let sub2 = this.municipalityService.getSchools().subscribe((schools : School[]) => {
       this.schoolsToChoose = schools;
-    })
+    });
+    this.subscriptions.push(sub2);
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -54,8 +65,34 @@ export class UpdateUserComponent implements OnInit {
     })
   }
 
+  checkAdmin(userToUpdate) : boolean {
+    let bol = false;
+    userToUpdate.permissions.forEach(permission => {
+      if(permission === 'admin') {
+        bol = true;
+      }
+    });
+    return bol;
+  }
+
   chooseUserToUpdate(user) {
 
+    if(user.firstName === undefined) {
+      this.firstNameToEdit = '';
+    } else {
+      this.firstNameToEdit = user.firstName;
+    }
+
+    this.userToUpdateTitle = user.email;
+    this.userToUpdate = user;
+    this.lastNameToEdit = user.lastName;
+    this.emailToEdit = user.email;
+    this.passwordToEdit = user.password;
+
+
+
+
+    // Set admin checked eller ej + set skolorna checked
   }
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
