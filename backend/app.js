@@ -11,8 +11,11 @@ app.use(express.json()) // To parse the incoming requests with JSON payloads
 app.use(express.static('./dist/'));
 app.use(function(req, res, next) {
     // The 'x-forwarded-proto' check is for Heroku
+    console.log(req.get('host'));
     if(req.get('host') != "localhost:8080" && req.get('host') != "http://localhost:4200/"){
+        console.log("hej!");
         if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
+            console.log("denna ska de va!");
             return res.redirect('https://' + req.get('host') + req.url);
         }
         next();
