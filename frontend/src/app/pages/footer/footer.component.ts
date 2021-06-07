@@ -22,7 +22,8 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.auth.user$.subscribe((user) => {
-      let currentUser = new User(user.picture);
+      let currentUser = new User();
+      currentUser.setUserFromAuthPic(user.picture);
       currentUser.permissions.forEach(permission => {
         if(permission === 'admin') {
           this.admin = true;

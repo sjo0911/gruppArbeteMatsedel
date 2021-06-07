@@ -19,10 +19,12 @@ app.use(function(req, res, next) {
     } else {
         next();
     }
-
 })
 
-app.get('/', function (req, res) {
+app.use('/private', privateRoute)
+app.use('/public', publicRoute)
+
+app.get('/*', function (req, res) {
     res.sendFile('index.html', { root: 'dist/' }
     );
 });
@@ -48,6 +50,3 @@ app.use(function (req, res, next) {
 // app.use('/auth/municipality', Municipality)
 // app.use('/auth/menu', Menu)
 // app.use('/auth/user', User)
-
-app.use('/private', privateRoute)
-app.use('/public', publicRoute)

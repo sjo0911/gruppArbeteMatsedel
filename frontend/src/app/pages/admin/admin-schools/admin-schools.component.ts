@@ -1,3 +1,4 @@
+import { AuthService } from '@auth0/auth0-angular';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Menu } from 'src/app/models/menu';
@@ -18,10 +19,14 @@ export class AdminSchoolsComponent implements OnInit {
 
 
 
-  constructor(private municipalityService : MunicipalityService, private menuService: MenuService) {}
+  constructor(private municipalityService : MunicipalityService, private menuService: MenuService, private auth: AuthService) {}
 
   ngOnInit(): void {
+
     this.subscriptions.push(this.municipalityService.getMunicipalities().subscribe((municipalities : Municipality[]) => {
+      this.auth.user$.subscribe((user) => {
+
+      })
       this.municipalities = municipalities;
     }))
     this.subscriptions.push(this.menuService.getMenus().subscribe((menus : Menu[]) => {

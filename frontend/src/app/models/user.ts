@@ -8,7 +8,11 @@ export class User {
   menuIds: any[];
   password: string;
 
-  constructor(user) {
+  constructor() {
+
+  }
+
+  setUserFromAuthPic(user) {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email;
