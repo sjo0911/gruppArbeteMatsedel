@@ -33,54 +33,58 @@ describe('UserHeaderComponent', () => {
     helper=new DOMHelper(fixture);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-  it('should contain 3 buttons', () => {
-    expect(helper.countFromTagName("button")).toEqual(3);
-  });
-  it('first button should have text: "lägg till användare"', () => {
-    expect(helper.singleTextFromTagName("button").trim()).toBe("Lägg till användare");
+  describe('Create', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('second button should have text: "Uppdatera användare"', () => {
-    expect(helper.getSpecificElement("button", 1).textContent.trim()).toBe("Uppdatera användare");
+  describe('HTML', () => {
+    it('should contain 3 buttons', () => {
+      expect(helper.countFromTagName("button")).toEqual(3);
+    });
+
+    it('first button should have text: "lägg till användare"', () => {
+      expect(helper.singleTextFromTagName("button").trim()).toBe("Lägg till användare");
+    });
+
+    it('second button should have text: "Uppdatera användare"', () => {
+      expect(helper.getSpecificElement("button", 1).textContent.trim()).toBe("Uppdatera användare");
+    });
+
+    it('third button should have text: "Ta bort användare"', () => {
+      expect(helper.getSpecificElement("button", 2).textContent.trim()).toBe("Ta bort användare");
+    });
   });
 
-  it('third button should have text: "Ta bort användare"', () => {
-    expect(helper.getSpecificElement("button", 2).textContent.trim()).toBe("Ta bort användare");
+  describe('Navigation', () => {
+    it('"Lägg till användare" button should navigate to /createUser', (done) => {
+      const router = TestBed.get(Router);
+      spyOn(router, 'navigateByUrl')
+      helper.clickButton("Lägg till användare");
+      expect(router.navigateByUrl).
+      toHaveBeenCalledWith(router.createUrlTree(['/createUser']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
+      done();
+    });
+
+    it('"Uppdatera användare" button should navigate to /updateUser', (done) => {
+      const router = TestBed.get(Router);
+      spyOn(router, 'navigateByUrl')
+      helper.clickButton("Uppdatera användare");
+      expect(router.navigateByUrl).
+      toHaveBeenCalledWith(router.createUrlTree(['/updateUser']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
+      done();
+    });
+
+    it('"Ta bort användare" button should navigate to /deleteUser', (done) => {
+      const router = TestBed.get(Router);
+      spyOn(router, 'navigateByUrl')
+      helper.clickButton("Ta bort användare");
+      expect(router.navigateByUrl).
+      toHaveBeenCalledWith(router.createUrlTree(['/deleteUser']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
+      done();
+    });
   });
-  it('"Lägg till användare" button should navigate to /createUser', (done) => {
-    const router = TestBed.get(Router);
-    spyOn(router, 'navigateByUrl')
-    helper.clickButton("Lägg till användare");
-    expect(router.navigateByUrl).
-    toHaveBeenCalledWith(router.createUrlTree(['/createUser']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
-    done();
-  });
-
-  it('"Uppdatera användare" button should navigate to /updateUser', (done) => {
-    const router = TestBed.get(Router);
-    spyOn(router, 'navigateByUrl')
-    helper.clickButton("Uppdatera användare");
-    expect(router.navigateByUrl).
-    toHaveBeenCalledWith(router.createUrlTree(['/updateUser']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
-    done();
-  });
-
-  it('"Ta bort användare" button should navigate to /deleteUser', (done) => {
-    const router = TestBed.get(Router);
-    spyOn(router, 'navigateByUrl')
-    helper.clickButton("Ta bort användare");
-    expect(router.navigateByUrl).
-    toHaveBeenCalledWith(router.createUrlTree(['/deleteUser']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
-    done();
-  });
-
-
-
-
-
 
 });
 class AuthServiceStub {
