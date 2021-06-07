@@ -69,7 +69,7 @@ export class UpdateUserComponent implements OnInit {
         });
       }
       newUser.schoolIds = schoolIds;
-      let sub: Subscription = this.userService.postUser(newUser).subscribe(() => {
+      let sub: Subscription = this.userService.updateUser(newUser).subscribe(() => {
       })
       this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
