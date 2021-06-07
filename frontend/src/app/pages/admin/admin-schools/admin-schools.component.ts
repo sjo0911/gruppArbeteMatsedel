@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { AuthService } from '@auth0/auth0-angular';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -25,7 +26,21 @@ export class AdminSchoolsComponent implements OnInit {
 
     this.subscriptions.push(this.municipalityService.getMunicipalities().subscribe((municipalities : Municipality[]) => {
       this.auth.user$.subscribe((user) => {
-
+        let currentUser = new User();
+        currentUser.setUserFromAuthPic(user.picture);
+        //Filter out municipalities that user have access to change
+        municipalities = municipalities.filter((mun) => {
+          return mun.schools.some((school) => {
+            return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
+          })
+        })
+        //filter out schools for each municipality that user have access to change
+        municipalities.forEach((municipality) => {
+          municipality.schools = municipality.schools.filter((school) => {
+            return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
+          })
+        })
+        this.municipalities = municipalities;
       })
       this.municipalities = municipalities;
     }))
