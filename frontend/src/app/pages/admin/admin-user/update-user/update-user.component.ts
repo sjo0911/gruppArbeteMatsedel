@@ -28,12 +28,12 @@ export class UpdateUserComponent implements OnInit {
   lastNameToEdit : string;
   emailToEdit : string;
   passwordToEdit : string;
+  checkAdmin : boolean = false;
 
   constructor(private municipalityService : MunicipalityService, private fb : FormBuilder, private userService : UserService, private alert : Alert) {
     this.schoolsTitle = 'Välj skolor till användare';
     this.subscriptions = [];
     this.userToUpdateTitle = 'Välj användare att uppdatera: ';
-    this.userToUpdate = new User();
   }
 
   ngOnInit(): void {
@@ -65,17 +65,9 @@ export class UpdateUserComponent implements OnInit {
     })
   }
 
-  checkAdmin(userToUpdate) : boolean {
-    let bol = false;
-    userToUpdate.permissions.forEach(permission => {
-      if(permission === 'admin') {
-        bol = true;
-      }
-    });
-    return bol;
-  }
-
   chooseUserToUpdate(user) {
+
+    this.checkAdmin = false;
 
     if(user.firstName === undefined) {
       this.firstNameToEdit = '';
@@ -89,8 +81,11 @@ export class UpdateUserComponent implements OnInit {
     this.emailToEdit = user.email;
     this.passwordToEdit = user.password;
 
-
-
+    user.permissions.forEach(permission => {
+      if(permission === 'admin') {
+        this.checkAdmin = true;
+      }
+    });
 
     // Set admin checked eller ej + set skolorna checked
   }
@@ -104,7 +99,8 @@ export class UpdateUserComponent implements OnInit {
     } else if(password.length < 5) {
       this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'warning');
     } else {
-      let newUser = new User({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
+      let newUser = new User();
+      newUser.setUserFromAuthPic({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
       let schoolIds = [];
       newUser.password = password;
       if(admin) {
