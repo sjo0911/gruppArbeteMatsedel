@@ -19,10 +19,14 @@ app.use(function(req, res, next) {
     } else {
         next();
     }
-
 })
 
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
+    res.sendFile('index.html', { root: 'dist/' }
+    );
+});
+
+app.get('/logout', function (req, res) {
     res.sendFile('index.html', { root: 'dist/' }
     );
 });
