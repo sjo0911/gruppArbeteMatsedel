@@ -8,7 +8,7 @@
         {{ userToDelete }}
       </a>
       <div class="navbar-dropdown">
-        <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToDelete(municipality)">
+        <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToDelete()">
           <p>{{ user.email }}</p>
         </a>
       </div>

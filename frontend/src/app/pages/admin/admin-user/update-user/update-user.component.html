@@ -2,35 +2,51 @@
 <div class="centered-content">
   <div class="choices-content">
     <form class="form-content">
-      <div class="fields-content">
-        <div class="element">
-              <input class="input-field" type="text" placeholder="Ange förnamn:" #firstName/>
-        </div>
 
-        <div class="element">
-              <input class="input-field" type="text" placeholder="Ange efternamn:" #lastName/>
-        </div>
-
-        <div class="element">
-              <input class="input-field" type="email" placeholder="Ange email:" #email/>
-        </div>
-
-        <div class="element">
-              <input class="input-field" type="password" placeholder="Ange lösenord:" #password/>
+      <div class="first-content">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{ userToUpdate }}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" *ngFor="let user of users" (click)="chooseUserToUpdate(user)">
+              <p>{{ user }}</p>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="other-content">
+      <div class="second-content">
+        <div class="fields-content">
+          <div class="element">
+                <input class="input-field" type="text" placeholder="Ange förnamn:" #firstName/>
+          </div>
 
-        <div class="element">
-          <label class="permissions-label">Behörigheter: </label>
-          <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
-          <label class="admin-label">Admin</label>
+          <div class="element">
+                <input class="input-field" type="text" placeholder="Ange efternamn:" #lastName/>
+          </div>
+
+          <div class="element">
+                <input class="input-field" type="email" placeholder="Ange email:" #email/>
+          </div>
+
+          <div class="element">
+                <input class="input-field" type="password" placeholder="Ange lösenord:" #password/>
+          </div>
         </div>
 
-        <div class="element">
-          <ng-multiselect-dropdown class="school-dropdown" name="schools" [placeholder]="'Välj skolor att tilldela'" [data]="schoolsToChoose" [settings]="dropdownSettings" #schools>
-          </ng-multiselect-dropdown>
+        <div class="other-content">
+
+          <div class="element">
+            <label class="permissions-label">Behörigheter: </label>
+            <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
+            <label class="admin-label">Admin</label>
+          </div>
+
+          <div class="element">
+            <ng-multiselect-dropdown class="school-dropdown" name="schools" [placeholder]="'Välj skolor att tilldela'" [data]="schoolsToChoose" [settings]="dropdownSettings" #schools>
+            </ng-multiselect-dropdown>
+          </div>
         </div>
       </div>
     </form>
