@@ -17,6 +17,7 @@ import { Alert } from 'src/assets/alert';
 export class CreateUserComponent implements OnInit {
   schoolsTitle : string;
   schoolsToChoose : School[];
+  selectedSchools : School[];
   chosenSchools : [];
   myForm: FormGroup;
   dropdownSettings: IDropdownSettings = {};
@@ -82,5 +83,13 @@ export class CreateUserComponent implements OnInit {
       this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
     };
   };
+
+  clickAdmin(adminChecked) {
+    if (adminChecked) {
+      this.selectedSchools = this.schoolsToChoose;
+    } else {
+      this.selectedSchools = [];
+    }
+  }
 
 }
