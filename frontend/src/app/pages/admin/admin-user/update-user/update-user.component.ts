@@ -21,10 +21,14 @@ export class UpdateUserComponent implements OnInit {
   myForm: FormGroup;
   dropdownSettings: IDropdownSettings = {};
   subscriptions : Subscription[];
+  userToUpdate : string;
+  users : any;
 
   constructor(private municipalityService : MunicipalityService, private fb : FormBuilder, private userService : UserService, private alert : Alert) {
     this.schoolsTitle = 'Välj skolor till användare';
     this.subscriptions = [];
+    this.users = this.userService.getUsers();
+    this.userToUpdate = 'Välj användare att uppdatera: ';
   }
 
   ngOnInit(): void {
@@ -50,7 +54,12 @@ export class UpdateUserComponent implements OnInit {
     })
   }
 
+  chooseUserToUpdate(user) {
+
+  }
+
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
+    // userToUpdate!!!!!
     if(lastName.length < 1) {
       this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
     } else if(email.length < 5) {
