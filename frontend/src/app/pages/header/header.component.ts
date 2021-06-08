@@ -47,47 +47,33 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.auth.isAuthenticated$.subscribe((loggedIn) => {
       if(loggedIn) {
-
         this.subscriptions.push(this.auth.user$.subscribe((user) => {
           let currentUser = new User();
           currentUser.setUserFromAuthPic(user.picture);
           if(!currentUser.permissions.some((perm) => perm === 'admin')){
             //Filter out municipalities that user have access to change
             this.$municipalities = this.municipalityService.getMunicipalities().pipe(map((municipalities : Municipality[]) => {
-              municipalities.filter((mun) => {
+              let mun = municipalities.filter((mun) => {
                 return mun.schools.some((school) => {
                   return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
                 })
               })
-            })).pipe(map((munici : Municipality[]) => {
-              return munici;
+              //Filter out schools that user have access to change
+             mun.forEach((municipality) => {
+                municipality.schools = municipality.schools.filter((school) => {
+                  return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
+                })
+              })
+              return mun;
             }))
-
-            // municipalities = municipalities.filter((mun) => {
-            //   return mun.schools.some((school) => {
-            //     return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
-            //   })
-            // })
-            //filter out schools for each municipality that user have access to change
-            // municipalities.forEach((municipality) => {
-            //   municipality.schools = municipality.schools.filter((school) => {
-            //     return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
-            //   })
-            // })
           }
-
-          this.$municipalities = municipalities;
         }))
-        this.$municipalities = municipalities;
-
       } else {
         this.$municipalities = this.municipalityService.getMunicipalities();
       }
     })
-
   }
 
   ngOnDestroy() {
