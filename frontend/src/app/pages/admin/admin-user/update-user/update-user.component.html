@@ -19,19 +19,19 @@
           </div>
 
           <div class="element">
-                <input class="input-field" type="text" placeholder="Ange förnamn:" [value]="firstNameToEdit" #firstName/>
+                <input class="input-field" type="text" placeholder="Ange förnamn:" [value]="userToUpdate.firstName" #firstName/>
           </div>
 
           <div class="element">
-                <input class="input-field" type="text" placeholder="Ange efternamn:" [value]="lastNameToEdit" #lastName/>
+                <input class="input-field" type="text" placeholder="Ange efternamn:" [value]="userToUpdate.lastName" #lastName/>
           </div>
 
           <div class="element">
-                <input class="input-field" type="email" placeholder="Ange email:" [value]="emailToEdit" #email/>
+                <input class="input-field" type="email" placeholder="Ange email:" [value]="userToUpdate.email" #email/>
           </div>
 
           <div class="element">
-                <input class="input-field" type="password" placeholder="Ange lösenord:" [value]="passwordToEdit" #password/>
+                <input class="input-field" type="password" placeholder="Ange lösenord:" [value]="userToUpdate.password" #password/>
           </div>
         </div>
 
@@ -52,7 +52,7 @@
     </form>
 
     <div class="button-content">
-      <button class="create-button" (click)="updateUser(firstName.value, lastName.value, email.value, password.value, admin.value, schools.selectedItems)">
+      <button class="create-button" (click)="updateUser(firstName.value, lastName.value, email.value, password.value, admin.checked, schools.selectedItems)">
         Uppdatera användare
     </button>
     </div>

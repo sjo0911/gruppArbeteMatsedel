@@ -24,16 +24,18 @@ export class UpdateUserComponent implements OnInit {
   userToUpdateTitle : string;
   users : any;
   userToUpdate : User;
-  firstNameToEdit : string;
-  lastNameToEdit : string;
-  emailToEdit : string;
-  passwordToEdit : string;
   checkAdmin : boolean = false;
 
   constructor(private municipalityService : MunicipalityService, private fb : FormBuilder, private userService : UserService, private alert : Alert) {
     this.schoolsTitle = 'Välj skolor till användare';
     this.subscriptions = [];
     this.userToUpdateTitle = 'Välj användare att uppdatera: ';
+
+    this.userToUpdate = new User();
+    this.userToUpdate.firstName = '';
+    this.userToUpdate.lastName = '';
+    this.userToUpdate.email = '';
+    this.userToUpdate.password = '';
   }
 
   ngOnInit(): void {
@@ -68,16 +70,17 @@ export class UpdateUserComponent implements OnInit {
   chooseUserToUpdate(user) {
     this.checkAdmin = false;
 
-    if(user.firstName === undefined) {
-      this.firstNameToEdit = '';
-    } else {
-      this.firstNameToEdit = user.firstName;
-    }
+    this.userToUpdate = new User();
+
     this.userToUpdateTitle = user.email;
-    this.userToUpdate = user;
-    this.lastNameToEdit = user.lastName;
-    this.emailToEdit = user.email;
-    this.passwordToEdit = user.password;
+    this.userToUpdate._id = user._id;
+    this.userToUpdate.firstName = user.firstName;
+    this.userToUpdate.lastName = user.lastName;
+    this.userToUpdate.email = user.email;
+    this.userToUpdate.schoolIds = user.schoolIds;
+    this.userToUpdate.permissions = user.permissions;
+    this.userToUpdate.menuIds = user.menuIds;
+    this.userToUpdate.password = user.password;
 
     user.permissions.forEach(permission => {
       if(permission === 'admin') {
@@ -85,11 +88,11 @@ export class UpdateUserComponent implements OnInit {
       }
     });
 
+
     // Set skolorna checked
   }
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
-    // userToUpdate!!!!!
     if(lastName.length < 1) {
       this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
     } else if(email.length < 5) {
