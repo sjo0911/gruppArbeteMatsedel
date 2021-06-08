@@ -32,20 +32,20 @@ export class AdminSchoolsComponent implements OnInit {
           municipalities = municipalities.filter((mun) => {
             return mun.schools.some((school) => {
               return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
-            })
-          })
+            });
+          });
           //filter out schools for each municipality that user have access to change
           municipalities.forEach((municipality) => {
             municipality.schools = municipality.schools.filter((school) => {
               return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
-            })
-          })
+            });
+          });
         }
 
         this.municipalities = municipalities;
-      }))
+      }));
       this.municipalities = municipalities;
-    }))
+    }));
     this.subscriptions.push(this.menuService.getMenus().subscribe((menus : Menu[]) => {
       this.menus = menus;
     }))

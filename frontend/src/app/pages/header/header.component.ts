@@ -11,6 +11,9 @@ import { SharingService } from 'src/app/services/sharing.service';
 import { Subscription, Observable } from 'rxjs';
 import  Swal  from 'sweetalert2';
 import { Alert } from 'src/assets/alert';
+import { User } from 'src/app/models/user';
+import { AuthService } from '@auth0/auth0-angular';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -35,7 +38,7 @@ export class HeaderComponent implements OnInit {
   ROOT_URL : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
-    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert) {
+    private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert, private auth: AuthService) {
     this.municipalityTitle = "Kommun";
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
@@ -44,7 +47,47 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.$municipalities = this.municipalityService.getMunicipalities();
+
+    this.auth.isAuthenticated$.subscribe((loggedIn) => {
+      if(loggedIn) {
+
+        this.subscriptions.push(this.auth.user$.subscribe((user) => {
+          let currentUser = new User();
+          currentUser.setUserFromAuthPic(user.picture);
+          if(!currentUser.permissions.some((perm) => perm === 'admin')){
+            //Filter out municipalities that user have access to change
+            this.$municipalities = this.municipalityService.getMunicipalities().pipe(map((municipalities : Municipality[]) => {
+              municipalities.filter((mun) => {
+                return mun.schools.some((school) => {
+                  return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
+                })
+              })
+            })).pipe(map((munici : Municipality[]) => {
+              return munici;
+            }))
+
+            // municipalities = municipalities.filter((mun) => {
+            //   return mun.schools.some((school) => {
+            //     return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
+            //   })
+            // })
+            //filter out schools for each municipality that user have access to change
+            // municipalities.forEach((municipality) => {
+            //   municipality.schools = municipality.schools.filter((school) => {
+            //     return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
+            //   })
+            // })
+          }
+
+          this.$municipalities = municipalities;
+        }))
+        this.$municipalities = municipalities;
+
+      } else {
+        this.$municipalities = this.municipalityService.getMunicipalities();
+      }
+    })
+
   }
 
   ngOnDestroy() {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { Menu } from 'src/app/models/menu';
 import { User } from 'src/app/models/user';
 import { MenuService } from 'src/app/services/menu.service';
@@ -21,12 +22,16 @@ export class AdminMenusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.$menus = this.menuService.getMenus();
 
-    this.subscriptions.push(this.auth.user$.subscribe((user) => {
-      this.currentUser = new User();
-      this.currentUser.setUserFromAuthPic(user.picture);
-    }));
+    this.auth.user$.subscribe((user) => {
+      let currentUser = new User();
+      currentUser.setUserFromAuthPic(user.picture)
+      if(currentUser.permissions.some(permission => permission === 'admin')) {
+        this.$menus = this.menuService.getMenus();
+      } else {
+        this.$menus = this.menuService.getMenus().pipe(map((menu : Menu[]) => menu.filter( m => currentUser.menuIds.some(id => id === m._id))));
+      }
+    })
   }
 
 }
