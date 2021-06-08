@@ -1,3 +1,4 @@
+import { AuthService } from '@auth0/auth0-angular';
 import { Observable, of } from 'rxjs';
 import { MenuService } from './../../../services/menu.service';
 import { MunicipalityService } from './../../../services/municipality.service';
@@ -16,7 +17,8 @@ describe('AdminSchoolsComponent', () => {
       declarations: [ AdminSchoolsComponent ],
       providers: [
         {provide: MunicipalityService, useClass: MunicipalityServiceStub},
-        {provide: MenuService, useClass: MenuServiceStub}
+        {provide: MenuService, useClass: MenuServiceStub},
+        {provide: AuthService, useClass: AuthServiceStub}
       ]
     })
     .compileComponents();
@@ -65,3 +67,17 @@ class MenuServiceStub {
     return of([])
   }
 }
+
+class AuthServiceStub{
+  user$ : Observable<any>;
+  constructor () {
+    this.user$ = of({"picture": {
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []}});
+  }
+}
+
