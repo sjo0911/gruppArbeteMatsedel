@@ -23,25 +23,27 @@ export class AdminSchoolsComponent implements OnInit {
   constructor(private municipalityService : MunicipalityService, private menuService: MenuService, private auth: AuthService) {}
 
   ngOnInit(): void {
-
     this.subscriptions.push(this.municipalityService.getMunicipalities().subscribe((municipalities : Municipality[]) => {
-      this.auth.user$.subscribe((user) => {
+      this.subscriptions.push(this.auth.user$.subscribe((user) => {
         let currentUser = new User();
         currentUser.setUserFromAuthPic(user.picture);
-        //Filter out municipalities that user have access to change
-        municipalities = municipalities.filter((mun) => {
-          return mun.schools.some((school) => {
-            return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
+        if(!currentUser.permissions.some((perm) => perm === 'admin')){
+          //Filter out municipalities that user have access to change
+          municipalities = municipalities.filter((mun) => {
+            return mun.schools.some((school) => {
+              return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
+            })
           })
-        })
-        //filter out schools for each municipality that user have access to change
-        municipalities.forEach((municipality) => {
-          municipality.schools = municipality.schools.filter((school) => {
-            return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
+          //filter out schools for each municipality that user have access to change
+          municipalities.forEach((municipality) => {
+            municipality.schools = municipality.schools.filter((school) => {
+              return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
+            })
           })
-        })
+        }
+
         this.municipalities = municipalities;
-      })
+      }))
       this.municipalities = municipalities;
     }))
     this.subscriptions.push(this.menuService.getMenus().subscribe((menus : Menu[]) => {
@@ -55,7 +57,9 @@ export class AdminSchoolsComponent implements OnInit {
     })
   }
 
+  filterMunicipalities(){
 
+  }
 
 
 }
