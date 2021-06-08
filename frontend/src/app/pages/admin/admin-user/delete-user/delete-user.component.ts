@@ -36,7 +36,7 @@ export class DeleteUserComponent implements OnInit {
   }
   deleteUser(){
     if(this.userToDeleteId===''){
-      this.alert.showAlert('', 'Du måste välja en manvändare att ta bort.', 'warning');
+      this.alert.showAlert('', 'Du måste välja en användare att ta bort!', 'warning');
     }else{
       let subscriptions: Subscription = this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
 
