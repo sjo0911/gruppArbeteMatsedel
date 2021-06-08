@@ -24,14 +24,14 @@
 
         <div class="element">
           <label class="permissions-label">Behörigheter: </label>
-          <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" #admin>
+          <input class="permission-checkbox" title="Admin" type="checkbox" value="admin" name="admin" id="admin" (change)="clickAdmin(admin.checked)" #admin>
           <label class="admin-label">Admin</label>
         </div>
 
         <div class="element">
 
           <!-- <form [formGroup]="myForm"> -->
-          <ng-multiselect-dropdown class="school-dropdown" name="schools" [placeholder]="'Välj skolor att tilldela'" [data]="schoolsToChoose" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" #schools>
+          <ng-multiselect-dropdown class="school-dropdown" name="schools" [placeholder]="'Välj skolor att tilldela'" [data]="schoolsToChoose" [(ngModel)]="selectedSchools" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" #schools>
           </ng-multiselect-dropdown>
 
           <!-- <div ng-dropdown-multiselect="" data="schoolsToChoose" selected-model="chosenSchools" checkboxes="true">

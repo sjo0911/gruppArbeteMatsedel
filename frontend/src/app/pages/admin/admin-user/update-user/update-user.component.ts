@@ -17,6 +17,7 @@ import { Alert } from 'src/assets/alert';
 export class UpdateUserComponent implements OnInit {
   schoolsTitle : string;
   schoolsToChoose : School[];
+  selectedSchools : School[];
   chosenSchools : [];
   myForm: FormGroup;
   dropdownSettings: IDropdownSettings = {};
@@ -69,6 +70,7 @@ export class UpdateUserComponent implements OnInit {
 
   chooseUserToUpdate(user) {
     this.checkAdmin = false;
+    this.selectedSchools = [];
 
     this.userToUpdate = new User();
 
@@ -82,14 +84,14 @@ export class UpdateUserComponent implements OnInit {
     this.userToUpdate.menuIds = user.menuIds;
     this.userToUpdate.password = user.password;
 
-    user.permissions.forEach(permission => {
-      if(permission === 'admin') {
+      if(user.permissions.some((permission) => permission === 'admin')) {
         this.checkAdmin = true;
+        this.selectedSchools = this.schoolsToChoose;
+      } else {
+        this.selectedSchools = this.schoolsToChoose.filter((school) => {
+          return this.userToUpdate.schoolIds.some((schoolId) => schoolId === school._id)
+        })
       }
-    });
-
-
-    // Set skolorna checked
   }
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
@@ -119,5 +121,15 @@ export class UpdateUserComponent implements OnInit {
       this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
     };
   };
+
+  clickAdmin(adminChecked) {
+    if (adminChecked) {
+      this.selectedSchools = this.schoolsToChoose;
+    } else {
+      this.selectedSchools = this.schoolsToChoose.filter((school) => {
+        return this.userToUpdate.schoolIds.some((schoolId) => schoolId === school._id)
+      })
+    }
+  }
 
 }
