@@ -27,6 +27,7 @@ export class UpdateUserComponent implements OnInit {
   userToUpdate : User;
   checkAdmin : boolean = false;
 
+
   constructor(private municipalityService : MunicipalityService, private fb : FormBuilder, private userService : UserService, private alert : Alert) {
     this.schoolsTitle = 'Välj skolor till användare';
     this.subscriptions = [];
@@ -95,6 +96,7 @@ export class UpdateUserComponent implements OnInit {
   }
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
+    // userToUpdate!!!!!
     if(lastName.length < 1) {
       this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
     } else if(email.length < 5) {
