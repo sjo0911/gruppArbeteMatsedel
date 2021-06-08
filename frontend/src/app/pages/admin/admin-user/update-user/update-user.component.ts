@@ -66,7 +66,6 @@ export class UpdateUserComponent implements OnInit {
   }
 
   chooseUserToUpdate(user) {
-
     this.checkAdmin = false;
 
     if(user.firstName === undefined) {
@@ -74,7 +73,6 @@ export class UpdateUserComponent implements OnInit {
     } else {
       this.firstNameToEdit = user.firstName;
     }
-
     this.userToUpdateTitle = user.email;
     this.userToUpdate = user;
     this.lastNameToEdit = user.lastName;
@@ -87,7 +85,7 @@ export class UpdateUserComponent implements OnInit {
       }
     });
 
-    // Set admin checked eller ej + set skolorna checked
+    // Set skolorna checked
   }
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
@@ -99,19 +97,20 @@ export class UpdateUserComponent implements OnInit {
     } else if(password.length < 5) {
       this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'warning');
     } else {
-      let newUser = new User();
-      newUser.setUserFromAuthPic({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
+
+      this.userToUpdate.setUserFromAuthPic({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
+
       let schoolIds = [];
-      newUser.password = password;
+      this.userToUpdate.password = password;
       if(admin) {
-        newUser.permissions.push('admin');
+        this.userToUpdate.permissions.push('admin');
       } else if(schools) {
         schools.forEach(school => {
           schoolIds.push(school.id);
         });
       }
-      newUser.schoolIds = schoolIds;
-      let sub: Subscription = this.userService.updateUser(newUser).subscribe(() => {
+      this.userToUpdate.schoolIds = schoolIds;
+      let sub: Subscription = this.userService.updateUser(this.userToUpdate).subscribe(() => {
       })
       this.subscriptions.push(sub);
       this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
