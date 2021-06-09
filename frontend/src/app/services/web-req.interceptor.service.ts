@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class WebReqInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor() {
+
+  }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     throw new Error('Method not implemented.');
   }

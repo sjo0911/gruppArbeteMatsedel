@@ -13,17 +13,7 @@ body {
 body {
     margin: 0px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 10;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14;
 }
 
 .centered-content {
@@ -69,6 +59,7 @@ body {
 .navbar-dropdown {
   background: #063752;
   overflow-y: auto;
+  font-size: 14;
 }
 
 .navbar-link {
