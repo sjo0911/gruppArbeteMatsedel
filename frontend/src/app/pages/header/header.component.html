@@ -1,68 +1,35 @@
 <div class="centered-content">
-
-  <div class="navbar">
-    <button class="paginatorLeft" (click) = "previousWeekClick()">
-      <span class="material-icons">
-        arrow_back_ios
-      </span>
-      <h1 class="weekPager">
-        {{previousWeekTitle}}
-      </h1>
-    </button>
-
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        {{municipalityTitle}}
-      </a>
-      <div class="navbar-dropdown">
-        <a class="navbar-item" *ngFor="let municipality of $municipalities | async"
-          (click)="chooseMunicipality(municipality)">
-          <p>{{ municipality.municipalityName }}</p>
-        </a>
-      </div>
-    </div>
-
-    <ng-template [ngIf]="chosenMunicipality" [ngIfElse]="none">
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          {{schoolTitle}}
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)">
-            <p>{{ school.schoolName }}</p>
-          </a>
-        </div>
-      </div>
+  <button class="paginatorLeft" (click) = "previousWeekClick()">
+    <span style="font-size: 30px;">
+      <
+    </span>
+    <h1 class="weekPager">
+      {{previousWeekTitle}}
+    </h1>
+  </button>
+  <select class="drowpdown">
+    <option value="" class="dropdown-item"> {{municipalityTitle}}</option>
+    <option class="dropdown-item" *ngFor="let municipality of $municipalities | async"
+    (click)="chooseMunicipality(municipality)">{{ municipality.municipalityName }}</option>
+  </select>
+  <select>
+    <option value=""> {{schoolTitle}</option>
+    <ng-template [ngIf]="chosenMunicipality" >
+    <option *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)">{{ school.schoolName }}</option>
+  </ng-template>
+  </select>
+  <select>
+    <option value=""> {{schoolTitle}</option>
+    <ng-template [ngIf]="chosenMunicipality" >
+      <option *ngFor="let week of weeks" (click)="chooseWeek(week)">{{ "Vecka " + week.weekNr }}</option>
     </ng-template>
-    <ng-template #none>
-      <div class="navbar-item">
-        <a class="navbar-link">
-          Skola
-        </a>
-      </div>
-    </ng-template>
-
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        {{weekTitle}}
-      </a>
-      <div class="navbar-dropdown">
-        <a class="navbar-item" *ngFor="let week of weeks" (click)="chooseWeek(week)">
-          <p>{{ "Vecka " + week.weekNr }}</p>
-        </a>
-
-      </div>
-    </div>
-
-    <button class="paginatorRight" (click) = "nextWeekClick()">
-      <h1 class="weekPager">
-        {{nextWeekTitle}}
-      </h1>
-      <span class="material-icons">
-        arrow_forward_ios
-      </span>
-    </button>
-    <hr class="navbar-divider">
-  </div>
-
+  </select>
+  <button class="paginatorRight" (click) = "nextWeekClick()">
+    <h1 class="weekPager">
+      {{nextWeekTitle}}
+    </h1>
+    <span style="font-size: 30px;">
+      >
+    </span>
+  </button>
 </div>
