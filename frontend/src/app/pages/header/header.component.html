@@ -7,19 +7,19 @@
       {{previousWeekTitle}}
     </h1>
   </button>
-  <select class="drowpdown">
+  <select class="drowpdown" #munDropdown (change)="chooseMunicipality(munDropdown.value)">
     <option value="" class="dropdown-item"> {{municipalityTitle}}</option>
-    <option class="dropdown-item" *ngFor="let municipality of $municipalities | async"
-    (click)="chooseMunicipality(municipality)">{{ municipality.municipalityName }}</option>
+    <option class="dropdown-item" *ngFor="let municipality of $municipalities | async" value="municipality"
+    >{{ municipality.municipalityName }}</option>
   </select>
   <select>
-    <option value=""> {{schoolTitle}</option>
+    <option value=""> {{schoolTitle}}</option>
     <ng-template [ngIf]="chosenMunicipality" >
     <option *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)">{{ school.schoolName }}</option>
   </ng-template>
   </select>
   <select>
-    <option value=""> {{schoolTitle}</option>
+    <option value=""> {{weekTitle}}</option>
     <ng-template [ngIf]="chosenMunicipality" >
       <option *ngFor="let week of weeks" (click)="chooseWeek(week)">{{ "Vecka " + week.weekNr }}</option>
     </ng-template>

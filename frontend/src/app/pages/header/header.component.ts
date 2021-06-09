@@ -85,6 +85,7 @@ export class HeaderComponent implements OnInit {
   }
 
   chooseMunicipality(municipality: Municipality) {
+    console.log(municipality);
     this.chosenMunicipality = municipality;
     this.municipalityTitle = this.chosenMunicipality.municipalityName;
     this.schoolTitle = "Skola";
