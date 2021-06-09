@@ -10,8 +10,8 @@ import { DatePipe } from '@angular/common';
   templateUrl: './update-menu.component.html',
   styleUrls: ['./update-menu.component.scss']
 })
-export class UpdateMenuComponent implements OnInit {
 
+export class UpdateMenuComponent implements OnInit {
   @Input() $menus : Observable<any>;
   editMenuTitle : string;
   menuToEdit : Menu = new Menu();
@@ -24,7 +24,7 @@ export class UpdateMenuComponent implements OnInit {
     this.editMenuTitle = "Välj matsedel att redigera: "
     this.menuNameToEdit = "";
     this.subscriptions = [];
-   }
+  }
 
   ngOnInit(): void {
   }

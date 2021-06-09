@@ -6,6 +6,7 @@ import { Alert } from 'src/assets/alert';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminMenusComponent } from './admin-menus.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 describe('AdminMenusComponent', () => {
   let component: AdminMenusComponent;
@@ -17,7 +18,9 @@ describe('AdminMenusComponent', () => {
       declarations: [ AdminMenusComponent ],
       providers: [
         {provide: MenuService, useClass: MenuServiceStub},
-        {provide: Alert, useClass: AlertStub}   ],
+        {provide: Alert, useClass: AlertStub},
+        {provide: AuthService, useClass: AuthServiceStub}
+      ],
        } )
     .compileComponents();
   });
@@ -44,6 +47,19 @@ describe('AdminMenusComponent', () => {
     });
   });
 });
+
+class AuthServiceStub{
+  user$ : Observable<any>;
+  constructor () {
+    this.user$ = of({"picture": {
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []}});
+  }
+}
 
 class AlertStub {
   showAdvancedAlert() {

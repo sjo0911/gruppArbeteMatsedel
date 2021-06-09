@@ -9,16 +9,19 @@ export class User {
   password: string;
 
   constructor() {
-
+    this.menuIds = new Array();
   }
 
   setUserFromAuthPic(user) {
+    this._id = user._id;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email;
     this.schoolIds = user.schoolIds;
     this.permissions = user.permissions;
-    this.menuIds = user.menuId;
+    if(user.menuId) {
+      this.menuIds = user.menuId;
+    }
   }
 
 }

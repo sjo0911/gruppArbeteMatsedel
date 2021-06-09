@@ -30,27 +30,9 @@
 
         <div class="element">
 
-          <!-- <form [formGroup]="myForm"> -->
           <ng-multiselect-dropdown class="school-dropdown" name="schools" [placeholder]="'Välj skolor att tilldela'" [data]="schoolsToChoose" [(ngModel)]="selectedSchools" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" #schools>
           </ng-multiselect-dropdown>
 
-          <!-- <div ng-dropdown-multiselect="" data="schoolsToChoose" selected-model="chosenSchools" checkboxes="true">
-            <a class="navbar-link">
-              {{ schoolsTitle }}
-            </a>
-          </div> -->
-
-          <!-- <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              {{ schoolsTitle }}
-            </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item" >
-                <p></p>
-              </a>
-            </div>
-          </div> -->
-          <!-- </form> -->
         </div>
       </div>
     </form>

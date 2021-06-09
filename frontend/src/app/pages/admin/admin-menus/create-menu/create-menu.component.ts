@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
 import  Swal  from 'sweetalert2';
 import { Alert } from 'src/assets/alert';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-menu',
@@ -14,7 +17,7 @@ import { DatePipe } from '@angular/common';
 export class CreateMenuComponent implements OnInit {
   currentDate = new Date();
   subscriptions : Subscription[];
-  constructor(private menuService : MenuService, private alert : Alert) {
+  constructor(private menuService : MenuService, private alert : Alert, private auth: AuthService, private userService : UserService) {
     this.subscriptions = [];
   }
 
@@ -38,9 +41,17 @@ export class CreateMenuComponent implements OnInit {
       menu.menuName = menuName;
       menu.startDate = startDate;
       menu.endDate = endDate;
-      let sub: Subscription = this.menuService.postMenu(menu).subscribe(() => {
-      })
-      this.subscriptions.push(sub);
+      this.subscriptions.push(this.menuService.postMenu(menu).subscribe((createdMenu : Menu) => {
+        this.subscriptions.push(this.auth.user$.subscribe((user) => {
+          let currentUser = new User();
+          currentUser.setUserFromAuthPic(user.picture);
+          currentUser.menuIds.push(createdMenu._id);
+          this.subscriptions.push(this.userService.updateUser(currentUser).subscribe(() => {
+          }));
+        }));
+      }));
+
+
       this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success');
     }
   }

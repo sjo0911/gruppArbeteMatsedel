@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -15,10 +16,10 @@ export class DeleteUserComponent implements OnInit {
   $users : Observable<any>;
   userToDeleteId: string='';
   sub:Subscription[];
+  currentUser : User;
 
 
-
-  constructor( private userService: UserService, private alert: Alert) {
+  constructor( private userService: UserService, private alert: Alert, private auth: AuthService) {
     this.sub=[];
 
   }
@@ -27,22 +28,36 @@ export class DeleteUserComponent implements OnInit {
     this.NameOfUserToDelete= "Välja användare att ta bort";
     this.$users= this.userService.getUsers();
 
-
+    this.sub.push(this.auth.user$.subscribe((user) => {
+      this.currentUser = new User();
+      this.currentUser.setUserFromAuthPic(user.picture);
+    }));
   }
-  UserToDelete(user: User){
+
+  ngOnDestroy(): void {
+    this.sub.forEach((sub) => {
+      sub.unsubscribe();
+    })
+  }
+
+  UserToDelete(user: User) {
       this.NameOfUserToDelete=user.email;
       this.userToDeleteId=user._id;
-
   }
-  deleteUser(){
-    if(this.userToDeleteId===''){
-      this.alert.showAlert('', 'Du måste välja en användare att ta bort!', 'warning');
-    }else{
-      let subscriptions: Subscription = this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
 
-      });
-      this.sub.push(subscriptions);
-      this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success');
+  deleteUser() {
+    if(!this.currentUser.permissions.some((permission) => permission === 'admin')) {
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'warning');
+    } else {
+      if(this.userToDeleteId===''){
+        this.alert.showAlert('', 'Du måste välja en användare att ta bort!', 'warning');
+      }else{
+        let subscriptions: Subscription = this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
+
+        });
+        this.sub.push(subscriptions);
+        this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success');
+      }
     }
   }
 
