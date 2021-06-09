@@ -9,6 +9,7 @@ import { By } from '@angular/platform-browser';
 import { CreateMenuComponent } from './create-menu.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { doesNotReject } from 'node:assert';
+import { AuthService } from '@auth0/auth0-angular';
 
 describe('CreateMenuComponent', () => {
   let component: CreateMenuComponent;
@@ -19,7 +20,9 @@ describe('CreateMenuComponent', () => {
       declarations: [ CreateMenuComponent ],
       providers: [
         {provide: MenuService, useClass: MenuServiceStub},
-        {provide: Alert, useClass: AlertStub}   ],
+        {provide: Alert, useClass: AlertStub},
+        {provide: AuthService, useClass: AuthServiceStub}
+      ],
       imports: [HttpClientTestingModule]
     })
     .compileComponents();
@@ -55,6 +58,10 @@ describe('CreateMenuComponent', () => {
   });
 
 });
+
+class AuthServiceStub{
+  user$ : Observable<any>;
+}
 
 class AlertStub {
   showAdvancedAlert() {

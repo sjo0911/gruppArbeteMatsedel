@@ -9,12 +9,13 @@ import { AdminMealsComponent } from './admin-meals.component';
 
 import { SharingService } from 'src/app/services/sharing.service';
 import { MenuService } from 'src/app/services/menu.service';
-import { of, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Week } from 'src/app/models/week';
 import { Menu } from 'src/app/models/menu';
 import { Button } from 'protractor';
 import { debug } from 'console';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 
 describe('AdminComponent', () => {
   let component: AdminMealsComponent;
@@ -28,7 +29,8 @@ describe('AdminComponent', () => {
       providers: [
         {provide: SharingService, useClass: SharingServiceStub},
         {provide: MenuService, useClass: MenuServiceStub},
-        {provide: Alert, useClass: AlertStub}
+        {provide: Alert, useClass: AlertStub},
+        {provide: AuthService, useClass: AuthServiceStub}
       ]
     }).overrideComponent(AdminMealsComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -154,6 +156,19 @@ describe('AdminComponent', () => {
   });
 
 });
+
+class AuthServiceStub{
+  user$ : Observable<any>;
+  constructor () {
+    this.user$ = of({"picture": {
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []}});
+  }
+}
 
 class SharingServiceStub {
   getObservableWeek() : Subject<Week> {

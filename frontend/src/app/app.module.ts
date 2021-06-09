@@ -29,7 +29,7 @@ import { UpdateUserComponent } from './pages/admin/admin-user/update-user/update
 import { DeleteUserComponent } from './pages/admin/admin-user/delete-user/delete-user.component';
 import { UserHeaderComponent } from './pages/admin/admin-user/user-header/user-header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 //
 registerLocaleData(sv);
 @NgModule({
@@ -53,7 +53,7 @@ registerLocaleData(sv);
     CreateUserComponent,
     UpdateUserComponent,
     DeleteUserComponent,
-    UserHeaderComponent
+    UserHeaderComponent,
   ],
   imports: [
     ReactiveFormsModule,

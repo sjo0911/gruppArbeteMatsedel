@@ -68,6 +68,8 @@ export class HeaderComponent implements OnInit {
               })
               return mun;
             }))
+          } else {
+            this.$municipalities = this.municipalityService.getMunicipalities();
           }
         }))
       } else {
