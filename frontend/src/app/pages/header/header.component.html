@@ -7,23 +7,24 @@
       {{previousWeekTitle}}
     </h1>
   </button>
-  <select required [(ngModel)]="chosenMunicipality" #munDropdown (change)="chooseMunicipality()">
-    <option disabled value="" disabled selected hidden>{{municipalityTitle}}</option>
+  <select required [(ngModel)]="chosenMunicipality" (change)="chooseMunicipality()">
+    <option [ngValue]="chosenMunicipality" disabled selected hidden>{{municipalityTitle}}</option>
     <option class="dropdown-item" *ngFor="let municipality of $municipalities | async" [ngValue]="municipality"
     >{{ municipality.municipalityName }}</option>
   </select>
-  <select [(ngModel)]="chosenSchool" #schoolDropdown (change)="chooseSchool()">
-    <option value="" > {{schoolTitle}}</option>
+  <select [(ngModel)]="chosenSchool" required (change)="chooseSchool()">
+    <option [ngValue]="chosenSchool"  disabled selected hidden>{{schoolTitle}}</option>
     <ng-template [ngIf]="chosenMunicipality" >
-    <option class="dropdown-item" *ngFor="let school of chosenMunicipality.schools" (click)="chooseSchool(school)">{{ school.schoolName }}</option>
+    <option class="dropdown-item" *ngFor="let school of chosenMunicipality.schools" [ngValue]="school" >{{ school.schoolName }}</option>
   </ng-template>
   </select>
-  <select>
-    <option value=""> {{weekTitle}}</option>
-    <ng-template [ngIf]="chosenMunicipality" >
-      <option *ngFor="let week of weeks" (click)="chooseWeek(week)">{{ "Vecka " + week.weekNr }}</option>
+  <select required (change)="setWeek()" [(ngModel)]="chosenWeek">
+    <option [ngValue]="chosenWeek" disabled selected hidden >{{weekTitle}}</option>
+    <ng-template [ngIf]="chosenSchool" >
+      <option class="dropdown-item" *ngFor="let week of weeks" [ngValue]="week">{{ "Vecka " + week.weekNr }}</option>
     </ng-template>
   </select>
+  <div>
   <button class="paginatorRight" (click) = "nextWeekClick()">
     <h1 class="weekPager">
       {{nextWeekTitle}}
@@ -32,4 +33,5 @@
       >
     </span>
   </button>
+</div>
 </div>
