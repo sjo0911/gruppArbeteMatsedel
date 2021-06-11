@@ -7,7 +7,7 @@ import { SharingService } from './services/sharing.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Matsedeln';
 
   constructor(private sharingService : SharingService) { }
 

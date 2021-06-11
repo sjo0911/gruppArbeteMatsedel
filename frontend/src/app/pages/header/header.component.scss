@@ -5,13 +5,6 @@
 
 }
 
-.navbar {
-    background: #063752;
-    align-items: center;
-    justify-content: center;
-    // position: fixed;
-}
-
 .dropdown-item {
     margin-top: 3px;
     cursor: pointer;
@@ -62,7 +55,7 @@ option[value=""][disabled] {
   cursor: pointer;
   color: hsl(0, 0%, 100%);
   .weekPager {
-      margin-bottom: 3px;
+    margin-top: 8px;
       font-size: 10;
   }
   border: 0px;
