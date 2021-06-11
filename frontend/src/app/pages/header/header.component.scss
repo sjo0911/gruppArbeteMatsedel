@@ -37,6 +37,7 @@ select {
 }
 
 option {
+  color:white;
   cursor: pointer;
   border: 0px;
   font-size: 18px;
@@ -44,6 +45,13 @@ option {
     color: #1775b8;
   }
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
 }
 
 .paginatorLeft, .paginatorRight{

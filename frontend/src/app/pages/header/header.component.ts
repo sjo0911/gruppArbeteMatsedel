@@ -24,6 +24,7 @@ import { map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   $municipalities: Observable<any>;
   chosenMunicipality: Municipality;
+  chosenSchool: School;
   municipalityTitle: string;
   schoolTitle: string;
   weeks : Week[];
@@ -44,9 +45,11 @@ export class HeaderComponent implements OnInit {
     this.weekTitle = "Vecka"
     this.currentWeek = this.dateHandlerService.getCurrentWeek();
     this.ROOT_URL = "localhost:4200";
+
   }
 
   ngOnInit(): void {
+    this.chosenMunicipality = {"_id": "0", "municipalityName": "Kommun", "schools": []};
     this.auth.isAuthenticated$.subscribe((loggedIn) => {
       if(loggedIn) {
         this.subscriptions.push(this.auth.user$.subscribe((user) => {
@@ -84,15 +87,16 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  chooseMunicipality(municipality: Municipality) {
-    console.log(municipality);
-    this.chosenMunicipality = municipality;
+  chooseMunicipality() {
+    console.log(this.chosenMunicipality);
+    this.chosenMunicipality = this.chosenMunicipality;
     this.municipalityTitle = this.chosenMunicipality.municipalityName;
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";
   }
 
-  chooseSchool(school: School) {
+  chooseSchool() {
+    let school : School = this.chosenSchool;
     if(school._menuId === '') {
       this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
     } else {
