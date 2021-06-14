@@ -19,3 +19,32 @@
     cursor: pointer;
     padding: 20px;
 }
+
+// .p {
+//   text-indent: 5em;
+// }
+
+.one {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  margin-right: 4px;
+}
+
+.two {
+  margin-top: 4px;
+}
+
+.user-content {
+  // Set x fast!
+  margin-top: 20px;
+  margin-right: 780px;
+  display: flex;
+  flex-direction: row;
+}
+
+.logged-in-user-label {
+  color: white;
+}

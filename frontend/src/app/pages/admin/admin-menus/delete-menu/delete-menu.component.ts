@@ -37,12 +37,16 @@ export class DeleteMenuComponent implements OnInit {
 
   deleteMenu() {
     if(this.menuToDeleteId === '') {
-      this.alert.showAlert('', 'Du måste välja en matsedel att ta bort.', 'warning');
+      this.alert.showAlert('', 'Du måste välja en matsedel att ta bort.', 'error');
     } else {
-      let sub: Subscription =this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
+      this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna matsedel?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
+        if (result.isConfirmed) {
+          let sub: Subscription =this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
+          });
+          this.subscriptions.push(sub);
+          this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen.', 'success');
+        }
       });
-      this.subscriptions.push(sub);
-      this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen.', 'success');
     }
   }
 }

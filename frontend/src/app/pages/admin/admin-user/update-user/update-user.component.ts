@@ -99,14 +99,14 @@ export class UpdateUserComponent implements OnInit {
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
     if(!this.currentUser.permissions.some((permission) => permission === 'admin')) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'error');
     } else {
       if(lastName.length < 1) {
-        this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'error');
       } else if(email.length < 5) {
-        this.alert.showAlert('', 'Användare måste ha en email på minst 5 tecken. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha en email på minst 5 tecken. Testa igen!', 'error');
       } else if(password.length < 5) {
-        this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'error');
       } else {
 
         this.userToUpdate.firstName = firstName;

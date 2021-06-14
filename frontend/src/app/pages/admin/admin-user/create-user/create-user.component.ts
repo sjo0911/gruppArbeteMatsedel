@@ -66,11 +66,11 @@ export class CreateUserComponent implements OnInit {
       this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'error');
     } else {
       if(lastName.length < 1) {
-        this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'error');
       } else if(email.length < 5) {
-        this.alert.showAlert('', 'Användare måste ha en email på minst 5 tecken. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha en email på minst 5 tecken. Testa igen!', 'error');
       } else if(password.length < 5) {
-        this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'error');
       } else {
         let newUser = new User();
         newUser.setUserFromAuthPic({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});

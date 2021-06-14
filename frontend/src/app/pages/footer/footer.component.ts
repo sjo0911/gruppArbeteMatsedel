@@ -15,6 +15,7 @@ export class FooterComponent implements OnInit {
   admin : boolean = false;
   sub : Subscription;
   readonly ROOT_URL;
+  loggedInUser : string;
 
   constructor(public auth: AuthService) {
     this.ROOT_URL = environment.ROOT_URL;
@@ -29,6 +30,7 @@ export class FooterComponent implements OnInit {
           this.admin = true;
         }
       });
+      this.loggedInUser = currentUser.firstName + ' ' + currentUser.lastName;
     })
   }
 

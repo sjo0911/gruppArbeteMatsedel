@@ -33,9 +33,9 @@ export class CreateMenuComponent implements OnInit {
   createMenu(menuName : string, startDate : Date, endDate : Date) {
     let datePipe: DatePipe = new DatePipe('en-US');
     if(menuName.length < 1) {
-      this.alert.showAlert('', 'Input för menynamnet är för kort. Testa igen!', 'warning');
+      this.alert.showAlert('', 'Input för menynamnet är för kort. Testa igen!', 'error');
     } else if (menuName.length > 40) {
-      this.alert.showAlert('', 'Input för menynamnet är för långt. Testa igen!', 'warning');
+      this.alert.showAlert('', 'Input för menynamnet är för långt. Testa igen!', 'error');
     } else {
       let menu : Menu = new Menu();
       menu.menuName = menuName;
