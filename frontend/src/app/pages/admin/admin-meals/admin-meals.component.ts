@@ -53,7 +53,7 @@ export class AdminMealsComponent implements OnInit {
 
   deleteMeal(mealId : string, day : Day) : void{
     if(!this.currentUser.permissions.some((permission) => permission === 'admin') && !this.currentUser.menuIds.some((menuId) => menuId === this.menu._id)) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera denna matsedel!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera denna matsedel!', 'error');
     } else {
       this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna maträtt?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
           if (result.isConfirmed) {
@@ -84,12 +84,12 @@ export class AdminMealsComponent implements OnInit {
 
   updateMeal(meal: Meal, day: Day, mealName : string, veg : any, hot : any, pig: any) {
     if(!this.currentUser.permissions.some((permission) => permission === 'admin') && !this.currentUser.menuIds.some((menuId) => menuId === this.menu._id)) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera denna matsedel!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera denna matsedel!', 'error');
     } else {
       if(mealName.length < 1) {
-        this.alert.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'error');
       } else if (mealName.length > 85) {
-        this.alert.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'error');
       } else {
         meal.mealName = mealName;
         meal.foodSpecs = [];
@@ -113,12 +113,12 @@ export class AdminMealsComponent implements OnInit {
 
   saveMeal(day: Day, newMealName : string, veg : any, hot : any, pig: any, form : any) {
     if(!this.currentUser.permissions.some((permission) => permission === 'admin') && !this.currentUser.menuIds.some((menuId) => menuId === this.menu._id)) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera denna matsedel!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera denna matsedel!', 'error');
     } else {
       if(newMealName.length < 1) {
-        this.alert.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Input för maträtten är för kort. Testa igen!', 'error');
       } else if (newMealName.length > 85) {
-        this.alert.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Input för maträtten är för långt. Testa igen!', 'error');
       } else {
         let meal : Meal = new Meal();
         meal.mealName = newMealName;

@@ -58,7 +58,7 @@ export class AddMenuComponent implements OnInit {
 
   addMenuToSchool(menu : Menu, school : School) {
     if(this.chosenSchoolTitleToAdd === "Välj skola: " || this.chosenMenuTitle === "Välj matsedel: ") {
-      this.alert.showAlert('', 'Du måste välja både en skola och en matsedel att lägga till!', 'warning');
+      this.alert.showAlert('', 'Du måste välja både en skola och en matsedel att lägga till!', 'error');
     } else {
       school._menuId = menu._id;
       let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {

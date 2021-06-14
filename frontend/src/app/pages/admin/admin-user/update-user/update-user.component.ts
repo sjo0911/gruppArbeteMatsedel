@@ -79,12 +79,12 @@ export class UpdateUserComponent implements OnInit {
 
     this.userToUpdateTitle = user.email;
     this.userToUpdate._id = user._id;
-    this.userToUpdate.firstName = user.firstName;
-    this.userToUpdate.lastName = user.lastName;
-    this.userToUpdate.email = user.email;
     this.userToUpdate.schoolIds = user.schoolIds;
     this.userToUpdate.permissions = user.permissions;
     this.userToUpdate.menuIds = user.menuIds;
+    this.userToUpdate.firstName = user.firstName;
+    this.userToUpdate.lastName = user.lastName;
+    this.userToUpdate.email = user.email;
     this.userToUpdate.password = user.password;
 
       if(user.permissions.some((permission) => permission === 'admin')) {
@@ -99,17 +99,20 @@ export class UpdateUserComponent implements OnInit {
 
   updateUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
     if(!this.currentUser.permissions.some((permission) => permission === 'admin')) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'error');
     } else {
       if(lastName.length < 1) {
-        this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'error');
       } else if(email.length < 5) {
-        this.alert.showAlert('', 'Användare måste ha en email på minst 5 tecken. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha en email på minst 5 tecken. Testa igen!', 'error');
       } else if(password.length < 5) {
-        this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'warning');
+        this.alert.showAlert('', 'Användare måste ha ett lösenord på minst 5 tecken. Testa igen!', 'error');
       } else {
 
-        this.userToUpdate.setUserFromAuthPic({'firstName' : firstName, 'lastName' : lastName, 'email' : email, 'permissions' : [], 'schoolIds' : [], 'menuIds' : []});
+        this.userToUpdate.firstName = firstName;
+        this.userToUpdate.lastName = lastName;
+        this.userToUpdate.email = email;
+        this.userToUpdate.password = password;
 
         let schoolIds = [];
         this.userToUpdate.password = password;
@@ -121,10 +124,9 @@ export class UpdateUserComponent implements OnInit {
           });
         }
         this.userToUpdate.schoolIds = schoolIds;
-        let sub: Subscription = this.userService.updateUser(this.userToUpdate).subscribe(() => {
-        })
-        this.subscriptions.push(sub);
-        this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
+        this.subscriptions.push(this.userService.updateUser(this.userToUpdate).subscribe(() => {
+        }));
+        this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit uppdaterad.', 'success');
       };
     }
   };

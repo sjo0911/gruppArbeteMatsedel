@@ -14,7 +14,7 @@ export class DeleteUserComponent implements OnInit {
 
   NameOfUserToDelete: string;
   $users : Observable<any>;
-  userToDeleteId: string='';
+  userToDeleteId: string = '';
   sub:Subscription[];
   currentUser : User;
 
@@ -47,16 +47,18 @@ export class DeleteUserComponent implements OnInit {
 
   deleteUser() {
     if(!this.currentUser.permissions.some((permission) => permission === 'admin')) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'error');
     } else {
       if(this.userToDeleteId===''){
-        this.alert.showAlert('', 'Du måste välja en användare att ta bort!', 'warning');
+        this.alert.showAlert('', 'Du måste välja en användare att ta bort!', 'error');
       }else{
-        let subscriptions: Subscription = this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
-
+        this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna användare?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
+          if (result.isConfirmed) {
+            this.sub.push(this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
+            }));
+            this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success');
+          }
         });
-        this.sub.push(subscriptions);
-        this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success');
       }
     }
   }
