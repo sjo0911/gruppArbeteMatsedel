@@ -7,7 +7,7 @@
       {{previousWeekTitle}}
     </h1>
   </button>
-  <select required [(ngModel)]="chosenMunicipality" (change)="chooseMunicipality()">
+  <select class="navbar-dropdown" required [(ngModel)]="chosenMunicipality" (change)="chooseMunicipality()">
     <option [ngValue]="chosenMunicipality" disabled selected hidden>{{municipalityTitle}}</option>
     <option class="dropdown-item" *ngFor="let municipality of $municipalities | async" [ngValue]="municipality"
     >{{ municipality.municipalityName }}</option>

@@ -46,8 +46,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chosenMunicipality = {"_id": "0", "municipalityName": "Kommun", "schools": []};
-    this.chosenSchool = {"_id": "0", "_menuId": "0", schoolName:"Skola"}
+    // this.chosenMunicipality = {"_id": "0", "municipalityName": "Kommun", "schools": []};
+    // this.chosenSchool = {"_id": "0", "_menuId": "0", schoolName:"Skola"}
     this.auth.isAuthenticated$.subscribe((loggedIn) => {
       if(loggedIn) {
         this.subscriptions.push(this.auth.user$.subscribe((user) => {
@@ -86,8 +86,8 @@ export class HeaderComponent implements OnInit {
   }
 
   chooseMunicipality() {
-    console.log(this.chosenMunicipality);
-    this.chosenMunicipality = this.chosenMunicipality;
+    console.log(this.chosenMunicipality.municipalityName);
+    // this.chosenMunicipality = this.chosenMunicipality;
     this.municipalityTitle = this.chosenMunicipality.municipalityName;
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";

@@ -83,8 +83,9 @@ describe('HeaderComponent', () => {
         {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
          fixture.detectChanges();
          fixture.whenStable().then(() => {
-          const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
-          dropDown.children[0].nativeElement.click();
+          const dropDown = fixture.debugElement.queryAll(By.css('select'))[0];
+          dropDown.nativeNode.options[1].click();
+          dropDown.nativeNode.dispatchEvent(new Event('change'));
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);
@@ -102,12 +103,15 @@ describe('HeaderComponent', () => {
         {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
          fixture.detectChanges();
          fixture.whenStable().then(() => {
-          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
-          expect(dropDownMunicipalities.children.length).toBe(2);
-          dropDownMunicipalities.children[0].nativeElement.click();
+          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('select'))[0];
+          dropDownMunicipalities.nativeNode.options[1].click();
+          dropDownMunicipalities.nativeNode.dispatchEvent(new Event('change'));
+          expect(dropDownMunicipalities.children.length).toBe(3);
+          // dropDownMunicipalities.children[0].nativeElement.click();
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);
+            expect(component.municipalityTitle).toBe('Skellefteå');
            });
          });
          done();
@@ -120,14 +124,17 @@ describe('HeaderComponent', () => {
         {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
          fixture.detectChanges();
          fixture.whenStable().then(() => {
-          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
-          dropDownMunicipalities.children[0].nativeElement.click();
-          expect(dropDownMunicipalities.children.length).toBe(2);
+          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('select'))[0];
+          dropDownMunicipalities.nativeNode.options[1].click();
+          dropDownMunicipalities.nativeNode.dispatchEvent(new Event('change'));
+          expect(dropDownMunicipalities.children.length).toBe(3);
           fixture.detectChanges();
           fixture.whenStable().then(() => {
-            const dropDownSchools = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[1];
-            expect(dropDownSchools.children.length).toBe(1);
-            dropDownSchools.children[0].nativeElement.click();
+            expect(component.chosenMunicipality.municipalityName).toBe('Skellefteå');
+            const dropDownSchools = fixture.debugElement.queryAll(By.css('select'))[1];
+            dropDownSchools.nativeNode.options[1].click();
+            dropDownSchools.nativeNode.dispatchEvent(new Event('change'));
+            expect(dropDownSchools.children.length).toBe(2);
             fixture.detectChanges();
             fixture.whenStable().then(() => {
               expect(component.chooseSchool).toHaveBeenCalledTimes(1);
@@ -200,13 +207,13 @@ describe('HeaderComponent', () => {
   describe('Check methods when buttons are clicked', () => {
     it('should call previousWeekClick() when "paginatorLeft" button is clicked', () => {
       spyOn(component, 'previousWeekClick');
-      dh.clickButton('arrow_back_ios');
+      dh.clickButton('<');
       expect(component.previousWeekClick).toHaveBeenCalledTimes(1);
     });
 
     it('should call nextWeekClick() when "paginatorRight" button is clicked', () => {
       spyOn(component, 'nextWeekClick');
-      dh.clickButton('arrow_forward_ios');
+      dh.clickButton('>');
       expect(component.nextWeekClick).toHaveBeenCalledTimes(1);
     });
   });
