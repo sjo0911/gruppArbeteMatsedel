@@ -1,28 +1,24 @@
 .admin-button {
-    border: 0px;
-    background: transparent;
-    color: white;
-    &:active {
-        transform: translateY(4px);
-    }
-    cursor: pointer;
-    padding: 20px;
+  border: 0px;
+  background: transparent;
+  color: white;
+  &:active {
+      transform: translateY(4px);
+  }
+  cursor: pointer;
+  padding: 20px;
 }
 
 .user-button {
-    border: 0px;
-    background: transparent;
-    color: white;
-    &:active {
-        transform: translateY(4px);
-    }
-    cursor: pointer;
-    padding: 20px;
+  border: 0px;
+  background: transparent;
+  color: white;
+  &:active {
+      transform: translateY(4px);
+  }
+  cursor: pointer;
+  padding: 20px;
 }
-
-// .p {
-//   text-indent: 5em;
-// }
 
 .one {
   display: flex;
@@ -38,9 +34,10 @@
 }
 
 .user-content {
-  // Set x fast!
+  position: fixed;
+  left: 15px;
   margin-top: 20px;
-  margin-right: 780px;
+  // margin-right: 780px;
   display: flex;
   flex-direction: row;
 }
