@@ -86,7 +86,7 @@ export class HeaderComponent implements OnInit {
   }
 
   chooseMunicipality() {
-    console.log(this.chosenMunicipality.municipalityName);
+    // console.log(this.chosenMunicipality.municipalityName);
     // this.chosenMunicipality = this.chosenMunicipality;
     this.municipalityTitle = this.chosenMunicipality.municipalityName;
     this.schoolTitle = "Skola";
@@ -115,9 +115,9 @@ export class HeaderComponent implements OnInit {
         this.weeks.forEach(week => {
           if(week.weekNr === this.currentWeek) {
             this.chosenWeek = week;
+            this.chooseWeek(this.chosenWeek);
           }
         });
-       this.chooseWeek(this.chosenWeek);
       });
       this.subscriptions.push(sub);
 
