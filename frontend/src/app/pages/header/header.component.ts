@@ -24,6 +24,7 @@ import { map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   $municipalities: Observable<any>;
   chosenMunicipality: Municipality;
+  chosenSchool: School;
   municipalityTitle: string;
   schoolTitle: string;
   weeks : Week[];
@@ -35,7 +36,6 @@ export class HeaderComponent implements OnInit {
   nextWeekTitle : string;
   currentWeek : string;
   subscriptions : Subscription[] = [];
-  ROOT_URL : string;
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
     private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert, private auth: AuthService) {
@@ -43,10 +43,11 @@ export class HeaderComponent implements OnInit {
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
     this.currentWeek = this.dateHandlerService.getCurrentWeek();
-    this.ROOT_URL = "localhost:4200";
   }
 
   ngOnInit(): void {
+    // this.chosenMunicipality = {"_id": "0", "municipalityName": "Kommun", "schools": []};
+    // this.chosenSchool = {"_id": "0", "_menuId": "0", schoolName:"Skola"}
     this.auth.isAuthenticated$.subscribe((loggedIn) => {
       if(loggedIn) {
         this.subscriptions.push(this.auth.user$.subscribe((user) => {
@@ -84,14 +85,16 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  chooseMunicipality(municipality: Municipality) {
-    this.chosenMunicipality = municipality;
+  chooseMunicipality() {
+    // console.log(this.chosenMunicipality.municipalityName);
+    // this.chosenMunicipality = this.chosenMunicipality;
     this.municipalityTitle = this.chosenMunicipality.municipalityName;
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";
   }
 
-  chooseSchool(school: School) {
+  chooseSchool() {
+    let school : School = this.chosenSchool;
     if(school._menuId === '') {
       this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
     } else {
@@ -112,14 +115,18 @@ export class HeaderComponent implements OnInit {
         this.weeks.forEach(week => {
           if(week.weekNr === this.currentWeek) {
             this.chosenWeek = week;
+            this.chooseWeek(this.chosenWeek);
           }
         });
-       this.chooseWeek(this.chosenWeek);
       });
       this.subscriptions.push(sub);
 
     }
 
+  }
+
+  setWeek(){
+    this.chooseWeek(this.chosenWeek);
   }
 
   chooseWeek(week : Week) {

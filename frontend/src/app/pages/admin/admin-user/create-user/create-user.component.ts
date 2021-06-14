@@ -63,7 +63,7 @@ export class CreateUserComponent implements OnInit {
   createUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
 
     if(!this.currentUser.permissions.some((permission) => permission === 'admin')) {
-      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'warning');
+      this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'error');
     } else {
       if(lastName.length < 1) {
         this.alert.showAlert('', 'Användare måste ha ett efternamn. Testa igen!', 'warning');

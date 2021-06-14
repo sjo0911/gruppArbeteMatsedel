@@ -2,19 +2,13 @@
     // position: fixed;
     // height: 100%;
     max-height: 50px;
+
 }
 
-.navbar {
-    background: #063752;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    // position: fixed;
-}
-
-.navbar-item {
+.dropdown-item {
     margin-top: 3px;
     cursor: pointer;
+    background:#063752;
     .navbar-link {
         color: hsl(0, 0%, 100%);
         background: transparent;
@@ -24,19 +18,44 @@
     }
 }
 
-.navbar-dropdown {
-  height: 400px;
+select {
+  margin-top: 5px;
+  border: 0px;
+  background:transparent !important;
+  color:white;
+  cursor: pointer;
+  padding:10px;
+  font-size: 18px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+option {
+  color:white;
+  cursor: pointer;
+  border: 0px;
+  font-size: 18px;
+  &:hover {
+    color: #1775b8;
+  }
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
 }
 
 .paginatorLeft, .paginatorRight{
   display: flex;
   margin-left: 100px;
-  margin-top: 10px;
+
   margin-right: 100px;
   cursor: pointer;
   color: hsl(0, 0%, 100%);
   .weekPager {
-      margin-bottom: 3px;
+    margin-top: 8px;
       font-size: 10;
   }
   border: 0px;
