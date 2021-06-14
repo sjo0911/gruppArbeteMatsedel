@@ -14,7 +14,7 @@ export class DeleteUserComponent implements OnInit {
 
   NameOfUserToDelete: string;
   $users : Observable<any>;
-  userToDeleteId: string='';
+  userToDeleteId: string = '';
   sub:Subscription[];
   currentUser : User;
 
@@ -52,10 +52,9 @@ export class DeleteUserComponent implements OnInit {
       if(this.userToDeleteId===''){
         this.alert.showAlert('', 'Du måste välja en användare att ta bort!', 'warning');
       }else{
-        let subscriptions: Subscription = this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
+        this.sub.push(this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
 
-        });
-        this.sub.push(subscriptions);
+        }));
         this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success');
       }
     }
