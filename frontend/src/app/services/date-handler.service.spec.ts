@@ -13,9 +13,8 @@ describe('DateHandlerService', () => {
   let weeks : Week[];
 
   beforeEach(() => {
-    // TestBed.configureTestingModule({});
-    // service = TestBed.inject(DateHandlerService);
-    service = new DateHandlerService();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(DateHandlerService);
 
     menuMockup = new MenuMockup();
     weeks = service.getWeeks(menuMockup.getMenu());

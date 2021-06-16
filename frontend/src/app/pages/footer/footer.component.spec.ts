@@ -31,7 +31,6 @@ describe('FooterComponent', () => {
   });
 
   beforeEach(() => {
-    //router = TestBed.inject(Router);
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -64,19 +63,6 @@ describe('FooterComponent', () => {
       })
       }
     }));
-
-    /*it('should navigate to /home on first button click', fakeAsync(() => {
-      const location=TestBed.inject(Location);
-      const loginButton = fixture.debugElement.queryAll(By.css('button'));
-      if(expect(loginButton[0].nativeNode.outerText).toBe("Logga ut")){
-        const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
-        nativeButton.click();
-        fixture.detectChanges();
-        fixture.whenStable().then(()=>{
-        expect(location.path()).toBe('home')
-      })
-      }
-    }));*/
   });
 
 });

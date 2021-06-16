@@ -26,8 +26,4 @@ export class WebReqService {
   delete(uri: string){
     return this.http.delete(`${this.ROOT_URL}/${uri}`);
   }
-
-//  put(uri: string, payload: Object) {
-//   return this.http.put(`${this.ROOT_URL}/${uri}`, payload);
-//  }
 }

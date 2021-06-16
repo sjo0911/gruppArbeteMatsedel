@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { AuthService } from '@auth0/auth0-angular';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -16,7 +16,7 @@ describe('FooterComponent', () => {
       imports:[RouterTestingModule.withRoutes(
         [
           { path:'admin', component: TempRouter},
-          {path: 'home', component: TempRouter}
+          {path: 'logout', component: TempRouter}
         ]
       )],
       providers:[
@@ -30,37 +30,22 @@ describe('FooterComponent', () => {
   });
 
   beforeEach(() => {
-    //router = TestBed.inject(Router);
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should navigate to /home on first button click', fakeAsync(() => {
+  it('should contain button with Logga ut', () => {
   const location=TestBed.inject(Location);
     const loginButton = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(loginButton[0].nativeNode.outerText).toBe("Logga ut")){
-      const nativeButton: HTMLButtonElement=loginButton[0].nativeElement;
-      nativeButton.click();
-      fixture.detectChanges();
-      fixture.whenStable().then(()=>{
-      expect(location.path()).toBe('home')
-      })
-    }
-  }));
+    expect(loginButton[2].nativeNode.outerText).toBe("Logga ut");
+  });
 
-  it('should navigate to /admin on second button click', fakeAsync(() => {
+  it('should contain button with Administrera matsedel', () => {
     const location=TestBed.inject(Location);
     const administrera = fixture.debugElement.queryAll(By.css('button'));
-    if(expect(administrera[1].nativeNode.outerText).toBe("Administrera matsedel")){
-      const nativeButton: HTMLButtonElement=administrera[1].nativeElement;
-      nativeButton.click();
-      fixture.detectChanges();
-      fixture.whenStable().then(()=>{
-      expect(location.path()).toBe('/admin')
-      })
-    }
-  }));
+    expect(administrera[1].nativeNode.outerText).toBe("Administrera matsedel");
+  });
 });
 
 @Component({template: ''})
@@ -68,7 +53,6 @@ describe('FooterComponent', () => {
 class TempRouter{}
 
 class AuthServiceStub {
-  //is authicated is needed to so we can test from a logged in page
   user$ : Observable<any>;
   isAuthenticated$ : Observable<boolean>;
   constructor () {
