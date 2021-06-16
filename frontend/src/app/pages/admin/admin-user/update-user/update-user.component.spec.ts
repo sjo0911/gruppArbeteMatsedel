@@ -20,14 +20,14 @@ describe('UpdateUserComponent', () => {
     municipalityServiceMock = jasmine.createSpyObj('MunicipalityService', ['getSchools']);
     municipalityServiceMock.getSchools.and.returnValue(of([]));
 
-    userServiceMock = jasmine.createSpyObj('UserService', ['getUsers']);
+    userServiceMock = jasmine.createSpyObj('UserService', ['getUsers', 'updateUser']);
     userServiceMock.getUsers.and.returnValue(of([]));
+    userServiceMock.updateUser.and.returnValue(of([]));
 
     await TestBed.configureTestingModule({
       declarations: [ UpdateUserComponent ],
       providers: [
         {provide: AuthService, useClass: AuthServiceStub},
-        {provide : UserService, useClass: UserServiceStub},
         {provide: Alert, useClass: AlertStub},
         {provide: MunicipalityService, useClass: MunicipalityServiceStub},
         {provide: MunicipalityService, useValue: municipalityServiceMock},
@@ -42,6 +42,14 @@ describe('UpdateUserComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     dh = new DOMHelper(fixture);
+    component.users = [{
+      "firstName": "Jakob",
+      "lastName": "Öhlén",
+      "email": "kungen@hubbahubba.com",
+      "schoolIds": [],
+      "permissions": ["admin"],
+      "menuId": []
+    }];
   });
 
   describe('Create', () => {
@@ -60,8 +68,8 @@ describe('UpdateUserComponent', () => {
     });
   });
 
-  describe('Check methods when buttons are clicked', () => {
-    it('should call updateUser() when "create-button" button is clicked', () => {
+  describe('Check methods when elements are clicked', () => {
+    it('should call updateUser() when "Uppdatera användare" button is clicked', () => {
       spyOn(component, 'updateUser');
       dh.clickButton('Uppdatera användare');
       expect(component.updateUser).toHaveBeenCalledTimes(1);
@@ -72,9 +80,18 @@ describe('UpdateUserComponent', () => {
       let input = fixture.debugElement.query(By.css('#admin')).nativeElement;
       expect(input.checked).toBeFalsy();
       input.click();
-      fixture.detectChanges();
       expect(input.checked).toBeTruthy();
       expect(component.clickAdmin).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call chooseUserToUpdate() when user is clicked in dropdown', (done) => {
+      spyOn(component, 'chooseUserToUpdate');
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        fixture.debugElement.query(By.css("a.navbar-item")).nativeElement.click();
+        expect(component.chooseUserToUpdate).toHaveBeenCalledTimes(1);
+      });
+      done();
     });
 
   });
