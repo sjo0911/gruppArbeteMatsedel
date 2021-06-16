@@ -46,23 +46,10 @@ describe('LogoutComponent', () => {
       expect(buttonElement.nativeElement.outerText).toBe("Till startsidan");
     });
   });
-
-  // describe('Navigation', () => {
-  //   // it('"Till startsidan" button should navigate to /', (done) => {
-  //   //   const router = TestBed.get(Router);
-  //   //   spyOn(router, 'navigateByUrl');
-  //   //   helpers.clickButton("Till startsidan");
-  //   //   expect(router.navigateByUrl).
-  //   //   toHaveBeenCalledWith(router.createUrlTree(['/']),{ skipLocationChange: false, replaceUrl: false, state: undefined});
-  //   //   done();
-  //   // });
-  // });
-
 });
 
 @Component({template: ''})
 class AuthServiceStub {
-  //is authicated is needed to so we can test from a logged in page
   isAuthenticated$ : Observable<boolean>;
   constructor () {
     this.isAuthenticated$ = of(true);
