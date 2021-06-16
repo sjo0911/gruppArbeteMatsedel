@@ -36,7 +36,9 @@ export class CreateUserComponent implements OnInit {
 
     this.subscriptions.push(this.municipalityService.getSchools().subscribe((schools : School[]) => {
       this.schoolsToChoose = schools;
-    }));
+    },
+    (err) => this.alert.showAlert('Error','Skolor kunde inte hämtas från databasen', 'error')
+    ));
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -56,12 +58,7 @@ export class CreateUserComponent implements OnInit {
     })
   }
 
-  onItemSelect(school : any) {
-
-  }
-
   createUser(firstName : string, lastName : string, email : string, password : string, admin : boolean, schools) {
-
     if(!this.currentUser.permissions.some((permission) => permission === 'admin')) {
       this.alert.showAlert('', 'Du måste ha behörighet för att administrera användare!', 'error');
     } else {
@@ -85,14 +82,16 @@ export class CreateUserComponent implements OnInit {
         }
         newUser.schoolIds = schoolIds;
         let sub: Subscription = this.userService.postUser(newUser).subscribe(() => {
-        })
+        },
+        (err) => this.alert.showAlert('Nånting gick fel.', 'Användaren sparades inte', 'error'),
+        () => this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success')
+        )
         this.subscriptions.push(sub);
-        this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success');
       };
     }
   };
 
-  clickAdmin(adminChecked) {
+  clickAdmin(adminChecked: boolean) {
     if (adminChecked) {
       this.selectedSchools = this.schoolsToChoose;
     } else {
