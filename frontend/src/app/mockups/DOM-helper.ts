@@ -19,7 +19,14 @@ export class DOMHelper <T> {
     return this.fixture.debugElement.queryAll(By.css(tagName))[arrayNumber].nativeElement;
   }
 
-  //Använd bara om du vet att de bara finns en knapp med den text du skickar in. Annars klickas bara första knappen.
+  clickElement(tagName : string, elementText : string) {
+    const elements = this.fixture.debugElement.queryAll(By.css(tagName));
+    const element = elements.filter(element => {
+      return element.nativeElement.textContent.trim() === elementText;
+    })[0]
+    element.nativeElement.click();
+  }
+
   clickButton(buttonText : string) {
     const buttons = this.fixture.debugElement.queryAll(By.css("button"));
     const button = buttons.filter(button => {
