@@ -79,27 +79,6 @@ describe('UpdateUserComponent', () => {
 
   });
 
-  describe('Check methods when dropdown is clicked', () => {
-    // it('should call method chooseUserToUpdate() when a user is clicked in dropdown', (done) => {
-    //   spyOn(component, 'chooseUserToUpdate');
-    //   component.users = of([
-    //     {_id:'abc', firstName: 'Leif', lastName: 'Olsson', schoolIds: [], permissions: [], menuIds: [], password: 'hejhej'},
-    //     {_id:'abc123', firstName: 'Gunilla', lastName: 'Persson', schoolIds: [], permissions: [], menuIds: [], password: 'hejhej'}]);
-    //      fixture.detectChanges();
-    //      fixture.whenStable().then(() => {
-    //       const dropDown = fixture.debugElement.queryAll(By.css('a'))[1];
-    //       dropDown.nativeElement.click();
-    //       // dropDown.nativeNode.options[1].click();
-    //       // dropDown.nativeNode.dispatchEvent(new Event('change'));
-    //       fixture.detectChanges();
-    //       fixture.whenStable().then(() => {
-    //         expect(component.chooseUserToUpdate).toHaveBeenCalledTimes(1);
-    //        });
-    //      });
-    //      done();
-    // });
-  });
-
   describe('Check ngOnInit', () => {
     it('should call getSchools() from municipalityService on NgOnInit()', () => {
       expect(component.schoolsToChoose).toBeDefined();
