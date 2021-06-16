@@ -41,8 +41,6 @@ describe('CreateUserComponent', () => {
 
 class AlertStub {
   showAdvancedAlert() {
-    //Mockup på Alert. Skickar tillbaka ett object med isConfirmed = true. isConfirmed används
-    //för att kolla om en måltid ska tas bort. Med denna mockup tas den alltid bort.
     const promise = new Promise((res, rej) => {
       const result = {isConfirmed : true};
       res(result);
