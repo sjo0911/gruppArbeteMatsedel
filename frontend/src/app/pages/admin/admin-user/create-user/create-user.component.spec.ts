@@ -1,5 +1,7 @@
+import { By } from '@angular/platform-browser';
+import { DOMHelper } from 'src/app/mockups/DOM-helper';
 import { User } from 'src/app/models/user';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 
 import { CreateUserComponent } from './create-user.component';
 import { AuthService } from '@auth0/auth0-angular';
@@ -11,6 +13,7 @@ import { MunicipalityService } from 'src/app/services/municipality.service';
 describe('CreateUserComponent', () => {
   let component: CreateUserComponent;
   let fixture: ComponentFixture<CreateUserComponent>;
+  let dh: DOMHelper<CreateUserComponent>;
   let mockservice = jasmine.createSpyObj('UserService', ['postUser']);
   mockservice.postUser.and.returnValue(of({}))
   beforeEach(async () => {
@@ -30,6 +33,7 @@ describe('CreateUserComponent', () => {
     fixture = TestBed.createComponent(CreateUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    dh = new DOMHelper(fixture);
   });
 
   describe('Create', () => {
@@ -49,11 +53,11 @@ describe('CreateUserComponent', () => {
         expect(component.selectedSchools.length).toBe(2);
       })
 
-      it('should deselect all schools if admin is not checked'), () => {
+      it('should deselect all schools if admin is not checked', () => {
         component.clickAdmin(true);
         component.clickAdmin(false);
         expect(component.selectedSchools.length).toBe(0);
-      }
+      })
     })
 
     describe('createUser', () => {
@@ -76,7 +80,13 @@ describe('CreateUserComponent', () => {
     })
   })
 
-
+  describe('html', () => {
+      it('should hava a "Spara användare" button that should call createUser', () => {
+        spyOn(component, 'createUser');
+        dh.clickButton('Spara användare')
+        expect(component.createUser).toHaveBeenCalledTimes(1);
+      })
+  })
 
 });
 
