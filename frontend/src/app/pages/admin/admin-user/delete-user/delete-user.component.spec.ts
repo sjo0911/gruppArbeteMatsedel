@@ -13,15 +13,19 @@ describe('DeleteUserComponent', () => {
   let component: DeleteUserComponent;
   let fixture: ComponentFixture<DeleteUserComponent>;
   let dh: DOMHelper<DeleteUserComponent>;
-  let userServiceMock : UserService;
+  let userServiceMock : any;
 
   beforeEach(async () => {
+    userServiceMock = jasmine.createSpyObj('UserService', ['getUsers', 'deleteUser']);
+    userServiceMock.getUsers.and.returnValue(of([]));
+    userServiceMock.deleteUser.and.returnValue(of([]));
+
     await TestBed.configureTestingModule({
       declarations: [ DeleteUserComponent ],
       providers: [
         {provide: AuthService, useClass: AuthServiceStub},
-        {provide : UserService, useClass: UserServiceStub},
         {provide: Alert, useClass: AlertStub},
+        {provide: UserService, useValue: userServiceMock}
       ],
     })
     .compileComponents();
@@ -64,7 +68,17 @@ describe('DeleteUserComponent', () => {
       dh.clickButton("Ta bort användare");
       expect(component.deleteUser).toHaveBeenCalledTimes(1);
     });
+
   });
+
+  describe('Check ngOnInit', () => {
+    it('should call getUsers() from userService on NgOnInit()', () => {
+      expect(component.$users).toBeDefined();
+      expect(component.$users).not.toBeNull();
+      expect(userServiceMock.getUsers).toHaveBeenCalledTimes(1);
+    });
+  });
+
 });
 
 class AlertStub {
@@ -76,6 +90,9 @@ class AlertStub {
     return promise;
   }
   showAlert(){
+  }
+  showAlertAndUpdatePage() {
+
   }
 }
 
