@@ -60,23 +60,5 @@ describe('LoginFailedComponent', () => {
       const location = TestBed.inject(Location);
       expect(location.path()).toBe('');
     });
-
-    // it('should navigate to / on "Till startsidan" button click', () => {
-    //   // const router = TestBed.inject(Router);
-    //   // spyOn(router, 'navigateByUrl');
-    //   // dh.clickButton('Till startsidan');
-    //   // expect(router.navigateByUrl).toHaveBeenCalledWith(router.createUrlTree(['']), {skipLocationChange: false, replaceUrl: false, state: undefined});
-    //   // done();
-    //   // const location = TestBed.inject(Location);
-    //   // const button = fixture.debugElement.queryAll(By.css('button'));
-    //   // if(expect(button[0].nativeNode.outerText).toBe("Till startsidan")){
-    //   //   const nativeButton: HTMLButtonElement=button[0].nativeElement;
-    //   //   nativeButton.click();
-    //   //   fixture.detectChanges();
-    //   //   fixture.whenStable().then(()=>{
-    //   //   expect(location.path()).toBe('')
-    //   // })
-    //   // }
-    // });
   });
 });

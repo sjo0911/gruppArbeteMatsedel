@@ -46,22 +46,18 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.chosenMunicipality = {"_id": "0", "municipalityName": "Kommun", "schools": []};
-    // this.chosenSchool = {"_id": "0", "_menuId": "0", schoolName:"Skola"}
     this.auth.isAuthenticated$.subscribe((loggedIn) => {
       if(loggedIn) {
         this.subscriptions.push(this.auth.user$.subscribe((user) => {
           let currentUser = new User();
           currentUser.setUserFromAuthPic(user.picture);
           if(!currentUser.permissions.some((perm) => perm === 'admin')){
-            //Filter out municipalities that user have access to change
             this.$municipalities = this.municipalityService.getMunicipalities().pipe(map((municipalities : Municipality[]) => {
               let mun = municipalities.filter((mun) => {
                 return mun.schools.some((school) => {
                   return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
                 })
               })
-              //Filter out schools that user have access to change
              mun.forEach((municipality) => {
                 municipality.schools = municipality.schools.filter((school) => {
                   return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
@@ -86,8 +82,6 @@ export class HeaderComponent implements OnInit {
   }
 
   chooseMunicipality() {
-    // console.log(this.chosenMunicipality.municipalityName);
-    // this.chosenMunicipality = this.chosenMunicipality;
     this.municipalityTitle = this.chosenMunicipality.municipalityName;
     this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";
@@ -110,8 +104,6 @@ export class HeaderComponent implements OnInit {
       () => {
         this.sharingService.setMenu(menu);
         this.weeks = this.dateHandlerService.getWeeks(menu);
-        // console.log(this.weeks);
-        // let currentWeek = this.dateHandlerService.getCurrentWeek();
         this.weeks.forEach(week => {
           if(week.weekNr === this.currentWeek) {
             this.chosenWeek = week;
