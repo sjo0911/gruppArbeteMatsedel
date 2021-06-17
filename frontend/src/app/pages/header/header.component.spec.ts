@@ -53,6 +53,10 @@ describe('HeaderComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     dh = new DOMHelper(fixture);
+    component.$municipalities = of([
+      {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
+      {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}
+    ]);
   });
 
   describe('Create', () => {
@@ -77,38 +81,23 @@ describe('HeaderComponent', () => {
       expect(component.$municipalities).not.toBeNull();
     });
 
+    it('should contain two municipalitites', () => {
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        const dropDown = fixture.debugElement.queryAll(By.css('mat-select'))[0];
+        expect(dropDown.children.length).toBe(2);
+      });
+    });
+
   });
 
   describe('Check methods when dropdown is clicked', () => {
     it('should call method chooseMunicipality() when a municipality is clicked in dropdown', (done) => {
       spyOn(component, 'chooseMunicipality');
-      component.$municipalities = of([
-        {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-        {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
-         fixture.detectChanges();
-         fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
           const dropDown = fixture.debugElement.queryAll(By.css('mat-select'))[0];
           dropDown.nativeElement.children[1].click();
-          fixture.detectChanges();
-          fixture.whenStable().then(() => {
-            expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);
-           });
-         });
-         done();
-    });
-  });
-
-  describe('Check correct input to methods', () => {
-    it('should call method chooseMunicipality() with chosen(first) municipality', (done) => {
-      spyOn(component, 'chooseMunicipality');
-      component.$municipalities = of([
-        {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-        {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
-         fixture.detectChanges();
-         fixture.whenStable().then(() => {
-          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('mat-select'))[0];
-          dropDownMunicipalities.nativeElement.children[1].click();
-          expect(dropDownMunicipalities.children.length).toBe(2);
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);

@@ -84,6 +84,17 @@ describe('UpdateUserComponent', () => {
       expect(component.clickAdmin).toHaveBeenCalledTimes(1);
     });
 
+    it('should return false if checkbox is not clicked', () => {
+      let input = fixture.debugElement.query(By.css('#admin')).nativeElement;
+      expect(input.checked).toBeFalsy();
+    });
+
+    it('should return true if checkbox is clicked', () => {
+      let input = fixture.debugElement.query(By.css('#admin')).nativeElement;
+      input.click();
+      expect(input.checked).toBeTruthy();
+    });
+
     it('should call chooseUserToUpdate() when user is clicked in dropdown', (done) => {
       spyOn(component, 'chooseUserToUpdate');
       fixture.detectChanges();

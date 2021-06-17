@@ -16,9 +16,12 @@ describe('UpdateMenuComponent', () => {
   let menu : any;
   let dh: DOMHelper<UpdateMenuComponent>;
   let mockService : MenuService;
-  let menuServiceMock : MenuService;
+  let menuServiceMock : any;
 
   beforeEach(async () => {
+    menuServiceMock = jasmine.createSpyObj('MenuService', ['updateMenu']);
+    menuServiceMock.updateMenu.and.returnValue(of([]));
+
     await TestBed.configureTestingModule({
       declarations: [ UpdateMenuComponent ],
       providers: [
@@ -37,6 +40,11 @@ describe('UpdateMenuComponent', () => {
     menu = menuMockup.getMenu();
     dh = new DOMHelper(fixture);
     mockService = TestBed.inject(MenuService);
+    component.$menus = of([
+      {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+      {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
+      {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
+    ]);
   });
 
   describe('Create', () => {
@@ -51,11 +59,6 @@ describe('UpdateMenuComponent', () => {
     });
 
     it('should contain a dropdown with 3 menus', (done) => {
-      component.$menus = of([
-        {_id: '123', menuName:'menu1', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
-        {_id: '345', menuName:'menu2', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")},
-        {_id: '678', menuName:'menu3', startDate: new Date("2021-05-20"), endDate: new Date("2021-06-20")}
-      ]);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         expect(dh.countFromTagName("a.navbar-item")).toBe(3);
@@ -79,12 +82,16 @@ describe('UpdateMenuComponent', () => {
 
     it('should click saveEditedMenu button and call saveEditedMenu()', () => {
       let mockSpy = spyOn(component, "saveEditedMenu");
-      menuServiceMock = jasmine.createSpyObj('MenuService', ['updateMenu']);
-      menuServiceMock.updateMenu(menu);
       dh.clickButton("Spara uppdaterad matsedel");
       expect(mockSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call updateMenu from menuService when saveEditedMenu() is run', () => {
+      component.saveEditedMenu('menu1', new Date("2021-05-20"), new Date("2021-06-20"));
       expect(menuServiceMock.updateMenu).toHaveBeenCalledTimes(1);
     });
+
+
   });
 });
 
@@ -97,6 +104,9 @@ class AlertStub {
     return promise;
   }
   showAlert(){
+  }
+  showAlertAndUpdatePage() {
+
   }
 }
 

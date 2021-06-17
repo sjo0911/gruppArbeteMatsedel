@@ -70,7 +70,7 @@ describe('AdminComponent', () => {
       done();
     })
 
-    it('should produce meals with mealname: "fläskpannkaka" and hava a "pig" icon in 4th place in its form wich is checked', (done) => {
+    it('should produce meals with mealname: "fläskpannkaka" and hava a "pig" icon in 4th place in its form which is checked', (done) => {
       component.week = new Helper().getWeek(3, 1);
       fixture.detectChanges()
       fixture.whenStable().then(() => {
