@@ -8,7 +8,7 @@
   background:#063752;
   color: white;
   &:hover {
-        color: #1775b8;
+        color: #1775b8 !important;
       }
 }
 
@@ -62,3 +62,8 @@ mat-select {
 // .my-select-panel {
 //   color: white;
 // }
+
+.mat-option.mat-selected {
+  background: #063752 !important;
+  color: #1775b8 !important;
+}
