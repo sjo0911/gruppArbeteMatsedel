@@ -58,6 +58,13 @@ mat-select {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   max-width: 160px;
 }
+::ng-deep .mat-select-placeholder{
+  color: white !important;
+}
+
+::ng-deep .mat-option{
+  color:white !important;
+}
 
 .mat-option.mat-selected {
   background: #063752 !important;
