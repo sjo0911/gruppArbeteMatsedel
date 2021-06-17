@@ -17,16 +17,16 @@ import { AuthGuard } from '@auth0/auth0-angular';
 const routes: Routes = [
   { path:  '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: MenuComponent },
-  { path: 'adminMeals', component: AdminMealsComponent, canActivate: [AuthGuard], },
-  { path: 'adminSchools', component: AdminSchoolsComponent, canActivate: [AuthGuard], },
-  { path: 'adminMenus', component: AdminMenusComponent, canActivate: [AuthGuard], },
-  { path: 'admin', component: AdminHeaderComponent, canActivate: [AuthGuard], },
+  { path: 'adminMeals', component: AdminMealsComponent, canActivate: [AuthGuard] },
+  { path: 'adminSchools', component: AdminSchoolsComponent, canActivate: [AuthGuard] },
+  { path: 'adminMenus', component: AdminMenusComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminHeaderComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
   { path: 'loginFailed', component : LoginFailedComponent },
-  { path: 'user', component: UserHeaderComponent, canActivate: [AuthGuard],},
-  { path: 'createUser', component: CreateUserComponent, canActivate: [AuthGuard],},
-  { path: 'updateUser', component: UpdateUserComponent, canActivate: [AuthGuard],},
-  { path: 'deleteUser', component: DeleteUserComponent, canActivate: [AuthGuard],}
+  { path: 'user', component: UserHeaderComponent, canActivate: [AuthGuard] },
+  { path: 'createUser', component: CreateUserComponent, canActivate: [AuthGuard] },
+  { path: 'updateUser', component: UpdateUserComponent, canActivate: [AuthGuard] },
+  { path: 'deleteUser', component: DeleteUserComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

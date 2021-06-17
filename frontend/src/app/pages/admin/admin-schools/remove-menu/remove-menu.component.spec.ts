@@ -15,20 +15,24 @@ describe('RemoveMenuComponent', () => {
   let fixture: ComponentFixture<RemoveMenuComponent>;
   let municipalitiesMockup = new Municipality();
   municipalitiesMockup = {_id: "123", municipalityName: "Umeå", schools: [{_id: "1", schoolName: "Dragonskolan", _menuId: "2"}]};
-  let menuServiceStub : MenuService;
   let dh: DOMHelper<RemoveMenuComponent>;
-  let menuServiceMock : MenuService;
-  let municipalityServiceMock : MunicipalityService;
+  let menuServiceMock : any;
+  let municipalityServiceMock : any;
 
   beforeEach(async () => {
+    menuServiceMock = jasmine.createSpyObj('MenuService', ['getMenuName']);
+    menuServiceMock.getMenuName.and.returnValue(of([]));
+
+    municipalityServiceMock = jasmine.createSpyObj('MunicipalityService', ['updateSchool']);
+    municipalityServiceMock.updateSchool.and.returnValue(of([]));
+
     await TestBed.configureTestingModule({
       declarations: [ RemoveMenuComponent ],
       providers: [
         {provide: MenuService, useClass: MenuServiceStub},
         {provide: Alert, useClass: AlertStub}  ,
-        {provide: MunicipalityService, useClass: MunicipalityServiceStub},
         {provide: MenuService, useValue: menuServiceMock},
-        {provide: MunicipalityService, useValue: municipalityServiceMock}
+        {provide: MunicipalityService, useValue: municipalityServiceMock},
       ],
 
     })
@@ -39,8 +43,9 @@ describe('RemoveMenuComponent', () => {
     fixture = TestBed.createComponent(RemoveMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    menuServiceStub = TestBed.inject(MenuService);
     dh = new DOMHelper(fixture);
+    component.municipalities = [municipalitiesMockup];
+    component.schoolToDelete = municipalitiesMockup.schools[0];
   });
 
   describe('Create', () => {
@@ -51,7 +56,6 @@ describe('RemoveMenuComponent', () => {
 
   describe('Check methods when buttons are clicked', () => {
     it('should call chooseMunicipalityToDelete() when dropdown is clicked', (done) => {
-      component.municipalities = [municipalitiesMockup];
       let mockSpy = spyOn(component, 'chooseMunicipalityToDelete');
       fixture.detectChanges();
        fixture.whenStable().then(() => {
@@ -63,13 +67,9 @@ describe('RemoveMenuComponent', () => {
     });
 
     it('should call chooseSchoolToDelete()', (done) => {
-      component.municipalities = [municipalitiesMockup];
-      component.schoolToDelete = municipalitiesMockup.schools[0];
       let mockSpy = spyOn(component, 'chooseSchoolToDelete');
-      menuServiceMock = jasmine.createSpyObj('MenuService', ['getMenuName']);
-      menuServiceMock.getMenuName(municipalitiesMockup.schools[0]._id);
       fixture.detectChanges();
-       fixture.whenStable().then(() => {
+      fixture.whenStable().then(() => {
         const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
         dropDown.children[0].nativeElement.click();
       fixture.detectChanges();
@@ -77,29 +77,27 @@ describe('RemoveMenuComponent', () => {
        const dropDown2 = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[1];
        dropDown2.children[0].nativeElement.click();
        expect(mockSpy).toHaveBeenCalledTimes(1);
-       expect(menuServiceMock.getMenuName).toHaveBeenCalledTimes(1);
       })
     })
       done();
     });
 
+    it('should call getMenuName() from menuService when chooseSchoolToDelete() is run', () => {
+      component.chooseSchoolToDelete({_id: "1", schoolName: "Dragonskolan", _menuId: "2"});
+      expect(menuServiceMock.getMenuName).toHaveBeenCalledTimes(1);
+    });
+
     it('should click deleteMenuFromSchool button and call deleteMenuFromSchool()', () => {
-      component.schoolToDelete = municipalitiesMockup.schools[0];
       let mockSpy = spyOn(component, 'deleteMenuFromSchool');
-      municipalityServiceMock = jasmine.createSpyObj('MunicipalityService', ['updateSchool']);
-      municipalityServiceMock.updateSchool(municipalitiesMockup._id, municipalitiesMockup.schools[0]);
       dh.clickButton("Ta bort matsedel från skolan");
       expect(mockSpy).toHaveBeenCalledTimes(1);
-      expect(municipalityServiceMock.updateSchool).toHaveBeenCalledTimes(1);
     });
+
   });
 });
 
-
 class AlertStub {
   showAdvancedAlert() {
-    //Mockup på Alert. Skickar tillbacka ett object med isConfirmed = true. isConfirmed används
-    //för att kolla om en måltid ska tas bort. Med denna mockup tas den alltid bort.
     const promise = new Promise((res, rej) => {
       const result = {isConfirmed : true};
       res(result);
@@ -107,6 +105,9 @@ class AlertStub {
     return promise;
   }
   showAlert(){
+  }
+  showAlertAndUpdatePage() {
+
   }
 }
 
@@ -118,7 +119,3 @@ class MenuServiceStub {
     return of(new MenuMockup().getMenu())
   }
 }
-
-class MunicipalityServiceStub {
-}
-

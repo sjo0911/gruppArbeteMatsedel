@@ -70,7 +70,7 @@ describe('AdminComponent', () => {
       done();
     })
 
-    it('should produce meals with mealname: "fläskpannkaka" and hava a "pig" icon in 4th place in its form wich is checked', (done) => {
+    it('should produce meals with mealname: "fläskpannkaka" and hava a "pig" icon in 4th place in its form which is checked', (done) => {
       component.week = new Helper().getWeek(3, 1);
       fixture.detectChanges()
       fixture.whenStable().then(() => {
@@ -207,8 +207,6 @@ class Helper {
 
 class AlertStub {
   showAdvancedAlert() {
-    //Mockup på Alert. Skickar tillbacka ett object med isConfirmed = true. isConfirmed används
-    //för att kolla om en måltid ska tas bort. Med denna mockup tas den alltid bort.
     const promise = new Promise((res, rej) => {
       const result = {isConfirmed : true};
       res(result);
