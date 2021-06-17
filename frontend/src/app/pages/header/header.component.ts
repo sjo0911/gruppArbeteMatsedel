@@ -9,7 +9,6 @@ import { MenuService } from 'src/app/services/menu.service';
 import { MunicipalityService } from 'src/app/services/municipality.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { Subscription, Observable } from 'rxjs';
-import  Swal  from 'sweetalert2';
 import { Alert } from 'src/assets/alert';
 import { User } from 'src/app/models/user';
 import { AuthService } from '@auth0/auth0-angular';
@@ -25,8 +24,6 @@ export class HeaderComponent implements OnInit {
   $municipalities: Observable<any>;
   chosenMunicipality: Municipality;
   chosenSchool: School;
-  // municipalityTitle: string;
-  // schoolTitle: string;
   weeks : Week[];
   weekTitle : string;
   chosenWeek : Week;
@@ -39,8 +36,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
     private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert, private auth: AuthService) {
-    // this.municipalityTitle = "Kommun";
-    // this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
     this.currentWeek = this.dateHandlerService.getCurrentWeek();
   }
@@ -52,19 +47,7 @@ export class HeaderComponent implements OnInit {
           let currentUser = new User();
           currentUser.setUserFromAuthPic(user.picture);
           if(!currentUser.permissions.some((perm) => perm === 'admin')){
-            this.$municipalities = this.municipalityService.getMunicipalities().pipe(map((municipalities : Municipality[]) => {
-              let mun = municipalities.filter((mun) => {
-                return mun.schools.some((school) => {
-                  return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
-                })
-              })
-             mun.forEach((municipality) => {
-                municipality.schools = municipality.schools.filter((school) => {
-                  return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
-                })
-              })
-              return mun;
-            }))
+            this.$municipalities = this.filterMunicipalitiesFromUserPerm(currentUser);
           } else {
             this.$municipalities = this.municipalityService.getMunicipalities();
           }
@@ -73,6 +56,22 @@ export class HeaderComponent implements OnInit {
         this.$municipalities = this.municipalityService.getMunicipalities();
       }
     })
+  }
+
+  filterMunicipalitiesFromUserPerm(currentUser : User) : Observable<object> {
+     return this.municipalityService.getMunicipalities().pipe(map((municipalities : Municipality[]) => {
+      let mun = municipalities.filter((mun) => {
+        return mun.schools.some((school) => {
+          return currentUser.schoolIds.some((schoolId) => schoolId === school._id)
+        })
+      })
+     mun.forEach((municipality) => {
+        municipality.schools = municipality.schools.filter((school) => {
+          return currentUser.schoolIds.some((schoolId) => schoolId === school._id);
+        })
+      })
+      return mun;
+    }))
   }
 
   ngOnDestroy() {
@@ -88,8 +87,6 @@ export class HeaderComponent implements OnInit {
     this.previousWeek = null;
     this.previousWeekTitle = '';
     this.nextWeekTitle = '';
-    // this.municipalityTitle = this.chosenMunicipality.municipalityName;
-    // this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";
   }
 
@@ -104,7 +101,6 @@ export class HeaderComponent implements OnInit {
     if(school._menuId === '' || school._menuId === undefined) {
       this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
     } else {
-      // this.schoolTitle = school.schoolName;
       let menu : Menu;
 
       let sub: Subscription = this.menuService.getMenu(school._menuId).subscribe((menuu: Menu) => {
@@ -124,9 +120,7 @@ export class HeaderComponent implements OnInit {
         });
       });
       this.subscriptions.push(sub);
-
     }
-
   }
 
   setWeek(){
@@ -136,7 +130,6 @@ export class HeaderComponent implements OnInit {
   chooseWeek(week : Week) {
     this.chosenWeek = week;
     this.weekTitle = "Vecka " + this.chosenWeek.weekNr;
-
     this.previousWeek = this.dateHandlerService.getPreviousWeek(this.weeks, week);
     if(this.previousWeek){
       this.previousWeekTitle = "V." + this.previousWeek.weekNr;
