@@ -10,22 +10,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-header.component.scss']
 })
 export class AdminHeaderComponent implements OnInit {
-  sub : Subscription;
 
-  constructor(public auth: AuthService, private router: Router, private location: Location) {
-    this.sub = auth.isAuthenticated$.subscribe((loggedIn) => {
-      if(!loggedIn) {
-        this.location.replaceState('/');
-        this.router.navigate(['logout']);
-      }
-    })
+  constructor(private router: Router, private location: Location) {
+
    }
 
   ngOnInit(): void {
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+
 
 }
