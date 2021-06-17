@@ -4,16 +4,12 @@ import { By } from '@angular/platform-browser';
 import { Day } from './../../../models/day';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MenuMockup } from 'src/app/mockups/menu-mockup';
-
 import { AdminMealsComponent } from './admin-meals.component';
-
 import { SharingService } from 'src/app/services/sharing.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { Observable, of, Subject } from 'rxjs';
 import { Week } from 'src/app/models/week';
 import { Menu } from 'src/app/models/menu';
-import { Button } from 'protractor';
-import { debug } from 'console';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
