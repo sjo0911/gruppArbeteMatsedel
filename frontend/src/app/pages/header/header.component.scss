@@ -52,3 +52,7 @@ mat-select {
   background: #063752 !important;
   color: #1775b8 !important;
 }
+
+::ng-deep .mat-select-panel{
+  background: #063752;
+}
