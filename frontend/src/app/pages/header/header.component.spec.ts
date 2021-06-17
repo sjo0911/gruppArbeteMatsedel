@@ -69,10 +69,14 @@ describe('HeaderComponent', () => {
 
   describe('Check ngOnInit', () => {
     it('should call getMunicipalities() from municipalityService on NgOnInit()', () => {
-      expect(component.$municipalities).toBeDefined();
-      expect(component.$municipalities).not.toBeNull();
       expect(municipalityServiceMock.getMunicipalities).toHaveBeenCalledTimes(1);
     });
+
+    it('should collect data from municipalityService on NgOnInit()', () => {
+      expect(component.$municipalities).toBeDefined();
+      expect(component.$municipalities).not.toBeNull();
+    });
+
   });
 
   describe('Check methods when dropdown is clicked', () => {

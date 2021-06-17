@@ -15,9 +15,9 @@ describe('FooterComponent', () => {
     await TestBed.configureTestingModule({
       imports:[RouterTestingModule.withRoutes(
         [
-          { path:'authLogin', component: TempRouter},
-          {path: 'home', component: TempRouter},
-          {path: '', component: TempRouter}
+          { path:'authLogin', component: TempRouter },
+          { path: 'home', component: TempRouter },
+          { path: '', component: TempRouter }
         ]
       )],
       providers:[
