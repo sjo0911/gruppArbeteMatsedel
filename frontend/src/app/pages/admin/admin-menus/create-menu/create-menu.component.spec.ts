@@ -8,7 +8,6 @@ import { By } from '@angular/platform-browser';
 
 import { CreateMenuComponent } from './create-menu.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { doesNotReject } from 'node:assert';
 import { AuthService } from '@auth0/auth0-angular';
 
 describe('CreateMenuComponent', () => {
