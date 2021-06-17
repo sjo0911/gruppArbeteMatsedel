@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
   $municipalities: Observable<any>;
   chosenMunicipality: Municipality;
   chosenSchool: School;
-  municipalityTitle: string;
-  schoolTitle: string;
+  // municipalityTitle: string;
+  // schoolTitle: string;
   weeks : Week[];
   weekTitle : string;
   chosenWeek : Week;
@@ -39,8 +39,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(private municipalityService: MunicipalityService, private router: Router,
     private dateHandlerService : DateHandlerService, private menuService: MenuService, private sharingService : SharingService, private alert : Alert, private auth: AuthService) {
-    this.municipalityTitle = "Kommun";
-    this.schoolTitle = "Skola";
+    // this.municipalityTitle = "Kommun";
+    // this.schoolTitle = "Skola";
     this.weekTitle = "Vecka"
     this.currentWeek = this.dateHandlerService.getCurrentWeek();
   }
@@ -83,18 +83,28 @@ export class HeaderComponent implements OnInit {
 
   chooseMunicipality() {
     this.sharingService.setWeek(null);
-    this.municipalityTitle = this.chosenMunicipality.municipalityName;
-    this.schoolTitle = "Skola";
+    this.weeks = [];
+    this.nextWeek = null;
+    this.previousWeek = null;
+    this.previousWeekTitle = '';
+    this.nextWeekTitle = '';
+    // this.municipalityTitle = this.chosenMunicipality.municipalityName;
+    // this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";
   }
 
   chooseSchool() {
     this.sharingService.setWeek(null);
+    this.weeks = [];
+    this.nextWeek = null;
+    this.previousWeek = null;
+    this.previousWeekTitle = '';
+    this.nextWeekTitle = '';
     let school : School = this.chosenSchool;
     if(school._menuId === '' || school._menuId === undefined) {
       this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
     } else {
-      this.schoolTitle = school.schoolName;
+      // this.schoolTitle = school.schoolName;
       let menu : Menu;
 
       let sub: Subscription = this.menuService.getMenu(school._menuId).subscribe((menuu: Menu) => {
