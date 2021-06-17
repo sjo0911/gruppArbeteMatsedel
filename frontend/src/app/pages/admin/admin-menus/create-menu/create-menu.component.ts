@@ -47,12 +47,14 @@ export class CreateMenuComponent implements OnInit {
           currentUser.setUserFromAuthPic(user.picture);
           currentUser.menuIds.push(createdMenu._id);
           this.subscriptions.push(this.userService.updateUser(currentUser).subscribe(() => {
-          }));
+          },
+          (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error')
+          ));
         }));
-      }));
-
-
-      this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success');
+      },
+      (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas', 'error'),
+      () => this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success')
+      ));
     }
   }
 }
