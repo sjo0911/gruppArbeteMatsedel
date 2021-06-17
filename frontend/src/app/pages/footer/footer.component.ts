@@ -25,11 +25,7 @@ export class FooterComponent implements OnInit {
     this.sub = this.auth.user$.subscribe((user) => {
       let currentUser = new User();
       currentUser.setUserFromAuthPic(user.picture);
-      currentUser.permissions.forEach(permission => {
-        if(permission === 'admin') {
-          this.admin = true;
-        }
-      });
+      this.admin = currentUser.permissions.some((perm)=> perm === 'admin');
       this.loggedInUser = currentUser.firstName + ' ' + currentUser.lastName;
     })
   }
@@ -37,5 +33,4 @@ export class FooterComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }
