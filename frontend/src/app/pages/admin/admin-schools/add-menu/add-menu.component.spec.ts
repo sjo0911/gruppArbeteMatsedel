@@ -27,6 +27,9 @@ describe('AddMenuComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     dh = new DOMHelper(fixture);
+    component.municipalities = [
+      {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
+       {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
   });
 
   describe('Create', () => {
@@ -47,9 +50,6 @@ describe('AddMenuComponent', () => {
 
   describe('Adding to dropdowns', () => {
     it('first dropdown should contain 2 municipalities', (done) => {
-      component.municipalities = [
-      {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-       {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
        fixture.detectChanges();
        fixture.whenStable().then(() => {
         const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];
@@ -72,9 +72,6 @@ describe('AddMenuComponent', () => {
     });
 
     it('when first municipality is selected that municipalitys school should be avalible in next dropdown', (done) => {
-      component.municipalities = [
-      {_id:'abc', municipalityName: 'Skellefteå', schools: [{_id:'abc123', schoolName:'Balderskolan', _menuId:'123'}]},
-       {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}];
        fixture.detectChanges();
        fixture.whenStable().then(() => {
         const dropDown = fixture.debugElement.queryAll(By.css('div.navbar-dropdown'))[0];

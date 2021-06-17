@@ -41,6 +41,8 @@ describe('RemoveMenuComponent', () => {
     fixture.detectChanges();
     menuServiceStub = TestBed.inject(MenuService);
     dh = new DOMHelper(fixture);
+    component.municipalities = [municipalitiesMockup];
+    component.schoolToDelete = municipalitiesMockup.schools[0];
   });
 
   describe('Create', () => {
@@ -51,7 +53,6 @@ describe('RemoveMenuComponent', () => {
 
   describe('Check methods when buttons are clicked', () => {
     it('should call chooseMunicipalityToDelete() when dropdown is clicked', (done) => {
-      component.municipalities = [municipalitiesMockup];
       let mockSpy = spyOn(component, 'chooseMunicipalityToDelete');
       fixture.detectChanges();
        fixture.whenStable().then(() => {
@@ -63,8 +64,6 @@ describe('RemoveMenuComponent', () => {
     });
 
     it('should call chooseSchoolToDelete()', (done) => {
-      component.municipalities = [municipalitiesMockup];
-      component.schoolToDelete = municipalitiesMockup.schools[0];
       let mockSpy = spyOn(component, 'chooseSchoolToDelete');
       menuServiceMock = jasmine.createSpyObj('MenuService', ['getMenuName']);
       menuServiceMock.getMenuName(municipalitiesMockup.schools[0]._id);
@@ -84,7 +83,6 @@ describe('RemoveMenuComponent', () => {
     });
 
     it('should click deleteMenuFromSchool button and call deleteMenuFromSchool()', () => {
-      component.schoolToDelete = municipalitiesMockup.schools[0];
       let mockSpy = spyOn(component, 'deleteMenuFromSchool');
       municipalityServiceMock = jasmine.createSpyObj('MunicipalityService', ['updateSchool']);
       municipalityServiceMock.updateSchool(municipalitiesMockup._id, municipalitiesMockup.schools[0]);
