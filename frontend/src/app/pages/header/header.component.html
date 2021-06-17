@@ -8,18 +8,15 @@
     </h1>
   </button>
   <mat-select required [(ngModel)]="chosenMunicipality" placeholder="Kommun">
-    <!-- <mat-option class="dropdown-item" [value]="chosenMunicipality" disabled selected hidden>{{municipalityTitle}}</mat-option> -->
     <mat-option class="dropdown-item" (click)="chooseMunicipality()" [value]="municipality" *ngFor="let municipality of $municipalities | async">
       {{ municipality.municipalityName }}</mat-option>
   </mat-select>
   <mat-select [(ngModel)]="chosenSchool" required placeholder="Skola">
-    <!-- <mat-option class="dropdown-item" [value]="chosenSchool"  disabled selected hidden>{{schoolTitle}}</mat-option> -->
     <ng-template [ngIf]="chosenMunicipality" >
     <mat-option class="dropdown-item" (click)="chooseSchool()" [value]="school" *ngFor="let school of chosenMunicipality.schools">{{ school.schoolName }}</mat-option>
   </ng-template>
   </mat-select>
   <mat-select [(ngModel)]="chosenWeek" required placeholder="Vecka">
-    <!-- <mat-option class="dropdown-item" [value]="chosenWeek" disabled selected hidden >{{weekTitle}}</mat-option> -->
     <ng-template [ngIf]="chosenSchool" >
       <mat-option class="dropdown-item" (click)="setWeek()" [value]="week" *ngFor="let week of weeks">{{ "Vecka " + week.weekNr }}</mat-option>
     </ng-template>

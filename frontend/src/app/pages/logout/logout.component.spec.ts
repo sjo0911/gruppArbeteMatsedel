@@ -21,7 +21,6 @@ describe('LogoutComponent', () => {
         RouterTestingModule
       ],
       providers:  [
-        {provide: AuthService, useClass: AuthServiceStub}
       ]
     })
     .compileComponents();
@@ -47,11 +46,3 @@ describe('LogoutComponent', () => {
     });
   });
 });
-
-@Component({template: ''})
-class AuthServiceStub {
-  isAuthenticated$ : Observable<boolean>;
-  constructor () {
-    this.isAuthenticated$ = of(true);
-  }
-}

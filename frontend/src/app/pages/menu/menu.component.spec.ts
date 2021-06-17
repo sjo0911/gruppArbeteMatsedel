@@ -17,8 +17,7 @@ describe('MenuComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MenuComponent ],
       providers: [
-        {provide: SharingService, useClass: SharingServiceStub},
-        {provide: AuthService, useClass: AuthServiceStub}
+        {provide: SharingService, useClass: SharingServiceStub}
       ]
     })
     .compileComponents();
@@ -93,7 +92,4 @@ class SharingServiceStub {
     week.days.push(day1, day2, day3)
     this.sub.next(week);
   }
-}
-
-class AuthServiceStub {
 }
