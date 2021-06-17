@@ -55,8 +55,10 @@ export class DeleteUserComponent implements OnInit {
         this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna användare?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
           if (result.isConfirmed) {
             this.sub.push(this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
-            }));
-            this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success');
+            },
+            (err) => this.alert.showAlert('Nånting gick fel.', 'Användaren sparades inte', 'error'),
+            () => this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success')
+            ));
           }
         });
       }
