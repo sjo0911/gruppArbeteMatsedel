@@ -83,6 +83,11 @@ export class HeaderComponent implements OnInit {
 
   chooseMunicipality() {
     this.sharingService.setWeek(null);
+    this.weeks = [];
+    this.nextWeek = null;
+    this.previousWeek = null;
+    this.previousWeekTitle = '';
+    this.nextWeekTitle = '';
     // this.municipalityTitle = this.chosenMunicipality.municipalityName;
     // this.schoolTitle = "Skola";
     this.weekTitle = "Vecka";
@@ -90,6 +95,11 @@ export class HeaderComponent implements OnInit {
 
   chooseSchool() {
     this.sharingService.setWeek(null);
+    this.weeks = [];
+    this.nextWeek = null;
+    this.previousWeek = null;
+    this.previousWeekTitle = '';
+    this.nextWeekTitle = '';
     let school : School = this.chosenSchool;
     if(school._menuId === '' || school._menuId === undefined) {
       this.alert.showAlert('', 'Vald skola har ingen matsedel!', 'error');
