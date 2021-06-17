@@ -1,11 +1,8 @@
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 
 import { LoginFailedComponent } from './login-failed.component';
-import { Router } from '@angular/router';
-import { exception } from 'node:console';
 import { DOMHelper } from 'src/app/mockups/DOM-helper';
 
 class TempRouter{}

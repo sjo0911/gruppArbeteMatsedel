@@ -57,9 +57,12 @@ export class RemoveMenuComponent implements OnInit {
       this.alert.showAdvancedAlert('VARNING', 'Vill du ta bort denna matsedel från skolan?', 'warning', 'Ja, ta bort', 'Avbryt').then((result) => {
         if (result.isConfirmed) {
           school._menuId = '';
-          let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {});
+          let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {},
+          (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error'),
+          () => this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen från den valda skolan.', 'success')
+          );
           this.subscriptions.push(sub);
-          this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen från den valda skolan.', 'success');
+
         }
       });
     }

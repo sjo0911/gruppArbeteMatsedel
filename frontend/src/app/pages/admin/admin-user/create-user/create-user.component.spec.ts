@@ -119,11 +119,6 @@ class AuthServiceStub {
   }
 }
 
-class UserServiceStub {
-  postUser(user : User){
-    return of({user});
-  }
-}
 
 class MunicipalityServiceStub {
   getSchools() {

@@ -1,6 +1,4 @@
 import { DOMHelper } from '../../../mockups/DOM-helper';
-import { Observable, of } from 'rxjs';
-import { AuthService } from '@auth0/auth0-angular';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -20,7 +18,7 @@ describe('AdminHeaderComponent', () => {
         RouterTestingModule
       ],
       providers:  [
-        {provide: AuthService, useClass: AuthServiceStub}
+
       ]
     })
     .compileComponents();
@@ -93,10 +91,3 @@ describe('AdminHeaderComponent', () => {
 
 
 });
-
-class AuthServiceStub {
-  isAuthenticated$ : Observable<boolean>;
-  constructor () {
-    this.isAuthenticated$ = of(true);
-  }
-}
