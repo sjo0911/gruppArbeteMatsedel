@@ -62,9 +62,12 @@ export class AddMenuComponent implements OnInit {
     } else {
       school._menuId = menu._id;
       let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToAdd._id, school).subscribe(() => {
-      });
+      },
+      (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error'),
+      () => this.alert.showAlertAndUpdatePage('Tillagd!', 'Matsedeln har blivit sparad i vald skola.', 'success')
+      );
       this.subscriptions.push(sub);
-      this.alert.showAlertAndUpdatePage('Tillagd!', 'Matsedeln har blivit sparad i vald skola.', 'success');
+
     }
   }
 
