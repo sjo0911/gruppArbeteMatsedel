@@ -83,9 +83,8 @@ describe('HeaderComponent', () => {
         {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
          fixture.detectChanges();
          fixture.whenStable().then(() => {
-          const dropDown = fixture.debugElement.queryAll(By.css('select'))[0];
-          dropDown.nativeNode.options[1].click();
-          dropDown.nativeNode.dispatchEvent(new Event('change'));
+          const dropDown = fixture.debugElement.queryAll(By.css('mat-select'))[0];
+          dropDown.nativeElement.children[1].click();
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);
@@ -103,10 +102,9 @@ describe('HeaderComponent', () => {
         {_id:'abc', municipalityName: 'Umeå', schools: [{_id:'cde456', schoolName:'Dragonskolan', _menuId:'123'}]}]);
          fixture.detectChanges();
          fixture.whenStable().then(() => {
-          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('select'))[0];
-          dropDownMunicipalities.nativeNode.options[1].click();
-          dropDownMunicipalities.nativeNode.dispatchEvent(new Event('change'));
-          expect(dropDownMunicipalities.children.length).toBe(3);
+          const dropDownMunicipalities = fixture.debugElement.queryAll(By.css('mat-select'))[0];
+          dropDownMunicipalities.nativeElement.children[1].click();
+          expect(dropDownMunicipalities.children.length).toBe(2);
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(component.chooseMunicipality).toHaveBeenCalledTimes(1);
