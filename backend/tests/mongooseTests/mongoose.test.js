@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const dbHandler = require('../db-handler');
 const userController = require('../../db/controllers/user.controller');
 const { fakeUserData } = require('./index');
-const chai = require('chai');
-const expect = chai.expect;
+// const chai = require('chai');
+// const expect = chai.expect;
 const {
     validateNotEmpty,
     validateStringEquality,
-    validateMongoDuplicateError,
+    validateMongoDuplicationError,
 } = require('./validators.utils.');
 const { TestWatcher } = require('@jest/core');
 const { User } = require('../../db/models');
@@ -32,14 +32,14 @@ describe('User model', () => {
         validateNotEmpty(postedUser);
 
         validateStringEquality(postedUser.permissions, fakeUserData.permissions);
-        validateStringEquality(postedUser.local.email, fakeUserData.email);
-        validateStringEquality(postedUser.local.firstName, fakeUserData.firstName);
-        validateStringEquality(postedUser.local.lastName, fakeUserData.lastName);
-        validateStringEquality(postedUser.local.password, fakeUserData.password);
+        validateStringEquality(postedUser.email, fakeUserData.email);
+        validateStringEquality(postedUser.firstName, fakeUserData.firstName);
+        validateStringEquality(postedUser.lastName, fakeUserData.lastName);
+        validateStringEquality(postedUser.password, fakeUserData.password);
     });
 
     test('should validate MongoError duplicate error with code 11000', async() => {
-        expect.assertions(4);
+        expect.assertions(2);
         const validUser = new User({
             local: fakeUserData,
             permissions: fakeUserData.permissions
@@ -49,8 +49,10 @@ describe('User model', () => {
             await validUser.save();
         } catch (error) {
             const { name, code } = error;
-            validateMongoDuplicateError(name, code);
+            console.log(name, code)
+            validateMongoDuplicationError(name, code);
         }
+
     });
 
 });

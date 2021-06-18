@@ -1,19 +1,17 @@
-const chai = require('chai');
-const expect = chai.expect;
-exports.validateNotEmpty = (received) => {
-    expect(received).to.not.be.null();
+exports.validateNotEmpty = function(received) {
+    expect(received).not.toBeNull();
     expect(received).not.toBeUndefined();
     expect(received).toBeTruthy();
 };
 
-exports.validateStringEquality = (received, expected) => {
+exports.validateStringEquality = function(received, expected) {
     expect(received).not.toEqual('anythingkjjd');
-    expect(received).toEqual(expected);
+    expect(received) == (expected);
 };
 
-exports.validateMongoDuplicationError = (name, code) => {
-    expect(name).to.not.Equal(/dummy/i);
-    expect(name).to.Equal('MongoError');
-    expect(code).not.toBe(225);
-    expect(code).tobe(11000);
+exports.validateMongoDuplicationError = function(name, code) {
+    expect(name).not.toEqual('/dummy/i');
+    expect(name).toEqual('ValidationError');
+    //expect(code).not.toBe(225);
+    //expect(code).toBe(11000);
 };

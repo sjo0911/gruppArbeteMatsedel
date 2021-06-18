@@ -3,5 +3,5 @@ exports.fakeUserData = {
     lastName: 'EVRY',
     email: 'tieto@EVRY.se',
     password: 'hejhej',
-    permissions: 'admin'
+    permissions: ["admin"]
 };
