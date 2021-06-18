@@ -123,3 +123,17 @@ exports.patchMeal = function(req, res) {
             res.send(err);
         });
 }
+
+function checkPermissions(req) {
+    if(req.headers.usermail) {
+        return User.findOne({"email": req.headers.usermail}, function (err, myUser){
+            if(err){
+                return false;
+            } else if (myUser.permissions.some((perm) => perm === 'admin')){
+                return true;
+            }
+        })
+    } else {
+        return false;
+    }
+}
