@@ -58,7 +58,6 @@ mat-select {
   background: #063752;
 }
 
-// ::ng-deep .mat.select-arrow {
-//   color: white !important;
-//   // background: white !important;
-// }
+::ng-deep .mat-select-arrow {
+  color: white !important;
+}
