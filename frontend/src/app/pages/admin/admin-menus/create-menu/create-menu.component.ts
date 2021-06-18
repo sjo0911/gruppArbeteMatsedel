@@ -52,9 +52,9 @@ export class CreateMenuComponent implements OnInit {
           ));
         }));
       },
-      (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas', 'error'),
-      () => this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success')
+      (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas', 'error')
       ));
+      this.alert.showAlertAndUpdatePage('Sparad!', 'Matsedeln har blivit sparad.', 'success')
     }
   }
 }

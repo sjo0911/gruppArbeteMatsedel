@@ -57,9 +57,9 @@ export class UpdateMenuComponent implements OnInit {
       this.menuToEdit.endDate = endDate;
       let sub: Subscription = this.menuService.updateMenu(this.menuToEdit).subscribe(() => {
       },
-      (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error'),
-      () =>  this.alert.showAlertAndUpdatePage('Uppdaterad!', 'Matsedeln har blivit uppdaterad.', 'success')
+      (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error')
       );
+      this.alert.showAlertAndUpdatePage('Uppdaterad!', 'Matsedeln har blivit uppdaterad.', 'success')
       this.subscriptions.push(sub);
 
     }

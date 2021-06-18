@@ -42,9 +42,9 @@ export class DeleteMenuComponent implements OnInit {
         if (result.isConfirmed) {
           let sub: Subscription =this.menuService.deleteMenu(this.menuToDeleteId).subscribe(() => {
           },
-          (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error'),
-          () => this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen.', 'success')
+          (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error')
           );
+          this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen.', 'success')
           this.subscriptions.push(sub);
         }
       });

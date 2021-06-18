@@ -58,9 +58,9 @@ export class RemoveMenuComponent implements OnInit {
         if (result.isConfirmed) {
           school._menuId = '';
           let sub: Subscription = this.municipalityService.updateSchool(this.municipalityToDelete._id, school).subscribe(() => {},
-          (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error'),
-          () => this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen från den valda skolan.', 'success')
+          (err) => this.alert.showAlert('Error', 'Något gick fel. Menyn kunde inte sparas till användaren', 'error')
           );
+          this.alert.showAlertAndUpdatePage('Borttagen!', 'Matsedeln har blivit borttagen från den valda skolan.', 'success')
           this.subscriptions.push(sub);
 
         }

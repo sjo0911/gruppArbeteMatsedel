@@ -56,9 +56,9 @@ export class DeleteUserComponent implements OnInit {
           if (result.isConfirmed) {
             this.sub.push(this.userService.deleteUser(this.userToDeleteId).subscribe(()=>{
             },
-            (err) => this.alert.showAlert('Nånting gick fel.', 'Användaren sparades inte', 'error'),
-            () => this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success')
+            (err) => this.alert.showAlert('Nånting gick fel.', 'Användaren sparades inte', 'error')
             ));
+            this.alert.showAlertAndUpdatePage('Borttagen!', 'Användare har blivit borttagen.', 'success')
           }
         });
       }

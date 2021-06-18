@@ -84,8 +84,8 @@ export class CreateUserComponent implements OnInit {
         let sub: Subscription = this.userService.postUser(newUser).subscribe(() => {
         },
         (err) => this.alert.showAlert('Nånting gick fel.', 'Användaren sparades inte', 'error'),
-        () => this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success')
         )
+        this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit sparad.', 'success')
         this.subscriptions.push(sub);
       };
     }
