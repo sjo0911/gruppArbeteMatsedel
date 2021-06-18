@@ -58,7 +58,7 @@ function checkPermissions(req) {
                 return false;
             } else if (myUser.permissions.some((perm) => perm === 'admin')){
                 return true;
-            }
+            } else return false;
         })
     } else {
         return false;
