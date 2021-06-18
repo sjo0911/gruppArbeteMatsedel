@@ -40,6 +40,7 @@ mat-select {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   max-width: 160px;
 }
+
 ::ng-deep .mat-select-placeholder{
   color: white !important;
 }
@@ -56,3 +57,8 @@ mat-select {
 ::ng-deep .mat-select-panel{
   background: #063752;
 }
+
+// ::ng-deep .mat.select-arrow {
+//   color: white !important;
+//   // background: white !important;
+// }
