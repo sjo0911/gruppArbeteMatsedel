@@ -15,23 +15,14 @@ export class WebReqInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req);
-    /*
-    return this.auth.isAuthenticated$.pipe(tap(), switchMap((loggedIn) => {
-      if(loggedIn){
-        this.auth.user$.pipe(tap(),switchMap(user => {
-          let currentUser = new User();
-          currentUser.setUserFromAuthPic(user.picture);
-          console.log(currentUser.email)
-          return next.handle(req.clone({ setHeaders: {'USER_EMAIL':currentUser.email}}));
-        }))
-      } else {
-        return next.handle(req);
-      }
-
-    }))
-    */
-
-
+    if(this.auth.isAuthenticated$){
+      return this.auth.user$.pipe(tap(),switchMap(user => {
+        let currentUser = new User();
+        currentUser.setUserFromAuthPic(user.picture);
+        return next.handle(req.clone({ setHeaders: {'USERMAIL': currentUser.email}}));
+      }));
+    } else {
+      return next.handle(req);
+    }
   }
 }

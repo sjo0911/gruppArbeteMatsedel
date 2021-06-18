@@ -126,8 +126,11 @@ export class UpdateUserComponent implements OnInit {
         this.userToUpdate.schoolIds = schoolIds;
         this.subscriptions.push(this.userService.updateUser(this.userToUpdate).subscribe(() => {
         },
-        (err) => this.alert.showAlert('Något gick fel!', 'Användaren uppdaterades inte.', 'error'),
-        () => this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit uppdaterad.', 'success')));
+        (err) => {
+          console.log(err);
+          this.alert.showAlert('Något gick fel!', 'Användaren uppdaterades inte.', 'error')},
+        ));
+        this.alert.showAlertAndUpdatePage('Sparad!', 'Användaren har blivit uppdaterad.', 'success');
       };
     }
   };

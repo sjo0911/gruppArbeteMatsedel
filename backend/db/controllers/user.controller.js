@@ -11,10 +11,13 @@ exports.postUser = function(req, res) {
 };
 
 exports.patchUser = function(req, res) {
+    console.log(req.body);
+    console.log(req);
     User.findOneAndUpdate({ _id: req.params.id }, {
         $set: req.body
     }, patchValidation).then(() => {
-        res.send({ message: 'Completed successfully' });
+        console.log("hejsan!");
+        res.send({'message': 'de gick bra'})
     }).catch((e) => {
         res.send(e);
     });

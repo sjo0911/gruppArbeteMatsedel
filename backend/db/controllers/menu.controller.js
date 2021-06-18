@@ -10,17 +10,6 @@ exports.postMenu = function(req, res) {
     let meals = req.body.meals;
     let menuName = req.body.menuName;
 
-    // let checkDate = true;
-    // if(meals) {
-    //     meals.forEach(meal => {
-    //         let dateMeal = new Date(meal.mealDate);
-    //         if (dateMeal < dateStart || dateMeal > dateEnd) {
-    //             checkDate = false;
-    //         }
-    //     });
-    // }
-
-    // if (checkDate) {
     let newMenu = new Menu({
         startDate,
         endDate,
