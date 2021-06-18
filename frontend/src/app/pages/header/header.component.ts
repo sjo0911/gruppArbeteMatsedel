@@ -105,11 +105,6 @@ export class HeaderComponent implements OnInit {
 
       let sub: Subscription = this.menuService.getMenu(school._menuId).subscribe((menuu: Menu) => {
         menu = menuu;
-      },
-      (err) => {
-
-      },
-      () => {
         this.sharingService.setMenu(menu);
         this.weeks = this.dateHandlerService.getWeeks(menu);
         this.weeks.forEach(week => {
