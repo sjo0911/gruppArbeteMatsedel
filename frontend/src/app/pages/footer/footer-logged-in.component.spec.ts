@@ -2,7 +2,6 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { AuthService } from '@auth0/auth0-angular';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Location } from '@angular/common';
 import { FooterComponent } from './footer.component';
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -36,13 +35,11 @@ describe('FooterComponent', () => {
   });
 
   it('should contain button with Logga ut', () => {
-  const location=TestBed.inject(Location);
     const loginButton = fixture.debugElement.queryAll(By.css('button'));
     expect(loginButton[2].nativeNode.outerText).toBe("Logga ut");
   });
 
   it('should contain button with Administrera matsedel', () => {
-    const location=TestBed.inject(Location);
     const administrera = fixture.debugElement.queryAll(By.css('button'));
     expect(administrera[1].nativeNode.outerText).toBe("Administrera matsedel");
   });

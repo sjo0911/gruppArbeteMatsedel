@@ -1,3 +1,4 @@
+import { WebReqInterceptorService } from './services/web-req.interceptor.service';
 import { DayComponent } from './pages/menu/day/day.component';
 import { Injectable, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,7 +15,7 @@ import { AdminSchoolsComponent } from './pages/admin/admin-schools/admin-schools
 import { AdminMenusComponent } from './pages/admin/admin-menus/admin-menus.component';
 import { AdminHeaderComponent } from './pages/admin/admin-header/admin-header.component';
 import { AuthModule } from '@auth0/auth0-angular';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { LoginFailedComponent } from './pages/login-failed/login-failed.component';
@@ -100,7 +101,9 @@ registerLocaleData(sv);
       }
     })
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "sv" }, { provide: Alert}],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+     { provide: LOCALE_ID, useValue: "sv" }, { provide: Alert},
+     { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

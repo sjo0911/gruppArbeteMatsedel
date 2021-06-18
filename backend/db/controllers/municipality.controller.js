@@ -3,6 +3,7 @@ const patchValidation = { runValidators: true };
 
 exports.getMunicipalities = function(req, res) {
     // Return array of all districts in database
+    console.log(req);
     Municipality.find().then((municipalities) => {
         res.send(municipalities);
     }).catch((e) => {
