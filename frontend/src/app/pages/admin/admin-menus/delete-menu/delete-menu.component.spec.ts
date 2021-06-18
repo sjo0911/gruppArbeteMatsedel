@@ -8,6 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteMenuComponent } from './delete-menu.component';
 import { doesNotReject } from 'assert';
+import { MunicipalityService } from 'src/app/services/municipality.service';
 
 describe('DeleteMenuComponent', () => {
   let component: DeleteMenuComponent;
@@ -20,7 +21,9 @@ describe('DeleteMenuComponent', () => {
       declarations: [ DeleteMenuComponent ],
       providers: [
         {provide: MenuService, useClass: MenuServiceStub},
-        {provide: Alert, useClass: AlertStub}   ],
+        {provide: Alert, useClass: AlertStub},
+        {provide: MunicipalityService, useClass: MunicipalityServiceStub}
+      ],
     })
     .compileComponents();
   });
@@ -91,5 +94,16 @@ class MenuServiceStub {
     return of({})
   }
   deleteMenu() {
+  }
+}
+
+class MunicipalityServiceStub {
+  getSchools() {
+    return of([]);
+  }
+  getMunicipalities() {
+    return of([]);
+  }
+  updateSchool() {
   }
 }
